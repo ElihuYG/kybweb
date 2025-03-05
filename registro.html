@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - KYB</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Crear una cuenta</h2>
+        <input type="email" id="newEmail" placeholder="Correo electrónico" required>
+        <input type="password" id="newPassword" placeholder="Contraseña" required>
+        <button onclick="registrar()">Registrarse</button>
+        <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+    </div>
+    <script>
+        function registrar() {
+            let email = document.getElementById("newEmail").value;
+            let password = document.getElementById("newPassword").value;
+            
+            if (email === "" || password === "") {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+            
+            if (localStorage.getItem(email)) {
+                alert("Este correo ya está registrado.");
+                return;
+            }
+            
+            localStorage.setItem(email, password);
+            alert("¡Cuenta creada con éxito! Ahora puedes iniciar sesión.");
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
