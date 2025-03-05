@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - KYB</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="perfil-container">
+        <h2>Perfil de Usuario</h2>
+        <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">Cargando...</span></p>
+        <p><strong>Correo electrónico:</strong> <span id="emailUsuario">Cargando...</span></p>
+        <a href="politica-privacidad.html">Política de Privacidad</a><br>
+        <a href="ayuda.html">Ayuda</a><br>
+        <a href="eliminar-cuenta.html">Eliminar Cuenta</a>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let emailUsuario = localStorage.getItem("currentUser");
+
+            if (emailUsuario) {
+                document.getElementById("nombreUsuario").innerText = emailUsuario.split("@")[0]; // Usa el nombre antes del @
+                document.getElementById("emailUsuario").innerText = emailUsuario;
+            } else {
+                document.getElementById("nombreUsuario").innerText = "Invitado";
+                document.getElementById("emailUsuario").innerText = "No disponible";
+            }
+        });
+    </script>
+</body>
+</html>
