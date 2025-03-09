@@ -16,115 +16,35 @@
     </header>
     
     <main>
-<section class="carousel">
-    <div class="carousel-container">
-        <img src="imagenes/PostersLargosbeginsyouth.png" alt="Slider 1" class="active">
-        <img src="imagenes/PostersLargosbeginsyouth.png" alt="Slider 2">
-        <img src="imagenes/PostersLargosbeginsyouth.png" alt="Slider 3">
-    </div>
-</section>
+        <!-- Carrusel Principal -->
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-item active" onclick="location.href='detalle1.html'">
+                    <img src="imagenes/PostersLargosbeginsyouth.png" alt="Slider 1">
+                </div>
+                <div class="carousel-item" onclick="location.href='detalle2.html'">
+                    <img src="imagenes/PostersLargosbeginsyouth.png" alt="Slider 2">
+                </div>
+                <div class="carousel-item" onclick="location.href='detalle3.html'">
+                    <img src="imagenes/PostersLargosbeginsyouth.png" alt="Slider 3">
+                </div>
+            </div>
+        </section>
 
-<style>
-.search-container {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-}
-
-#search {
-    width: 0;
-    padding: 5px;
-    border: none;
-    transition: width 0.3s ease-in-out;
-    opacity: 0;
-}
-
-#search-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.search-container.active #search {
-    width: 150px;
-    opacity: 1;
-}
-
-.carousel {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-}
-
-.carousel-container {
-    display: flex;
-    gap: 10px;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel img {
-    width: 250px;
-    height: auto;
-    transition: transform 0.5s ease-in-out, opacity 0.5s;
-    opacity: 0.6;
-}
-
-.carousel img.active {
-    transform: scale(1.2);
-    opacity: 1;
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    let images = document.querySelectorAll(".carousel img");
-    let index = 0;
-
-    function changeSlide() {
-        images.forEach((img, i) => {
-            img.classList.remove("active");
-            if (i === index) {
-                img.classList.add("active");
-            }
-        });
-
-        index = (index + 1) % images.length;
-    }
-
-    setInterval(changeSlide, 3000);
-
-    const searchContainer = document.querySelector(".search-container");
-    const searchInput = document.getElementById("search");
-    const searchBtn = document.getElementById("search-btn");
-
-    searchBtn.addEventListener("click", () => {
-        searchContainer.classList.toggle("active");
-        if (searchContainer.classList.contains("active")) {
-            searchInput.focus();
-        }
-    });
-});
-</script>
-        
-        <!-- Sección de Estrenos -->
         <section class="estrenos">
             <h2>Estrenos</h2>
             <div class="estrenos-container">
-                <img src="https://via.placeholder.com/150x200" alt="Estreno 1">
-                <img src="https://via.placeholder.com/150x200" alt="Estreno 2">
-                <img src="https://via.placeholder.com/150x200" alt="Estreno 3">
-                <img src="https://via.placeholder.com/150x200" alt="Estreno 4">
-                <img src="https://via.placeholder.com/150x200" alt="Estreno 5">
-                <img src="https://via.placeholder.com/150x200" alt="Estreno 6">
+                <img src="imagenes/estreno1.png" alt="Estreno 1">
+                <img src="imagenes/estreno2.png" alt="Estreno 2">
+                <img src="imagenes/estreno3.png" alt="Estreno 3">
+                <img src="imagenes/estreno4.png" alt="Estreno 4">
+                <img src="imagenes/estreno5.png" alt="Estreno 5">
+                <img src="imagenes/estreno6.png" alt="Estreno 6">
             </div>
             <button class="ver-mas">Ver más</button>
         </section>
     </main>   
+    
     <!-- Menú Inferior -->
     <nav class="bottom-nav">
         <a href="index.html" class="active">🏠 Home</a>
@@ -132,6 +52,100 @@ document.addEventListener("DOMContentLoaded", function () {
         <a href="cuenta.html">👤 Cuenta</a>
     </nav>
     
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let items = document.querySelectorAll(".carousel-item");
+            let index = 0;
+
+            function changeSlide() {
+                items.forEach((item, i) => {
+                    item.classList.remove("active");
+                    if (i === index) {
+                        item.classList.add("active");
+                    }
+                });
+                index = (index + 1) % items.length;
+            }
+
+            setInterval(changeSlide, 3000);
+
+            const searchContainer = document.querySelector(".search-container");
+            const searchInput = document.getElementById("search");
+            const searchBtn = document.getElementById("search-btn");
+
+            searchBtn.addEventListener("click", () => {
+                searchContainer.classList.toggle("active");
+                if (searchContainer.classList.contains("active")) {
+                    searchInput.focus();
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        .search-container {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #search {
+            width: 0;
+            padding: 5px;
+            border: none;
+            transition: width 0.3s ease-in-out;
+            opacity: 0;
+        }
+
+        #search-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .search-container.active #search {
+            width: 150px;
+            opacity: 1;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            display: none;
+            text-align: center;
+        }
+
+        .carousel-item.active {
+            display: block;
+        }
+
+        .carousel img {
+            width: 70%;
+            height: auto;
+            transition: transform 0.5s ease-in-out, opacity 0.5s;
+        }
+
+        .estrenos-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px;
+        }
+    </style>
 </body>
 </html>
