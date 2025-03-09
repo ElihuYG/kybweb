@@ -8,28 +8,14 @@
 </head>
 <body>
     <header>
-        <!-- Título sin interferir con el menú -->
         <h1>KYB</h1>
-
-        <!-- Barra de búsqueda en la parte derecha -->
         <div class="search-container">
             <input type="text" id="search" placeholder="Buscar...">
             <button id="search-btn">🔍</button>
             <div id="search-results" class="search-results"></div>
         </div>
-
-        <!-- Icono del menú hamburguesa (parte superior derecha) -->
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </header>
-
-    <!-- Menú Desplegable en la parte izquierda -->
-    <nav id="menu" class="menu">
-        <button class="close-menu" onclick="toggleMenu()">✖</button>
-        <a href="index.html">🏠 Home</a>
-        <a href="new-popular.html">🔥 New & Popular</a>
-        <a href="cuenta.html">👤 Cuenta</a>
-    </nav>
-
+    
     <main>
         <!-- Carrusel Principal -->
         <section class="carousel">
@@ -58,20 +44,20 @@
             </div>
             <button class="ver-mas">Ver más</button>
         </section>
-    </main>
+    </main>   
 
+    <!-- Menú con hamburguesa -->
+    <nav class="menu">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div id="menu-content" class="menu-content">
+            <button id="close-menu" class="close-menu">X</button>
+            <a href="index.html">🏠 Home</a>
+            <a href="new-popular.html">🔥 New & Popular</a>
+            <a href="cuenta.html">👤 Cuenta</a>
+        </div>
+    </nav>
+    
     <script>
-        // Función para mostrar/ocultar el menú
-        function toggleMenu() {
-            const menu = document.getElementById("menu");
-            if (menu.style.display === "block") {
-                menu.style.display = "none";
-            } else {
-                menu.style.display = "block";
-            }
-        }
-
-        // Función de búsqueda en tiempo real
         document.addEventListener("DOMContentLoaded", function () {
             let searchInput = document.getElementById("search");
             let searchResults = document.getElementById("search-results");
@@ -104,69 +90,31 @@
                     searchResults.style.display = "none";
                 }
             });
+
+            // Menu desplegable
+            let menuToggle = document.getElementById("menu-toggle");
+            let menuContent = document.getElementById("menu-content");
+            let closeMenu = document.getElementById("close-menu");
+
+            menuToggle.addEventListener("click", function () {
+                menuContent.style.display = "block";
+            });
+
+            closeMenu.addEventListener("click", function () {
+                menuContent.style.display = "none";
+            });
         });
     </script>
-
+    
     <style>
-        /* Estilo para el título */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
         h1 {
-            font-size: 36px;
-            margin-left: 20px;
-            margin-top: 10px;
+            text-align: center;
         }
 
-        /* Estilo para el icono del menú (hamburguesa) */
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-        }
-
-        /* Estilo para el menú, oculto por defecto */
-        .menu {
-            display: none; /* Ocultamos el menú inicialmente */
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: white;
-            width: 200px;
-            height: 100%;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding-top: 50px;
-            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Estilo para los enlaces del menú */
-        .menu a {
-            padding: 15px;
-            text-decoration: none;
-            display: block;
-            color: black;
-            background-color: white;
-            border-bottom: 1px solid #ddd;
-        }
-
-        /* Efecto hover para los enlaces */
-        .menu a:hover {
-            background-color: #f0f0f0;
-        }
-
-        /* Estilo del botón para cerrar el menú */
-        .close-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 30px;
-            background: none;
-            border: none;
-            color: black;
-            cursor: pointer;
-        }
-
-        /* Estilo para la barra de búsqueda */
         .search-container {
             position: absolute;
             top: 10px;
@@ -187,6 +135,7 @@
             background: white;
             border: 1px solid #ccc;
             display: none;
+            z-index: 100;
         }
 
         .search-result-item {
@@ -227,26 +176,51 @@
             display: block;
         }
 
-        /* Responsividad para móviles */
-        @media (max-width: 768px) {
-            /* Ajustes para el menú en dispositivos pequeños */
-            .menu {
-                width: 250px;
-            }
+        /* Menú con hamburguesa */
+        .menu {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            z-index: 200;
+        }
 
-            /* Ajustes para la barra de búsqueda */
-            .search-container {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-            }
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
 
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .menu-content a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: black;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Estilos responsivos para móvil */
+        @media (max-width: 600px) {
             #search {
                 width: 120px;
             }
 
-            h1 {
-                font-size: 28px;
+            .menu-content {
+                width: 200px;
             }
         }
     </style>
