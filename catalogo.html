@@ -20,18 +20,16 @@
         <!-- Carrusel Principal -->
         <section class="carousel">
             <div class="carousel-container">
-                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                <div class="carousel-item active" onclick="location.href='detalle1.html'">
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
                 </div>
-                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                <div class="carousel-item" onclick="location.href='detalle2.html'">
                     <img src="sliders_Arriba_TP.png" alt="Slider 2">
                 </div>
-                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
-                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+                <div class="carousel-item" onclick="location.href='detalle3.html'">
+                    <img src="Posters Largos KYB begins youth.png" alt="Slider 3">
                 </div>
             </div>
-            <button class="prev" onclick="moveCarousel(-1)">❮</button>
-            <button class="next" onclick="moveCarousel(1)">❯</button>
         </section>
 
         <section class="estrenos">
@@ -107,20 +105,18 @@
             });
         });
 
-        // Función para mover el carrusel
+        // Función para mover el carrusel automáticamente
         let currentIndex = 0;
         const carouselItems = document.querySelectorAll(".carousel-item");
 
-        function moveCarousel(direction) {
+        function moveCarousel() {
             carouselItems[currentIndex].classList.remove("active");
-            currentIndex = (currentIndex + direction + carouselItems.length) % carouselItems.length;
+            currentIndex = (currentIndex + 1) % carouselItems.length;
             carouselItems[currentIndex].classList.add("active");
         }
 
         // Desplazamiento automático cada 3 segundos
-        setInterval(function() {
-            moveCarousel(1);
-        }, 3000);
+        setInterval(moveCarousel, 3000);
     </script>
     
     <style>
@@ -191,26 +187,6 @@
 
         .carousel-item.active {
             display: block;
-        }
-
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 30px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
         }
 
         /* Menú con hamburguesa */
