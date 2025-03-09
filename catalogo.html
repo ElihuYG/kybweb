@@ -48,50 +48,22 @@
             <button class="ver-mas">Ver más</button>
         </section>
     </main>   
-    
+
     <script>
         // Función para mostrar/ocultar el menú desplegable
         function toggleMenu() {
             const menu = document.getElementById("menu");
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
+            // Cambiar el estado de visualización del menú
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
         }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            let searchInput = document.getElementById("search");
-            let searchResults = document.getElementById("search-results");
-            let series = [
-                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
-                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
-                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
-            ];
-
-            searchInput.addEventListener("input", function () {
-                let query = searchInput.value.toLowerCase();
-                searchResults.innerHTML = "";
-
-                if (query.length > 0) {
-                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
-                    filteredSeries.forEach(series => {
-                        let resultItem = document.createElement("div");
-                        resultItem.classList.add("search-result-item");
-                        resultItem.innerHTML = `
-                            <img src="${series.image}" alt="${series.name}">
-                            <span>${series.name}</span>
-                        `;
-                        resultItem.addEventListener("click", function () {
-                            window.location.href = series.url;
-                        });
-                        searchResults.appendChild(resultItem);
-                    });
-                    searchResults.style.display = "block";
-                } else {
-                    searchResults.style.display = "none";
-                }
-            });
-        });
     </script>
 
     <style>
+        /* Estilo para el icono del menú (hamburguesa) */
         .menu-icon {
             font-size: 30px;
             cursor: pointer;
@@ -100,8 +72,9 @@
             right: 20px;
         }
 
+        /* Estilo para el menú, oculto por defecto */
         .menu {
-            display: none;
+            display: none; /* Ocultamos el menú inicialmente */
             position: absolute;
             top: 0;
             right: 0;
@@ -109,19 +82,27 @@
             width: 200px;
             height: 100%;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-top: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* Estilo para los enlaces del menú */
         .menu a {
-            padding: 10px;
+            padding: 15px;
             text-decoration: none;
             display: block;
+            color: black;
+            background-color: white;
+            border-bottom: 1px solid #ddd;
         }
 
+        /* Efecto hover para los enlaces */
         .menu a:hover {
             background-color: #f0f0f0;
         }
 
+        /* Estilo del contenedor de búsqueda */
         .search-container {
             position: absolute;
             top: 10px;
