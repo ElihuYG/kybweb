@@ -10,8 +10,9 @@
     <header>
         <h1>Bienvenido a KYB</h1>
         <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar..." onkeyup="searchMovies()">
+            <input type="text" id="search" placeholder="Buscar...">
             <button id="search-btn">🔍</button>
+            <div id="search-results" class="search-results"></div>
         </div>
     </header>
     
@@ -23,23 +24,23 @@
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
                 </div>
                 <div class="carousel-item active" onclick="location.href='detalle2.html'">
-                    <img src="sliders_Arriba_TP.png" alt="Slider 2">
+                    <img src= "sliders_Arriba_TP.png" alt="Slider 2">
                 </div>
                 <div class="carousel-item active" onclick="location.href='detalle3.html'">
-                    <img src="Posters_Largos_KYB_begins_youth.png" alt="Slider 3">
+                    <img src="Posters Largos KYB begins youth.png" alt="Slider 3">
                 </div>
             </div>
         </section>
 
         <section class="estrenos">
             <h2>Estrenos</h2>
-            <div class="estrenos-container" id="estrenos-container">
-                <img src="begins_youth_posters.png" alt="Begins Youth" class="estreno">
-                <img src="imagenes/estreno2.png" alt="Estreno 2" class="estreno">
-                <img src="imagenes/estreno3.png" alt="Estreno 3" class="estreno">
-                <img src="imagenes/estreno4.png" alt="Estreno 4" class="estreno">
-                <img src="imagenes/estreno5.png" alt="Estreno 5" class="estreno">
-                <img src="imagenes/estreno6.png" alt="Estreno 6" class="estreno">
+            <div class="estrenos-container">
+                <img src="begins_youth_posters.png" alt="Estreno 1">
+                <img src="imagenes/estreno2.png" alt="Estreno 2">
+                <img src="imagenes/estreno3.png" alt="Estreno 3">
+                <img src="imagenes/estreno4.png" alt="Estreno 4">
+                <img src="imagenes/estreno5.png" alt="Estreno 5">
+                <img src="imagenes/estreno6.png" alt="Estreno 6">
             </div>
             <button class="ver-mas">Ver más</button>
         </section>
@@ -54,35 +55,38 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let items = document.querySelectorAll(".carousel-item");
-            let index = 0;
+            let searchInput = document.getElementById("search");
+            let searchResults = document.getElementById("search-results");
+            let series = [
+                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
+                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
+                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
+            ];
 
-            function changeSlide() {
-                items.forEach((item, i) => {
-                    item.classList.remove("active");
-                    if (i === index) {
-                        item.classList.add("active");
-                    }
-                });
-                index = (index + 1) % items.length;
-            }
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
 
-            setInterval(changeSlide, 3000);
-        });
-
-        function searchMovies() {
-            let input = document.getElementById("search").value.toLowerCase();
-            let movies = document.querySelectorAll(".estreno");
-            
-            movies.forEach(movie => {
-                let altText = movie.alt.toLowerCase();
-                if (altText.includes(input)) {
-                    movie.style.display = "inline-block";
+                if (query.length > 0) {
+                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
+                    filteredSeries.forEach(series => {
+                        let resultItem = document.createElement("div");
+                        resultItem.classList.add("search-result-item");
+                        resultItem.innerHTML = `
+                            <img src="${series.image}" alt="${series.name}">
+                            <span>${series.name}</span>
+                        `;
+                        resultItem.addEventListener("click", function () {
+                            window.location.href = series.url;
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.style.display = "block";
                 } else {
-                    movie.style.display = "none";
+                    searchResults.style.display = "none";
                 }
             });
-        }
+        });
     </script>
     
     <style>
@@ -96,14 +100,29 @@
             width: 150px;
             padding: 5px;
             border: none;
-            opacity: 1;
         }
 
-        #search-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
+        .search-results {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            width: 200px;
+            background: white;
+            border: 1px solid #ccc;
+            display: none;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
             cursor: pointer;
+        }
+
+        .search-result-item img {
+            width: 30px;
+            height: 40px;
+            margin-right: 10px;
         }
 
         .carousel {
@@ -129,19 +148,6 @@
 
         .carousel-item.active {
             display: block;
-        }
-
-        .carousel img {
-            width: 70%;
-            height: auto;
-            transition: transform 0.5s ease-in-out, opacity 0.5s;
-        }
-
-        .estrenos-container {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px;
         }
     </style>
 </body>
