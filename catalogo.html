@@ -8,8 +8,9 @@
 </head>
 <body>
     <header>
-        <h1>Bienvenido a KYB</h1>
-        
+        <!-- Título sin interferir con el menú -->
+        <h1>KYB</h1>
+
         <!-- Barra de búsqueda en la parte derecha -->
         <div class="search-container">
             <input type="text" id="search" placeholder="Buscar...">
@@ -17,13 +18,13 @@
             <div id="search-results" class="search-results"></div>
         </div>
 
-        <!-- Icono del menú hamburguesa (parte izquierda) -->
+        <!-- Icono del menú hamburguesa (parte superior derecha) -->
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </header>
 
     <!-- Menú Desplegable en la parte izquierda -->
     <nav id="menu" class="menu">
-        <button class="close-menu" onclick="toggleMenu()">✖</button> <!-- Botón para cerrar el menú -->
+        <button class="close-menu" onclick="toggleMenu()">✖</button>
         <a href="index.html">🏠 Home</a>
         <a href="new-popular.html">🔥 New & Popular</a>
         <a href="cuenta.html">👤 Cuenta</a>
@@ -69,24 +70,66 @@
                 menu.style.display = "block";
             }
         }
+
+        // Función de búsqueda en tiempo real
+        document.addEventListener("DOMContentLoaded", function () {
+            let searchInput = document.getElementById("search");
+            let searchResults = document.getElementById("search-results");
+            let series = [
+                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
+                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
+                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
+            ];
+
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
+
+                if (query.length > 0) {
+                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
+                    filteredSeries.forEach(series => {
+                        let resultItem = document.createElement("div");
+                        resultItem.classList.add("search-result-item");
+                        resultItem.innerHTML = `
+                            <img src="${series.image}" alt="${series.name}">
+                            <span>${series.name}</span>
+                        `;
+                        resultItem.addEventListener("click", function () {
+                            window.location.href = series.url;
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.style.display = "block";
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+        });
     </script>
 
     <style>
+        /* Estilo para el título */
+        h1 {
+            font-size: 36px;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
         /* Estilo para el icono del menú (hamburguesa) */
         .menu-icon {
             font-size: 30px;
             cursor: pointer;
             position: absolute;
             top: 10px;
-            left: 20px;
+            right: 20px;
         }
 
         /* Estilo para el menú, oculto por defecto */
         .menu {
             display: none; /* Ocultamos el menú inicialmente */
-            position: absolute;
+            position: fixed;
             top: 0;
-            left: 0;  /* Menú en la parte izquierda */
+            left: 0;
             background-color: white;
             width: 200px;
             height: 100%;
@@ -182,6 +225,29 @@
 
         .carousel-item.active {
             display: block;
+        }
+
+        /* Responsividad para móviles */
+        @media (max-width: 768px) {
+            /* Ajustes para el menú en dispositivos pequeños */
+            .menu {
+                width: 250px;
+            }
+
+            /* Ajustes para la barra de búsqueda */
+            .search-container {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            #search {
+                width: 120px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
         }
     </style>
 </body>
