@@ -10,7 +10,7 @@
     <header>
         <h1>Bienvenido a KYB</h1>
         <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar...">
+            <input type="text" id="search" placeholder="Buscar..." onkeyup="searchMovies()">
             <button id="search-btn">🔍</button>
         </div>
     </header>
@@ -23,23 +23,23 @@
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
                 </div>
                 <div class="carousel-item active" onclick="location.href='detalle2.html'">
-                <img src= "sliders_Arriba_TP.png" alt="Slider 2">
+                    <img src="sliders_Arriba_TP.png" alt="Slider 2">
                 </div>
                 <div class="carousel-item active" onclick="location.href='detalle3.html'">
-                    <img src="Posters Largos KYB begins youth.png" alt="Slider 3">
+                    <img src="Posters_Largos_KYB_begins_youth.png" alt="Slider 3">
                 </div>
             </div>
         </section>
 
         <section class="estrenos">
             <h2>Estrenos</h2>
-            <div class="estrenos-container">
-                <img src="begins_youth_posters.png" alt="Estreno 1">
-                <img src="imagenes/estreno2.png" alt="Estreno 2">
-                <img src="imagenes/estreno3.png" alt="Estreno 3">
-                <img src="imagenes/estreno4.png" alt="Estreno 4">
-                <img src="imagenes/estreno5.png" alt="Estreno 5">
-                <img src="imagenes/estreno6.png" alt="Estreno 6">
+            <div class="estrenos-container" id="estrenos-container">
+                <img src="begins_youth_posters.png" alt="Begins Youth" class="estreno">
+                <img src="imagenes/estreno2.png" alt="Estreno 2" class="estreno">
+                <img src="imagenes/estreno3.png" alt="Estreno 3" class="estreno">
+                <img src="imagenes/estreno4.png" alt="Estreno 4" class="estreno">
+                <img src="imagenes/estreno5.png" alt="Estreno 5" class="estreno">
+                <img src="imagenes/estreno6.png" alt="Estreno 6" class="estreno">
             </div>
             <button class="ver-mas">Ver más</button>
         </section>
@@ -68,18 +68,21 @@
             }
 
             setInterval(changeSlide, 3000);
+        });
 
-            const searchContainer = document.querySelector(".search-container");
-            const searchInput = document.getElementById("search");
-            const searchBtn = document.getElementById("search-btn");
-
-            searchBtn.addEventListener("click", () => {
-                searchContainer.classList.toggle("active");
-                if (searchContainer.classList.contains("active")) {
-                    searchInput.focus();
+        function searchMovies() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let movies = document.querySelectorAll(".estreno");
+            
+            movies.forEach(movie => {
+                let altText = movie.alt.toLowerCase();
+                if (altText.includes(input)) {
+                    movie.style.display = "inline-block";
+                } else {
+                    movie.style.display = "none";
                 }
             });
-        });
+        }
     </script>
     
     <style>
@@ -90,11 +93,10 @@
         }
 
         #search {
-            width: 0;
+            width: 150px;
             padding: 5px;
             border: none;
-            transition: width 0.3s ease-in-out;
-            opacity: 0;
+            opacity: 1;
         }
 
         #search-btn {
@@ -102,11 +104,6 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-        }
-
-        .search-container.active #search {
-            width: 150px;
-            opacity: 1;
         }
 
         .carousel {
