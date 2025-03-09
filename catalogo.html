@@ -9,11 +9,20 @@
 <body>
     <header>
         <h1>Bienvenido a KYB</h1>
+        <!-- Barra de búsqueda -->
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar...">
+            <button id="search-btn">🔍</button>
+            <div id="search-results" class="search-results"></div>
+        </div>
+        
+        <!-- Icono del menú hamburguesa -->
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </header>
-    
+
     <!-- Menú Desplegable -->
     <nav id="menu" class="menu">
+        <button class="close-menu" onclick="toggleMenu()">✖</button> <!-- Botón para cerrar el menú -->
         <a href="index.html">🏠 Home</a>
         <a href="new-popular.html">🔥 New & Popular</a>
         <a href="cuenta.html">👤 Cuenta</a>
@@ -47,13 +56,12 @@
             </div>
             <button class="ver-mas">Ver más</button>
         </section>
-    </main>   
+    </main>
 
     <script>
-        // Función para mostrar/ocultar el menú desplegable
+        // Función para mostrar/ocultar el menú
         function toggleMenu() {
             const menu = document.getElementById("menu");
-            // Cambiar el estado de visualización del menú
             if (menu.style.display === "block") {
                 menu.style.display = "none";
             } else {
@@ -102,7 +110,19 @@
             background-color: #f0f0f0;
         }
 
-        /* Estilo del contenedor de búsqueda */
+        /* Estilo del botón para cerrar el menú */
+        .close-menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: black;
+            cursor: pointer;
+        }
+
+        /* Estilo para la barra de búsqueda */
         .search-container {
             position: absolute;
             top: 10px;
