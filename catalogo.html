@@ -9,18 +9,19 @@
 <body>
     <header>
         <h1>Bienvenido a KYB</h1>
-        <!-- Barra de búsqueda -->
+        
+        <!-- Barra de búsqueda en la parte derecha -->
         <div class="search-container">
             <input type="text" id="search" placeholder="Buscar...">
             <button id="search-btn">🔍</button>
             <div id="search-results" class="search-results"></div>
         </div>
-        
-        <!-- Icono del menú hamburguesa -->
+
+        <!-- Icono del menú hamburguesa (parte izquierda) -->
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </header>
 
-    <!-- Menú Desplegable -->
+    <!-- Menú Desplegable en la parte izquierda -->
     <nav id="menu" class="menu">
         <button class="close-menu" onclick="toggleMenu()">✖</button> <!-- Botón para cerrar el menú -->
         <a href="index.html">🏠 Home</a>
@@ -77,7 +78,7 @@
             cursor: pointer;
             position: absolute;
             top: 10px;
-            right: 20px;
+            left: 20px;
         }
 
         /* Estilo para el menú, oculto por defecto */
@@ -85,14 +86,14 @@
             display: none; /* Ocultamos el menú inicialmente */
             position: absolute;
             top: 0;
-            right: 0;
+            left: 0;  /* Menú en la parte izquierda */
             background-color: white;
             width: 200px;
             height: 100%;
             flex-direction: column;
             justify-content: flex-start;
             padding-top: 50px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Estilo para los enlaces del menú */
@@ -114,7 +115,7 @@
         .close-menu {
             position: absolute;
             top: 10px;
-            left: 10px;
+            right: 10px;
             font-size: 30px;
             background: none;
             border: none;
