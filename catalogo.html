@@ -23,13 +23,15 @@
                 <div class="carousel-item active" onclick="location.href='yoursky.html'">
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
                 </div>
-                <div class="carousel-item active" onclick="location.href='thamepo.html'">
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
                     <img src="sliders_Arriba_TP.png" alt="Slider 2">
                 </div>
-                <div class="carousel-item active" onclick="location.href='beginsyouth.html'">
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
                     <img src="Sliders_Arriba_BY.png" alt="Slider 3">
                 </div>
             </div>
+            <button class="prev" onclick="moveCarousel(-1)">❮</button>
+            <button class="next" onclick="moveCarousel(1)">❯</button>
         </section>
 
         <section class="estrenos">
@@ -104,6 +106,21 @@
                 menuContent.style.display = "none";
             });
         });
+
+        // Función para mover el carrusel
+        let currentIndex = 0;
+        const carouselItems = document.querySelectorAll(".carousel-item");
+
+        function moveCarousel(direction) {
+            carouselItems[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + direction + carouselItems.length) % carouselItems.length;
+            carouselItems[currentIndex].classList.add("active");
+        }
+
+        // Desplazamiento automático cada 3 segundos
+        setInterval(function() {
+            moveCarousel(1);
+        }, 3000);
     </script>
     
     <style>
@@ -174,6 +191,26 @@
 
         .carousel-item.active {
             display: block;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
         }
 
         /* Menú con hamburguesa */
