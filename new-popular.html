@@ -25,9 +25,24 @@
 
         <section class="top5">
             <h2>Top 5 Más Vistas</h2>
-            <ol id="top5-list">
-                <!-- Aquí se generarán las películas/series más vistas -->
-            </ol>
+            <div class="top5-container">
+                <!-- Aquí se generarán las imágenes del Top 5 -->
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 1">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 2">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 3">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 4">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 5">
+                </div>
+            </div>
         </section>
     </main>
 
@@ -45,19 +60,6 @@
 
     <!-- Script para obtener Top 5 desde el Backend -->
     <script>
-        // Obtener el Top 5 desde el backend (este código requiere un backend funcionando)
-        fetch('/top-5')
-            .then(response => response.json())
-            .then(data => {
-                const top5List = document.getElementById('top5-list');
-                data.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = item.nombre;
-                    top5List.appendChild(li);
-                });
-            })
-            .catch(error => console.error('Error al obtener el Top 5:', error));
-
         // Función para mostrar y ocultar el menú hamburguesa
         function toggleMenu() {
             const menu = document.getElementById('menu');
@@ -84,21 +86,21 @@
             padding: 20px;
         }
 
-        .estrenos-container img {
+        .estrenos-container img, .top5-container img {
             width: 150px;
             height: 200px;
             margin: 10px;
             object-fit: cover;
         }
 
-        .top5 ol {
-            list-style-type: none;
-            padding-left: 0;
+        .top5-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
-        .top5 ol li {
-            font-size: 18px;
-            margin: 5px 0;
+        .top5-item {
+            margin: 10px;
         }
 
         .bottom-nav {
@@ -112,7 +114,9 @@
         }
 
         .hamburger-menu {
-            position: relative;
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
 
         .hamburger-icon {
@@ -126,7 +130,8 @@
         .menu-items {
             display: none;
             position: absolute;
-            bottom: 40px;
+            top: 40px;
+            left: 0;
             background-color: #333;
             width: 100%;
             text-align: center;
