@@ -137,6 +137,21 @@
             margin-right: 10px;
             font-size: 20px;
         }
+
+        .change-photo-btn {
+            font-size: 18px;
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .change-photo-btn:hover {
+            background-color: #f40612;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -157,6 +172,9 @@
             <div class="foto-perfil-placeholder" id="botonFoto" onclick="mostrarPopup()">
                 <span>+</span>
             </div>
+
+            <!-- Botón para cambiar foto debajo de la foto -->
+            <button class="change-photo-btn" id="cambiarFotoBtn" onclick="mostrarPopup()">Cambiar Foto</button>
         </div>
 
         <a href="politica-privacidad.html" class="link-with-icon">
@@ -178,8 +196,8 @@
         <div class="popup-content">
             <h3>Elige tu Foto de Perfil</h3>
             <div class="perfiles">
-                <img src="Jung_woo_jin.jpg" alt="Perfil 1" onclick="cambiarFoto('perfil1.jpg')">
-                <img src="Kim_Yoon_woo.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
+                <img src="perfil1.jpg" alt="Perfil 1" onclick="cambiarFoto('perfil1.jpg')">
+                <img src="perfil2.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
                 <img src="perfil3.jpg" alt="Perfil 3" onclick="cambiarFoto('perfil3.jpg')">
                 <img src="perfil4.jpg" alt="Perfil 4" onclick="cambiarFoto('perfil4.jpg')">
                 <img src="perfil5.jpg" alt="Perfil 5" onclick="cambiarFoto('perfil5.jpg')">
@@ -203,7 +221,8 @@
 
             localStorage.setItem("fotoPerfil", foto);
 
-            document.getElementById("botonFoto").style.display = "none";
+            document.getElementById("botonFoto").style.display = "none"; // Ocultar el "+" una vez que se ha elegido una foto
+            document.getElementById("cambiarFotoBtn").style.display = "block"; // Mostrar el botón de cambiar foto
 
             cerrarPopup();
         }
@@ -224,7 +243,8 @@
                 let perfilSeleccionado = document.getElementById("perfilSeleccionado");
                 perfilSeleccionado.innerHTML = `<img src="${fotoPerfil}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
 
-                document.getElementById("botonFoto").style.display = "none";
+                document.getElementById("botonFoto").style.display = "none"; // Ocultar el "+" si ya se eligió una foto
+                document.getElementById("cambiarFotoBtn").style.display = "block"; // Mostrar el botón de cambiar foto
             }
         });
     </script>
