@@ -20,13 +20,13 @@
         <!-- Carrusel Principal -->
         <section class="carousel">
             <div class="carousel-container">
-                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                <div class="carousel-item active" data-title="Begins Youth" onclick="location.href='yoursky.html'">
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
                 </div>
-                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                <div class="carousel-item" data-title="The Pursuit" onclick="location.href='thamepo.html'">
                     <img src="Sliders_Arriba_TP.png" alt="Slider 2">
                 </div>
-                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                <div class="carousel-item" data-title="Begins Youth" onclick="location.href='beginsyouth.html'">
                     <img src="Sliders_Arriba_BY.png" alt="Slider 3">
                 </div>
             </div>
@@ -35,12 +35,18 @@
         <section class="estrenos">
             <h2>Estrenos</h2>
             <div class="estrenos-container">
-                <img src="poster_begins_youth.png" alt="Estreno 1">
-                <img src="imagenes/estreno2.png" alt="Estreno 2">
-                <img src="imagenes/estreno3.png" alt="Estreno 3">
-                <img src="imagenes/estreno4.png" alt="Estreno 4">
-                <img src="imagenes/estreno5.png" alt="Estreno 5">
-                <img src="imagenes/estreno6.png" alt="Estreno 6">
+                <div class="estreno" data-title="Begins Youth">
+                    <img src="poster_begins_youth.png" alt="Estreno 1">
+                </div>
+                <div class="estreno" data-title="The Pursuit">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno" data-title="Another Series">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
+                <div class="estreno" data-title="Another Series">
+                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
             </div>
             <button class="ver-mas">Ver más</button>
         </section>
@@ -61,27 +67,27 @@
         document.addEventListener("DOMContentLoaded", function () {
             let searchInput = document.getElementById("search");
             let searchResults = document.getElementById("search-results");
-            let series = [
-                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
-                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
-                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
-            ];
+
+            // Seleccionar todos los elementos de la página que contienen títulos de series o películas
+            let seriesItems = document.querySelectorAll("[data-title]");
 
             searchInput.addEventListener("input", function () {
                 let query = searchInput.value.toLowerCase();
                 searchResults.innerHTML = "";
 
                 if (query.length > 0) {
-                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
-                    filteredSeries.forEach(series => {
+                    let filteredItems = Array.from(seriesItems).filter(item => 
+                        item.getAttribute("data-title").toLowerCase().includes(query)
+                    );
+
+                    filteredItems.forEach(item => {
                         let resultItem = document.createElement("div");
                         resultItem.classList.add("search-result-item");
                         resultItem.innerHTML = `
-                            <img src="${series.image}" alt="${series.name}">
-                            <span>${series.name}</span>
+                            <span>${item.getAttribute("data-title")}</span>
                         `;
                         resultItem.addEventListener("click", function () {
-                            window.location.href = series.url;
+                            window.location.href = item.getAttribute("onclick").match(/'(.*?)'/)[1];
                         });
                         searchResults.appendChild(resultItem);
                     });
