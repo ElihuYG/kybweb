@@ -5,88 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB - New & Popular</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Estilos para el menú hamburguesa */
-        .menu-icon {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #333;
-            color: white;
-            width: 250px;
-            height: 100%;
-            padding-top: 60px;
-            text-align: left;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .menu a {
-            padding: 12px 16px;
-            text-decoration: none;
-            color: white;
-            display: block;
-            font-size: 18px;
-        }
-
-        .menu a:hover {
-            background-color: #575757;
-        }
-
-        .menu.active {
-            display: block;
-        }
-
-        /* Mostrar el menú hamburguesa en todas las pantallas */
-        .menu-icon {
-            display: block;
-        }
-
-        /* Para pantallas grandes, aseguramos que el menú se vea fijo y no se oculte */
-        @media screen and (min-width: 768px) {
-            .menu-icon {
-                display: none; /* No mostrar el icono en pantallas grandes */
-            }
-
-            .menu {
-                display: block; /* Menú visible siempre */
-                position: static;
-                width: auto;
-                box-shadow: none;
-                height: auto;
-                background-color: transparent;
-            }
-
-            .menu a {
-                display: inline-block;
-                padding: 10px;
-                color: #333;
-            }
-
-            .menu a:hover {
-                background-color: transparent;
-                color: #f90;
-            }
-        }
-    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <h1>Nuevas y Populares</h1>
     </header>
-    
+
+    <!-- Main Content -->
     <main>
-        <!-- Últimos Estrenos -->
         <section class="estrenos">
             <h2>Últimos Estrenos</h2>
             <div class="estrenos-container">
@@ -96,35 +23,129 @@
             </div>
         </section>
 
-        <!-- Top 5 Más Vistas (se actualizará manualmente) -->
         <section class="top5">
             <h2>Top 5 Más Vistas</h2>
-            <ol>
-                <li>Serie/Película 1</li>
-                <li>Serie/Película 2</li>
-                <li>Serie/Película 3</li>
-                <li>Serie/Película 4</li>
-                <li>Serie/Película 5</li>
+            <ol id="top5-list">
+                <!-- Aquí se generarán las películas/series más vistas -->
             </ol>
         </section>
     </main>
-    
-    <!-- Icono del menú hamburguesa -->
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
 
-    <!-- Menú lateral -->
-    <div class="menu" id="menu">
-        <a href="catalogo.html">🏠 Home</a>
-        <a href="cuenta.html">👤 Cuenta</a>
-        <a href="search.html">🔍 Buscar</a>
-    </div>
+    <!-- Bottom Navigation (Menú Hamburguesa) -->
+    <nav class="bottom-nav">
+        <div class="hamburger-menu">
+            <button class="hamburger-icon" onclick="toggleMenu()">☰</button>
+            <div id="menu" class="menu-items">
+                <a href="catalogo.html">🏠 Home</a>
+                <a href="cuenta.html">👤 Cuenta</a>
+                <a href="search.html">🔍 Buscar</a>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Script para obtener Top 5 desde el Backend -->
     <script>
-        // Función para mostrar/ocultar el menú
+        // Obtener el Top 5 desde el backend (este código requiere un backend funcionando)
+        fetch('/top-5')
+            .then(response => response.json())
+            .then(data => {
+                const top5List = document.getElementById('top5-list');
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item.nombre;
+                    top5List.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error al obtener el Top 5:', error));
+
+        // Función para mostrar y ocultar el menú hamburguesa
         function toggleMenu() {
             const menu = document.getElementById('menu');
-            menu.classList.toggle('active');
+            menu.classList.toggle('show');
         }
     </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .estrenos-container img {
+            width: 150px;
+            height: 200px;
+            margin: 10px;
+            object-fit: cover;
+        }
+
+        .top5 ol {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .top5 ol li {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .hamburger-menu {
+            position: relative;
+        }
+
+        .hamburger-icon {
+            font-size: 30px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-items {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            background-color: #333;
+            width: 100%;
+            text-align: center;
+        }
+
+        .menu-items a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .menu-items a:hover {
+            background-color: #444;
+        }
+
+        .menu-items.show {
+            display: block;
+        }
+    </style>
 </body>
 </html>
