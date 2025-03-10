@@ -17,7 +17,15 @@
 
         .banner img {
             width: 100%;
-            display: block;
+            max-height: 400px; /* Controla el tamaño en móvil */
+            object-fit: cover;
+        }
+
+        /* Ajuste para pantallas grandes (PC) */
+        @media (min-width: 1024px) {
+            .banner img {
+                max-height: 300px; /* Reduce el tamaño en PC */
+            }
         }
 
         .content {
