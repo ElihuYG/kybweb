@@ -20,13 +20,13 @@
         <!-- Carrusel Principal -->
         <section class="carousel">
             <div class="carousel-container">
-                <div class="carousel-item active" data-title="Your sky" onclick="location.href='yoursky.html'">
+                <div class="carousel-item active" onclick="location.href='yoursky.html'">
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
                 </div>
-                <div class="carousel-item" data-title="ThamePo" onclick="location.href='thamepo.html'">
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
                     <img src="Sliders_Arriba_TP.png" alt="Slider 2">
                 </div>
-                <div class="carousel-item" data-title="Begins Youth" onclick="location.href='beginsyouth.html'">
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
                     <img src="Sliders_Arriba_BY.png" alt="Slider 3">
                 </div>
             </div>
@@ -35,17 +35,23 @@
         <section class="estrenos">
             <h2>Estrenos</h2>
             <div class="estrenos-container">
-                <div class="estreno" data-title="Begins Youth">
+                <div class="estreno">
                     <img src="poster_begins_youth.png" alt="Estreno 1">
                 </div>
-                <div class="estreno" data-title="The Pursuit">
+                <div class="estreno">
                     <img src="imagenes/estreno2.png" alt="Estreno 2">
                 </div>
-                <div class="estreno" data-title="Another Series">
+                <div class="estreno">
                     <img src="imagenes/estreno3.png" alt="Estreno 3">
                 </div>
-                <div class="estreno" data-title="Another Series">
+                <div class="estreno">
                     <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno6.png" alt="Estreno 6">
                 </div>
             </div>
             <button class="ver-mas">Ver más</button>
@@ -67,27 +73,27 @@
         document.addEventListener("DOMContentLoaded", function () {
             let searchInput = document.getElementById("search");
             let searchResults = document.getElementById("search-results");
-
-            // Seleccionar todos los elementos de la página que contienen títulos de series o películas
-            let seriesItems = document.querySelectorAll("[data-title]");
+            let series = [
+                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
+                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
+                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
+            ];
 
             searchInput.addEventListener("input", function () {
                 let query = searchInput.value.toLowerCase();
                 searchResults.innerHTML = "";
 
                 if (query.length > 0) {
-                    let filteredItems = Array.from(seriesItems).filter(item => 
-                        item.getAttribute("data-title").toLowerCase().includes(query)
-                    );
-
-                    filteredItems.forEach(item => {
+                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
+                    filteredSeries.forEach(series => {
                         let resultItem = document.createElement("div");
                         resultItem.classList.add("search-result-item");
-                        resultItem.innerHTML = `
-                            <span>${item.getAttribute("data-title")}</span>
+                        resultItem.innerHTML = ` 
+                            <img src="${series.image}" alt="${series.name}">
+                            <span>${series.name}</span>
                         `;
                         resultItem.addEventListener("click", function () {
-                            window.location.href = item.getAttribute("onclick").match(/'(.*?)'/)[1];
+                            window.location.href = series.url;
                         });
                         searchResults.appendChild(resultItem);
                     });
@@ -232,6 +238,28 @@
             cursor: pointer;
         }
 
+        /* Estilos para los estrenos en horizontal */
+        .estrenos-container {
+            display: flex;
+            justify-content: space-between; /* Distribuye las imágenes de manera horizontal */
+            gap: 20px; /* Espaciado entre las imágenes */
+            flex-wrap: nowrap; /* Evita que las imágenes se acomoden en varias filas */
+        }
+
+        .estreno {
+            flex: 0 0 auto; /* Hace que cada imagen tenga su tamaño fijo */
+            width: 150px; /* Puedes ajustar el tamaño según prefieras */
+            height: 200px; /* Ajusta la altura también si lo deseas */
+            overflow: hidden;
+            border-radius: 10px; /* Opcional: para bordes redondeados */
+        }
+
+        .estreno img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Mantiene la proporción de la imagen y cubre el área del contenedor */
+        }
+
         /* Estilos responsivos para móvil */
         @media (max-width: 600px) {
             #search {
@@ -240,6 +268,11 @@
 
             .menu-content {
                 width: 200px;
+            }
+
+            .estrenos-container {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
