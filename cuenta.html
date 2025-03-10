@@ -74,8 +74,8 @@
 <body>
     <div class="perfil-container">
         <h2>Cuenta de Usuario</h2>
-        <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">elihuf07</span></p>
-        <p><strong>Correo electrónico:</strong> <span id="emailUsuario">elihuf07@gmail.com</span></p>
+        <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">Cargando...</span></p>
+        <p><strong>Correo electrónico:</strong> <span id="emailUsuario">Cargando...</span></p>
         <a href="politica-privacidad.html">Política de Privacidad</a>
         <a href="ayuda.html">Ayuda</a>
         <a href="eliminar-cuenta.html">Eliminar Cuenta</a>
@@ -83,10 +83,12 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let emailUsuario = localStorage.getItem("currentUser");
+            let usuario = localStorage.getItem("currentUser");
 
-            if (emailUsuario) {
-                document.getElementById("nombreUsuario").innerText = emailUsuario.split("@")[0]; // Usa el nombre antes del @
+            if (usuario) {
+                let nombreUsuario = usuario.split("@")[0]; // Extrae el nombre antes del '@'
+                let emailUsuario = usuario;
+                document.getElementById("nombreUsuario").innerText = nombreUsuario; 
                 document.getElementById("emailUsuario").innerText = emailUsuario;
             } else {
                 document.getElementById("nombreUsuario").innerText = "Invitado";
