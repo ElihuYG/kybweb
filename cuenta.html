@@ -191,7 +191,7 @@
             <h3>Elige tu Foto de Perfil</h3>
             <div class="perfiles">
                 <img src="Jung_woo_jin.jpg" alt="Perfil 1" onclick="cambiarFoto('perfil1.jpg')">
-                <img src="Kim_Yoon_woo.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
+                <img src="Seo_Young_Joo.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
                 <img src="perfil3.jpg" alt="Perfil 3" onclick="cambiarFoto('perfil3.jpg')">
                 <img src="perfil4.jpg" alt="Perfil 4" onclick="cambiarFoto('perfil4.jpg')">
                 <img src="perfil5.jpg" alt="Perfil 5" onclick="cambiarFoto('perfil5.jpg')">
@@ -217,13 +217,9 @@
             let perfilSeleccionado = document.getElementById("perfilSeleccionado");
             perfilSeleccionado.innerHTML = `<img src="${foto}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
 
-            // Cambiar el icono "+" por la foto seleccionada
-            document.querySelector(".foto-perfil-placeholder").style.display = "none"; // Ocultar icono
-            let fotoPerfil = document.createElement("img");
-            fotoPerfil.src = foto;
-            fotoPerfil.classList.add("foto-perfil");
-            document.querySelector(".perfil-container").insertBefore(fotoPerfil, document.querySelector(".user-info"));
-            
+            // Guardar la foto seleccionada en el almacenamiento local
+            localStorage.setItem("fotoPerfil", foto);
+
             // Cerrar el popup después de seleccionar la foto
             cerrarPopup();
         }
@@ -237,6 +233,13 @@
             } else {
                 document.getElementById("nombreUsuario").innerText = "Invitado";
                 document.getElementById("emailUsuario").innerText = "No disponible";
+            }
+
+            // Recuperar la foto de perfil guardada
+            let fotoPerfil = localStorage.getItem("fotoPerfil");
+            if (fotoPerfil) {
+                let perfilSeleccionado = document.getElementById("perfilSeleccionado");
+                perfilSeleccionado.innerHTML = `<img src="${fotoPerfil}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
             }
         });
     </script>
