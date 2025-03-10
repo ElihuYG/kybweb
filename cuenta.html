@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - KYB</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilo general */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Contenedor principal */
+        .perfil-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Estilo para la información del usuario */
+        .perfil-container p {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        .perfil-container p strong {
+            color: #333;
+        }
+
+        /* Enlaces */
+        .perfil-container a {
+            display: block;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: color 0.3s;
+        }
+
+        .perfil-container a:hover {
+            color: #0056b3;
+        }
+
+        /* Ajustes para pantallas pequeñas */
+        @media (max-width: 600px) {
+            .perfil-container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="perfil-container">
+        <h2>Perfil de Usuario</h2>
+        <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">elihuf07</span></p>
+        <p><strong>Correo electrónico:</strong> <span id="emailUsuario">elihuf07@gmail.com</span></p>
+        <a href="politica-privacidad.html">Política de Privacidad</a>
+        <a href="ayuda.html">Ayuda</a>
+        <a href="eliminar-cuenta.html">Eliminar Cuenta</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let emailUsuario = localStorage.getItem("currentUser");
+
+            if (emailUsuario) {
+                document.getElementById("nombreUsuario").innerText = emailUsuario.split("@")[0]; // Usa el nombre antes del @
+                document.getElementById("emailUsuario").innerText = emailUsuario;
+            } else {
+                document.getElementById("nombreUsuario").innerText = "Invitado";
+                document.getElementById("emailUsuario").innerText = "No disponible";
+            }
+        });
+    </script>
+</body>
+</html>
