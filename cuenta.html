@@ -128,16 +128,24 @@
 <body>
 
     <div class="perfil-container">
-        <!-- Foto de perfil placeholder con icono de edición -->
-        <div class="foto-perfil-placeholder" onclick="mostrarPopup()">
-            <span>+</span>
-        </div>
-
         <!-- Información del usuario -->
         <h2>Perfil de Usuario</h2>
         <div class="user-info">
             <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">elihuf07</span></p>
             <p><strong>Correo electrónico:</strong> <span id="emailUsuario">elihuf07@gmail.com</span></p>
+        </div>
+
+        <!-- Foto de perfil placeholder con icono de edición -->
+        <div class="foto-perfil-placeholder" onclick="mostrarPopup()">
+            <span>+</span>
+        </div>
+
+        <div>
+            <h3>Selecciona tu Foto de Perfil</h3>
+            <!-- Aquí se mostrará la foto de perfil seleccionada -->
+            <div id="perfilSeleccionado">
+                <!-- Foto seleccionada aparecerá aquí -->
+            </div>
         </div>
         
         <a href="politica-privacidad.html" style="color: white; text-decoration: none;">Política de Privacidad</a><br>
@@ -178,12 +186,19 @@
 
         // Función para cambiar la foto de perfil
         function cambiarFoto(foto) {
+            // Mostrar la foto seleccionada debajo de "Selecciona tu Foto de Perfil"
+            let perfilSeleccionado = document.getElementById("perfilSeleccionado");
+            perfilSeleccionado.innerHTML = `<img src="${foto}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
+
+            // Cambiar el icono "+" por la foto seleccionada
             document.querySelector(".foto-perfil-placeholder").style.display = "none"; // Ocultar icono
             let fotoPerfil = document.createElement("img");
             fotoPerfil.src = foto;
             fotoPerfil.classList.add("foto-perfil");
             document.querySelector(".perfil-container").insertBefore(fotoPerfil, document.querySelector(".user-info"));
-            cerrarPopup(); // Cerrar el popup después de seleccionar la foto
+            
+            // Cerrar el popup después de seleccionar la foto
+            cerrarPopup();
         }
 
         document.addEventListener("DOMContentLoaded", function () {
