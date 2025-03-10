@@ -3,195 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Your Sky</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <h1>Your Sky</h1>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-        <section class="info-serie">
-            <div class="serie-imagen">
-                <img src="https://via.placeholder.com/300x450" alt="Imagen de Your Sky">
-            </div>
-            <div class="serie-detalles">
-                <h2>Información de la Serie</h2>
-                <p><strong>Título:</strong> Your Sky</p>
-                <p><strong>Género:</strong> Drama, Romance</p>
-                <p><strong>País:</strong> Corea del Sur</p>
-                <p><strong>Duración:</strong> 60 min por episodio</p>
-                <p><strong>Emitido:</strong> 2024</p>
-                <p><strong>Clasificación:</strong> 13+</p>
-                <p><strong>Reparto:</strong> Kim Yoon Woo, Jun Woo Jin, Jeon Jin Seo</p>
-            </div>
-        </section>
-
-        <!-- Lista de Episodios -->
-        <section class="episodios">
-            <h2>Episodios</h2>
-            <ul>
-                <li>
-                    <a href="#">
-                        <img src="https://via.placeholder.com/100x150" alt="Episodio 1">
-                        <p>Episodio 1 - El Comienzo</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="https://via.placeholder.com/100x150" alt="Episodio 2">
-                        <p>Episodio 2 - La Tormenta</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="https://via.placeholder.com/100x150" alt="Episodio 3">
-                        <p>Episodio 3 - La Promesa</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="https://via.placeholder.com/100x150" alt="Episodio 4">
-                        <p>Episodio 4 - El Encuentro</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="https://via.placeholder.com/100x150" alt="Episodio 5">
-                        <p>Episodio 5 - El Destino</p>
-                    </a>
-                </li>
-            </ul>
-        </section>
-    </main>
-
-    <!-- Bottom Navigation (Menú Hamburguesa) -->
-    <nav class="bottom-nav">
-        <div class="hamburger-menu">
-            <button class="hamburger-icon" onclick="toggleMenu()">☰</button>
-            <div id="menu" class="menu-items">
-                <a href="catalogo.html">🏠 Home</a>
-                <a href="cuenta.html">👤 Cuenta</a>
-                <a href="search.html">🔍 Buscar</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Script para mostrar el menú hamburguesa -->
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('show');
-        }
-    </script>
-
+    <title>Your Sky</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Work Sans', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #111;
+            color: white;
         }
 
-        header {
-            background-color: #333;
-            color: white;
+        .banner img {
+            width: 100%;
+            max-height: 400px; /* Controla el tamaño en móvil */
+            object-fit: cover;
+        }
+
+        /* Ajuste para pantallas grandes (PC) */
+        @media (min-width: 1024px) {
+            .banner img {
+                max-height: 300px; /* Reduce el tamaño en PC */
+            }
+
+            .actor img {
+                width: 100%;
+            }
+        }
+
+        /* Ajuste para pantallas pequeñas (Móviles) */
+        @media (max-width: 1024px) {
+            .actor img {
+                width: 70%; /* Hace las imágenes un poco más pequeñas en móvil */
+                max-width: 100px; /* Limita el tamaño máximo en móvil */
+            }
+        }
+
+        .content {
             padding: 20px;
+        }
+
+        .sinopsis {
             text-align: center;
         }
 
-        main {
-            padding: 20px;
+        .reparto {
+            text-align: center;
         }
 
-        .info-serie {
+        .actores {
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .actor {
+            width: 120px;
+            text-align: center;
+        }
+
+        .actor img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .fila {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
-        .serie-imagen img {
-            width: 300px;
-            height: 450px;
-            object-fit: cover;
+        .episodio img {
+            width: 150px;
+            border-radius: 8px;
         }
 
-        .serie-detalles {
-            max-width: 600px;
-        }
-
-        .serie-detalles p {
-            margin: 5px 0;
-        }
-
-        .episodios ul {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .episodios li {
-            list-style-type: none;
-            text-align: center;
-        }
-
-        .episodios img {
-            width: 100px;
-            height: 150px;
-            object-fit: cover;
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #333;
-            text-align: center;
-            padding: 10px 0;
-            z-index: 100;
-        }
-
-        .hamburger-menu {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-
-        .hamburger-icon {
-            font-size: 30px;
-            color: white;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .menu-items {
-            display: none;
-            position: absolute;
-            top: 40px;
-            left: 0;
-            background-color: #333;
-            width: 100%;
-            text-align: center;
-        }
-
-        .menu-items a {
-            display: block;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-        }
-
-        .menu-items a:hover {
-            background-color: #444;
-        }
-
-        .menu-items.show {
-            display: block;
+        .episodio-info {
+            max-width: 500px;
         }
     </style>
+</head>
+<body>
+
+    <header class="banner">
+        <img src="YourSky_banner_2025.jpg" alt="Your Sky">
+    </header>
+
+    <main class="content">
+        <section class="sinopsis">
+            <h1>Your Sky (2025)</h1>
+            <p><strong>Género:</strong> Romance, Drama</p>
+            <p><strong>País:</strong> Tailandia</p>
+            <p><strong>Episodios:</strong> 12</p>
+            <p><strong>Emitido:</strong> 2025</p>
+            <p><strong>Duración:</strong> 45 min por episodio</p>
+            <p><strong>Clasificación:</strong> 13+</p>
+            <h2>Sinopsis</h2>
+            <p>"Your Sky" es una serie tailandesa que explora la historia de dos jóvenes que, a pesar de las circunstancias y los obstáculos en su vida, se encuentran a través del destino. A medida que sus vidas se entrelazan, deben confrontar sus miedos y las decisiones que deben tomar para seguir sus propios sueños, mientras luchan por un amor que parece imposible.</p>
+        </section>
+
+        <section class="reparto">
+            <h2>Reparto</h2>
+            <!-- Primera fila de actores -->
+            <div class="actores">
+                <div class="actor">
+                    <a href="actor1.html">
+                        <img src="actor1.jpg" alt="Actor 1">
+                        <p><strong>Actor 1</strong></p>
+                        <p class="rol">Protagonista 1</p>
+                    </a>
+                </div>
+                <div class="actor">
+                    <a href="actor2.html">
+                        <img src="actor2.jpg" alt="Actor 2">
+                        <p><strong>Actor 2</strong></p>
+                        <p class="rol">Protagonista 2</p>
+                    </a>
+                </div>
+                <div class="actor">
+                    <a href="actor3.html">
+                        <img src="actor3.jpg" alt="Actor 3">
+                        <p><strong>Actor 3</strong></p>
+                        <p class="rol">Personaje secundario</p>
+                    </a>
+                </div>
+                <div class="actor">
+                    <a href="actor4.html">
+                        <img src="actor4.jpg" alt="Actor 4">
+                        <p><strong>Actor 4</strong></p>
+                        <p class="rol">Personaje secundario</p>
+                    </a>
+                </div>
+            </div>
+            <!-- Segunda fila de actores -->
+            <div class="actores">
+                <div class="actor">
+                    <a href="actor5.html">
+                        <img src="actor5.jpg" alt="Actor 5">
+                        <p><strong>Actor 5</strong></p>
+                        <p class="rol">Personaje secundario</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="episodios">
+            <h2>Episodios</h2>
+            <div class="episodio fila">
+                <a href="reproductor.html?ep=1">
+                    <img src="ep1.jpg" alt="Episodio 1">
+                </a>
+                <div class="episodio-info">
+                    <h3>Episodio 1</h3>
+                    <p>Los protagonistas se encuentran en circunstancias inesperadas y su primer encuentro marca el inicio de un amor que tendrá muchos altibajos. La serie comienza explorando el tema del destino y el deseo.</p>
+                </div>
+            </div>
+            <div class="episodio fila">
+                <a href="reproductor.html?ep=2">
+                    <img src="ep2.jpg" alt="Episodio 2">
+                </a>
+                <div class="episodio-info">
+                    <h3>Episodio 2</h3>
+                    <p>A medida que la relación entre los dos se desarrolla, nuevos personajes entran en escena y ponen en duda las decisiones que los protagonistas tomaron. El conflicto emocional se intensifica.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
 </body>
 </html>
