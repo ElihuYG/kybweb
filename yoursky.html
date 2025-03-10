@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB - Your Sky</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Your Sky</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="estrenos">
+            <h2>Últimos Estrenos de Your Sky</h2>
+            <div class="estrenos-container">
+                <img src="https://via.placeholder.com/150x200" alt="Estreno 1">
+                <img src="https://via.placeholder.com/150x200" alt="Estreno 2">
+                <img src="https://via.placeholder.com/150x200" alt="Estreno 3">
+            </div>
+        </section>
+
+        <section class="top5">
+            <h2>Top 5 Más Vistas de Your Sky</h2>
+            <div class="top5-container">
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 1">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 2">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 3">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 4">
+                </div>
+                <div class="top5-item">
+                    <img src="https://via.placeholder.com/150x200" alt="Top 5 5">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation (Menú Hamburguesa) -->
+    <nav class="bottom-nav">
+        <div class="hamburger-menu">
+            <button class="hamburger-icon" onclick="toggleMenu()">☰</button>
+            <div id="menu" class="menu-items">
+                <a href="catalogo.html">🏠 Home</a>
+                <a href="cuenta.html">👤 Cuenta</a>
+                <a href="search.html">🔍 Buscar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Script para obtener Top 5 desde el Backend -->
+    <script>
+        // Función para mostrar y ocultar el menú hamburguesa
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('show');
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .estrenos-container img, .top5-container img {
+            width: 150px;
+            height: 200px;
+            margin: 10px;
+            object-fit: cover;
+        }
+
+        .top5-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .top5-item {
+            margin: 10px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .hamburger-menu {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .hamburger-icon {
+            font-size: 30px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-items {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #333;
+            width: 100%;
+            text-align: center;
+        }
+
+        .menu-items a {
+            display: block;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .menu-items a:hover {
+            background-color: #444;
+        }
+
+        .menu-items.show {
+            display: block;
+        }
+    </style>
+</body>
+</html>
