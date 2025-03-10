@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seleccionar Perfil - KYB</title>
+    <title>Mi Cuenta - KYB</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -13,6 +13,7 @@
             color: white;
         }
 
+        /* Contenedor principal de la cuenta */
         .perfil-container {
             text-align: center;
             padding: 40px;
@@ -23,46 +24,94 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
+        /* Estilo para el título */
         h2 {
             font-size: 30px;
             color: white;
             margin-bottom: 20px;
         }
 
-        .perfil-img {
+        /* Foto de perfil */
+        .foto-perfil {
             width: 120px;
             height: 120px;
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 20px;
+            border: 4px solid #e50914;
+            cursor: pointer;
         }
 
+        /* Icono para elegir foto */
+        .foto-perfil-placeholder {
+            font-size: 40px;
+            color: #e50914;
+            background-color: #333;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        /* Ventana emergente para elegir foto */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .popup-content {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .popup img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .popup img:hover {
+            opacity: 0.8;
+        }
+
+        .close-popup {
+            background-color: #e50914;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        /* Contenedor de perfiles */
         .perfiles {
             display: flex;
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        .perfil-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .perfil-item img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .perfil-item p {
-            color: #ddd;
-        }
-
+        /* Botón de Home */
         .home-btn {
             background-color: #e50914;
             color: white;
@@ -71,7 +120,6 @@
             border-radius: 5px;
             font-size: 18px;
             cursor: pointer;
-            margin-top: 20px;
             transition: background-color 0.3s;
         }
 
@@ -81,27 +129,56 @@
     </style>
 </head>
 <body>
-    <div class="perfil-container">
-        <h2>Seleccionar Perfil</h2>
-        <div class="perfiles">
-            <div class="perfil-item">
-                <img src="perfil1.jpg" alt="Perfil 1">
-                <p>Usuario 1</p>
-            </div>
-            <div class="perfil-item">
-                <img src="perfil2.jpg" alt="Perfil 2">
-                <p>Usuario 2</p>
-            </div>
-            <div class="perfil-item">
-                <img src="perfil3.jpg" alt="Perfil 3">
-                <p>Usuario 3</p>
-            </div>
-        </div>
 
-        <!-- Botón de inicio -->
+    <div class="perfil-container">
+        <!-- Foto de perfil placeholder con icono de edición -->
+        <div class="foto-perfil-placeholder" onclick="mostrarPopup()">
+            <span>+</span>
+        </div>
+        <h2>Seleccionar Foto de Perfil</h2>
+
+        <!-- Botón de Home -->
         <a href="catalogo.html">
-            <button class="home-btn">Seleccionar y Entrar</button>
+            <button class="home-btn">Ir al Catálogo</button>
         </a>
     </div>
+
+    <!-- Ventana emergente para elegir foto de perfil -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h3>Elige tu Foto de Perfil</h3>
+            <div class="perfiles">
+                <img src="perfil1.jpg" alt="Perfil 1" onclick="cambiarFoto('perfil1.jpg')">
+                <img src="perfil2.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
+                <img src="perfil3.jpg" alt="Perfil 3" onclick="cambiarFoto('perfil3.jpg')">
+                <img src="perfil4.jpg" alt="Perfil 4" onclick="cambiarFoto('perfil4.jpg')">
+                <img src="perfil5.jpg" alt="Perfil 5" onclick="cambiarFoto('perfil5.jpg')">
+            </div>
+            <button class="close-popup" onclick="cerrarPopup()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar el popup de selección de foto
+        function mostrarPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        // Función para cerrar el popup
+        function cerrarPopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Función para cambiar la foto de perfil
+        function cambiarFoto(foto) {
+            document.querySelector(".foto-perfil-placeholder").style.display = "none"; // Ocultar icono
+            let fotoPerfil = document.createElement("img");
+            fotoPerfil.src = foto;
+            fotoPerfil.classList.add("foto-perfil");
+            document.querySelector(".perfil-container").insertBefore(fotoPerfil, document.querySelector("h2"));
+            cerrarPopup(); // Cerrar el popup después de seleccionar la foto
+        }
+    </script>
+
 </body>
 </html>
