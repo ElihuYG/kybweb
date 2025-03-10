@@ -3,191 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Begins Youth</title>
+    <title>KYB - Catálogo</title>
     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>KYB</h1>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar...">
+            <button id="search-btn">🔍</button>
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Carrusel Principal -->
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
+                </div>
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
+                </div>
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+                </div>
+            </div>
+        </section>
+
+        <section class="estrenos">
+            <h2>Estrenos</h2>
+            <div class="estrenos-container">
+                <div class="estreno">
+                    <img src="poster_begins_youth.png" alt="Estreno 1">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno6.png" alt="Estreno 6">
+                </div>
+            </div>
+            <button class="ver-mas">Ver más</button>
+        </section>
+    </main>   
+
+    <!-- Menú con hamburguesa -->
+    <nav class="menu">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div id="menu-content" class="menu-content">
+            <button id="close-menu" class="close-menu">X</button>
+            <a href="index.html">🏠 Home</a>
+            <a href="new-popular.html">🔥 New & Popular</a>
+            <a href="cuenta.html">👤 Cuenta</a>
+        </div>
+    </nav>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let searchInput = document.getElementById("search");
+            let searchResults = document.getElementById("search-results");
+            let series = [
+                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
+                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
+                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
+            ];
+
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
+
+                if (query.length > 0) {
+                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
+                    filteredSeries.forEach(series => {
+                        let resultItem = document.createElement("div");
+                        resultItem.classList.add("search-result-item");
+                        resultItem.innerHTML = ` 
+                            <img src="${series.image}" alt="${series.name}">
+                            <span>${series.name}</span>
+                        `;
+                        resultItem.addEventListener("click", function () {
+                            window.location.href = series.url;
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.style.display = "block";
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+
+            // Menu desplegable
+            let menuToggle = document.getElementById("menu-toggle");
+            let menuContent = document.getElementById("menu-content");
+            let closeMenu = document.getElementById("close-menu");
+
+            menuToggle.addEventListener("click", function () {
+                menuContent.style.display = "block";
+            });
+
+            closeMenu.addEventListener("click", function () {
+                menuContent.style.display = "none";
+            });
+        });
+
+        // Función para mover el carrusel automáticamente
+        let currentIndex = 0;
+        const carouselItems = document.querySelectorAll(".carousel-item");
+
+        function moveCarousel() {
+            carouselItems[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.add("active");
+        }
+
+        // Desplazamiento automático cada 3 segundos
+        setInterval(moveCarousel, 3000);
+    </script>
+    
     <style>
-        /* Estilo para la imagen de encabezado */
-        .banner img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
+        body {
+            font-family: Arial, sans-serif;
         }
 
-        /* Asegura que las imágenes no se vean demasiado grandes */
-        img {
-            width: 200px; /* Ajusta este valor según lo que necesites */
-            height: auto;
-            margin: 10px;
-            border-radius: 8px;
-        }
-
-        /* Estilo para el reparto y sus imágenes */
-        .reparto {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 20px;
-        }
-
-        /* Estilo general para los actores */
-        .actor {
+        h1 {
             text-align: center;
         }
 
-        /* Imágenes de los actores */
-        .actor img {
-            width: 150px; /* Tamaño moderado para las fotos */
-            height: auto;
-            border-radius: 8px;
+        .search-container {
+            position: absolute;
+            top: 10px;
+            right: 20px;
         }
 
-        /* Sección de sinopsis y episodios */
-        .sinopsis, .episodios {
-            margin: 20px;
+        #search {
+            width: 150px;
+            padding: 5px;
+            border: none;
         }
 
-        .episodio {
+        .search-results {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            width: 200px;
+            background: white;
+            border: 1px solid #ccc;
+            display: none;
+            z-index: 100;
+        }
+
+        .search-result-item {
             display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
+            align-items: center;
+            padding: 5px;
+            cursor: pointer;
         }
 
-        .episodio img {
-            width: 120px;
-            height: auto;
+        .search-result-item img {
+            width: 30px;
+            height: 40px;
+            margin-right: 10px;
         }
 
-        .episodio-info {
-            max-width: 500px;
+        .carousel {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* Estilo para pantallas pequeñas (móviles) */
-        @media (max-width: 768px) {
-            /* En móviles, la imagen de los actores será más pequeña y sin texto */
-            .reparto .actor {
-                text-align: center;
-            }
-
-            .actor img {
-                width: 80px; /* Tamaño pequeño para móviles */
-            }
-
-            .actor p {
-                display: none; /* No mostramos el nombre en móviles */
-            }
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
 
-        /* Estilo para pantallas grandes (PC) */
-        @media (min-width: 769px) {
-            .reparto {
-                display: flex;
-                justify-content: space-evenly;
-                gap: 20px;
-            }
-
-            .actor {
-                text-align: center;
-            }
-
-            .actor img {
-                width: 150px; /* Tamaño moderado en PC */
-            }
+        .carousel-item {
+            flex: 0 0 100%;
+            display: none;
+            text-align: center;
         }
 
+        .carousel-item.active {
+            display: block;
+        }
+
+        /* Menú con hamburguesa */
+        .menu {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            z-index: 200;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .menu-content a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: black;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Estilos para los estrenos en horizontal */
+        .estrenos-container {
+            display: flex;
+            justify-content: space-between; /* Distribuye las imágenes de manera horizontal */
+            gap: 20px; /* Espaciado entre las imágenes */
+            flex-wrap: nowrap; /* Evita que las imágenes se acomoden en varias filas */
+        }
+
+        .estreno {
+            flex: 0 0 auto; /* Hace que cada imagen tenga su tamaño fijo */
+            width: 150px; /* Puedes ajustar el tamaño según prefieras */
+            height: 200px; /* Ajusta la altura también si lo deseas */
+            overflow: hidden;
+            border-radius: 10px; /* Opcional: para bordes redondeados */
+        }
+
+        .estreno img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Mantiene la proporción de la imagen y cubre el área del contenedor */
+        }
+
+        /* Estilos responsivos para móvil */
+        @media (max-width: 600px) {
+            #search {
+                width: 120px;
+            }
+
+            .menu-content {
+                width: 200px;
+            }
+
+            .estrenos-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
     </style>
-</head>
-<body>
-
-    <!-- Imagen de Begins Youth -->
-    <header class="banner">
-        <img src="Sliders_Arriba_BY.png" alt="Begins Youth">
-    </header>
-
-    <main class="content">
-        <!-- Sección de Sinopsis -->
-        <section class="sinopsis">
-            <h1>Begins Youth</h1>
-            <p><strong>Género:</strong> Drama, Escolar</p>
-            <p><strong>País:</strong> Corea del Sur</p>
-            <p><strong>Episodios:</strong> 12</p>
-            <p><strong>Emitido:</strong> 2024</p>
-            <p><strong>Duración:</strong> 45 min por episodio</p>
-            <p><strong>Clasificación:</strong> 13+</p>
-            <h2>Sinopsis</h2>
-            <p>"Begins Youth" expande la historia que los fanáticos han visto en los videos musicales de BTS y en el webtoon "Save Me". La historia comienza cuando Kim Hwan conoce a otros seis chicos, cada uno lidiando con sus propias luchas. Juntos, aprenden a superar sus mayores dificultades.</p>
-        </section>
-
-        <!-- Sección de Reparto -->
-        <section class="reparto">
-            <h2>Reparto</h2>
-            <div class="actor">
-                <a href="Seo_Ji-hoon.html">
-                    <img src="seo_ji_hoon.jpg" alt="Seo Ji-hoon">
-                    <p>Seo Ji-hoon como Kim Hwan</p>
-                </a>
-            </div>
-            <div class="actor">
-                <a href="Noh_Jong-hyun.html">
-                    <img src="noh_jong_hyun.jpg" alt="Noh Jong-hyun">
-                    <p>Noh Jong-hyun como Min Ce-in</p>
-                </a>
-            </div>
-            <div class="actor">
-                <a href="Ahn_Ji-ho.html">
-                    <img src="ahn_ji_ho.jpg" alt="Ahn Ji-ho">
-                    <p>Ahn Ji-ho como Jeong Ho-su</p>
-                </a>
-            </div>
-            <div class="actor">
-                <a href="Seo_Young-joo.html">
-                    <img src="seo_young_joo.jpg" alt="Seo Young-joo">
-                    <p>Seo Young-joo como Kim Do-geon</p>
-                </a>
-            </div>
-            <div class="actor">
-                <a href="Kim_Yoon-woo.html">
-                    <img src="kim_yoon_woo.jpg" alt="Kim Yoon-woo">
-                    <p>Kim Yoon-woo como Park Ha-ru</p>
-                </a>
-            </div>
-            <div class="actor">
-                <a href="Jung_Woo-jin.html">
-                    <img src="jung_woo_jin.jpg" alt="Jung Woo-jin">
-                    <p>Jung Woo-jin como Kim Joo-an</p>
-                </a>
-            </div>
-            <div class="actor">
-                <a href="Jeon_Jin-seo.html">
-                    <img src="jeon_jin_seo.jpg" alt="Jeon Jin-seo">
-                    <p>Jeon Jin-seo como Jeon Je-ha</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- Sección de Episodios -->
-        <section class="episodios">
-            <h2>Episodios</h2>
-            <div class="episodio">
-                <a href="reproductor.html?ep=1">
-                    <img src="ep1.jpg" alt="Episodio 1">
-                </a>
-                <div class="episodio-info">
-                    <h3>Episodio 1</h3>
-                    <p>Un nuevo comienzo trae consigo secretos y desafíos inesperados.</p>
-                </div>
-            </div>
-            
-            <div class="episodio">
-                <a href="reproductor.html?ep=2">
-                    <img src="ep2.jpg" alt="Episodio 2">
-                </a>
-                <div class="episodio-info">
-                    <h3>Episodio 2</h3>
-                    <p>Los lazos de amistad se ponen a prueba cuando un incidente sacude la escuela.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
 </body>
 </html>
