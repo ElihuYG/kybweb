@@ -45,7 +45,6 @@
             border-radius: 50%;
             margin-bottom: 20px;
             border: 4px solid #e50914;
-            cursor: pointer;
         }
 
         /* Icono para elegir foto */
@@ -53,14 +52,19 @@
             font-size: 40px;
             color: #e50914;
             background-color: #333;
-            width: 120px;
-            height: 120px;
+            width: 40px;
+            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
             cursor: pointer;
+            margin-top: -15px; /* Hace que el icono se coloque justo debajo de la imagen */
             margin-bottom: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         /* Ventana emergente para elegir foto */
@@ -155,19 +159,18 @@
             <p><strong>Correo electrónico:</strong> <span id="emailUsuario">elihuf07@gmail.com</span></p>
         </div>
 
-        <!-- Foto de perfil placeholder con icono de edición -->
-        <div class="foto-perfil-placeholder" onclick="mostrarPopup()">
-            <span>+</span>
-        </div>
-
+        <!-- Foto de perfil -->
         <div>
-            <h3>Selecciona tu Foto de Perfil</h3>
-            <!-- Aquí se mostrará la foto de perfil seleccionada -->
-            <div id="perfilSeleccionado">
+            <div id="perfilSeleccionado" class="foto-perfil">
                 <!-- Foto seleccionada aparecerá aquí -->
             </div>
+
+            <!-- Botón para elegir foto (aparece solo si no se ha elegido una foto) -->
+            <div class="foto-perfil-placeholder" id="botonFoto" onclick="mostrarPopup()">
+                <span>+</span>
+            </div>
         </div>
-        
+
         <!-- Enlaces con iconos -->
         <a href="politica-privacidad.html" class="link-with-icon">
             <i class="fas fa-shield-alt"></i> Política de Privacidad
@@ -190,8 +193,8 @@
         <div class="popup-content">
             <h3>Elige tu Foto de Perfil</h3>
             <div class="perfiles">
-                <img src="Jung_woo_jin.jpg" alt="Perfil 1" onclick="cambiarFoto('perfil1.jpg')">
-                <img src="Seo_Young_Joo.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
+                <img src="ahn_ji_ho.jpg" alt="Perfil 1" onclick="cambiarFoto('perfil1.jpg')">
+                <img src="Kim_Yoon_woo.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
                 <img src="perfil3.jpg" alt="Perfil 3" onclick="cambiarFoto('perfil3.jpg')">
                 <img src="perfil4.jpg" alt="Perfil 4" onclick="cambiarFoto('perfil4.jpg')">
                 <img src="perfil5.jpg" alt="Perfil 5" onclick="cambiarFoto('perfil5.jpg')">
@@ -213,12 +216,15 @@
 
         // Función para cambiar la foto de perfil
         function cambiarFoto(foto) {
-            // Mostrar la foto seleccionada debajo de "Selecciona tu Foto de Perfil"
+            // Mostrar la foto seleccionada en el lugar de la foto de perfil
             let perfilSeleccionado = document.getElementById("perfilSeleccionado");
             perfilSeleccionado.innerHTML = `<img src="${foto}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
 
             // Guardar la foto seleccionada en el almacenamiento local
             localStorage.setItem("fotoPerfil", foto);
+
+            // Eliminar el botón para elegir foto
+            document.getElementById("botonFoto").style.display = "none";
 
             // Cerrar el popup después de seleccionar la foto
             cerrarPopup();
@@ -240,6 +246,9 @@
             if (fotoPerfil) {
                 let perfilSeleccionado = document.getElementById("perfilSeleccionado");
                 perfilSeleccionado.innerHTML = `<img src="${fotoPerfil}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
+
+                // Eliminar el botón para elegir foto
+                document.getElementById("botonFoto").style.display = "none";
             }
         });
     </script>
