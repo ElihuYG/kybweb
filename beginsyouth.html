@@ -4,7 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Begins Youth</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: white;
+        }
+
+        .banner img {
+            width: 100%;
+            display: block;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .sinopsis {
+            text-align: center;
+        }
+
+        .reparto {
+            text-align: center;
+        }
+
+        .actores {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .actor {
+            width: 120px;
+            text-align: center;
+        }
+
+        .actor img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .fila {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .episodio img {
+            width: 150px;
+            border-radius: 8px;
+        }
+
+        .episodio-info {
+            max-width: 500px;
+        }
+    </style>
 </head>
 <body>
 
@@ -27,15 +87,15 @@
 
         <section class="reparto">
             <h2>Reparto</h2>
-            <div class="actores fila">
-                <div class="actor protagonista">
+            <div class="actores">
+                <div class="actor">
                     <a href="Seo_Ji-hoon.html">
                         <img src="seo_ji_hoon.jpg" alt="Seo Ji-hoon">
                         <p><strong>Seo Ji-hoon</strong></p>
                         <p class="rol">Kim Hwan (Protagonista)</p>
                     </a>
                 </div>
-                <div class="actor coprotagonista">
+                <div class="actor">
                     <a href="Noh_Jong-hyun.html">
                         <img src="noh_jong_hyun.jpg" alt="Noh Jong-hyun">
                         <p><strong>Noh Jong-hyun</strong></p>
@@ -54,27 +114,6 @@
                         <img src="Seo_young_joo.jpg" alt="Seo Young-joo">
                         <p><strong>Seo Young-joo</strong></p>
                         <p class="rol">Kim Do-geon</p>
-                    </a>
-                </div>
-                <div class="actor">
-                    <a href="Kim_Yoon-woo.html">
-                        <img src="kim_yoon_woo.jpg" alt="Kim Yoon-woo">
-                        <p><strong>Kim Yoon-woo</strong></p>
-                        <p class="rol">Park Ha-ru</p>
-                    </a>
-                </div>
-                <div class="actor">
-                    <a href="Jung_Woo-jin.html">
-                        <img src="Jung_woo_jin.jpg" alt="Jung Woo-jin">
-                        <p><strong>Jung Woo-jin</strong></p>
-                        <p class="rol">Kim Joo-an</p>
-                    </a>
-                </div>
-                <div class="actor">
-                    <a href="Jeon_Jin-seo.html">
-                        <img src="Jeon_jin_seo.jpg" alt="Jeon Jin-seo">
-                        <p><strong>Jeon Jin-seo</strong></p>
-                        <p class="rol">Jeon Je-ha</p>
                     </a>
                 </div>
             </div>
@@ -102,5 +141,6 @@
             </div>
         </section>
     </main>
+
 </body>
 </html>
