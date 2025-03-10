@@ -11,7 +11,7 @@
             display: none;
             position: fixed;
             top: 20px;
-            right: 20px;
+            left: 20px;
             font-size: 30px;
             cursor: pointer;
             z-index: 1000;
@@ -21,14 +21,14 @@
             display: none;
             position: fixed;
             top: 0;
-            right: 0;
+            left: 0;
             background-color: #333;
             color: white;
             width: 250px;
             height: 100%;
             padding-top: 60px;
             text-align: left;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
         }
 
         .menu a {
@@ -47,10 +47,35 @@
             display: block;
         }
 
-        /* Para que el icono del menú hamburguesa sea visible en pantallas pequeñas */
-        @media screen and (max-width: 768px) {
+        /* Mostrar el menú hamburguesa en todas las pantallas */
+        .menu-icon {
+            display: block;
+        }
+
+        /* Para pantallas grandes, aseguramos que el menú se vea fijo y no se oculte */
+        @media screen and (min-width: 768px) {
             .menu-icon {
-                display: block;
+                display: none; /* No mostrar el icono en pantallas grandes */
+            }
+
+            .menu {
+                display: block; /* Menú visible siempre */
+                position: static;
+                width: auto;
+                box-shadow: none;
+                height: auto;
+                background-color: transparent;
+            }
+
+            .menu a {
+                display: inline-block;
+                padding: 10px;
+                color: #333;
+            }
+
+            .menu a:hover {
+                background-color: transparent;
+                color: #f90;
             }
         }
     </style>
@@ -90,8 +115,8 @@
     <!-- Menú lateral -->
     <div class="menu" id="menu">
         <a href="catalogo.html">🏠 Home</a>
-        <a href="new-popular.html" class="active">🔥 New & Popular</a>
-        <a href="search.html">🔍 Search</a>
+        <a href="cuenta.html">👤 Cuenta</a>
+        <a href="search.html">🔍 Buscar</a>
     </div>
 
     <script>
