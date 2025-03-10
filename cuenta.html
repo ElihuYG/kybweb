@@ -31,6 +31,12 @@
             margin-bottom: 20px;
         }
 
+        /* Información de usuario */
+        .user-info p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
         /* Foto de perfil */
         .foto-perfil {
             width: 120px;
@@ -102,15 +108,6 @@
             border-radius: 5px;
         }
 
-        /* Contenedor de perfiles */
-        .perfiles {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
         /* Botón de Home */
         .home-btn {
             background-color: #e50914;
@@ -135,7 +132,17 @@
         <div class="foto-perfil-placeholder" onclick="mostrarPopup()">
             <span>+</span>
         </div>
-        <h2>Seleccionar Foto de Perfil</h2>
+
+        <!-- Información del usuario -->
+        <h2>Perfil de Usuario</h2>
+        <div class="user-info">
+            <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">elihuf07</span></p>
+            <p><strong>Correo electrónico:</strong> <span id="emailUsuario">elihuf07@gmail.com</span></p>
+        </div>
+        
+        <a href="politica-privacidad.html" style="color: white; text-decoration: none;">Política de Privacidad</a><br>
+        <a href="ayuda.html" style="color: white; text-decoration: none;">Ayuda</a><br>
+        <a href="eliminar-cuenta.html" style="color: white; text-decoration: none;">Eliminar Cuenta</a><br>
 
         <!-- Botón de Home -->
         <a href="catalogo.html">
@@ -175,9 +182,21 @@
             let fotoPerfil = document.createElement("img");
             fotoPerfil.src = foto;
             fotoPerfil.classList.add("foto-perfil");
-            document.querySelector(".perfil-container").insertBefore(fotoPerfil, document.querySelector("h2"));
+            document.querySelector(".perfil-container").insertBefore(fotoPerfil, document.querySelector(".user-info"));
             cerrarPopup(); // Cerrar el popup después de seleccionar la foto
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let emailUsuario = localStorage.getItem("currentUser");
+
+            if (emailUsuario) {
+                document.getElementById("nombreUsuario").innerText = emailUsuario.split("@")[0]; // Usa el nombre antes del @
+                document.getElementById("emailUsuario").innerText = emailUsuario;
+            } else {
+                document.getElementById("nombreUsuario").innerText = "Invitado";
+                document.getElementById("emailUsuario").innerText = "No disponible";
+            }
+        });
     </script>
 
 </body>
