@@ -9,47 +9,53 @@
         /* Estilo general */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: #111;
+            color: white;
         }
 
         /* Contenedor principal */
         .perfil-container {
-            background-color: #fff;
+            background-color: #111;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            max-width: 500px;
+            padding: 40px 20px;
+            max-width: 600px;
             width: 100%;
+            margin: 50px auto;
             text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         h2 {
-            font-size: 24px;
+            font-size: 30px;
             margin-bottom: 20px;
-            color: #333;
+            color: #fff;
         }
 
-        /* Estilo para la información de la cuenta */
         .perfil-container p {
-            font-size: 16px;
+            font-size: 18px;
             margin: 10px 0;
-            color: #555;
+            color: #ddd;
         }
 
         .perfil-container p strong {
-            color: #333;
+            color: #fff;
+        }
+
+        /* Imagen de perfil */
+        .perfil-container img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 20px;
         }
 
         /* Enlaces */
         .perfil-container a {
             display: block;
-            font-size: 16px;
+            font-size: 18px;
             color: #007bff;
             text-decoration: none;
             margin: 10px 0;
@@ -57,28 +63,63 @@
         }
 
         .perfil-container a:hover {
-            color: #0056b3;
+            color: #fff;
         }
 
-        /* Ajustes para pantallas pequeñas */
+        /* Estilo del botón Home */
+        .home-btn {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .home-btn:hover {
+            background-color: #f40612;
+        }
+
+        /* Estilo para pantallas pequeñas */
         @media (max-width: 600px) {
             .perfil-container {
                 padding: 20px;
             }
+
             h2 {
-                font-size: 20px;
+                font-size: 24px;
+            }
+
+            .perfil-container img {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Cabecera con la imagen -->
+    <header style="text-align: center; margin-bottom: 30px;">
+        <img src="tu-imagen.jpg" alt="Imagen de perfil" class="perfil-img">
+    </header>
+
+    <!-- Contenedor del perfil -->
     <div class="perfil-container">
-        <h2>Cuenta de Usuario</h2>
+        <h2>Bienvenido a tu cuenta</h2>
+        <img src="perfil.jpg" alt="Foto de perfil">
         <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">Cargando...</span></p>
         <p><strong>Correo electrónico:</strong> <span id="emailUsuario">Cargando...</span></p>
         <a href="politica-privacidad.html">Política de Privacidad</a>
         <a href="ayuda.html">Ayuda</a>
         <a href="eliminar-cuenta.html">Eliminar Cuenta</a>
+
+        <!-- Botón de Home -->
+        <a href="catalogo.html">
+            <button class="home-btn">Volver al Catálogo</button>
+        </a>
     </div>
 
     <script>
@@ -88,7 +129,7 @@
             if (usuario) {
                 let nombreUsuario = usuario.split("@")[0]; // Extrae el nombre antes del '@'
                 let emailUsuario = usuario;
-                document.getElementById("nombreUsuario").innerText = nombreUsuario; 
+                document.getElementById("nombreUsuario").innerText = nombreUsuario;
                 document.getElementById("emailUsuario").innerText = emailUsuario;
             } else {
                 document.getElementById("nombreUsuario").innerText = "Invitado";
