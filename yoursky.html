@@ -15,39 +15,19 @@
             color: white;
         }
 
-        /* Header con flecha */
         .header {
             display: flex;
             align-items: center;
-            padding: 15px;
-            background: #000;
-        }
-
-        .back-arrow {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: white;
+            padding: 10px;
         }
 
         .back-arrow svg {
-            width: 30px;
-            height: 30px;
-            fill: white;
+            width: 20px;
+            height: 20px;
         }
 
-        /* Ajuste del slider */
         .banner img {
             width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: contain;
-        }
-
-        @media (max-width: 768px) {
-            .banner img {
-                object-fit: cover;
-            }
         }
 
         .content {
@@ -58,7 +38,6 @@
             text-align: center;
         }
 
-        /* Reparto */
         .actores {
             display: flex;
             flex-wrap: wrap;
@@ -76,18 +55,15 @@
             border-radius: 8px;
         }
 
-        /* Ajuste en móviles: 5 actores por fila sin nombres */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .actor img {
-                width: 70%;
-                max-width: 100px;
+                width: 70px;
             }
             .actor p {
                 display: none;
             }
         }
 
-        /* Estilo de episodios */
         .fila {
             display: flex;
             align-items: center;
@@ -102,24 +78,22 @@
 
         .episodio-info {
             max-width: 500px;
-            text-align: left;
         }
     </style>
 </head>
 <body>
 
-    <!-- Flecha de regreso -->
     <header class="header">
         <a href="catalogo.html" class="back-arrow">
-            <svg viewBox="0 0 24 24">
-                <path d="M15 19l-7-7 7-7"></path>
+            <svg width="20" height="20" viewBox="0 0 24 24">
+                <path d="M15 19l-7-7 7-7" fill="white"></path>
             </svg>
         </a>
     </header>
 
-    <header class="banner">
+    <div class="banner">
         <img src="Sliders_Arriba_YS.png" alt="Your Sky (Uncut)">
-    </header>
+    </div>
 
     <main class="content">
         <section class="sinopsis">
@@ -170,6 +144,23 @@
                         <img src="Save_Worapong_Walor.jpg" alt="Save Worapong">
                         <p><strong>Save Worapong Walor</strong></p>
                         <p class="rol">Hia Pawee Sae-song</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="actores">
+                <div class="actor">
+                    <a href="patji_jirachart.html">
+                        <img src="Patji_Jirachart_Buspavanich.jpg" alt="Patji Jirachart">
+                        <p><strong>Patji Jirachart Buspavanich</strong></p>
+                        <p class="rol">Type Thikhayu Rungprasertsin</p>
+                    </a>
+                </div>
+                <div class="actor">
+                    <a href="in_inthira.html">
+                        <img src="In_Inthira.jpg" alt="In Inthira">
+                        <p><strong>In Inthira Sae-sieo</strong></p>
+                        <p class="rol">Joy Jiranan Phantrakul</p>
                     </a>
                 </div>
             </div>
