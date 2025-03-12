@@ -31,15 +31,9 @@
 
         .actores-container {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .fila-actores {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
 
         .actor {
@@ -52,13 +46,60 @@
             border-radius: 8px;
         }
 
-        @media (max-width: 1024px) {
-            .actor img {
-                width: 70%;
-                max-width: 100px;
+        .fila-actores {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
+        }
+
+        /* Ajustes para móviles */
+        @media (max-width: 768px) {
+            .fila-actores {
+                gap: 10px;
             }
+
+            .actor {
+                width: 80px;
+            }
+
+            .actor img {
+                width: 100%;
+                max-width: 80px;
+            }
+
             .actor p {
                 display: none; /* Oculta los nombres y roles en móviles */
+            }
+        }
+
+        /* Episodios en formato imagen izquierda y texto derecha */
+        .episodio {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .episodio img {
+            width: 150px;
+            border-radius: 8px;
+        }
+
+        .episodio-info {
+            flex: 1;
+        }
+
+        /* Ajustes para móviles en episodios */
+        @media (max-width: 768px) {
+            .episodio {
+                flex-direction: row;
+            }
+
+            .episodio img {
+                width: 120px;
             }
         }
     </style>
@@ -85,7 +126,6 @@
         <section class="reparto">
             <h2>Reparto</h2>
             <div class="actores-container">
-                <!-- Primera fila -->
                 <div class="fila-actores">
                     <div class="actor">
                         <a href="kong_kongpob.html">
@@ -124,7 +164,6 @@
                     </div>
                 </div>
 
-                <!-- Segunda fila -->
                 <div class="fila-actores">
                     <div class="actor">
                         <a href="patji_jirachart.html">
@@ -167,22 +206,11 @@
 
         <section class="episodios">
             <h2>Episodios</h2>
-            <div class="episodio fila">
-                <a href="reproductor.html?ep=1">
-                    <img src="ep1_yoursky.jpg" alt="Episodio 1">
-                </a>
+            <div class="episodio">
+                <img src="ep1_yoursky.jpg" alt="Episodio 1">
                 <div class="episodio-info">
                     <h3>Episodio 1</h3>
-                    <p>Teerak y Muenfah se conocen en circunstancias inesperadas, dando inicio a una historia de amor y autodescubrimiento.</p>
-                </div>
-            </div>
-            <div class="episodio fila">
-                <a href="reproductor.html?ep=2">
-                    <img src="ep2_yoursky.jpg" alt="Episodio 2">
-                </a>
-                <div class="episodio-info">
-                    <h3>Episodio 2</h3>
-                    <p>Las diferencias entre Teerak y Muenfah comienzan a surgir, poniendo a prueba su relación.</p>
+                    <p>Teerak y Muenfah se conocen en circunstancias inesperadas.</p>
                 </div>
             </div>
         </section>
