@@ -15,10 +15,18 @@
             color: white;
         }
 
+        /* Ajuste del slider */
         .banner img {
             width: 100%;
+            height: auto;
             max-height: 400px;
-            object-fit: cover;
+            object-fit: contain; /* Se ve completo en PC */
+        }
+
+        @media (max-width: 768px) {
+            .banner img {
+                object-fit: cover; /* En móvil se mantiene */
+            }
         }
 
         .content {
@@ -29,11 +37,12 @@
             text-align: center;
         }
 
-        .actores-container {
+        /* Reparto */
+        .actores {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .actor {
@@ -46,41 +55,23 @@
             border-radius: 8px;
         }
 
-        .fila-actores {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            width: 100%;
-        }
-
-        /* Ajustes para móviles */
+        /* Ajuste en móviles: 5 actores por fila sin nombres */
         @media (max-width: 768px) {
-            .fila-actores {
-                gap: 10px;
-            }
-
-            .actor {
-                width: 80px;
-            }
-
             .actor img {
-                width: 100%;
-                max-width: 80px;
+                width: 70%;
+                max-width: 100px;
             }
-
             .actor p {
-                display: none; /* Oculta los nombres y roles en móviles */
+                display: none; /* Oculta nombres en móvil */
             }
         }
 
-        /* Episodios en formato imagen izquierda y texto derecha */
-        .episodio {
+        /* Estilo de episodios */
+        .fila {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
-            text-align: left;
         }
 
         .episodio img {
@@ -89,18 +80,8 @@
         }
 
         .episodio-info {
-            flex: 1;
-        }
-
-        /* Ajustes para móviles en episodios */
-        @media (max-width: 768px) {
-            .episodio {
-                flex-direction: row;
-            }
-
-            .episodio img {
-                width: 120px;
-            }
+            max-width: 500px;
+            text-align: left;
         }
     </style>
 </head>
@@ -125,92 +106,63 @@
 
         <section class="reparto">
             <h2>Reparto</h2>
-            <div class="actores-container">
-                <div class="fila-actores">
-                    <div class="actor">
-                        <a href="kong_kongpob.html">
-                            <img src="Kong_Kongpob_Jirojmontri.jpg" alt="Kong Kongpob">
-                            <p><strong>Kong Kongpob Jirojmontri</strong></p>
-                            <p class="rol">Teerak Rak Niran</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="thomas_teetut.html">
-                            <img src="Thomas_Teetut_Chungmanirat.jpg" alt="Thomas Teetut">
-                            <p><strong>Thomas Teetut Chungmanirat</strong></p>
-                            <p class="rol">Muenfah Pradiphat Phisut</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="suppakarn_jirachotikul.html">
-                            <img src="Suppakarn.jpg" alt="Suppakarn Jirachotikul">
-                            <p><strong>Por Suppakarn Jirachotikul</strong></p>
-                            <p class="rol">PunLee Sasin Phisut</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="auau_thanaphum.html">
-                            <img src="Auau_Thanaphum_Sestasittikul.jpg" alt="Auau Thanaphum">
-                            <p><strong>Auau Thanaphum Sestasittikul</strong></p>
-                            <p class="rol">Real Prach Panha</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="save_worapong.html">
-                            <img src="Save_Worapong_Walor.jpg" alt="Save Worapong">
-                            <p><strong>Save Worapong Walor</strong></p>
-                            <p class="rol">Hia Pawee Sae-song</p>
-                        </a>
-                    </div>
+            <div class="actores">
+                <div class="actor">
+                    <a href="kong_kongpob.html">
+                        <img src="Kong_Kongpob_Jirojmontri.jpg" alt="Kong Kongpob">
+                        <p><strong>Kong Kongpob Jirojmontri</strong></p>
+                        <p class="rol">Teerak Rak Niran</p>
+                    </a>
                 </div>
-
-                <div class="fila-actores">
-                    <div class="actor">
-                        <a href="patji_jirachart.html">
-                            <img src="Patji_Jirachart_Buspavanich.jpg" alt="Patji Jirachart">
-                            <p><strong>Patji Jirachart Buspavanich</strong></p>
-                            <p class="rol">Type Thikhayu Rungprasertsin</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="in_inthira.html">
-                            <img src="In_Inthira.jpg" alt="In Inthira">
-                            <p><strong>In Inthira Sae-sieo</strong></p>
-                            <p class="rol">Joy Jiranan Phantrakul</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="Mike_Chinnarat.html">
-                            <img src="eq8Bq_5s.jpg" alt="Mike Chinnarat">
-                            <p><strong>Mike Chinnarat Siriphogchawalit</strong></p>
-                            <p class="rol">Oh</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="Morakot_Liu.html">
-                            <img src="jlrPrs.jpg" alt="Morakot Liu">
-                            <p><strong>Morakot Liu</strong></p>
-                            <p class="rol">Babe</p>
-                        </a>
-                    </div>
-                    <div class="actor">
-                        <a href="Tonnam_Piamchon.html">
-                            <img src="Q38X2_5s.jpg" alt="Tonnam Piamchon">
-                            <p><strong>Tonnam Piamchon Damrongsonthornchai</strong></p>
-                            <p class="rol">Dom</p>
-                        </a>
-                    </div>
+                <div class="actor">
+                    <a href="thomas_teetut.html">
+                        <img src="Thomas_Teetut_Chungmanirat.jpg" alt="Thomas Teetut">
+                        <p><strong>Thomas Teetut Chungmanirat</strong></p>
+                        <p class="rol">Muenfah Pradiphat Phisut</p>
+                    </a>
+                </div>
+                <div class="actor">
+                    <a href="suppakarn_jirachotikul.html">
+                        <img src="Suppakarn.jpg" alt="Suppakarn Jirachotikul">
+                        <p><strong>Por Suppakarn Jirachotikul</strong></p>
+                        <p class="rol">PunLee Sasin Phisut</p>
+                    </a>
+                </div>
+                <div class="actor">
+                    <a href="auau_thanaphum.html">
+                        <img src="Auau_Thanaphum_Sestasittikul.jpg" alt="Auau Thanaphum">
+                        <p><strong>Auau Thanaphum Sestasittikul</strong></p>
+                        <p class="rol">Real Prach Panha</p>
+                    </a>
+                </div>
+                <div class="actor">
+                    <a href="save_worapong.html">
+                        <img src="Save_Worapong_Walor.jpg" alt="Save Worapong">
+                        <p><strong>Save Worapong Walor</strong></p>
+                        <p class="rol">Hia Pawee Sae-song</p>
+                    </a>
                 </div>
             </div>
         </section>
 
         <section class="episodios">
             <h2>Episodios</h2>
-            <div class="episodio">
-                <img src="ep1_yoursky.jpg" alt="Episodio 1">
+            <div class="episodio fila">
+                <a href="reproductor.html?ep=1">
+                    <img src="ep1_yoursky.jpg" alt="Episodio 1">
+                </a>
                 <div class="episodio-info">
                     <h3>Episodio 1</h3>
-                    <p>Teerak y Muenfah se conocen en circunstancias inesperadas.</p>
+                    <p>Teerak y Muenfah se conocen en circunstancias inesperadas, dando inicio a una historia de amor y autodescubrimiento.</p>
+                </div>
+            </div>
+            <div class="episodio fila">
+                <a href="reproductor.html?ep=2">
+                    <img src="ep2_yoursky.jpg" alt="Episodio 2">
+                </a>
+                <div class="episodio-info">
+                    <h3>Episodio 2</h3>
+                    <p>Las diferencias entre Teerak y Muenfah comienzan a surgir, poniendo a prueba su relación.</p>
                 </div>
             </div>
         </section>
