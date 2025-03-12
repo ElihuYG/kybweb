@@ -15,17 +15,38 @@
             color: white;
         }
 
+        /* Header con flecha */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #000;
+        }
+
+        .back-arrow {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        .back-arrow svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
         /* Ajuste del slider */
         .banner img {
             width: 100%;
             height: auto;
             max-height: 400px;
-            object-fit: contain; /* Se ve completo en PC */
+            object-fit: contain;
         }
 
         @media (max-width: 768px) {
             .banner img {
-                object-fit: cover; /* En móvil se mantiene */
+                object-fit: cover;
             }
         }
 
@@ -62,7 +83,7 @@
                 max-width: 100px;
             }
             .actor p {
-                display: none; /* Oculta nombres en móvil */
+                display: none;
             }
         }
 
@@ -86,6 +107,15 @@
     </style>
 </head>
 <body>
+
+    <!-- Flecha de regreso -->
+    <header class="header">
+        <a href="catalogo.html" class="back-arrow">
+            <svg viewBox="0 0 24 24">
+                <path d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </a>
+    </header>
 
     <header class="banner">
         <img src="Sliders_Arriba_YS.png" alt="Your Sky (Uncut)">
