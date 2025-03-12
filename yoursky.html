@@ -21,23 +21,6 @@
             object-fit: cover;
         }
 
-        @media (min-width: 1024px) {
-            .banner img {
-                max-height: 300px;
-            }
-
-            .actor img {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .actor img {
-                width: 70%;
-                max-width: 100px;
-            }
-        }
-
         .content {
             padding: 20px;
         }
@@ -46,11 +29,17 @@
             text-align: center;
         }
 
-        .actores {
+        .actores-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .fila-actores {
+            display: flex;
             justify-content: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         .actor {
@@ -63,20 +52,14 @@
             border-radius: 8px;
         }
 
-        .fila {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .episodio img {
-            width: 150px;
-            border-radius: 8px;
-        }
-
-        .episodio-info {
-            max-width: 500px;
+        @media (max-width: 1024px) {
+            .actor img {
+                width: 70%;
+                max-width: 100px;
+            }
+            .actor p {
+                display: none; /* Oculta los nombres y roles en móviles */
+            }
         }
     </style>
 </head>
@@ -96,90 +79,88 @@
             <p><strong>Duración:</strong> 45 min por episodio</p>
             <p><strong>Clasificación:</strong> 13+</p>
             <h2>Sinopsis</h2>
-            <p>La historia sigue a Teerak y Muenfah, dos jóvenes con destinos entrelazados que navegan a través del amor, la amistad y los desafíos de la vida. Mientras enfrentan obstáculos personales y sociales, descubren qué significa realmente el amor y la aceptación.</p>
+            <p>La historia sigue a Teerak y Muenfah, dos jóvenes con destinos entrelazados que navegan a través del amor, la amistad y los desafíos de la vida.</p>
         </section>
 
         <section class="reparto">
             <h2>Reparto</h2>
-            <div class="actores">
-                <div class="actor">
-                    <a href="kong_kongpob.html">
-                        <img src="Kong_Kongpob_Jirojmontri.jpg" alt="Kong Kongpob">
-                        <p><strong>Kong Kongpob Jirojmontri</strong></p>
-                        <p class="rol">Teerak Rak Niran</p>
-                    </a>
+            <div class="actores-container">
+                <!-- Primera fila -->
+                <div class="fila-actores">
+                    <div class="actor">
+                        <a href="kong_kongpob.html">
+                            <img src="Kong_Kongpob_Jirojmontri.jpg" alt="Kong Kongpob">
+                            <p><strong>Kong Kongpob Jirojmontri</strong></p>
+                            <p class="rol">Teerak Rak Niran</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="thomas_teetut.html">
+                            <img src="Thomas_Teetut_Chungmanirat.jpg" alt="Thomas Teetut">
+                            <p><strong>Thomas Teetut Chungmanirat</strong></p>
+                            <p class="rol">Muenfah Pradiphat Phisut</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="suppakarn_jirachotikul.html">
+                            <img src="Suppakarn.jpg" alt="Suppakarn Jirachotikul">
+                            <p><strong>Por Suppakarn Jirachotikul</strong></p>
+                            <p class="rol">PunLee Sasin Phisut</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="auau_thanaphum.html">
+                            <img src="Auau_Thanaphum_Sestasittikul.jpg" alt="Auau Thanaphum">
+                            <p><strong>Auau Thanaphum Sestasittikul</strong></p>
+                            <p class="rol">Real Prach Panha</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="save_worapong.html">
+                            <img src="Save_Worapong_Walor.jpg" alt="Save Worapong">
+                            <p><strong>Save Worapong Walor</strong></p>
+                            <p class="rol">Hia Pawee Sae-song</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="actor">
-                    <a href="thomas_teetut.html">
-                        <img src="Thomas_Teetut_Chungmanirat.jpg" alt="Thomas Teetut">
-                        <p><strong>Thomas Teetut Chungmanirat</strong></p>
-                        <p class="rol">Muenfah Pradiphat Phisut</p>
-                    </a>
-                </div>
-            </div>
 
-            <div class="actores">
-                <div class="actor">
-                    <a href="suppakarn_jirachotikul.html">
-                        <img src="Suppakarn.jpg" alt="Suppakarn Jirachotikul">
-                        <p><strong>Por Suppakarn Jirachotikul</strong></p>
-                        <p class="rol">PunLee Sasin Phisut</p>
-                    </a>
-                </div>
-                <div class="actor">
-                    <a href="auau_thanaphum.html">
-                        <img src="Auau_Thanaphum_Sestasittikul.jpg" alt="Auau Thanaphum">
-                        <p><strong>Auau Thanaphum Sestasittikul</strong></p>
-                        <p class="rol">Real Prach Panha</p>
-                    </a>
-                </div>
-                <div class="actor">
-                    <a href="save_worapong.html">
-                        <img src="Save_Worapong_Walor.jpg" alt="Save Worapong">
-                        <p><strong>Save Worapong Walor</strong></p>
-                        <p class="rol">Hia Pawee Sae-song</p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="actores">
-                <div class="actor">
-                    <a href="patji_jirachart.html">
-                        <img src="Patji_Jirachart_Buspavanich.jpg" alt="Patji Jirachart">
-                        <p><strong>Patji Jirachart Buspavanich</strong></p>
-                        <p class="rol">Type Thikhayu Rungprasertsin</p>
-                    </a>
-                </div>
-                <div class="actor">
-                    <a href="in_inthira.html">
-                        <img src="In_Inthira.jpg" alt="In Inthira">
-                        <p><strong>In Inthira Sae-sieo</strong></p>
-                        <p class="rol">Joy Jiranan Phantrakul</p>
-                    </a>
-                </div>
-            </div>
-                            <div class="actor">
-                    <a href="Mike_Chinnarat.html">
-                        <img src="eq8Bq_5s.jpg" alt="Thomas Teetut">
-                        <p><strong>Mike Chinnarat Siriphogchawalit</strong></p>
-                        <p class="rol">Oh</p>
-                    </a>
-                </div>
-            </div>
-                            <div class="actor">
-                    <a href="Morakot_Liu.html">
-                        <img src="jlrPrs.jpg" alt="Thomas Teetut">
-                        <p><strong>Morakot Liu</strong></p>
-                        <p class="rol">Babe</p>
-                    </a>
-                </div>
-            </div>
-                            <div class="actor">
-                    <a href="Tonnam_Piamchon.html">
-                        <img src="Q38X2_5s.jpg" alt="Thomas Teetut">
-                        <p><strong>Tonnam Piamchon Damrongsonthornchai</strong></p>
-                        <p class="rol">Dom</p>
-                    </a>
+                <!-- Segunda fila -->
+                <div class="fila-actores">
+                    <div class="actor">
+                        <a href="patji_jirachart.html">
+                            <img src="Patji_Jirachart_Buspavanich.jpg" alt="Patji Jirachart">
+                            <p><strong>Patji Jirachart Buspavanich</strong></p>
+                            <p class="rol">Type Thikhayu Rungprasertsin</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="in_inthira.html">
+                            <img src="In_Inthira.jpg" alt="In Inthira">
+                            <p><strong>In Inthira Sae-sieo</strong></p>
+                            <p class="rol">Joy Jiranan Phantrakul</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="Mike_Chinnarat.html">
+                            <img src="eq8Bq_5s.jpg" alt="Mike Chinnarat">
+                            <p><strong>Mike Chinnarat Siriphogchawalit</strong></p>
+                            <p class="rol">Oh</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="Morakot_Liu.html">
+                            <img src="jlrPrs.jpg" alt="Morakot Liu">
+                            <p><strong>Morakot Liu</strong></p>
+                            <p class="rol">Babe</p>
+                        </a>
+                    </div>
+                    <div class="actor">
+                        <a href="Tonnam_Piamchon.html">
+                            <img src="Q38X2_5s.jpg" alt="Tonnam Piamchon">
+                            <p><strong>Tonnam Piamchon Damrongsonthornchai</strong></p>
+                            <p class="rol">Dom</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
