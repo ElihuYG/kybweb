@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB - Catálogo</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -17,9 +18,7 @@
     </header>
     
     <main>
-        <!-- Carrusel Principal -->
         <section class="carousel">
-            <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
             <div class="carousel-container">
                 <div class="carousel-item active" onclick="location.href='yoursky.html'">
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
@@ -31,10 +30,8 @@
                     <img src="Sliders_Arriba_BY.png" alt="Slider 3">
                 </div>
             </div>
-            <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
-            <div class="carousel-pagination"></div>
         </section>
-
+        
         <section class="estrenos">
             <h2>Estrenos</h2>
             <div class="estrenos-container">
@@ -47,115 +44,106 @@
                 <div class="estreno">
                     <img src="imagenes/estreno3.png" alt="Estreno 3">
                 </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno4.png" alt="Estreno 4">
-                </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno5.png" alt="Estreno 5">
-                </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno6.png" alt="Estreno 6">
-                </div>
             </div>
             <button class="ver-mas">Ver más</button>
         </section>
-    </main>   
-
+    </main>
+    
+    <nav class="menu">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div id="menu-content" class="menu-content">
+            <button id="close-menu" class="close-menu">X</button>
+            <a href="index.html">🏠 Home</a>
+            <a href="new-popular.html">🔥 New & Popular</a>
+            <a href="cuenta.html">👤 Cuenta</a>
+        </div>
+    </nav>
+    
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        $(document).ready(function() {
             let currentIndex = 0;
-            const carouselItems = document.querySelectorAll(".carousel-item");
-            const paginationContainer = document.querySelector(".carousel-pagination");
+            const carouselItems = $(".carousel-item");
             
-            function updatePagination() {
-                paginationContainer.innerHTML = "";
-                carouselItems.forEach((_, index) => {
-                    const dot = document.createElement("span");
-                    dot.classList.add("dot");
-                    if (index === currentIndex) dot.classList.add("active");
-                    dot.addEventListener("click", () => moveCarousel(index - currentIndex));
-                    paginationContainer.appendChild(dot);
-                });
+            function moveCarousel() {
+                carouselItems.removeClass("active");
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                carouselItems.eq(currentIndex).addClass("active");
             }
+            setInterval(moveCarousel, 3000);
 
-            function moveCarousel(direction) {
-                carouselItems[currentIndex].classList.remove("active");
-                currentIndex = (currentIndex + direction + carouselItems.length) % carouselItems.length;
-                carouselItems[currentIndex].classList.add("active");
-                updatePagination();
-            }
+            $(".estreno").hover(function() {
+                $(this).css("transform", "scale(1.1)");
+            }, function() {
+                $(this).css("transform", "scale(1)");
+            });
 
-            setInterval(() => moveCarousel(1), 3000);
-            updatePagination();
+            $("#menu-toggle").click(function() {
+                $("#menu-content").slideToggle();
+            });
+            $("#close-menu").click(function() {
+                $("#menu-content").slideUp();
+            });
         });
     </script>
     
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
         .carousel {
             width: 100%;
             height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
             position: relative;
         }
 
         .carousel-container {
             display: flex;
-            transition: transform 0.5s ease-in-out;
         }
 
         .carousel-item {
-            flex: 0 0 100%;
             display: none;
             text-align: center;
         }
 
         .carousel-item.active {
             display: block;
+            transition: opacity 0.5s ease-in-out;
         }
 
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 24px;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
-        }
-
-        .carousel-pagination {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+        .estrenos-container {
             display: flex;
-            gap: 5px;
+            justify-content: space-around;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
+        .estreno {
+            width: 150px;
+            transition: transform 0.3s;
+        }
+
+        .menu {
+            position: fixed;
+            left: 20px;
+            top: 10px;
+        }
+
+        .menu-icon {
+            font-size: 30px;
             cursor: pointer;
         }
 
-        .dot.active {
-            opacity: 1;
+        .menu-content {
+            display: none;
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </body>
