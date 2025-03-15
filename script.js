@@ -1,44 +1,41 @@
-// Carrusel automático
 document.addEventListener("DOMContentLoaded", function () {
-    let currentIndex = 0;
-    const items = document.querySelectorAll(".carousel-item");
-    
-    function showSlide(index) {
-        items.forEach(item => item.classList.remove("active"));
-        items[index].classList.add("active");
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    const closeMenu = document.getElementById("closeMenu");
+    const searchToggle = document.getElementById("searchToggle");
+    const searchBar = document.getElementById("searchBar");
+    const slides = document.querySelector(".slides");
+    const dots = document.querySelectorAll(".dot");
+    let index = 0;
+
+    menuToggle.addEventListener("click", function () {
+        sidebar.style.left = "0";
+    });
+
+    closeMenu.addEventListener("click", function () {
+        sidebar.style.left = "-250px";
+    });
+
+    searchToggle.addEventListener("click", function () {
+        searchBar.style.display = searchBar.style.display === "block" ? "none" : "block";
+    });
+
+    function showSlide(i) {
+        index = i;
+        slides.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle("active", idx === index);
+        });
     }
-    
+
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % items.length;
-        showSlide(currentIndex);
+        index = (index + 1) % dots.length;
+        showSlide(index);
     }
-    
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => showSlide(i));
+    });
+
     setInterval(nextSlide, 3000);
-    showSlide(currentIndex);
-});
-
-// Menú hamburguesa
-document.querySelector(".menu-icon").addEventListener("click", function () {
-    document.querySelector(".menu-content").style.display = "block";
-});
-
-document.querySelector(".close-menu").addEventListener("click", function () {
-    document.querySelector(".menu-content").style.display = "none";
-});
-
-// Buscador interactivo
-document.querySelector("#search").addEventListener("input", function () {
-    let query = this.value.toLowerCase();
-    let resultsContainer = document.querySelector(".search-results");
-    
-    if (query.length > 1) {
-        resultsContainer.style.display = "block";
-        resultsContainer.innerHTML = "<p>Buscando...</p>";
-        
-        setTimeout(() => {
-            resultsContainer.innerHTML = "<p>Resultados para '" + query + "' (Ejemplo)</p>";
-        }, 500);
-    } else {
-        resultsContainer.style.display = "none";
-    }
 });
