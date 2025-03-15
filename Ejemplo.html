@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB - Catálogo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>KYB</h1>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar...">
+            <button id="search-btn">🔍</button>
+            <div id="search-results" class="search-results"></div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Carrusel Principal -->
+        <section class="carousel">
+            <button class="carousel-btn prev" onclick="moveCarousel(-1)">&#10094;</button>
+            <div class="carousel-container">
+                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
+                </div>
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
+                </div>
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+                </div>
+            </div>
+            <button class="carousel-btn next" onclick="moveCarousel(1)">&#10095;</button>
+            <div class="carousel-pagination"></div>
+        </section>
+
+        <section class="estrenos">
+            <h2>Estrenos</h2>
+            <div class="estrenos-container">
+                <div class="estreno">
+                    <img src="poster_begins_youth.png" alt="Estreno 1">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno6.png" alt="Estreno 6">
+                </div>
+            </div>
+            <button class="ver-mas">Ver más</button>
+        </section>
+    </main>   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentIndex = 0;
+            const carouselItems = document.querySelectorAll(".carousel-item");
+            const paginationContainer = document.querySelector(".carousel-pagination");
+            
+            function updatePagination() {
+                paginationContainer.innerHTML = "";
+                carouselItems.forEach((_, index) => {
+                    const dot = document.createElement("span");
+                    dot.classList.add("dot");
+                    if (index === currentIndex) dot.classList.add("active");
+                    dot.addEventListener("click", () => moveCarousel(index - currentIndex));
+                    paginationContainer.appendChild(dot);
+                });
+            }
+
+            function moveCarousel(direction) {
+                carouselItems[currentIndex].classList.remove("active");
+                currentIndex = (currentIndex + direction + carouselItems.length) % carouselItems.length;
+                carouselItems[currentIndex].classList.add("active");
+                updatePagination();
+            }
+
+            setInterval(() => moveCarousel(1), 3000);
+            updatePagination();
+        });
+    </script>
+    
+    <style>
+        .carousel {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            display: none;
+            text-align: center;
+        }
+
+        .carousel-item.active {
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .carousel-pagination {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+    </style>
+</body>
+</html>
