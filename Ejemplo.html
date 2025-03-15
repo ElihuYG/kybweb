@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Inicio</title>
+    <title>KYB - Catálogo</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>KYB</h1>
+        <div class="logo">KYB</div>
         <nav>
-            <div id="menu-toggle" class="menu-icon">☰</div>
-            <div id="menu-content" class="menu-content">
-                <button id="close-menu" class="close-menu">X</button>
-                <a href="index.html">🏠 Inicio</a>
-                <a href="popular.html">🔥 Populares</a>
-                <a href="cuenta.html">👤 Cuenta</a>
-            </div>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Series</a></li>
+                <li><a href="#">Películas</a></li>
+                <li><a href="#">Explorar</a></li>
+            </ul>
         </nav>
-        <div class="search-container">
+        <div class="user-menu">
             <input type="text" id="search" placeholder="Buscar...">
             <button id="search-btn">🔍</button>
-            <div id="search-results" class="search-results"></div>
+            <div id="menu-toggle">☰</div>
         </div>
     </header>
     
@@ -30,27 +29,48 @@
             <div class="carousel-container">
                 <div class="carousel-item active" onclick="location.href='yoursky.html'">
                     <img src="Sliders_Arriba_YS.png" alt="Your Sky">
+                    <div class="info">
+                        <h2>Your Sky</h2>
+                        <p>Serie | Drama | 12 episodios</p>
+                    </div>
                 </div>
                 <div class="carousel-item" onclick="location.href='thamepo.html'">
-                    <img src="Sliders_Arriba_TP.png" alt="Thame Po">
+                    <img src="Sliders_Arriba_TP.png" alt="The Pursuit">
+                    <div class="info">
+                        <h2>The Pursuit</h2>
+                        <p>Serie | Acción | 10 episodios</p>
+                    </div>
                 </div>
                 <div class="carousel-item" onclick="location.href='beginsyouth.html'">
                     <img src="Sliders_Arriba_BY.png" alt="Begins Youth">
+                    <div class="info">
+                        <h2>Begins Youth</h2>
+                        <p>Serie | Romance | 8 episodios</p>
+                    </div>
                 </div>
             </div>
         </section>
-        
+
         <section class="estrenos">
             <h2>Estrenos</h2>
             <div class="estrenos-container">
-                <div class="estreno"><img src="poster_begins_youth.png" alt="Begins Youth"></div>
-                <div class="estreno"><img src="poster_begins_youth.png" alt="Estreno 2"></div>
-                <div class="estreno"><img src="imagenes/estreno3.png" alt="Estreno 3"></div>
+                <div class="estreno">
+                    <img src="poster_begins_youth.png" alt="Begins Youth">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
             </div>
         </section>
     </main>
 
+    <footer>
+        <p>&copy; 2025 KYB. Todos los derechos reservados.</p>
+    </footer>
+
     <script src="script.js"></script>
-    <link rel="stylesheet" href="styles.css">
 </body>
 </html>
