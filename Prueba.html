@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor KYB</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet">
+    <style>
+        .skip-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <video id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}">
+        <source src="https://archive.org/download/prueba_20250318/y2mate.com%20-%20TWICE%20Prerelease%20english%20track%20MOONLIGHT%20SUNRISE%20MV_v720P.mp4" type="video/mp4">
+    </video>
+    
+    <button class="skip-button" id="skip-intro">Saltar Intro</button>
+    <button class="skip-button" id="skip-outro" style="right: 100px;">Saltar Créditos</button>
+    <button class="skip-button" id="next-episode" style="right: 190px;">Siguiente Episodio</button>
+    
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script>
+        var player = videojs('my-video');
+        var introTime = 10;  // Tiempo en segundos donde termina la intro
+        var outroTime = 30;  // Tiempo en segundos donde comienzan los créditos
+
+        document.getElementById('skip-intro').addEventListener('click', function() {
+            player.currentTime(introTime);
+        });
+
+        document.getElementById('skip-outro').addEventListener('click', function() {
+            player.currentTime(outroTime);
+        });
+
+        document.getElementById('next-episode').addEventListener('click', function() {
+            window.location.href = 'URL_DEL_SIGUIENTE_EPISODIO';
+        });
+    </script>
+</body>
+</html>
