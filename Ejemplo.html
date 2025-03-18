@@ -6,10 +6,15 @@
     <title>Reproductor KYB</title>
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet">
     <style>
+        .video-container {
+            position: relative;
+            width: 640px;
+            margin: auto;
+        }
         .skip-button {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            bottom: 20px;
+            right: 20px;
             background: rgba(0, 0, 0, 0.7);
             color: white;
             border: none;
@@ -18,16 +23,30 @@
             font-size: 14px;
             border-radius: 5px;
         }
+        #skip-outro { right: 130px; }
+        #next-episode { right: 260px; }
+        .video-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <video id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}">
-        <source src="https://archive.org/download/prueba_20250318/y2mate.com%20-%20TWICE%20Prerelease%20english%20track%20MOONLIGHT%20SUNRISE%20MV_v720P.mp4" type="video/mp4">
-    </video>
-    
-    <button class="skip-button" id="skip-intro">Saltar Intro</button>
-    <button class="skip-button" id="skip-outro" style="right: 100px;">Saltar Créditos</button>
-    <button class="skip-button" id="next-episode" style="right: 190px;">Siguiente Episodio</button>
+    <div class="video-container">
+        <div class="video-overlay">Contiene: Subtítulos, Audio Dual</div>
+        <video id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}">
+            <source src="https://archive.org/download/prueba_20250318/y2mate.com%20-%20TWICE%20Prerelease%20english%20track%20MOONLIGHT%20SUNRISE%20MV_v720P.mp4" type="video/mp4">
+        </video>
+        <button class="skip-button" id="skip-intro">Saltar Intro</button>
+        <button class="skip-button" id="skip-outro">Saltar Créditos</button>
+        <button class="skip-button" id="next-episode">Siguiente Episodio</button>
+    </div>
     
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script>
