@@ -25,7 +25,7 @@
         }
         #skip-intro { right: 20px; }
         #skip-outro { right: 130px; }
-        #next-episode { right: 20px; bottom: 60px; display: none; }
+        #next-episode { right: 20px; bottom: 60px; }
         .video-overlay {
             position: absolute;
             top: 10px;
@@ -35,12 +35,13 @@
             padding: 5px 10px;
             border-radius: 5px;
             font-size: 14px;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="video-container">
-        <div class="video-overlay">Contiene: Subtítulos, Audio Dual</div>
+        <div class="video-overlay" id="video-overlay">Contiene: Subtítulos, Audio Dual</div>
         <video id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}">
             <source src="https://archive.org/download/prueba_20250318/y2mate.com%20-%20TWICE%20Prerelease%20english%20track%20MOONLIGHT%20SUNRISE%20MV_v720P.mp4" type="video/mp4">
         </video>
@@ -54,17 +55,29 @@
         var player = videojs('my-video');
         var introStart = 10; // Inicio de la intro
         var introEnd = 30; // Fin de la intro
-        var outroStart = player.duration() - 20; // 20 segundos antes de que termine el video
-
+        var outroStart;
+        
+        player.on('loadedmetadata', function() {
+            outroStart = player.duration() - 20;
+        });
+        
+        player.on('play', function() {
+            setTimeout(function() {
+                document.getElementById('video-overlay').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('video-overlay').style.display = 'none';
+                }, 3000);
+            }, 3000);
+        });
+        
         player.on('timeupdate', function() {
             var currentTime = player.currentTime();
-            var duration = player.duration();
             
             document.getElementById('skip-intro').style.display = (currentTime >= introStart && currentTime <= introEnd) ? 'block' : 'none';
-            document.getElementById('skip-outro').style.display = (currentTime >= outroStart) ? 'block' : 'none';
-            document.getElementById('next-episode').style.display = (currentTime >= outroStart) ? 'block' : 'none';
+            document.getElementById('skip-outro').style.display = (outroStart && currentTime >= outroStart) ? 'block' : 'none';
+            document.getElementById('next-episode').style.display = (outroStart && currentTime >= outroStart) ? 'block' : 'none';
         });
-
+        
         document.getElementById('skip-intro').addEventListener('click', function() {
             player.currentTime(introEnd);
         });
