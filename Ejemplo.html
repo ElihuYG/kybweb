@@ -14,7 +14,6 @@
         .skip-button {
             position: absolute;
             bottom: 20px;
-            right: 20px;
             background: rgba(0, 0, 0, 0.7);
             color: white;
             border: none;
@@ -22,9 +21,11 @@
             cursor: pointer;
             font-size: 14px;
             border-radius: 5px;
+            display: none;
         }
+        #skip-intro { right: 20px; }
         #skip-outro { right: 130px; }
-        #next-episode { right: 260px; }
+        #next-episode { right: 20px; bottom: 60px; display: none; }
         .video-overlay {
             position: absolute;
             top: 10px;
@@ -51,15 +52,25 @@
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script>
         var player = videojs('my-video');
-        var introTime = 10;  // Tiempo en segundos donde termina la intro
-        var outroTime = 30;  // Tiempo en segundos donde comienzan los créditos
+        var introStart = 10; // Inicio de la intro
+        var introEnd = 30; // Fin de la intro
+        var outroStart = player.duration() - 20; // 20 segundos antes de que termine el video
+
+        player.on('timeupdate', function() {
+            var currentTime = player.currentTime();
+            var duration = player.duration();
+            
+            document.getElementById('skip-intro').style.display = (currentTime >= introStart && currentTime <= introEnd) ? 'block' : 'none';
+            document.getElementById('skip-outro').style.display = (currentTime >= outroStart) ? 'block' : 'none';
+            document.getElementById('next-episode').style.display = (currentTime >= outroStart) ? 'block' : 'none';
+        });
 
         document.getElementById('skip-intro').addEventListener('click', function() {
-            player.currentTime(introTime);
+            player.currentTime(introEnd);
         });
 
         document.getElementById('skip-outro').addEventListener('click', function() {
-            player.currentTime(outroTime);
+            player.currentTime(player.duration() - 1);
         });
 
         document.getElementById('next-episode').addEventListener('click', function() {
