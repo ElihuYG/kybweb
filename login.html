@@ -18,37 +18,9 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", async function() {
-            const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co"; // Reemplaza con tu URL
-            const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ"; // Reemplaza con tu clave
-            const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-            document.getElementById("loginBtn").addEventListener("click", async function() {
-                let email = document.getElementById("email").value;
-                let password = document.getElementById("password").value;
-                let message = document.getElementById("message");
-
-                if (!email || !password) {
-                    message.innerHTML = "❌ Por favor, completa todos los campos.";
-                    message.style.color = "red";
-                    return;
-                }
-                
-                console.log("Intentando iniciar sesión...");
-                let { data, error } = await supabase.auth.signInWithPassword({ email, password });
-                
-                console.log("Data:", data);
-                console.log("Error:", error);
-                
-                if (error) {
-                    message.innerHTML = "❌ Correo o contraseña incorrectos.";
-                    message.style.color = "red";
-                } else {
-                    message.innerHTML = "✅ Inicio de sesión exitoso.";
-                    message.style.color = "green";
-                    localStorage.setItem("currentUser", email);
-                    setTimeout(() => window.location.href = "catalogo.html", 1000);
-                }
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("loginBtn").addEventListener("click", function() {
+                window.location.href = "catalogo.html";
             });
         });
     </script>
