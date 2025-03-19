@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - KYB</title>
+    <title>Registro - KYB</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Iniciar sesión</h2>
-        <input type="email" id="email" placeholder="Correo electrónico" required>
-        <input type="password" id="password" placeholder="Contraseña" required>
-        <button onclick="login()">Entrar</button>
-        <p>¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a></p>
+        <h2>Crear una cuenta</h2>
+        <form id="registerForm">
+            <input type="text" id="name" placeholder="Nombre completo" required>
+            <input type="email" id="newEmail" placeholder="Correo electrónico" required>
+            <input type="password" id="newPassword" placeholder="Contraseña" required>
+            <button type="submit">Registrarse</button>
+        </form>
+        <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
         <p id="message"></p>
     </div>
 
@@ -22,28 +25,41 @@
         const supabaseKey = "TU_CLAVE_SECRETA_AQUI";
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        async function login() {
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
+        document.getElementById("registerForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Evita que la página se recargue
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("newEmail").value.trim();
+            let password = document.getElementById("newPassword").value.trim();
             let message = document.getElementById("message");
 
-            if (email === "" || password === "") {
+            if (name === "" || email === "" || password === "") {
                 message.innerHTML = "⚠️ Completa todos los campos.";
                 message.style.color = "red";
                 return;
             }
 
-            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+            if (password.length < 6) {
+                message.innerHTML = "⚠️ La contraseña debe tener al menos 6 caracteres.";
+                message.style.color = "red";
+                return;
+            }
+
+            let { data, error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: { data: { name } }
+            });
 
             if (error) {
                 message.innerHTML = "❌ " + error.message;
                 message.style.color = "red";
             } else {
-                message.innerHTML = "✅ Inicio de sesión exitoso.";
+                message.innerHTML = "✅ Cuenta creada con éxito. Verifica tu correo.";
                 message.style.color = "green";
-                setTimeout(() => window.location.href = "catalogo.html", 2000);
+                setTimeout(() => window.location.href = "login.html", 3000);
             }
-        }
+        });
     </script>
 </body>
 </html>
