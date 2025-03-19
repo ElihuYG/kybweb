@@ -32,8 +32,8 @@
         /* Estilos para el "Contiene" */
         .video-overlay {
             position: absolute;
-            bottom: -50px; /* Inicia fuera de la pantalla */
-            left: 20px; /* Ahora está en la esquina inferior izquierda */
+            top: -50px; /* Inicia fuera de la pantalla */
+            left: 20px; /* Ahora está en la esquina superior izquierda */
             font-size: 18px;
             font-weight: bold;
             z-index: 1001;
@@ -46,13 +46,13 @@
         /* Efecto de luz tipo Disney */
         .video-overlay.show {
             opacity: 1;
-            transform: translateY(-60px);
+            transform: translateY(60px); /* Baja desde arriba */
             text-shadow: 0 0 20px rgba(255, 255, 255, 1);
         }
 
         .video-overlay.hide {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(-50px); /* Sube y desaparece */
             text-shadow: 0 0 30px rgba(255, 255, 255, 1);
         }
     </style>
