@@ -23,10 +23,10 @@
             display: none;
             z-index: 1000;
         }
-        #skip-intro { bottom: 60px; right: 20px; }
+        #skip-intro { bottom: 50px; right: 20px; }
         #skip-outro { bottom: 20px; right: 20px; }
-        #next-episode { bottom: 20px; right: 80px; }
-        
+        #next-episode { bottom: 20px; right: 20px; }
+
         .video-overlay {
             position: absolute;
             top: 10px; left: 10px;
@@ -38,17 +38,18 @@
             background: rgba(0, 0, 0, 0.8);
             color: white;
             opacity: 0;
-            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
 
         .video-overlay.show {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateX(0);
         }
 
         .video-overlay.hide {
             opacity: 0;
-            transform: translateY(-20px);
+            transform: translateX(-20px);
         }
     </style>
 </head>
@@ -76,25 +77,28 @@
         
         player.on('play', function() {
             var overlay = document.getElementById('video-overlay');
+            overlay.style.display = 'block';
+            overlay.classList.add('show');
             setTimeout(function() {
-                overlay.style.display = 'block';
-                overlay.classList.add('show');
+                overlay.classList.add('hide');
                 setTimeout(function() {
-                    overlay.classList.add('hide');
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                    }, 800);
-                }, 5000);
-            }, 3000);
+                    overlay.style.display = 'none';
+                }, 500);
+            }, 5000);
         });
         
         player.on('timeupdate', function() {
             var currentTime = player.currentTime();
-            document.getElementById('skip-intro').style.display = (currentTime >= introStart && currentTime <= introEnd) ? 'block' : 'none';
-            document.getElementById('skip-outro').style.display = (outroStart && currentTime >= outroStart) ? 'block' : 'none';
-            setTimeout(function() {
-                document.getElementById('next-episode').style.display = (outroStart && currentTime >= outroStart) ? 'block' : 'none';
-            }, 3000);
+            var skipIntroBtn = document.getElementById('skip-intro');
+            var skipOutroBtn = document.getElementById('skip-outro');
+            var nextEpisodeBtn = document.getElementById('next-episode');
+
+            skipIntroBtn.style.display = (currentTime >= introStart && currentTime <= introEnd) ? 'block' : 'none';
+            if (outroStart && currentTime >= outroStart) {
+                skipOutroBtn.style.display = 'block';
+            } else {
+                skipOutroBtn.style.display = 'none';
+            }
         });
         
         document.getElementById('skip-intro').addEventListener('click', function() {
@@ -103,6 +107,8 @@
 
         document.getElementById('skip-outro').addEventListener('click', function() {
             player.currentTime(player.duration() - 1);
+            document.getElementById('skip-outro').style.display = 'none';
+            document.getElementById('next-episode').style.display = 'block';
         });
 
         document.getElementById('next-episode').addEventListener('click', function() {
