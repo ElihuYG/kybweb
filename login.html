@@ -5,22 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - KYB</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <input type="email" id="email" placeholder="Correo electrónico" oninput="validateEmail()">
-        <p id="emailError" class="error-message"></p>
-        <div class="password-container">
-            <input type="password" id="password" placeholder="Contraseña" oninput="validatePassword()">
-            <span class="toggle-password" onclick="togglePassword()">👁️</span>
+    <div class="login-wrapper">
+        <h1 class="welcome-text">¡Bienvenid@ a KYB!</h1>
+        <div class="login-container">
+            <h2>Iniciar Sesión</h2>
+            <input type="email" id="email" placeholder="Correo electrónico" oninput="validateEmail()">
+            <span class="error-message" id="emailError"></span>
+            
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Contraseña" oninput="validatePassword()">
+                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            </div>
+            <span class="error-message" id="passwordError"></span>
+
+            <button onclick="login()">Entrar</button>
+            <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
         </div>
-        <p id="passwordError" class="error-message"></p>
-        <button onclick="login()">Entrar</button>
-        <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
