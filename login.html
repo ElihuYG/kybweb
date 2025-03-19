@@ -5,26 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - KYB</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;400;600&display=swap');
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #141414;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .login-container {
+            background-color: #1f1f1f;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .login-container h2 {
+            margin-bottom: 15px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #e65c00;
+        }
+
+        .login-container p {
+            margin-top: 15px;
+        }
+
+        .login-container a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <div class="login-wrapper">
-        <h1 class="welcome-text">¡Bienvenid@ a KYB!</h1>
-        <div class="login-container">
-            <h2>Iniciar Sesión</h2>
-            <input type="email" id="email" placeholder="Correo electrónico" oninput="validateEmail()">
-            <span class="error-message" id="emailError"></span>
-            
-            <div class="password-container">
-                <input type="password" id="password" placeholder="Contraseña" oninput="validatePassword()">
-                <span class="toggle-password" onclick="togglePassword()">👁️</span>
-            </div>
-            <span class="error-message" id="passwordError"></span>
-
-            <button onclick="login()">Entrar</button>
-            <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
-        </div>
+    <h1 class="welcome-title">Bienvenid@ a KYB</h1>
+    
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Entrar</button>
+        <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function login() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            let storedPassword = localStorage.getItem(email);
+
+            if (storedPassword === password) {
+                localStorage.setItem("currentUser", email); // Guarda el usuario
+                alert("¡Bienvenid@ " + email + "!");
+                window.location.href = "catalogo.html"; // Redirige al catálogo
+            } else {
+                alert("Correo o contraseña incorrectos");
+            }
+        }
+    </script>
 </body>
 </html>
