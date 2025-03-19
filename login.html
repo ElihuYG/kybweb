@@ -5,68 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - KYB</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #141414;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+            width: 320px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #b20710;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #e50914;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Fondo con imágenes tipo Netflix -->
-    <div class="background">
-        <div class="overlay"></div>
-    </div>
-
     <div class="login-container">
-        <h1>Bienvenid@ a KYB</h1>
-        <h2>Iniciar Sesión</h2>
-        
-        <div class="input-container">
-            <input type="email" id="email" placeholder="Correo electrónico">
-        </div>
-
-        <div class="input-container">
-            <input type="password" id="password" placeholder="Contraseña">
-        </div>
-
+        <h2>¡Bienvenid@ a KYB!</h2>
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <input type="password" id="password" placeholder="Contraseña">
         <button onclick="login()">Entrar</button>
-
         <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
-
-        <div id="error-message" class="error-message"></div>
     </div>
 
     <script>
-        function login() {
+        async function login() {
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
-            let errorMessage = document.getElementById("error-message");
-            let storedPassword = localStorage.getItem(email);
 
-            if (email === "" || password === "") {
-                showError("⚠️ Todos los campos son obligatorios");
-                return;
+            // URL de tu archivo JSON en GitHub
+            const jsonURL = "https://raw.githubusercontent.com/tu-usuario/tu-repo/main/users.json";
+
+            try {
+                let response = await fetch(jsonURL);
+                let users = await response.json();
+
+                // Buscar el usuario en la base de datos
+                let user = users.find(u => u.email === email && u.password === password);
+
+                if (user) {
+                    localStorage.setItem("currentUser", email); // Guarda sesión
+                    alert("✅ ¡Bienvenid@ a KYB!");
+                    window.location.href = "catalogo.html"; // Redirige
+                } else {
+                    alert("❌ Correo o contraseña incorrectos");
+                }
+            } catch (error) {
+                console.error("Error al cargar usuarios:", error);
+                alert("⚠️ Error al conectarse con el servidor");
             }
-
-            if (!email.includes("@")) {
-                showError("⚠️ Ingresa un correo válido");
-                return;
-            }
-
-            if (storedPassword === password) {
-                localStorage.setItem("currentUser", email);
-                alert("¡Bienvenido a KYB! 🎬");
-                window.location.href = "catalogo.html";
-            } else {
-                showError("❌ Correo o contraseña incorrectos");
-            }
-        }
-
-        function showError(message) {
-            let errorMessage = document.getElementById("error-message");
-            errorMessage.innerText = message;
-            errorMessage.classList.add("show");
-
-            setTimeout(() => {
-                errorMessage.classList.remove("show");
-            }, 3000);
         }
     </script>
 
