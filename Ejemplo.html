@@ -12,7 +12,7 @@
             margin: auto;
         }
 
-        .skip-button, .video-overlay {
+        .skip-button {
             position: absolute;
             background: rgba(0, 0, 0, 0.7);
             color: white;
@@ -34,35 +34,32 @@
             position: absolute;
             bottom: -50px; /* Inicia fuera de la pantalla */
             left: 20px; /* Ahora está en la esquina inferior izquierda */
-            padding: 10px 15px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
-            border-radius: 8px;
             z-index: 1001;
-            background: rgba(0, 0, 0, 0.8);
             color: white;
             opacity: 0;
-            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, text-shadow 0.8s ease-in-out;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0);
         }
 
         /* Efecto de luz tipo Disney */
         .video-overlay.show {
             opacity: 1;
             transform: translateY(-60px);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 1);
         }
 
         .video-overlay.hide {
             opacity: 0;
             transform: translateY(50px);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+            text-shadow: 0 0 30px rgba(255, 255, 255, 1);
         }
     </style>
 </head>
 <body>
     <div class="video-container">
-        <div class="video-overlay" id="video-overlay">✨ Contiene: Violencia, Lenguaje fuerte ✨</div>
+        <div class="video-overlay" id="video-overlay"> Contiene: Violencia, Lenguaje fuerte </div>
         <video id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}">
             <source src="https://archive.org/download/prueba_20250318/y2mate.com%20-%20TWICE%20Prerelease%20english%20track%20MOONLIGHT%20SUNRISE%20MV_v720P.mp4" type="video/mp4">
         </video>
