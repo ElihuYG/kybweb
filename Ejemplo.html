@@ -27,14 +27,17 @@
         #next-episode { bottom: 60px; right: 20px; }
         
         .video-overlay {
-            top: 10px; left: 50%; transform: translateX(-50%);
+            position: absolute;
+            top: 10px; left: 50%; transform: translateX(-50%) translateY(-20px);
             padding: 10px 15px;
             font-size: 16px;
             font-weight: bold;
             border-radius: 8px;
-            z-index: 10;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
         }
 
         .video-overlay.show {
@@ -44,7 +47,7 @@
 
         .video-overlay.hide {
             opacity: 0;
-            transform: translateX(-50%) translateY(-30px);
+            transform: translateX(-50%) translateY(-20px);
         }
     </style>
 </head>
@@ -72,13 +75,15 @@
         
         player.on('play', function() {
             var overlay = document.getElementById('video-overlay');
-            overlay.classList.add('show');
             setTimeout(function() {
-                overlay.classList.add('hide');
+                overlay.classList.add('show');
                 setTimeout(function() {
-                    overlay.style.display = 'none';
-                }, 500);
-            }, 3000);
+                    overlay.classList.add('hide');
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                    }, 800);
+                }, 5000);
+            }, 1000);
         });
         
         player.on('timeupdate', function() {
