@@ -70,23 +70,25 @@
         var introStart = 10;
         var introEnd = 30;
         var outroStart;
-        
+        var overlay = document.getElementById('video-overlay');
+
         player.on('loadedmetadata', function() {
             outroStart = player.duration() - 20;
         });
-        
+
         player.on('play', function() {
-            var overlay = document.getElementById('video-overlay');
-            overlay.style.display = 'block';
-            overlay.classList.add('show');
             setTimeout(function() {
-                overlay.classList.add('hide');
+                overlay.style.display = 'block';
+                overlay.classList.add('show');
                 setTimeout(function() {
-                    overlay.style.display = 'none';
-                }, 500);
-            }, 5000);
+                    overlay.classList.add('hide');
+                    setTimeout(function() {
+                        overlay.style.display = 'none';
+                    }, 500);
+                }, 5000);
+            }, 2000); // Espera 2 segundos antes de mostrar "Contiene"
         });
-        
+
         player.on('timeupdate', function() {
             var currentTime = player.currentTime();
             var skipIntroBtn = document.getElementById('skip-intro');
@@ -100,7 +102,7 @@
                 skipOutroBtn.style.display = 'none';
             }
         });
-        
+
         document.getElementById('skip-intro').addEventListener('click', function() {
             player.currentTime(introEnd);
         });
