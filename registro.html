@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - KYB</title>
+    <title>Iniciar sesión - KYB</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Crear una cuenta</h2>
-        <input type="email" id="newEmail" placeholder="Correo electrónico" required>
-        <input type="password" id="newPassword" placeholder="Contraseña" required>
-        <button onclick="registrar()">Registrarse</button>
-        <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+        <h2>Iniciar sesión</h2>
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <button onclick="login()">Entrar</button>
+        <p>¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a></p>
         <p id="message"></p>
     </div>
 
     <script>
-        // Conectar Supabase
         const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";
-        const supabaseKey = "TU_CLAVE_SECRETA_AQUI"; // No pongas la clave expuesta
+        const supabaseKey = "TU_CLAVE_SECRETA_AQUI";
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        async function registrar() {
-            let email = document.getElementById("newEmail").value;
-            let password = document.getElementById("newPassword").value;
+        async function login() {
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
             let message = document.getElementById("message");
 
             if (email === "" || password === "") {
@@ -34,15 +33,15 @@
                 return;
             }
 
-            let { data, error } = await supabase.auth.signUp({ email, password });
+            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
             if (error) {
                 message.innerHTML = "❌ " + error.message;
                 message.style.color = "red";
             } else {
-                message.innerHTML = "✅ Cuenta creada con éxito. Verifica tu correo.";
+                message.innerHTML = "✅ Inicio de sesión exitoso.";
                 message.style.color = "green";
-                setTimeout(() => window.location.href = "login.html", 2000);
+                setTimeout(() => window.location.href = "catalogo.html", 2000);
             }
         }
     </script>
