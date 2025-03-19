@@ -5,29 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - KYB</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
-        <input type="email" id="email" placeholder="Correo electrónico">
-        <input type="password" id="password" placeholder="Contraseña">
+        <input type="email" id="email" placeholder="Correo electrónico" oninput="validateEmail()">
+        <p id="emailError" class="error-message"></p>
+        <div class="password-container">
+            <input type="password" id="password" placeholder="Contraseña" oninput="validatePassword()">
+            <span class="toggle-password" onclick="togglePassword()">👁️</span>
+        </div>
+        <p id="passwordError" class="error-message"></p>
         <button onclick="login()">Entrar</button>
         <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
     </div>
-    <script>
-        function login() {
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
-            let storedPassword = localStorage.getItem(email);
-
-            if (storedPassword === password) {
-                localStorage.setItem("currentUser", email); // Guarda el usuario
-                alert("¡Bienvenido " + email + "!");
-                window.location.href = "catalogo.html"; // Redirige al catálogo
-            } else {
-                alert("Correo o contraseña incorrectos");
-            }
-        }
-    </script>
 </body>
 </html>
