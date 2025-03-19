@@ -274,3 +274,106 @@ p a:hover {
     opacity: 1;
     transform: translateY(0);
 }
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    margin: 0;
+}
+
+/* Contenedor del formulario */
+.container {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: 320px;
+}
+
+/* Estilos del formulario */
+.form h2 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Inputs con iconos */
+.input-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    padding-left: 40px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: #333;
+    color: #fff;
+}
+
+.input-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #bbb;
+}
+
+/* Botón de registro */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background: #ff4757;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #e84118;
+}
+
+/* Mensajes animados */
+.mensaje {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Mensaje de éxito */
+.exito {
+    color: #2ecc71;
+}
+
+/* Mensaje de error */
+.error {
+    color: #e74c3c;
+}
+
+/* Texto para cambiar a login */
+.switch {
+    margin-top: 10px;
+    color: #bbb;
+    font-size: 14px;
+}
+
+.switch a {
+    color: #ff4757;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.switch a:hover {
+    text-decoration: underline;
+}
