@@ -1,156 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const menuToggle = document.getElementById("menuToggle");
-    const sidebar = document.getElementById("sidebar");
-    const closeMenu = document.getElementById("closeMenu");
-    const searchToggle = document.getElementById("searchToggle");
-    const searchBar = document.getElementById("searchBar");
-    const slides = document.querySelector(".slides");
-    const dots = document.querySelectorAll(".dot");
-    let index = 0;
-
-    menuToggle.addEventListener("click", function () {
-        sidebar.style.left = "0";
-    });
-
-    closeMenu.addEventListener("click", function () {
-        sidebar.style.left = "-250px";
-    });
-
-    searchToggle.addEventListener("click", function () {
-        searchBar.style.display = searchBar.style.display === "block" ? "none" : "block";
-    });
-
-    function showSlide(i) {
-        index = i;
-        slides.style.transform = `translateX(-${index * 100}%)`;
-        dots.forEach((dot, idx) => {
-            dot.classList.toggle("active", idx === index);
-        });
-    }
-
-    function nextSlide() {
-        index = (index + 1) % dots.length;
-        showSlide(index);
-    }
-
-    dots.forEach((dot, i) => {
-        dot.addEventListener("click", () => showSlide(i));
-    });
-
-    setInterval(nextSlide, 3000);
-});
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #111;
-    color: white;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #222;
-}
-
-.logo {
-    height: 40px;
-}
-
-.profile-icon {
-    height: 30px;
-    cursor: pointer;
-}
-
-#menuToggle, #searchToggle {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: white;
-}
-
-#sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: #333;
-    padding: 20px;
-    transition: 0.3s;
-}
-
-#closeMenu {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-ul li {
-    margin: 20px 0;
-    cursor: pointer;
-}
-
-#searchBar {
-    display: none;
-    padding: 10px;
-    background: #222;
-    text-align: center;
-}
-
-#searchBar input {
-    width: 80%;
-    padding: 5px;
-}
-
-.slider {
-    position: relative;
-    overflow: hidden;
-    max-width: 100%;
-    height: 300px;
-}
-
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide img {
-    width: 100%;
-    height: 300px;
-}
-
-.indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    margin: 0 5px;
-    background: gray;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.dot.active {
-    background: white;
-}
-/* Fondo tipo Netflix */
+/* ----- ESTILOS GENERALES ----- */
 body {
     font-family: 'Work Sans', sans-serif;
     margin: 0;
@@ -164,7 +12,7 @@ body {
     color: white;
 }
 
-/* Fondo con imágenes difuminadas */
+/* ----- FONDO DIFUMINADO ----- */
 .background {
     position: absolute;
     width: 100%;
@@ -174,7 +22,7 @@ body {
     z-index: -1;
 }
 
-/* Capa de oscurecimiento */
+/* ----- CAPA OSCURA ----- */
 .overlay {
     position: absolute;
     width: 100%;
@@ -183,7 +31,7 @@ body {
     z-index: -1;
 }
 
-/* Contenedor del login */
+/* ----- CONTENEDOR DEL FORMULARIO ----- */
 .login-container {
     background: rgba(0, 0, 0, 0.8);
     padding: 30px;
@@ -194,7 +42,7 @@ body {
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* Títulos */
+/* ----- TÍTULOS ----- */
 h1 {
     font-size: 24px;
     font-weight: 700;
@@ -206,7 +54,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Inputs */
+/* ----- INPUTS ----- */
 .input-container {
     margin-bottom: 15px;
 }
@@ -226,7 +74,7 @@ input::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Botón */
+/* ----- BOTÓN ----- */
 button {
     width: 100%;
     padding: 12px;
@@ -244,7 +92,7 @@ button:hover {
     background: darkred;
 }
 
-/* Enlace de registro */
+/* ----- ENLACE PARA CAMBIAR A LOGIN ----- */
 p {
     margin-top: 15px;
     font-size: 14px;
@@ -260,120 +108,27 @@ p a:hover {
     text-decoration: underline;
 }
 
-/* Mensajes de error con animación */
-.error-message {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #ff4444;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s, transform 0.3s;
-}
-
-.error-message.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #121212;
-    margin: 0;
-}
-
-/* Contenedor del formulario */
-.container {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    text-align: center;
-    width: 320px;
-}
-
-/* Estilos del formulario */
-.form h2 {
-    color: #fff;
-    margin-bottom: 20px;
-}
-
-/* Inputs con iconos */
-.input-group {
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    padding-left: 40px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    background: #333;
-    color: #fff;
-}
-
-.input-group i {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #bbb;
-}
-
-/* Botón de registro */
-.btn {
-    width: 100%;
-    padding: 10px;
-    background: #ff4757;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.btn:hover {
-    background: #e84118;
-}
-
-/* Mensajes animados */
+/* ----- MENSAJES DE ERROR O ÉXITO ----- */
 .mensaje {
     margin-top: 10px;
     font-size: 14px;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transform: translateY(-10px);
+    transition: opacity 0.5s, transform 0.3s;
 }
 
 /* Mensaje de éxito */
-.exito {
+.mensaje.exito {
     color: #2ecc71;
 }
 
 /* Mensaje de error */
-.error {
+.mensaje.error {
     color: #e74c3c;
 }
 
-/* Texto para cambiar a login */
-.switch {
-    margin-top: 10px;
-    color: #bbb;
-    font-size: 14px;
-}
-
-.switch a {
-    color: #ff4757;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.switch a:hover {
-    text-decoration: underline;
+/* Cuando se muestra el mensaje */
+.mensaje.show {
+    opacity: 1;
+    transform: translateY(0);
 }
