@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - KYB</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
@@ -13,25 +14,36 @@
         <input type="password" id="newPassword" placeholder="Contraseña" required>
         <button onclick="registrar()">Registrarse</button>
         <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+        <p id="message"></p>
     </div>
+
     <script>
-        function registrar() {
+        // Conectar Supabase
+        const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";
+        const supabaseKey = "TU_CLAVE_SECRETA_AQUI"; // No pongas la clave expuesta
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function registrar() {
             let email = document.getElementById("newEmail").value;
             let password = document.getElementById("newPassword").value;
-            
+            let message = document.getElementById("message");
+
             if (email === "" || password === "") {
-                alert("Por favor, completa todos los campos.");
+                message.innerHTML = "⚠️ Completa todos los campos.";
+                message.style.color = "red";
                 return;
             }
-            
-            if (localStorage.getItem(email)) {
-                alert("Este correo ya está registrado.");
-                return;
+
+            let { data, error } = await supabase.auth.signUp({ email, password });
+
+            if (error) {
+                message.innerHTML = "❌ " + error.message;
+                message.style.color = "red";
+            } else {
+                message.innerHTML = "✅ Cuenta creada con éxito. Verifica tu correo.";
+                message.style.color = "green";
+                setTimeout(() => window.location.href = "login.html", 2000);
             }
-            
-            localStorage.setItem(email, password);
-            alert("¡Cuenta creada con éxito! Ahora puedes iniciar sesión.");
-            window.location.href = "login.html";
         }
     </script>
 </body>
