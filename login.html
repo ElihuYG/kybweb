@@ -12,32 +12,40 @@
         <h2>Bienvenid@ a KYB</h2>
         <input type="email" id="email" placeholder="Correo electrónico">
         <input type="password" id="password" placeholder="Contraseña">
-        <button onclick="login()">Entrar</button>
+        <button id="loginBtn">Entrar</button>
         <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
         <p id="message"></p>
     </div>
 
     <script>
         // Conectar Supabase
-        const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";  // Reemplázalo con tu URL de Supabase
-        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";  // Reemplázalo con tu API Key (manténlo seguro)
+        const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";  
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";  
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+        document.getElementById("loginBtn").addEventListener("click", login);
+
         async function login() {
-            let email = document.getElementById("email").value;
-            let password = document.getElementById("password").value;
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
             let message = document.getElementById("message");
 
-            // Autenticación con Supabase
+            if (!email || !password) {
+                message.innerHTML = "⚠️ Por favor, completa todos los campos.";
+                message.style.color = "orange";
+                return;
+            }
+
+            console.log("Intentando iniciar sesión con:", email);
+
             let { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
             if (error) {
+                console.error("Error de inicio de sesión:", error);
                 message.innerHTML = "❌ Correo o contraseña incorrectos.";
                 message.style.color = "red";
-            } else if (!data.user?.confirmed_at) {
-                message.innerHTML = "⚠️ Verifica tu correo antes de iniciar sesión.";
-                message.style.color = "orange";
             } else {
+                console.log("Inicio de sesión exitoso:", data);
                 message.innerHTML = "✅ Inicio de sesión exitoso.";
                 message.style.color = "green";
                 localStorage.setItem("currentUser", email);
