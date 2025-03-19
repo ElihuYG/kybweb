@@ -5,61 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - KYB</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
         <h2>Crear una cuenta</h2>
-        <form id="registerForm">
-            <input type="text" id="name" placeholder="Nombre completo" required>
-            <input type="email" id="newEmail" placeholder="Correo electrónico" required>
-            <input type="password" id="newPassword" placeholder="Contraseña" required>
-            <button type="submit">Registrarse</button>
-        </form>
+        <input type="text" id="newName" placeholder="Nombre completo" required>
+        <input type="email" id="newEmail" placeholder="Correo electrónico" required>
+        <input type="password" id="newPassword" placeholder="Contraseña" required>
+        <button onclick="registrar()">Registrarse</button>
         <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
-        <p id="message"></p>
     </div>
+    
+    <script type="module">
+        import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    <script>
         const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";
         const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const supabase = createClient(supabaseUrl, supabaseKey);
 
-        document.getElementById("registerForm").addEventListener("submit", async function(event) {
-            event.preventDefault(); // Evita que la página se recargue
+        async function registrar() {
+            let name = document.getElementById("newName").value;
+            let email = document.getElementById("newEmail").value;
+            let password = document.getElementById("newPassword").value;
 
-            let name = document.getElementById("name").value.trim();
-            let email = document.getElementById("newEmail").value.trim();
-            let password = document.getElementById("newPassword").value.trim();
-            let message = document.getElementById("message");
-
-            if (name === "" || email === "" || password === "") {
-                message.innerHTML = "⚠️ Completa todos los campos.";
-                message.style.color = "red";
-                return;
-            }
-
-            if (password.length < 6) {
-                message.innerHTML = "⚠️ La contraseña debe tener al menos 6 caracteres.";
-                message.style.color = "red";
+            if (!name || !email || !password) {
+                alert("Por favor, completa todos los campos.");
                 return;
             }
 
             let { data, error } = await supabase.auth.signUp({
-                email,
-                password,
-                options: { data: { name } }
+                email: email,
+                password: password,
+                options: { data: { name: name } }
             });
 
             if (error) {
-                message.innerHTML = "❌ " + error.message;
-                message.style.color = "red";
+                alert("Error en el registro: " + error.message);
             } else {
-                message.innerHTML = "✅ Cuenta creada con éxito. Verifica tu correo.";
-                message.style.color = "green";
-                setTimeout(() => window.location.href = "login.html", 3000);
+                alert("¡Cuenta creada con éxito! Ahora puedes iniciar sesión.");
+                window.location.href = "login.html";
             }
-        });
+        }
     </script>
 </body>
 </html>
