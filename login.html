@@ -19,8 +19,8 @@
 
     <script>
         // Conectar Supabase
-        const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co ";  // Reemplázalo con tu URL de Supabase
-        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";  // Reemplázalo con tu API Key
+        const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";  // Reemplázalo con tu URL de Supabase
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";  // Reemplázalo con tu API Key (manténlo seguro)
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         async function login() {
@@ -34,6 +34,9 @@
             if (error) {
                 message.innerHTML = "❌ Correo o contraseña incorrectos.";
                 message.style.color = "red";
+            } else if (!data.user?.confirmed_at) {
+                message.innerHTML = "⚠️ Verifica tu correo antes de iniciar sesión.";
+                message.style.color = "orange";
             } else {
                 message.innerHTML = "✅ Inicio de sesión exitoso.";
                 message.style.color = "green";
