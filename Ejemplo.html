@@ -21,6 +21,7 @@
             font-size: 14px;
             border-radius: 5px;
             display: none;
+            z-index: 1000;
         }
         #skip-intro { top: 50%; left: 50%; transform: translate(-50%, -50%); }
         #skip-outro { bottom: 20px; right: 130px; }
@@ -33,7 +34,7 @@
             font-size: 16px;
             font-weight: bold;
             border-radius: 8px;
-            z-index: 999;
+            z-index: 1001; /* Asegurar que esté por encima del video */
             background: rgba(0, 0, 0, 0.8);
             color: white;
             opacity: 0;
@@ -75,15 +76,14 @@
         
         player.on('play', function() {
             var overlay = document.getElementById('video-overlay');
+            overlay.style.display = 'block';
+            overlay.classList.add('show');
             setTimeout(function() {
-                overlay.classList.add('show');
+                overlay.classList.add('hide');
                 setTimeout(function() {
-                    overlay.classList.add('hide');
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                    }, 800);
-                }, 5000);
-            }, 1000);
+                    overlay.style.display = 'none';
+                }, 800);
+            }, 5000);
         });
         
         player.on('timeupdate', function() {
