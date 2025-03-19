@@ -76,6 +76,30 @@
         .login-container a:hover {
             text-decoration: underline;
         }
+
+        /* 🔹 Mensajes animados */
+        .message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .message.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .message.error {
+            background-color: #E74C3C;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -89,18 +113,39 @@
         <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
     </div>
 
+    <!-- 🔹 Mensaje dinámico -->
+    <div id="message" class="message"></div>
+
     <script>
+        function showMessage(text, type) {
+            const message = document.getElementById("message");
+            message.textContent = text;
+            message.className = "message " + type; // Agrega clase success o error
+            message.style.display = "block";
+            message.style.opacity = "1";
+
+            setTimeout(() => {
+                message.style.opacity = "0";
+                setTimeout(() => message.style.display = "none", 500);
+            }, 3000);
+        }
+
         function login() {
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
             let storedPassword = localStorage.getItem(email);
 
-            if (storedPassword === password) {
-                localStorage.setItem("currentUser", email); // Guarda el usuario
-                alert("¡Bienvenid@ " + email + "!");
-                window.location.href = "catalogo.html"; // Redirige al catálogo
+            if (email === "" || password === "") {
+                showMessage("⚠️ Completa todos los campos", "error");
+            } else if (storedPassword === password) {
+                localStorage.setItem("currentUser", email);
+                showMessage("✅ ¡Bienvenid@ a KYB!", "success");
+
+                setTimeout(() => {
+                    window.location.href = "catalogo.html";
+                }, 2000);
             } else {
-                alert("Correo o contraseña incorrectos");
+                showMessage("❌ Correo o contraseña incorrectos", "error");
             }
         }
     </script>
