@@ -5,111 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - KYB</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600&display=swap');
-
-        body {
-            font-family: 'Work Sans', sans-serif;
-            background-color: #141414;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .login-container {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-            width: 320px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #e50914;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #b20710;
-        }
-
-        p {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        a {
-            color: #e50914;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
     <div class="login-container">
-        <h2>¡Bienvenid@ a KYB!</h2>
+        <h2>Bienvenid@ a KYB</h2>
         <input type="email" id="email" placeholder="Correo electrónico">
         <input type="password" id="password" placeholder="Contraseña">
         <button onclick="login()">Entrar</button>
         <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+        <p id="message"></p>
     </div>
 
     <script>
+        // Conectar Supabase
+        const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co ";  // Reemplázalo con tu URL de Supabase
+        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";  // Reemplázalo con tu API Key
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
         async function login() {
             let email = document.getElementById("email").value;
             let password = document.getElementById("password").value;
+            let message = document.getElementById("message");
 
-            // URL de tu archivo JSON en GitHub
-            const jsonURL = "https://raw.githubusercontent.com/tu-usuario/tu-repo/main/users.json";
+            // Autenticación con Supabase
+            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-            try {
-                let response = await fetch(jsonURL);
-                let users = await response.json();
-
-                // Buscar el usuario en la base de datos
-                let user = users.find(u => u.email === email && u.password === password);
-
-                if (user) {
-                    localStorage.setItem("currentUser", email); // Guarda sesión
-                    alert("✅ ¡Bienvenid@ a KYB!");
-                    window.location.href = "catalogo.html"; // Redirige
-                } else {
-                    alert("❌ Correo o contraseña incorrectos");
-                }
-            } catch (error) {
-                console.error("Error al cargar usuarios:", error);
-                alert("⚠️ Error al conectarse con el servidor");
+            if (error) {
+                message.innerHTML = "❌ Correo o contraseña incorrectos.";
+                message.style.color = "red";
+            } else {
+                message.innerHTML = "✅ Inicio de sesión exitoso.";
+                message.style.color = "green";
+                localStorage.setItem("currentUser", email);
+                setTimeout(() => window.location.href = "catalogo.html", 1000);
             }
         }
     </script>
-
 </body>
 </html>
