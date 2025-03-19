@@ -21,19 +21,30 @@
             font-size: 14px;
             border-radius: 5px;
             display: none;
-            z-index: 10;
         }
         #skip-intro { top: 50%; left: 50%; transform: translate(-50%, -50%); }
         #skip-outro { bottom: 20px; right: 130px; }
         #next-episode { bottom: 60px; right: 20px; }
-        #video-overlay {
-            top: 10px;
-            left: 10px;
-            display: none;
+        
+        .video-overlay {
+            top: 10px; left: 50%; transform: translateX(-50%);
+            padding: 10px 15px;
             font-size: 16px;
             font-weight: bold;
-            padding: 10px;
-            z-index: 20;
+            border-radius: 8px;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .video-overlay.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .video-overlay.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-30px);
         }
     </style>
 </head>
@@ -61,10 +72,12 @@
         
         player.on('play', function() {
             var overlay = document.getElementById('video-overlay');
-            overlay.style.display = 'block';
+            overlay.classList.add('show');
             setTimeout(function() {
-                overlay.style.opacity = '0';
-                setTimeout(() => overlay.style.display = 'none', 500);
+                overlay.classList.add('hide');
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                }, 500);
             }, 3000);
         });
         
