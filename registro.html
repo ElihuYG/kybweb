@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Registro con Supabase</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
@@ -17,28 +17,30 @@
         <br>
         <button type="submit">Registrarse</button>
     </form>
-    
+
     <script>
-        // Inicializar Supabase
-        const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";
-        const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        document.addEventListener("DOMContentLoaded", () => {
+            // Inicializar Supabase
+            const supabaseUrl = "https://lcsfhhhsfmnseweqwrye.supabase.co";
+            const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc2ZoaGhzZm1uc2V3ZXF3cnllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzNTUxNDUsImV4cCI6MjA1NzkzMTE0NX0.pqpwtV5mM9ip96prsNdHN6eKMzi6J7LTpownEwdjvqQ";
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        document.getElementById("registroForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            
-            const { user, error } = await supabase.auth.signUp({
-                email,
-                password
+            document.getElementById("registroForm").addEventListener("submit", async function(event) {
+                event.preventDefault();
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                
+                const { user, error } = await supabase.auth.signUp({
+                    email,
+                    password
+                });
+
+                if (error) {
+                    alert("Error: " + error.message);
+                } else {
+                    alert("Registro exitoso. Verifica tu correo electrónico.");
+                }
             });
-
-            if (error) {
-                alert("Error: " + error.message);
-            } else {
-                alert("Registro exitoso. Verifica tu correo electrónico.");
-            }
         });
     </script>
 </body>
