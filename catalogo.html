@@ -20,6 +20,7 @@
     </header>
     
     <main>
+        <!-- Carrusel Principal -->
         <section class="carousel">
             <div class="carousel-container">
                 <div class="carousel-item active" onclick="location.href='yoursky.html'">
@@ -59,7 +60,8 @@
         </section>
     </main>   
 
-    <nav class="menu-content">
+    <!-- Menú con hamburguesa -->
+    <nav class="menu-content" id="menu-content">
         <button id="close-menu" class="close-menu">X</button>
         <a href="index.html">🏠 Home</a>
         <a href="new-popular.html">🔥 New & Popular</a>
@@ -71,12 +73,56 @@
             let searchBtn = document.getElementById("search-btn");
             let searchInput = document.getElementById("search");
             let searchResults = document.getElementById("search-results");
-            
+            let menuToggle = document.getElementById("menu-toggle");
+            let menuContent = document.getElementById("menu-content");
+            let closeMenu = document.getElementById("close-menu");
+            let series = [
+                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
+                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
+                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
+            ];
+
             searchBtn.addEventListener("click", function () {
-                searchInput.classList.toggle("active");
+                searchInput.style.display = "block";
                 searchInput.focus();
             });
+
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
+                if (query.length > 0) {
+                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
+                    filteredSeries.forEach(series => {
+                        let resultItem = document.createElement("div");
+                        resultItem.classList.add("search-result-item");
+                        resultItem.innerHTML = `<img src="${series.image}" alt="${series.name}"><span>${series.name}</span>`;
+                        resultItem.addEventListener("click", function () {
+                            window.location.href = series.url;
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.style.display = "block";
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+
+            menuToggle.addEventListener("click", function () {
+                menuContent.style.display = "block";
+            });
+            closeMenu.addEventListener("click", function () {
+                menuContent.style.display = "none";
+            });
         });
+
+        let currentIndex = 0;
+        const carouselItems = document.querySelectorAll(".carousel-item");
+        function moveCarousel() {
+            carouselItems.forEach(item => item.classList.remove("active"));
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.add("active");
+        }
+        setInterval(moveCarousel, 3000);
     </script>
 </body>
 </html>
