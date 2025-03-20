@@ -8,14 +8,16 @@
 </head>
 <body>
     <header>
-        <div class="menu-container">
-            <div id="menu-toggle" class="menu-icon">☰</div>
-            <h1>KYB</h1>
-        </div>
-        <div class="search-container">
-            <button id="search-icon">🔍</button>
-            <input type="text" id="search" placeholder="Buscar...">
-            <div id="search-results" class="search-results"></div>
+        <div class="top-bar">
+            <div class="left-container">
+                <div id="menu-toggle" class="menu-icon">☰</div>
+                <h1>KYB</h1>
+            </div>
+            <div class="search-container">
+                <button id="search-icon">🔍</button>
+                <input type="text" id="search" placeholder="Buscar...">
+                <div id="search-results" class="search-results"></div>
+            </div>
         </div>
     </header>
     
@@ -60,7 +62,6 @@
         </section>
     </main>   
 
-    <!-- Menú con hamburguesa -->
     <nav class="menu">
         <div id="menu-content" class="menu-content">
             <button id="close-menu" class="close-menu">X</button>
@@ -73,11 +74,8 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let searchInput = document.getElementById("search");
-            let searchIcon = document.getElementById("search-icon");
             let searchResults = document.getElementById("search-results");
-            let menuToggle = document.getElementById("menu-toggle");
-            let menuContent = document.getElementById("menu-content");
-            let closeMenu = document.getElementById("close-menu");
+            let searchIcon = document.getElementById("search-icon");
 
             let series = [
                 { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
@@ -86,7 +84,7 @@
             ];
 
             searchIcon.addEventListener("click", function () {
-                searchInput.style.display = "block";
+                searchInput.classList.toggle("show");
                 searchInput.focus();
             });
 
@@ -114,7 +112,10 @@
                 }
             });
 
-            // Menú desplegable
+            let menuToggle = document.getElementById("menu-toggle");
+            let menuContent = document.getElementById("menu-content");
+            let closeMenu = document.getElementById("close-menu");
+
             menuToggle.addEventListener("click", function () {
                 menuContent.style.display = "block";
             });
@@ -124,13 +125,24 @@
             });
         });
     </script>
-    
+
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .menu-container {
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: #000;
+            color: white;
+        }
+
+        .left-container {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -138,19 +150,39 @@
 
         h1 {
             margin: 0;
+            font-size: 24px;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
         }
 
         .search-container {
-            position: absolute;
-            top: 10px;
-            right: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         #search {
+            display: none;
             width: 150px;
             padding: 5px;
             border: none;
-            display: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #search.show {
+            display: block;
+        }
+
+        #search-icon {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
         }
 
         .search-results {
@@ -177,42 +209,11 @@
             margin-right: 10px;
         }
 
-        .carousel {
-            width: 100%;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .carousel-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-item {
-            flex: 0 0 100%;
-            display: none;
-            text-align: center;
-        }
-
-        .carousel-item.active {
-            display: block;
-        }
-
-        /* Menú con hamburguesa */
         .menu {
             position: absolute;
             left: 20px;
             top: 10px;
             z-index: 200;
-        }
-
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
         }
 
         .menu-content {
@@ -239,20 +240,29 @@
             cursor: pointer;
         }
 
-        /* Estilos responsivos para móvil */
-        @media (max-width: 600px) {
-            #search {
-                width: 120px;
-            }
+        .carousel {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-            .menu-content {
-                width: 200px;
-            }
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
 
-            .estrenos-container {
-                flex-direction: column;
-                align-items: center;
-            }
+        .carousel-item {
+            flex: 0 0 100%;
+            display: none;
+            text-align: center;
+        }
+
+        .carousel-item.active {
+            display: block;
         }
     </style>
 </body>
