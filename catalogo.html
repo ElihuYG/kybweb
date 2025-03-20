@@ -5,145 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB - Catálogo</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>KYB</h1>
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar...">
-            <button id="search-btn">🔍</button>
-            <div id="search-results" class="search-results"></div>
-        </div>
-    </header>
-    
-    <main>
-        <!-- Carrusel Principal -->
-        <section class="carousel">
-            <div class="carousel-container">
-                <div class="carousel-item active" onclick="location.href='yoursky.html'">
-                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
-                </div>
-                <div class="carousel-item" onclick="location.href='thamepo.html'">
-                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
-                </div>
-                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
-                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
-                </div>
-            </div>
-        </section>
-
-        <section class="estrenos">
-            <h2>Estrenos</h2>
-            <div class="estrenos-container">
-                <div class="estreno">
-                    <img src="poster_begins_youth.png" alt="Estreno 1">
-                </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno2.png" alt="Estreno 2">
-                </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno3.png" alt="Estreno 3">
-                </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno4.png" alt="Estreno 4">
-                </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno5.png" alt="Estreno 5">
-                </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno6.png" alt="Estreno 6">
-                </div>
-            </div>
-            <button class="ver-mas">Ver más</button>
-        </section>
-    </main>   
-
-    <!-- Menú con hamburguesa -->
-    <nav class="menu">
-        <div id="menu-toggle" class="menu-icon">☰</div>
-        <div id="menu-content" class="menu-content">
-            <button id="close-menu" class="close-menu">X</button>
-            <a href="index.html">🏠 Home</a>
-            <a href="new-popular.html">🔥 New & Popular</a>
-            <a href="cuenta.html">👤 Cuenta</a>
-        </div>
-    </nav>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let searchInput = document.getElementById("search");
-            let searchResults = document.getElementById("search-results");
-            let series = [
-                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
-                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
-                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
-            ];
-
-            searchInput.addEventListener("input", function () {
-                let query = searchInput.value.toLowerCase();
-                searchResults.innerHTML = "";
-
-                if (query.length > 0) {
-                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
-                    filteredSeries.forEach(series => {
-                        let resultItem = document.createElement("div");
-                        resultItem.classList.add("search-result-item");
-                        resultItem.innerHTML = ` 
-                            <img src="${series.image}" alt="${series.name}">
-                            <span>${series.name}</span>
-                        `;
-                        resultItem.addEventListener("click", function () {
-                            window.location.href = series.url;
-                        });
-                        searchResults.appendChild(resultItem);
-                    });
-                    searchResults.style.display = "block";
-                } else {
-                    searchResults.style.display = "none";
-                }
-            });
-
-            // Menu desplegable
-            let menuToggle = document.getElementById("menu-toggle");
-            let menuContent = document.getElementById("menu-content");
-            let closeMenu = document.getElementById("close-menu");
-
-            menuToggle.addEventListener("click", function () {
-                menuContent.style.display = "block";
-            });
-
-            closeMenu.addEventListener("click", function () {
-                menuContent.style.display = "none";
-            });
-        });
-
-        // Función para mover el carrusel automáticamente
-        let currentIndex = 0;
-        const carouselItems = document.querySelectorAll(".carousel-item");
-
-        function moveCarousel() {
-            carouselItems[currentIndex].classList.remove("active");
-            currentIndex = (currentIndex + 1) % carouselItems.length;
-            carouselItems[currentIndex].classList.add("active");
-        }
-
-        // Desplazamiento automático cada 3 segundos
-        setInterval(moveCarousel, 3000);
-    </script>
-    
     <style>
         body {
             font-family: Arial, sans-serif;
         }
 
+        .header-container {
+            display: flex;
+            justify-content: space-between; /* Espacio entre el título y el contenedor de búsqueda */
+            align-items: center; /* Centra verticalmente */
+            padding: 10px; /* Espaciado alrededor */
+        }
+
         h1 {
-            text-align: center;
+            margin: 0; /* Elimina el margen por defecto */
+            flex-grow: 1; /* Permite que el título ocupe el espacio disponible */
+            text-align: center; /* Centra el texto */
         }
 
         .search-container {
-            position: absolute;
-            top: 10px;
-            right: 20px;
+            position: relative; /* Cambiado a relative para el posicionamiento */
         }
 
         #search {
@@ -276,5 +157,133 @@
             }
         }
     </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="menu-icon">
+                <div id="menu-toggle">☰</div>
+            </div>
+            <h1>KYB</h1>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Buscar...">
+                <button id="search-btn">🔍</button>
+                <div id="search-results" class="search-results"></div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Carrusel Principal -->
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
+                </div>
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
+                </div>
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+                </div>
+            </div>
+        </section>
+
+        <section class="estrenos">
+            <h2>Estrenos</h2>
+            <div class="estrenos-container">
+                <div class="estreno">
+                    <img src="poster_begins_youth.png" alt="Estreno 1">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno6.png" alt="Estreno 6">
+                </div>
+            </div>
+        </section>
+    </main>   
+
+    <!-- Menú con hamburguesa -->
+    <nav class="menu">
+        <div id="menu-content" class="menu-content">
+            <button id="close-menu" class="close-menu">X</button>
+            <a href="index.html">🏠 Home</a>
+            <a href="new-popular.html">🔥 New & Popular</a>
+            <a href="cuenta.html">👤 Cuenta</a>
+        </div>
+    </nav>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let searchInput = document.getElementById("search");
+            let searchResults = document.getElementById("search-results");
+            let series = [
+                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
+                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
+                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
+            ];
+
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
+
+                if (query.length > 0) {
+                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
+                    filteredSeries.forEach(series => {
+                        let resultItem = document.createElement("div");
+                        resultItem.classList.add("search-result-item");
+                        resultItem.innerHTML = ` 
+                            <img src="${series.image}" alt="${series.name}">
+                            <span>${series.name}</span>
+                        `;
+                        resultItem.addEventListener("click", function () {
+                            window.location.href = series.url;
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.style.display = "block";
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+
+            // Menu desplegable
+            let menuToggle = document.getElementById("menu-toggle");
+            let menuContent = document.getElementById("menu-content");
+            let closeMenu = document.getElementById("close-menu");
+
+            menuToggle.addEventListener("click", function () {
+                menuContent.style.display = "block";
+            });
+
+            closeMenu.addEventListener("click", function () {
+                menuContent.style.display = "none";
+            });
+        });
+
+        // Función para mover el carrusel automáticamente
+        let currentIndex = 0;
+        const carouselItems = document.querySelectorAll(".carousel-item");
+
+        function moveCarousel() {
+            carouselItems[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.add("active");
+        }
+
+        // Desplazamiento automático cada 3 segundos
+        setInterval(moveCarousel, 3000);
+    </script>
 </body>
 </html>
