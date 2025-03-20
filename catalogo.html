@@ -1,68 +1,82 @@
-import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Menu, Search } from "lucide-react";
-import Image from "next/image";
-
-const Carousel = () => {
-  const items = [
-    { id: 1, title: "Serie 1", image: "/serie1.jpg" },
-    { id: 2, title: "Serie 2", image: "/serie2.jpg" },
-    { id: 3, title: "Serie 3", image: "/serie3.jpg" },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [searchVisible, setSearchVisible] = useState(false);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
-  };
-
-  return (
-    <div className="relative w-full h-screen bg-black text-white">
-      {/* Encabezado */}
-      <div className="absolute top-0 left-0 right-0 flex items-center justify-between p-4 bg-black bg-opacity-75 z-10">
-        <div className="flex items-center gap-4">
-          <Menu className="w-6 h-6 cursor-pointer" />
-          <h1 className="text-xl font-bold">KYB</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB - Catálogo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="menu">
+            <div id="menu-toggle" class="menu-icon">☰</div>
+            <h1>KYB</h1>
         </div>
-        <div className="relative">
-          {searchVisible && (
-            <input
-              type="text"
-              placeholder="Buscar..."
-              className="absolute right-10 top-1/2 transform -translate-y-1/2 px-2 py-1 bg-white text-black rounded"
-            />
-          )}
-          <Search className="w-6 h-6 cursor-pointer" onClick={() => setSearchVisible(!searchVisible)} />
+        <div class="search-container">
+            <button id="search-btn">🔍</button>
+            <input type="text" id="search" placeholder="Buscar...">
+            <div id="search-results" class="search-results"></div>
         </div>
-      </div>
+    </header>
+    
+    <main>
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
+                </div>
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
+                </div>
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+                </div>
+            </div>
+        </section>
 
-      {/* Carrusel */}
-      <div className="relative w-full h-[500px] flex items-center justify-center mt-20">
-        <button onClick={prevSlide} className="absolute left-2 z-10 p-2 bg-black bg-opacity-50 rounded-full">
-          <ChevronLeft className="w-8 h-8 text-white" />
-        </button>
-        <Card className="relative w-[300px] h-[400px] flex items-center justify-center overflow-hidden">
-          <Image
-            src={items[currentIndex].image}
-            alt={items[currentIndex].title}
-            layout="fill"
-            objectFit="cover"
-          />
-          <CardContent className="absolute bottom-0 w-full bg-black bg-opacity-50 text-center py-2">
-            <h2 className="text-lg font-semibold">{items[currentIndex].title}</h2>
-          </CardContent>
-        </Card>
-        <button onClick={nextSlide} className="absolute right-2 z-10 p-2 bg-black bg-opacity-50 rounded-full">
-          <ChevronRight className="w-8 h-8 text-white" />
-        </button>
-      </div>
-    </div>
-  );
-};
+        <section class="estrenos">
+            <h2>Estrenos</h2>
+            <div class="estrenos-container">
+                <div class="estreno">
+                    <img src="poster_begins_youth.png" alt="Estreno 1">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno6.png" alt="Estreno 6">
+                </div>
+            </div>
+        </section>
+    </main>   
 
-export default Carousel;
+    <nav class="menu-content">
+        <button id="close-menu" class="close-menu">X</button>
+        <a href="index.html">🏠 Home</a>
+        <a href="new-popular.html">🔥 New & Popular</a>
+        <a href="cuenta.html">👤 Cuenta</a>
+    </nav>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let searchBtn = document.getElementById("search-btn");
+            let searchInput = document.getElementById("search");
+            let searchResults = document.getElementById("search-results");
+            
+            searchBtn.addEventListener("click", function () {
+                searchInput.classList.toggle("active");
+                searchInput.focus();
+            });
+        });
+    </script>
+</body>
+</html>
