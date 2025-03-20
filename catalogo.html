@@ -8,12 +8,12 @@
 </head>
 <body>
     <header>
-        <div class="menu">
+        <div class="menu-container">
             <div id="menu-toggle" class="menu-icon">☰</div>
             <h1>KYB</h1>
         </div>
         <div class="search-container">
-            <button id="search-btn">🔍</button>
+            <button id="search-icon">🔍</button>
             <input type="text" id="search" placeholder="Buscar...">
             <div id="search-results" class="search-results"></div>
         </div>
@@ -61,28 +61,31 @@
     </main>   
 
     <!-- Menú con hamburguesa -->
-    <nav class="menu-content" id="menu-content">
-        <button id="close-menu" class="close-menu">X</button>
-        <a href="index.html">🏠 Home</a>
-        <a href="new-popular.html">🔥 New & Popular</a>
-        <a href="cuenta.html">👤 Cuenta</a>
+    <nav class="menu">
+        <div id="menu-content" class="menu-content">
+            <button id="close-menu" class="close-menu">X</button>
+            <a href="index.html">🏠 Home</a>
+            <a href="new-popular.html">🔥 New & Popular</a>
+            <a href="cuenta.html">👤 Cuenta</a>
+        </div>
     </nav>
     
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let searchBtn = document.getElementById("search-btn");
             let searchInput = document.getElementById("search");
+            let searchIcon = document.getElementById("search-icon");
             let searchResults = document.getElementById("search-results");
             let menuToggle = document.getElementById("menu-toggle");
             let menuContent = document.getElementById("menu-content");
             let closeMenu = document.getElementById("close-menu");
+
             let series = [
                 { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
                 { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
                 { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
             ];
 
-            searchBtn.addEventListener("click", function () {
+            searchIcon.addEventListener("click", function () {
                 searchInput.style.display = "block";
                 searchInput.focus();
             });
@@ -90,12 +93,16 @@
             searchInput.addEventListener("input", function () {
                 let query = searchInput.value.toLowerCase();
                 searchResults.innerHTML = "";
+
                 if (query.length > 0) {
                     let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
                     filteredSeries.forEach(series => {
                         let resultItem = document.createElement("div");
                         resultItem.classList.add("search-result-item");
-                        resultItem.innerHTML = `<img src="${series.image}" alt="${series.name}"><span>${series.name}</span>`;
+                        resultItem.innerHTML = ` 
+                            <img src="${series.image}" alt="${series.name}">
+                            <span>${series.name}</span>
+                        `;
                         resultItem.addEventListener("click", function () {
                             window.location.href = series.url;
                         });
@@ -107,22 +114,146 @@
                 }
             });
 
+            // Menú desplegable
             menuToggle.addEventListener("click", function () {
                 menuContent.style.display = "block";
             });
+
             closeMenu.addEventListener("click", function () {
                 menuContent.style.display = "none";
             });
         });
-
-        let currentIndex = 0;
-        const carouselItems = document.querySelectorAll(".carousel-item");
-        function moveCarousel() {
-            carouselItems.forEach(item => item.classList.remove("active"));
-            currentIndex = (currentIndex + 1) % carouselItems.length;
-            carouselItems[currentIndex].classList.add("active");
-        }
-        setInterval(moveCarousel, 3000);
     </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .search-container {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #search {
+            width: 150px;
+            padding: 5px;
+            border: none;
+            display: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            width: 200px;
+            background: white;
+            border: 1px solid #ccc;
+            display: none;
+            z-index: 100;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .search-result-item img {
+            width: 30px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            display: none;
+            text-align: center;
+        }
+
+        .carousel-item.active {
+            display: block;
+        }
+
+        /* Menú con hamburguesa */
+        .menu {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            z-index: 200;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .menu-content a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: black;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Estilos responsivos para móvil */
+        @media (max-width: 600px) {
+            #search {
+                width: 120px;
+            }
+
+            .menu-content {
+                width: 200px;
+            }
+
+            .estrenos-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </body>
 </html>
