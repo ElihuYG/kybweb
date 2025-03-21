@@ -1,100 +1,278 @@
-<!DOCTYPE html>
+ok mira este es el catalogo.html ok <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrenos</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-        #header {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-        }
-        #search-container {
-            margin-left: auto;
-            display: flex;
-        }
-        #search-input {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        #search-button {
-            padding: 10px;
-            background-color: red;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #featured {
-            text-align: center;
-            margin: 20px 0;
-        }
-        #releases {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .release {
-            margin: 10px;
-            width: 150px;
-            text-align: center;
-        }
-        .release img {
-            width: 100%;
-            border-radius: 10px;
-        }
-    </style>
+    <title>KYB - Catálogo</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div id="header">
+    <header>
         <h1>KYB</h1>
-        <div id="search-container">
-            <input type="text" id="search-input" placeholder="Buscar...">
-            <button id="search-button">🔍</button>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar...">
+            <button id="search-btn">🔍</button>
+            <div id="search-results" class="search-results"></div>
         </div>
-    </div>
+    </header>
+    
+    <main>
+        <!-- Carrusel Principal -->
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
+                </div>
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
+                </div>
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+                </div>
+            </div>
+        </section>
 
-    <div id="featured">
-        <img src="your_image_url_here.jpg" alt="Your Sky" style="width: 100%; max-width: 600px;">
-        <h2>Your Sky</h2>
-    </div>
+        <section class="estrenos">
+            <h2>Estrenos</h2>
+            <div class="estrenos-container">
+                <div class="estreno">
+                    <img src="poster_begins_youth.png" alt="Estreno 1">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno6.png" alt="Estreno 6">
+                </div>
+        </section>
+    </main>   
 
-    <h3>Estrenos</h3>
-    <div id="releases">
-        <div class="release">
-            <img src="begins_youth_image_url.jpg" alt="Estreno 1">
-            <p>Begins Youth</p>
+    <!-- Menú con hamburguesa -->
+    <nav class="menu">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div id="menu-content" class="menu-content">
+            <button id="close-menu" class="close-menu">X</button>
+            <a href="index.html">🏠 Home</a>
+            <a href="new-popular.html">🔥 New & Popular</a>
+            <a href="cuenta.html">👤 Cuenta</a>
         </div>
-        <div class="release">
-            <img src="estreno2_image_url.jpg" alt="Estreno 2">
-            <p>Estreno 2</p>
-        </div>
-        <div class="release">
-            <img src="estreno3_image_url.jpg" alt="Estreno 3">
-            <p>Estreno 3</p>
-        </div>
-        <div class="release">
-            <img src="estreno4_image_url.jpg" alt="Estreno 4">
-            <p>Estreno 4</p>
-        </div>
-        <div class="release">
-            <img src="estreno5_image_url.jpg" alt="Estreno 5">
-            <p>Estreno 5</p>
-        </div>
-        <div class="release">
-            <img src="estreno6_image_url.jpg" alt="Estreno 6">
-            <p>Estreno 6</p>
-        </div>
-    </div>
+    </nav>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let searchInput = document.getElementById("search");
+            let searchResults = document.getElementById("search-results");
+            let series = [
+                { name: "Begins Youth", image: "begins_youth_posters.png", url: "detalle1.html" },
+                { name: "The Pursuit", image: "sliders_Arriba_TP.png", url: "detalle2.html" },
+                { name: "Another Series", image: "Posters Largos KYB begins youth.png", url: "detalle3.html" }
+            ];
 
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
+
+                if (query.length > 0) {
+                    let filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
+                    filteredSeries.forEach(series => {
+                        let resultItem = document.createElement("div");
+                        resultItem.classList.add("search-result-item");
+                        resultItem.innerHTML = ` 
+                            <img src="${series.image}" alt="${series.name}">
+                            <span>${series.name}</span>
+                        `;
+                        resultItem.addEventListener("click", function () {
+                            window.location.href = series.url;
+                        });
+                        searchResults.appendChild(resultItem);
+                    });
+                    searchResults.style.display = "block";
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+
+            // Menu desplegable
+            let menuToggle = document.getElementById("menu-toggle");
+            let menuContent = document.getElementById("menu-content");
+            let closeMenu = document.getElementById("close-menu");
+
+            menuToggle.addEventListener("click", function () {
+                menuContent.style.display = "block";
+            });
+
+            closeMenu.addEventListener("click", function () {
+                menuContent.style.display = "none";
+            });
+        });
+
+        // Función para mover el carrusel automáticamente
+        let currentIndex = 0;
+        const carouselItems = document.querySelectorAll(".carousel-item");
+
+        function moveCarousel() {
+            carouselItems[currentIndex].classList.remove("active");
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.add("active");
+        }
+
+        // Desplazamiento automático cada 3 segundos
+        setInterval(moveCarousel, 3000);
+    </script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .search-container {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        #search {
+            width: 150px;
+            padding: 5px;
+            border: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            width: 200px;
+            background: white;
+            border: 1px solid #ccc;
+            display: none;
+            z-index: 100;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .search-result-item img {
+            width: 30px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            display: none;
+            text-align: center;
+        }
+
+        .carousel-item.active {
+            display: block;
+        }
+
+        /* Menú con hamburguesa */
+        .menu {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            z-index: 200;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .menu-content a {
+            display: block;
+            margin: 10px 0;
+            text-decoration: none;
+            color: black;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Estilos para los estrenos en horizontal */
+        .estrenos-container {
+            display: flex;
+            justify-content: space-between; /* Distribuye las imágenes de manera horizontal */
+            gap: 20px; /* Espaciado entre las imágenes */
+            flex-wrap: nowrap; /* Evita que las imágenes se acomoden en varias filas */
+        }
+
+        .estreno {
+            flex: 0 0 auto; /* Hace que cada imagen tenga su tamaño fijo */
+            width: 150px; /* Puedes ajustar el tamaño según prefieras */
+            height: 200px; /* Ajusta la altura también si lo deseas */
+            overflow: hidden;
+            border-radius: 10px; /* Opcional: para bordes redondeados */
+        }
+
+        .estreno img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Mantiene la proporción de la imagen y cubre el área del contenedor */
+        }
+
+        /* Estilos responsivos para móvil */
+        @media (max-width: 600px) {
+            #search {
+                width: 120px;
+            }
+
+            .menu-content {
+                width: 200px;
+            }
+
+            .estrenos-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </body>
 </html>
