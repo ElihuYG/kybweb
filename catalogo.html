@@ -11,8 +11,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
     <script defer src="script.js"></script>
     <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
         .slider {
-            max-width: 70%;
+            max-width: 90%;
             margin: auto;
             position: relative;
         }
@@ -22,23 +27,44 @@
             object-fit: cover;
         }
         .header {
-            position: absolute;
-            top: 10px;
+            position: fixed;
+            top: 0;
             left: 0;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
+            padding: 15px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
         }
         .search-container {
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.7);
             padding: 5px;
+            border-radius: 5px;
+        }
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        .categorias-container, .populares-container, .recientes-container, .tendencias-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        .categoria, .populares-item, .reciente, .tendencia {
+            margin-right: 10px;
+        }
+        .categoria {
+            background: #222;
+            padding: 10px;
             border-radius: 5px;
         }
     </style>
@@ -51,30 +77,15 @@
             <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
             <div id="search-icon" class="search-icon">🔍</div>
             <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
-            <div id="suggestions" class="suggestions"></div>
         </div>
     </header>
-
-    <div id="menu" class="menu">
-        <ul>
-            <li>Inicio</li>
-            <li>Favoritos</li>
-            <li>Recomendador</li>
-            <li>Próximamente</li>
-            <li>Ayuda</li>
-        </ul>
-    </div>
-
     <main>
         <section class="slider">
             <div class="slide">
                 <img src="Sliders_Arriba_YS.png" alt="Your Sky">
                 <div class="info">
                     <h2>Your Sky</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 45 min/ep</p>
-                    <p class="synopsis">Una historia sobre sueños y superación...</p>
+                    <p>⭐⭐⭐⭐✰</p>
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
@@ -82,53 +93,333 @@
                 <img src="Sliders_Arriba_TP.png" alt="ThemePo">
                 <div class="info">
                     <h2>ThemePo</h2>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 50 min/ep</p>
-                    <p class="synopsis">Una serie llena de misterio y emoción...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="Your Sky 2">
-                <div class="info">
-                    <h2>Your Sky 2</h2>
-                    <p class="rating">⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 40 min/ep</p>
-                    <p class="synopsis">La continuación de una gran historia...</p>
+                    <p>⭐⭐⭐⭐⭐</p>
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
         </section>
+        <section class="recientes">
+            <h2>Recientes</h2>
+            <div class="recientes-container">
+                <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
+                <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
+                <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
+                <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
+            </div>
+        </section>
+        <section class="populares">
+            <h2>Populares</h2>
+            <div class="populares-container">
+                <div class="populares-item"><img src="pop1.png" alt="Popular 1"></div>
+                <div class="populares-item"><img src="pop2.png" alt="Popular 2"></div>
+                <div class="populares-item"><img src="pop3.png" alt="Popular 3"></div>
+                <div class="populares-item"><img src="pop4.png" alt="Popular 4"></div>
+            </div>
+        </section>
+        <section class="tendencias">
+            <h2>Tendencias</h2>
+            <div class="tendencias-container">
+                <div class="tendencia"><img src="trend1.png" alt="Tendencia 1"></div>
+                <div class="tendencia"><img src="trend2.png" alt="Tendencia 2"></div>
+                <div class="tendencia"><img src="trend3.png" alt="Tendencia 3"></div>
+                <div class="tendencia"><img src="trend4.png" alt="Tendencia 4"></div>
+            </div>
+        </section>
+        <section class="categorias">
+            <h2>Explorar por Categoría</h2>
+            <div class="categorias-container">
+                <div class="categoria">Acción</div>
+                <div class="categoria">Drama</div>
+                <div class="categoria">Romance</div>
+                <div class="categoria">Ciencia Ficción</div>
+                <div class="categoria">Comedia</div>
+                <div class="categoria">Terror</div>
+                <div class="categoria">Fantasía</div>
+            </div>
+        </section>
     </main>
-    <section class="recientes">
-        <h2>Recientes</h2>
-        <div class="recientes-container">
-            <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
-            <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
-            <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
-            <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
-            <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
-            <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB - Catálogo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .slider {
+            max-width: 90%;
+            margin: auto;
+            position: relative;
+        }
+        .slide img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        .categorias-container, .populares-container, .recientes-container, .tendencias-container, .recomendados-container, .favoritos-container, .proximos-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        .categoria, .populares-item, .reciente, .tendencia, .recomendado, .favorito, .proximo {
+            margin-right: 10px;
+        }
+        .categoria {
+            background: #222;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div class="title">KYB</div>
+        <div class="search-container">
+            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
         </div>
-    </section>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let menuBtn = document.querySelector("#menu-toggle");
-            let menu = document.querySelector(".menu");
-            let searchBtn = document.querySelector("#search-icon");
-            let searchContainer = document.querySelector(".search-container");
-
-            menuBtn.addEventListener("click", function () {
-                menu.classList.toggle("active");
-            });
-
-            searchBtn.addEventListener("click", function () {
-                searchContainer.style.display = searchContainer.style.display === "block" ? "none" : "block";
-            });
-        });
-    </script>
+    </header>
+    <main>
+        <section class="slider">
+            <div class="slide">
+                <img src="Sliders_Arriba_YS.png" alt="Your Sky">
+                <div class="info">
+                    <h2>Your Sky</h2>
+                    <p>⭐⭐⭐⭐✰</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="ThemePo">
+                <div class="info">
+                    <h2>ThemePo</h2>
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+        </section>
+        <section class="recientes">
+            <h2>Recientes</h2>
+            <div class="recientes-container">
+                <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
+                <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
+                <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
+                <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
+            </div>
+        </section>
+        <section class="populares">
+            <h2>Populares</h2>
+            <div class="populares-container">
+                <div class="populares-item"><img src="pop1.png" alt="Popular 1"></div>
+                <div class="populares-item"><img src="pop2.png" alt="Popular 2"></div>
+                <div class="populares-item"><img src="pop3.png" alt="Popular 3"></div>
+                <div class="populares-item"><img src="pop4.png" alt="Popular 4"></div>
+            </div>
+        </section>
+        <section class="recomendados">
+            <h2>Recomendados</h2>
+            <div class="recomendados-container">
+                <div class="recomendado"><img src="rec1.png" alt="Recomendado 1"></div>
+                <div class="recomendado"><img src="rec2.png" alt="Recomendado 2"></div>
+                <div class="recomendado"><img src="rec3.png" alt="Recomendado 3"></div>
+            </div>
+        </section>
+        <section class="favoritos">
+            <h2>Favoritos</h2>
+            <div class="favoritos-container">
+                <div class="favorito"><img src="fav1.png" alt="Favorito 1"></div>
+                <div class="favorito"><img src="fav2.png" alt="Favorito 2"></div>
+                <div class="favorito"><img src="fav3.png" alt="Favorito 3"></div>
+            </div>
+        </section>
+        <section class="proximos">
+            <h2>Próximos Estrenos</h2>
+            <div class="proximos-container">
+                <div class="proximo"><img src="prox1.png" alt="Próximo 1"></div>
+                <div class="proximo"><img src="prox2.png" alt="Próximo 2"></div>
+                <div class="proximo"><img src="prox3.png" alt="Próximo 3"></div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB - Catálogo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .slider {
+            max-width: 90%;
+            margin: auto;
+            position: relative;
+        }
+        .slide img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 300;
+        }
+        .categorias-container, .populares-container, .recientes-container, .tendencias-container, .recomendados-container, .favoritos-container, .proximos-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        .categoria, .populares-item, .reciente, .tendencia, .recomendado, .favorito, .proximo {
+            margin-right: 10px;
+        }
+        .categoria {
+            background: #222;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div class="title">KYB</div>
+        <div class="search-container">
+            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
+        </div>
+    </header>
+    <main>
+        <section class="slider">
+            <div class="slide">
+                <img src="Sliders_Arriba_YS.png" alt="Your Sky">
+                <div class="info">
+                    <h2>Your Sky</h2>
+                    <p>⭐⭐⭐⭐✰</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="ThemePo">
+                <div class="info">
+                    <h2>ThemePo</h2>
+                    <p>⭐⭐⭐⭐⭐</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+        </section>
+        <section class="categorias">
+            <h2>Categorías</h2>
+            <div class="categorias-container">
+                <div class="categoria">Acción</div>
+                <div class="categoria">Drama</div>
+                <div class="categoria">Comedia</div>
+                <div class="categoria">Ciencia Ficción</div>
+                <div class="categoria">Fantasía</div>
+                <div class="categoria">Terror</div>
+            </div>
+        </section>
+        <section class="tendencias">
+            <h2>Tendencias</h2>
+            <div class="tendencias-container">
+                <div class="tendencia"><img src="tendencia1.png" alt="Tendencia 1"></div>
+                <div class="tendencia"><img src="tendencia2.png" alt="Tendencia 2"></div>
+                <div class="tendencia"><img src="tendencia3.png" alt="Tendencia 3"></div>
+            </div>
+        </section>
+        <section class="favoritos">
+            <h2>Favoritos</h2>
+            <div class="favoritos-container">
+                <div class="favorito"><img src="fav1.png" alt="Favorito 1"></div>
+                <div class="favorito"><img src="fav2.png" alt="Favorito 2"></div>
+                <div class="favorito"><img src="fav3.png" alt="Favorito 3"></div>
+            </div>
+        </section>
+        <section class="proximos">
+            <h2>Próximos Estrenos</h2>
+            <div class="proximos-container">
+                <div class="proximo"><img src="prox1.png" alt="Próximo 1"></div>
+                <div class="proximo"><img src="prox2.png" alt="Próximo 2"></div>
+                <div class="proximo"><img src="prox3.png" alt="Próximo 3"></div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
