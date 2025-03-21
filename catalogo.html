@@ -22,10 +22,21 @@
             position: relative;
             z-index: 100;
         }
+        .slide {
+            position: relative;
+        }
         .slide img {
             width: 100%;
             height: 500px;
             object-fit: cover;
+        }
+        .slide .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
         }
         .header {
             position: fixed;
@@ -42,7 +53,7 @@
         .search-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 30px;
         }
         .categorias-container {
             display: flex;
@@ -74,6 +85,16 @@
         </div>
     </header>
     <main>
+        <section class="slider">
+            <div class="slide">
+                <img src="slider1.jpg" alt="Slide 1">
+                <div class="info">Información de la imagen</div>
+            </div>
+            <div class="slide">
+                <img src="slider2.jpg" alt="Slide 2">
+                <div class="info">Otra información</div>
+            </div>
+        </section>
         <section class="categorias">
             <h2>Categorías</h2>
             <div class="categorias-container">
