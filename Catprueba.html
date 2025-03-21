@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #111;
+            background: #141414;
             color: white;
         }
         header {
@@ -19,7 +19,6 @@
             padding: 10px;
             background: #333;
             color: white;
-            position: relative;
         }
         .logo {
             position: absolute;
@@ -28,54 +27,70 @@
             font-size: 24px;
             font-weight: bold;
         }
-        .menu-btn {
+        .menu-btn, .search-btn {
             font-size: 24px;
             cursor: pointer;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        .search-container input {
-            display: none;
             padding: 5px;
-            font-size: 16px;
         }
-        .search-container.active input {
-            display: block;
-        }
+        /* Menú hamburguesa */
         .menu {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 200px;
+            background: #222;
+            display: none;
+            flex-direction: column;
+            border-radius: 5px;
+        }
+        .menu.active {
+            display: flex;
+        }
+        .menu-item {
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #444;
+        }
+        .submenu {
+            display: none;
+            flex-direction: column;
+            background: #333;
+        }
+        .submenu-item {
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .submenu-btn:hover + .submenu, .submenu:hover {
+            display: flex;
+        }
+
+        /* Buscador */
+        .search-container {
             display: none;
             position: absolute;
             top: 50px;
-            left: 10px;
+            right: 10px;
             background: #222;
             padding: 10px;
             border-radius: 5px;
         }
-        .menu.active {
-            display: block;
+        .search-container input {
+            padding: 5px;
+            width: 150px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 3px;
         }
-        .submenu {
-            display: none;
-            padding-left: 10px;
-        }
-        .submenu.active {
-            display: block;
-        }
-        .menu-btn, .search-btn {
-            cursor: pointer;
-        }
-        .submenu-btn {
-            transition: transform 0.3s ease;
-        }
-        .submenu-btn.active {
-            transform: rotate(180deg);
-        }
+
+        /* Carrusel */
         .carousel {
-            width: 100%;
+            width: 70%;
+            margin: 20px auto;
             overflow: hidden;
+            border-radius: 10px;
         }
         .carousel-container {
             display: flex;
@@ -88,21 +103,37 @@
         .carousel-item img {
             width: 100%;
             height: auto;
+            border-radius: 10px;
         }
+
+        /* Secciones */
         .recientes-container, .estrenos-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-            gap: 5px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
             padding: 10px;
         }
         .reciente img, .estreno img {
             width: 100%;
+            height: 160px;
+            object-fit: cover;
             border-radius: 5px;
         }
+
+        /* Responsivo */
+        @media (max-width: 900px) {
+            .carousel { width: 90%; }
+            .recientes-container, .estrenos-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
         @media (max-width: 600px) {
-            .carousel-item img {
-                height: 150px;
-                object-fit: cover;
+            .carousel { width: 100%; }
+            .recientes-container, .estrenos-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .reciente img, .estreno img {
+                height: 130px;
             }
         }
     </style>
@@ -111,13 +142,10 @@
     <header>
         <div class="menu-btn">☰</div>
         <h1 class="logo">KYB</h1>
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar...">
-            <div class="search-btn">🔍</div>
-        </div>
+        <div class="search-btn">🔍</div>
     </header>
-    
-    <div class="menu">
+
+    <nav class="menu">
         <div class="menu-item">New and popular</div>
         <div class="menu-item">App móvil</div>
         <div class="menu-item">Noticias</div>
@@ -127,80 +155,75 @@
             <div class="submenu-item">Próximamente</div>
             <div class="submenu-item">Recomendador</div>
         </div>
-    </div>
-    
-    <main>
-        <section class="carousel">
-            <div class="carousel-container">
-                <div class="carousel-item" onclick="location.href='yoursky.html'">
-                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
-                </div>
-                <div class="carousel-item" onclick="location.href='thamepo.html'">
-                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
-                </div>
-                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
-                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
-                </div>
-            </div>
-        </section>
+    </nav>
 
-        <section class="recientes">
-            <h2>Recientes</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 1"></div>
+    <div class="search-container">
+        <input type="text" placeholder="Buscar...">
+    </div>
+
+    <section class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                <img src="Sliders_Arriba_YS.png" alt="Slider 1">
             </div>
-        </section>
-        
-        <section class="nuevos-episodios">
-            <h2>Nuevos Episodios</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster_nuevo.png" alt="Nuevo Episodio"></div>
+            <div class="carousel-item" onclick="location.href='thamepo.html'">
+                <img src="Sliders_Arriba_TP.png" alt="Slider 2">
             </div>
-        </section>
-        
-        <section class="proximos-estrenos">
-            <h2>Próximos Estrenos</h2>
-            <div class="estrenos-container">
-                <div class="estreno"><img src="poster_proximo.png" alt="Próximo Estreno"></div>
+            <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                <img src="Sliders_Arriba_BY.png" alt="Slider 3">
             </div>
-        </section>
-        
-        <section class="lo-mas-visto">
-            <h2>Lo Más Visto</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster_mas_visto.png" alt="Más Visto"></div>
-            </div>
-        </section>
-        
-        <section class="boys-love">
-            <h2>Boys Love</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster_boys_love.png" alt="Boys Love"></div>
-            </div>
-        </section>
-    </main>   
+        </div>
+    </section>
+
+    <section class="recientes">
+        <h2>Recientes</h2>
+        <div class="recientes-container">
+            <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
+            <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
+            <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
+            <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
+            <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
+            <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
+        </div>
+    </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let searchBtn = document.querySelector(".search-btn");
-            let searchInput = document.querySelector("#search");
-            let searchContainer = document.querySelector(".search-container");
             let menuBtn = document.querySelector(".menu-btn");
             let menu = document.querySelector(".menu");
+            let searchBtn = document.querySelector(".search-btn");
+            let searchContainer = document.querySelector(".search-container");
             let submenuBtn = document.querySelector(".submenu-btn");
             let submenu = document.querySelector(".submenu");
 
-            searchBtn.addEventListener("click", function () {
-                searchContainer.classList.toggle("active");
-            });
-
+            // Alternar menú hamburguesa
             menuBtn.addEventListener("click", function () {
                 menu.classList.toggle("active");
             });
 
+            // Alternar buscador
+            searchBtn.addEventListener("click", function () {
+                if (searchContainer.style.display === "block") {
+                    searchContainer.style.display = "none";
+                } else {
+                    searchContainer.style.display = "block";
+                    searchContainer.querySelector("input").focus();
+                }
+            });
+
+            // Alternar submenú
             submenuBtn.addEventListener("click", function () {
-                submenu.classList.toggle("active");
-                submenuBtn.classList.toggle("active");
+                submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
+            });
+
+            // Cerrar menú si se toca fuera
+            document.addEventListener("click", function (e) {
+                if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+                    menu.classList.remove("active");
+                }
+                if (!searchContainer.contains(e.target) && !searchBtn.contains(e.target)) {
+                    searchContainer.style.display = "none";
+                }
             });
         });
     </script>
