@@ -9,6 +9,8 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background: #141414;
+            color: white;
         }
         header {
             display: flex;
@@ -30,50 +32,11 @@
             font-size: 24px;
             cursor: pointer;
         }
-        .search-container {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        .search-container input {
-            display: none;
-            padding: 5px;
-            font-size: 16px;
-        }
-        .search-container.active input {
-            display: block;
-        }
-        .menu {
-            display: none;
-            position: absolute;
-            top: 50px;
-            left: 10px;
-            background: #222;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .menu.active {
-            display: block;
-        }
-        .submenu {
-            display: none;
-            padding-left: 10px;
-        }
-        .submenu.active {
-            display: block;
-        }
-        .menu-btn, .search-btn {
-            cursor: pointer;
-        }
-        .submenu-btn {
-            transition: transform 0.3s ease;
-        }
-        .submenu-btn.active {
-            transform: rotate(180deg);
-        }
         .carousel {
-            width: 100%;
+            width: 70%; /* Reducido para que no ocupe todo */
+            margin: 20px auto;
             overflow: hidden;
+            border-radius: 10px;
         }
         .carousel-container {
             display: flex;
@@ -86,34 +49,37 @@
         .carousel-item img {
             width: 100%;
             height: auto;
+            border-radius: 10px;
         }
 
-        /* Estilos para imágenes pequeñas y cuadradas */
+        /* Secciones de imágenes */
         .recientes-container, .estrenos-container {
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6 imágenes por fila */
+            grid-template-columns: repeat(6, 1fr);
             gap: 10px;
             padding: 10px;
         }
         .reciente img, .estreno img {
             width: 100%;
-            height: 160px; /* Más cuadradas */
+            height: 160px;
             object-fit: cover;
             border-radius: 5px;
         }
 
         /* Responsivo */
         @media (max-width: 900px) {
+            .carousel { width: 90%; }
             .recientes-container, .estrenos-container {
-                grid-template-columns: repeat(3, 1fr); /* 3 imágenes por fila en pantallas medianas */
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         @media (max-width: 600px) {
+            .carousel { width: 100%; }
             .recientes-container, .estrenos-container {
-                grid-template-columns: repeat(2, 1fr); /* 2 imágenes por fila en móviles */
+                grid-template-columns: repeat(2, 1fr);
             }
             .reciente img, .estreno img {
-                height: 130px; /* Tamaño más pequeño en móviles */
+                height: 130px;
             }
         }
     </style>
@@ -122,97 +88,53 @@
     <header>
         <div class="menu-btn">☰</div>
         <h1 class="logo">KYB</h1>
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar...">
-            <div class="search-btn">🔍</div>
-        </div>
     </header>
-    
-    <div class="menu">
-        <div class="menu-item">New and popular</div>
-        <div class="menu-item">App móvil</div>
-        <div class="menu-item">Noticias</div>
-        <div class="menu-item submenu-btn">Más ▼</div>
-        <div class="submenu">
-            <div class="submenu-item">Calendario</div>
-            <div class="submenu-item">Próximamente</div>
-            <div class="submenu-item">Recomendador</div>
-        </div>
-    </div>
-    
-    <main>
-        <section class="carousel">
-            <div class="carousel-container">
-                <div class="carousel-item active" onclick="location.href='yoursky.html'">
-                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
-                </div>
-                <div class="carousel-item" onclick="location.href='thamepo.html'">
-                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
-                </div>
-                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
-                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
-                </div>
+
+    <section class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                <img src="Sliders_Arriba_YS.png" alt="Slider 1">
             </div>
-        </section>
+            <div class="carousel-item" onclick="location.href='thamepo.html'">
+                <img src="Sliders_Arriba_TP.png" alt="Slider 2">
+            </div>
+            <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+            </div>
+        </div>
+    </section>
+
+    <section class="recientes">
+        <h2>Recientes</h2>
+        <div class="recientes-container">
+            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 1"></div>
+            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 2"></div>
+            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 3"></div>
+            <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
+            <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
+            <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
+        </div>
+    </section>
 
         <section class="recientes">
-            <h2>Recientes</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
-                <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
-                <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
-                <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
-                <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
-                <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
-            </div>
-        </section>
-        
-        <section class="nuevos-episodios">
-            <h2>Nuevos Episodios</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster7.png" alt="Nuevo Episodio 1"></div>
-                <div class="reciente"><img src="poster8.png" alt="Nuevo Episodio 2"></div>
-                <div class="reciente"><img src="poster9.png" alt="Nuevo Episodio 3"></div>
-                <div class="reciente"><img src="poster10.png" alt="Nuevo Episodio 4"></div>
-                <div class="reciente"><img src="poster11.png" alt="Nuevo Episodio 5"></div>
-                <div class="reciente"><img src="poster12.png" alt="Nuevo Episodio 6"></div>
-            </div>
-        </section>
-        
-        <section class="proximos-estrenos">
-            <h2>Próximos Estrenos</h2>
-            <div class="estrenos-container">
-                <div class="estreno"><img src="poster13.png" alt="Próximo 1"></div>
-                <div class="estreno"><img src="poster14.png" alt="Próximo 2"></div>
-                <div class="estreno"><img src="poster15.png" alt="Próximo 3"></div>
-                <div class="estreno"><img src="poster16.png" alt="Próximo 4"></div>
-                <div class="estreno"><img src="poster17.png" alt="Próximo 5"></div>
-                <div class="estreno"><img src="poster18.png" alt="Próximo 6"></div>
-            </div>
-        </section>
-    </main>   
-
+        <h2>Proximamente</h2>
+        <div class="recientes-container">
+            <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
+            <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
+            <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
+            <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
+            <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
+            <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
+        </div>
+    </section>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let searchBtn = document.querySelector(".search-btn");
-            let searchInput = document.querySelector("#search");
-            let searchContainer = document.querySelector(".search-container");
             let menuBtn = document.querySelector(".menu-btn");
             let menu = document.querySelector(".menu");
-            let submenuBtn = document.querySelector(".submenu-btn");
-            let submenu = document.querySelector(".submenu");
-
-            searchBtn.addEventListener("click", function () {
-                searchContainer.classList.toggle("active");
-            });
 
             menuBtn.addEventListener("click", function () {
                 menu.classList.toggle("active");
-            });
-
-            submenuBtn.addEventListener("click", function () {
-                submenu.classList.toggle("active");
-                submenuBtn.classList.toggle("active");
             });
         });
     </script>
