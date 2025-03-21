@@ -9,8 +9,6 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #141414;
-            color: white;
         }
         header {
             display: flex;
@@ -19,6 +17,7 @@
             padding: 10px;
             background: #333;
             color: white;
+            position: relative;
         }
         .logo {
             position: absolute;
@@ -27,45 +26,90 @@
             font-size: 24px;
             font-weight: bold;
         }
-        .menu-btn, .search-btn {
+        .menu-btn {
             font-size: 24px;
             cursor: pointer;
-            padding: 5px;
         }
-        /* Buscador */
         .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .search-container input {
+            display: none;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .search-container.active input {
+            display: block;
+        }
+        .menu {
             display: none;
             position: absolute;
             top: 50px;
-            right: 10px;
+            left: 10px;
             background: #222;
             padding: 10px;
             border-radius: 5px;
         }
-        .search-container input {
-            padding: 5px;
-            width: 200px;
-            background: #fff;
-            color: #000;
-            border: none;
-            border-radius: 3px;
+        .menu.active {
+            display: block;
         }
-        .search-results {
+        .submenu {
             display: none;
-            position: absolute;
-            background: #333;
-            color: white;
-            width: 200px;
-            border-radius: 5px;
-            margin-top: 5px;
-            padding: 5px;
+            padding-left: 10px;
         }
-        .search-results div {
-            padding: 8px;
+        .submenu.active {
+            display: block;
+        }
+        .submenu-btn {
+            transition: transform 0.3s ease;
+        }
+        .submenu-btn.active {
+            transform: rotate(180deg);
+        }
+        .carousel {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
             cursor: pointer;
         }
-        .search-results div:hover {
-            background: #444;
+        .carousel-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            margin: 5px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .recientes-container, .estrenos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .reciente img, .estreno img {
+            width: 100%;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -73,63 +117,79 @@
     <header>
         <div class="menu-btn">☰</div>
         <h1 class="logo">KYB</h1>
-        <div class="search-btn">🔍</div>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar...">
+            <div class="search-btn">🔍</div>
+        </div>
     </header>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Buscar...">
-        <div class="search-results" id="searchResults"></div>
+    
+    <div class="menu">
+        <div class="menu-item">New and popular</div>
+        <div class="menu-item">App móvil</div>
+        <div class="menu-item">Noticias</div>
+        <div class="menu-item submenu-btn">Más ▼</div>
+        <div class="submenu">
+            <div class="submenu-item">Calendario</div>
+            <div class="submenu-item">Próximamente</div>
+            <div class="submenu-item">Recomendador</div>
+        </div>
     </div>
+    
+    <main>
+        <section class="carousel">
+            <div class="carousel-container">
+                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
+                </div>
+                <div class="carousel-item" onclick="location.href='thamepo.html'">
+                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
+                </div>
+                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
+                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+                </div>
+            </div>
+            <div class="carousel-dots"></div>
+        </section>
+
+        <section class="recientes">
+            <h2>Recientes</h2>
+            <div class="recientes-container">
+                <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 1"></div>
+            </div>
+        </section>
+        
+    </main>   
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let searchBtn = document.querySelector(".search-btn");
+            let searchInput = document.querySelector("#search");
             let searchContainer = document.querySelector(".search-container");
-            let searchInput = document.getElementById("searchInput");
-            let searchResults = document.getElementById("searchResults");
+            let menuBtn = document.querySelector(".menu-btn");
+            let menu = document.querySelector(".menu");
+            let submenuBtn = document.querySelector(".submenu-btn");
+            let submenu = document.querySelector(".submenu");
+            let carouselContainer = document.querySelector(".carousel-container");
+            let carouselItems = document.querySelectorAll(".carousel-item");
+            let index = 0;
 
-            // Alternar buscador
+            function changeSlide() {
+                index = (index + 1) % carouselItems.length;
+                carouselContainer.style.transform = `translateX(-${index * 100}%)`;
+            }
+            setInterval(changeSlide, 3000);
+
             searchBtn.addEventListener("click", function () {
-                searchContainer.style.display = searchContainer.style.display === "block" ? "none" : "block";
-                if (searchContainer.style.display === "block") {
-                    searchInput.focus();
-                }
+                searchContainer.classList.toggle("active");
             });
 
-            // Datos simulados de búsqueda
-            let shows = [
-                "Your Sky", "Thamepo", "Begins Youth", "My Love Story",
-                "The Hidden Truth", "Shining Days", "Lost Memories"
-            ];
-
-            // Buscar y mostrar resultados
-            searchInput.addEventListener("input", function () {
-                let query = searchInput.value.toLowerCase();
-                searchResults.innerHTML = "";
-                if (query.length > 0) {
-                    let matches = shows.filter(show => show.toLowerCase().includes(query));
-                    if (matches.length > 0) {
-                        searchResults.style.display = "block";
-                        matches.forEach(match => {
-                            let div = document.createElement("div");
-                            div.textContent = match;
-                            div.onclick = () => alert("Abrir: " + match); // Aquí puedes cambiar a abrir la página de la serie
-                            searchResults.appendChild(div);
-                        });
-                    } else {
-                        searchResults.style.display = "none";
-                    }
-                } else {
-                    searchResults.style.display = "none";
-                }
+            menuBtn.addEventListener("click", function () {
+                menu.classList.toggle("active");
             });
 
-            // Cerrar el buscador si se hace clic afuera
-            document.addEventListener("click", function (e) {
-                if (!searchContainer.contains(e.target) && !searchBtn.contains(e.target)) {
-                    searchContainer.style.display = "none";
-                    searchResults.style.display = "none";
-                }
+            submenuBtn.addEventListener("click", function () {
+                submenu.classList.toggle("active");
+                submenuBtn.classList.toggle("active");
             });
         });
     </script>
