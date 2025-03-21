@@ -33,6 +33,7 @@
 
             $("#submenu-toggle").click(function() {
                 $("#submenu").toggle();
+                $("#submenu-toggle i").toggleClass("rotated");
             });
 
             $("#search-bar").on("input", function() {
@@ -56,6 +57,8 @@
             align-items: center;
             padding: 10px;
             background: rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 10;
         }
         .menu-icon, .search-icon, .profile-img {
             cursor: pointer;
@@ -89,9 +92,10 @@
             border-bottom: 1px solid #ddd;
         }
         .profile-img {
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
+            margin-left: 10px;
         }
         .menu {
             display: none;
@@ -100,14 +104,16 @@
             position: absolute;
             left: 10px;
             top: 50px;
+            z-index: 15;
         }
         .submenu {
             display: none;
             padding-left: 20px;
         }
         .slider {
-            width: 80%;
+            width: 90%;
             margin: auto;
+            position: relative;
         }
         .slider img {
             width: 100%;
@@ -134,7 +140,7 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <img src="profile.jpg" alt="Perfil" class="profile-img">
+            <img src="In_Inthira" alt="Perfil" class="cuenta.html">
             <div id="search-icon" class="search-icon">🔍</div>
             <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
             <div id="suggestions" class="suggestions"></div>
@@ -145,7 +151,7 @@
         <ul>
             <li>Inicio</li>
             <li>Favoritos</li>
-            <li id="submenu-toggle">Más</li>
+            <li id="submenu-toggle">Más <i>▼</i></li>
             <ul id="submenu" class="submenu">
                 <li>Recomendador</li>
                 <li>Próximamente</li>
@@ -157,10 +163,9 @@
     <main>
         <section class="slider">
             <div class="slide">
-                <img src="serie1.jpg" alt="Serie 1">
+                <img src="Sliders_Arriba_TP.png" alt="Serie 1">
                 <div class="info">
                     <h2>Nombre de la Serie 1</h2>
-                    <span class="favorite-icon">⭐</span>
                     <p class="rating">⭐⭐⭐⭐✰</p>
                     <p class="subtitles">Subtítulos: ESP, ING</p>
                     <p class="duration">Duración: 45 min/ep</p>
@@ -169,10 +174,9 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="Sliders_Arriba_BY.png" alt="Serie 2">
+                <img src="Sliders_Arriba_YS" alt="Serie 2">
                 <div class="info">
                     <h2>Nombre de la Serie 2</h2>
-                    <span class="favorite-icon">⭐</span>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
                     <p class="subtitles">Subtítulos: ESP</p>
                     <p class="duration">Duración: 50 min/ep</p>
