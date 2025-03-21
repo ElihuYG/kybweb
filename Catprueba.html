@@ -18,6 +18,19 @@
                 arrows: true,
                 dots: true,
             });
+
+            $("#search-input").on("input", function() {
+                let query = $(this).val().toLowerCase();
+                $("#suggestions").empty();
+                if (query.length > 0) {
+                    let suggestions = ["Serie 1", "Serie 2", "Dorama X", "Película Y"];
+                    suggestions.forEach(s => {
+                        if (s.toLowerCase().includes(query)) {
+                            $("#suggestions").append(`<div class='suggestion'>${s}</div>`);
+                        }
+                    });
+                }
+            });
         });
     </script>
     <style>
@@ -41,15 +54,46 @@
             font-size: 24px;
             cursor: pointer;
         }
+        .menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu li {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .submenu {
+            margin-left: 10px;
+        }
         .search-profile {
             display: flex;
             align-items: center;
         }
-        .search-profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-left: 10px;
+        .search-bar {
+            position: relative;
+        }
+        #search-input {
+            padding: 5px;
+        }
+        #suggestions {
+            position: absolute;
+            background: white;
+            color: black;
+            width: 100%;
+        }
+        .suggestion {
+            padding: 5px;
+            cursor: pointer;
         }
         .slider {
             position: relative;
@@ -68,7 +112,6 @@
             position: absolute;
             bottom: 10px;
             left: 10px;
-            background: rgba(0, 0, 0, 0.6);
             padding: 10px;
             border-radius: 5px;
         }
@@ -87,9 +130,25 @@
 </head>
 <body>
     <header class="header">
-        <div class="menu-icon">☰</div>
+        <div class="menu-icon" onclick="$('.menu').toggle();">☰</div>
+        <div class="menu">
+            <ul>
+                <li>Inicio</li>
+                <li>Favoritos</li>
+                <li>Más ▼
+                    <ul class="submenu">
+                        <li>Recomendador</li>
+                        <li>Próximamente</li>
+                        <li>Ayuda</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
         <div class="search-profile">
-            <input type="text" placeholder="Buscar...">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar...">
+                <div id="suggestions"></div>
+            </div>
             <img src="profile.jpg" alt="Perfil">
         </div>
     </header>
@@ -107,7 +166,7 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="Sliders_Arriba_TP.png alt="Serie 2">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 2">
                 <div class="info">
                     <h2>Nombre de la Serie 2</h2>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
@@ -117,7 +176,6 @@
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
-            <!-- Agrega más sliders según sea necesario -->
         </section>
     </main>
 </body>
