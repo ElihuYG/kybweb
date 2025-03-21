@@ -34,43 +34,22 @@
             position: absolute;
             bottom: 20px;
             left: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
         }
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            z-index: 200;
-            background: rgba(0, 0, 0, 0.9);
+        .info h2 {
+            margin: 0;
         }
-        .search-container {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-        .categorias-container {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px 0;
-            position: relative;
-            z-index: 50;
-        }
-        .categoria {
-            margin-right: 10px;
-            text-align: center;
-        }
-        .categoria img {
-            width: 150px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 5px;
+        .watch-now {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -87,12 +66,26 @@
     <main>
         <section class="slider">
             <div class="slide">
-                <img src="slider1.jpg" alt="Slide 1">
-                <div class="info">Información de la imagen</div>
+                <img src="serie1.jpg" alt="Serie 1">
+                <div class="info">
+                    <h2>Nombre de la Serie 1</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
             <div class="slide">
-                <img src="slider2.jpg" alt="Slide 2">
-                <div class="info">Otra información</div>
+                <img src="serie2.jpg" alt="Serie 2">
+                <div class="info">
+                    <h2>Nombre de la Serie 2</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
         </section>
         <section class="categorias">
