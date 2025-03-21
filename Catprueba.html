@@ -17,6 +17,18 @@
             padding: 10px;
             background: #333;
             color: white;
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .menu-btn {
+            font-size: 24px;
+            cursor: pointer;
         }
         .search-container {
             display: flex;
@@ -42,13 +54,13 @@
             width: 100%;
             height: auto;
         }
-        .estrenos-container {
+        .recientes-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 10px;
             padding: 10px;
         }
-        .estreno img {
+        .reciente img {
             width: 100%;
             border-radius: 5px;
         }
@@ -68,11 +80,11 @@
 </head>
 <body>
     <header>
-        <h1>KYB</h1>
+        <div class="menu-btn">☰</div>
+        <h1 class="logo">KYB</h1>
         <div class="search-container">
             <input type="text" id="search" placeholder="Buscar...">
             <button id="search-btn">🔍</button>
-            <div id="search-results" class="search-results"></div>
         </div>
     </header>
     
@@ -91,26 +103,26 @@
             </div>
         </section>
 
-        <section class="estrenos">
-            <h2>Estrenos</h2>
-            <div class="estrenos-container">
-                <div class="estreno">
-                    <img src="poster_begins_youth.png" alt="Estreno 1">
+        <section class="recientes">
+            <h2>Recientes</h2>
+            <div class="recientes-container">
+                <div class="reciente">
+                    <img src="poster_begins_youth.png" alt="Reciente 1">
                 </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                <div class="reciente">
+                    <img src="imagenes/reciente2.png" alt="Reciente 2">
                 </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                <div class="reciente">
+                    <img src="imagenes/reciente3.png" alt="Reciente 3">
                 </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                <div class="reciente">
+                    <img src="imagenes/reciente4.png" alt="Reciente 4">
                 </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                <div class="reciente">
+                    <img src="imagenes/reciente5.png" alt="Reciente 5">
                 </div>
-                <div class="estreno">
-                    <img src="imagenes/estreno6.png" alt="Estreno 6">
+                <div class="reciente">
+                    <img src="imagenes/reciente6.png" alt="Reciente 6">
                 </div>
             </div>
         </section>
@@ -120,11 +132,22 @@
         document.addEventListener("DOMContentLoaded", function () {
             let searchInput = document.getElementById("search");
             let searchResults = document.getElementById("search-results");
-
+            let carouselContainer = document.querySelector(".carousel-container");
+            let items = document.querySelectorAll(".carousel-item");
+            let index = 0;
+            
             searchInput.addEventListener("input", function () {
                 let query = searchInput.value.toLowerCase();
                 searchResults.style.display = query.length > 0 ? "block" : "none";
             });
+
+            function nextSlide() {
+                index = (index + 1) % items.length;
+                let offset = -index * 100;
+                carouselContainer.style.transform = `translateX(${offset}%)`;
+            }
+
+            setInterval(nextSlide, 3000);
         });
     </script>
 </body>
