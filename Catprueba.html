@@ -65,6 +65,12 @@
         .menu-btn, .search-btn {
             cursor: pointer;
         }
+        .submenu-btn {
+            transition: transform 0.3s ease;
+        }
+        .submenu-btn.active {
+            transform: rotate(180deg);
+        }
         .carousel {
             width: 100%;
             overflow: hidden;
@@ -88,6 +94,16 @@
             padding: 10px;
         }
         .reciente img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .estrenos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .estreno img {
             width: 100%;
             border-radius: 5px;
         }
@@ -152,10 +168,49 @@
         
         <section class="proximos-estrenos">
             <h2>Próximos Estrenos</h2>
+            <div class="estrenos-container">
+                <div class="estreno"><img src="poster_proximo.png" alt="Próximo Estreno"></div>
+            </div>
+        </section>
+        
+        <section class="lo-mas-visto">
+            <h2>Lo Más Visto</h2>
             <div class="recientes-container">
-                <div class="reciente"><img src="poster_proximo.png" alt="Próximo Estreno"></div>
+                <div class="reciente"><img src="poster_mas_visto.png" alt="Más Visto"></div>
+            </div>
+        </section>
+        
+        <section class="boys-love">
+            <h2>Boys Love</h2>
+            <div class="recientes-container">
+                <div class="reciente"><img src="poster_boys_love.png" alt="Boys Love"></div>
             </div>
         </section>
     </main>   
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let searchBtn = document.querySelector(".search-btn");
+            let searchInput = document.querySelector("#search");
+            let searchContainer = document.querySelector(".search-container");
+            let menuBtn = document.querySelector(".menu-btn");
+            let menu = document.querySelector(".menu");
+            let submenuBtn = document.querySelector(".submenu-btn");
+            let submenu = document.querySelector(".submenu");
+
+            searchBtn.addEventListener("click", function () {
+                searchContainer.classList.toggle("active");
+            });
+
+            menuBtn.addEventListener("click", function () {
+                menu.classList.toggle("active");
+            });
+
+            submenuBtn.addEventListener("click", function () {
+                submenu.classList.toggle("active");
+                submenuBtn.classList.toggle("active");
+            });
+        });
+    </script>
 </body>
 </html>
