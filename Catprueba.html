@@ -41,6 +41,7 @@
                 let suggestions = ["Dorama 1", "Dorama 2", "Serie Coreana", "Película Asiática"];
                 let filtered = suggestions.filter(s => s.toLowerCase().includes(query));
                 $("#suggestions").html(filtered.map(s => `<div class='suggestion'>${s}</div>`).join(""));
+                $("#suggestions").show();
             });
         });
     </script>
@@ -63,40 +64,6 @@
         .menu-icon, .search-icon, .profile-img {
             cursor: pointer;
         }
-        .menu-icon {
-            font-size: 24px;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        .search-bar {
-            display: none;
-            background: white;
-            color: black;
-            border: none;
-            padding: 5px;
-            margin-left: 10px;
-        }
-        .suggestions {
-            position: absolute;
-            top: 30px;
-            background: white;
-            color: black;
-            width: 100%;
-            display: none;
-        }
-        .suggestion {
-            padding: 5px;
-            border-bottom: 1px solid #ddd;
-        }
-        .profile-img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-left: 10px;
-        }
         .menu {
             display: none;
             background: black;
@@ -115,20 +82,23 @@
             margin: auto;
             position: relative;
         }
+        .slider .slide {
+            position: relative;
+        }
         .slider img {
             width: 100%;
             height: 350px;
             object-fit: cover;
             display: block;
-            position: relative;
         }
         .info {
             position: absolute;
             bottom: 10px;
             left: 10px;
-            width: 90%;
-            color: white;
+            background: rgba(0, 0, 0, 0.7);
             padding: 10px;
+            color: white;
+            width: 90%;
         }
         .slick-dots {
             bottom: -30px;
@@ -140,7 +110,7 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <img src="In_Inthira" alt="Perfil" class="cuenta.html">
+            <img src="profile.jpg" alt="Perfil" class="profile-img">
             <div id="search-icon" class="search-icon">🔍</div>
             <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
             <div id="suggestions" class="suggestions"></div>
@@ -163,7 +133,7 @@
     <main>
         <section class="slider">
             <div class="slide">
-                <img src="Sliders_Arriba_TP.png" alt="Serie 1">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
                 <div class="info">
                     <h2>Nombre de la Serie 1</h2>
                     <p class="rating">⭐⭐⭐⭐✰</p>
@@ -174,7 +144,7 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="Serie 2">
+                <img src="serie2.jpg" alt="Serie 2">
                 <div class="info">
                     <h2>Nombre de la Serie 2</h2>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
