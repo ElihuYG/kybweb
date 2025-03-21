@@ -3,195 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Catálogo</title>
+    <title>KYB - Inicio</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+    <script>
+        $(document).ready(function(){
+            $('.slider').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: true,
+            });
+        });
+    </script>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
+        .slider {
+            position: relative;
+            max-width: 800px;
+            margin: auto;
         }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background: #333;
-            color: white;
+        .slide {
             position: relative;
         }
-        .logo {
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .info {
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            font-weight: bold;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            text-align: center;
         }
-        .menu-btn {
-            font-size: 24px;
+        .watch-now {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px 15px;
             cursor: pointer;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        .search-container input {
-            display: none;
-            padding: 5px;
             font-size: 16px;
         }
-        .search-container.active input {
-            display: block;
-        }
-        .menu {
-            display: none;
-            position: absolute;
-            top: 50px;
-            left: 10px;
-            background: #222;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .menu.active {
-            display: block;
-        }
-        .submenu {
-            display: none;
-            padding-left: 10px;
-        }
-        .submenu.active {
-            display: block;
-        }
-        .submenu-btn {
-            transition: transform 0.3s ease;
-        }
-        .submenu-btn.active {
-            transform: rotate(180deg);
-        }
-        .carousel {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-        .carousel-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .carousel-item {
-            min-width: 100%;
-            cursor: pointer;
-        }
-        .carousel-item img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-        .carousel-dots {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-        }
-        .dot {
-            width: 10px;
-            height: 10px;
-            margin: 5px;
-            background: white;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .recientes-container, .estrenos-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            padding: 10px;
-        }
-        .reciente img, .estreno img {
-            width: 100%;
-            border-radius: 5px;
+        .watch-now:hover {
+            background: darkred;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="menu-btn">☰</div>
-        <h1 class="logo">KYB</h1>
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar...">
-            <div class="search-btn">🔍</div>
-        </div>
+        <h1>KYB</h1>
     </header>
-    
-    <div class="menu">
-        <div class="menu-item">New and popular</div>
-        <div class="menu-item">App móvil</div>
-        <div class="menu-item">Noticias</div>
-        <div class="menu-item submenu-btn">Más ▼</div>
-        <div class="submenu">
-            <div class="submenu-item">Calendario</div>
-            <div class="submenu-item">Próximamente</div>
-            <div class="submenu-item">Recomendador</div>
-        </div>
-    </div>
-    
     <main>
-        <section class="carousel">
-            <div class="carousel-container">
-                <div class="carousel-item active" onclick="location.href='yoursky.html'">
-                    <img src="Sliders_Arriba_YS.png" alt="Slider 1">
-                </div>
-                <div class="carousel-item" onclick="location.href='thamepo.html'">
-                    <img src="Sliders_Arriba_TP.png" alt="Slider 2">
-                </div>
-                <div class="carousel-item" onclick="location.href='beginsyouth.html'">
-                    <img src="Sliders_Arriba_BY.png" alt="Slider 3">
+        <section class="slider">
+            <div class="slide">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+                <div class="info">
+                    <h2>Nombre de la Serie 1</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
-            <div class="carousel-dots"></div>
-        </section>
-
-        <section class="recientes">
-            <h2>Recientes</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 1"></div>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="Serie 2">
+                <div class="info">
+                    <h2>Nombre de la Serie 2</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
+            <!-- Agrega más sliders según sea necesario -->
         </section>
-        
-    </main>   
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let searchBtn = document.querySelector(".search-btn");
-            let searchInput = document.querySelector("#search");
-            let searchContainer = document.querySelector(".search-container");
-            let menuBtn = document.querySelector(".menu-btn");
-            let menu = document.querySelector(".menu");
-            let submenuBtn = document.querySelector(".submenu-btn");
-            let submenu = document.querySelector(".submenu");
-            let carouselContainer = document.querySelector(".carousel-container");
-            let carouselItems = document.querySelectorAll(".carousel-item");
-            let index = 0;
-
-            function changeSlide() {
-                index = (index + 1) % carouselItems.length;
-                carouselContainer.style.transform = `translateX(-${index * 100}%)`;
-            }
-            setInterval(changeSlide, 3000);
-
-            searchBtn.addEventListener("click", function () {
-                searchContainer.classList.toggle("active");
-            });
-
-            menuBtn.addEventListener("click", function () {
-                menu.classList.toggle("active");
-            });
-
-            submenuBtn.addEventListener("click", function () {
-                submenu.classList.toggle("active");
-                submenuBtn.classList.toggle("active");
-            });
-        });
-    </script>
+    </main>
 </body>
 </html>
