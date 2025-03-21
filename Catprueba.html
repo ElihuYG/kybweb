@@ -21,9 +21,39 @@
         });
     </script>
     <style>
+        body {
+            background: black;
+            color: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .search-profile {
+            display: flex;
+            align-items: center;
+        }
+        .search-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
         .slider {
             position: relative;
-            max-width: 800px;
+            max-width: 1000px;
             margin: auto;
         }
         .slide {
@@ -36,11 +66,11 @@
         }
         .info {
             position: absolute;
-            top: 10%;
+            bottom: 10px;
             left: 10px;
-            color: white;
-            text-align: left;
-            background: none;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 5px;
         }
         .watch-now {
             background: red;
@@ -56,13 +86,17 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>KYB</h1>
+    <header class="header">
+        <div class="menu-icon">☰</div>
+        <div class="search-profile">
+            <input type="text" placeholder="Buscar...">
+            <img src="profile.jpg" alt="Perfil">
+        </div>
     </header>
     <main>
         <section class="slider">
             <div class="slide">
-                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
                 <div class="info">
                     <h2>Begins Youth</h2>
                     <p class="rating">⭐⭐⭐⭐✰</p>
@@ -73,9 +107,9 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="Sliders_Arriba_TP.png" alt="ThamePo.html">
+                <img src="Sliders_Arriba_TP.png alt="Serie 2">
                 <div class="info">
-                    <h2>ThamePo</h2>
+                    <h2>Nombre de la Serie 2</h2>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
                     <p class="subtitles">Subtítulos: ESP</p>
                     <p class="duration">Duración: 50 min/ep</p>
