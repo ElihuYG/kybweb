@@ -32,14 +32,9 @@
                 $("#menu").toggle();
             });
 
-            $("#submenu-toggle").click(function() {
-                $("#submenu").toggle();
-                $("#submenu-toggle i").toggleClass("rotated");
-            });
-
             $("#search-bar").on("input", function() {
                 let query = $(this).val().toLowerCase();
-                let suggestions = []; // Se llenará dinámicamente
+                let suggestions = ["Thamepo", "Begins Youth", "Your Sky"];
                 let filtered = suggestions.filter(s => s.toLowerCase().includes(query));
                 $("#suggestions").html(filtered.map(s => `<div class='suggestion'>${s}</div>`).join(""));
             });
@@ -108,10 +103,6 @@
             top: 50px;
             z-index: 15;
         }
-        .submenu {
-            display: none;
-            padding-left: 20px;
-        }
         .slider {
             width: 90%;
             margin: auto;
@@ -133,16 +124,6 @@
             padding: 10px;
             background: rgba(0, 0, 0, 0.7);
         }
-        .slick-dots {
-            bottom: -30px;
-            z-index: 5;
-        }
-        .arrow {
-            transition: transform 0.3s ease-in-out;
-        }
-        .rotated {
-            transform: rotate(180deg);
-        }
     </style>
 </head>
 <body>
@@ -150,7 +131,7 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <img src="profile.jpg" alt="Perfil" class="profile-img">
+            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
             <div id="search-icon" class="search-icon">🔍</div>
             <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
             <div id="suggestions" class="suggestions"></div>
@@ -161,12 +142,9 @@
         <ul>
             <li>Inicio</li>
             <li>Favoritos</li>
-            <li id="submenu-toggle">Más <i class="arrow">▼</i></li>
-            <ul id="submenu" class="submenu">
-                <li>Recomendador</li>
-                <li>Próximamente</li>
-                <li>Ayuda</li>
-            </ul>
+            <li>Recomendador</li>
+            <li>Próximamente</li>
+            <li>Ayuda</li>
         </ul>
     </div>
     
@@ -174,25 +152,12 @@
         <section class="slider">
             <div class="slide">
                 <img src="Sliders_Arriba_YS.png" alt="Serie 1">
-                <div class="info">
-                    <h2>Nombre de la Serie 1</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 45 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
             </div>
             <div class="slide">
-                <img src="serie2.jpg" alt="Serie 2">
-                <div class="info">
-                    <h2>Nombre de la Serie 2</h2>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 50 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
+                <img src="Sliders_Arriba_TP.png" alt="Serie 2">
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 3">
             </div>
         </section>
     </main>
