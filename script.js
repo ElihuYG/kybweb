@@ -39,3 +39,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setInterval(nextSlide, 3000);
 });
+$(document).ready(function(){
+    // Slider con puntos de navegación
+    $('.slider').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: true, // Asegura que los puntos de navegación aparezcan
+    });
+
+    // Abrir y cerrar menú
+    $("#menu-toggle").click(function() {
+        $("#menu").toggle();
+    });
+
+    // Buscador con sugerencias dinámicas
+    let series = ["ThemePo", "Begins Youth", "Your Sky"];
+    
+    $("#search-bar").on("input", function() {
+        let query = $(this).val().toLowerCase();
+        let filtered = series.filter(s => s.toLowerCase().includes(query));
+        
+        if (filtered.length > 0) {
+            $("#suggestions").html(filtered.map(s => `<div class='suggestion'>${s}</div>`).join("")).show();
+        } else {
+            $("#suggestions").hide();
+        }
+    });
+
+    // Hacer que el menú de búsqueda aparezca y desaparezca
+    $("#search-icon").click(function() {
+        $("#search-bar").toggle().focus();
+        $("#suggestions").toggle();
+    });
+
+    // Hacer que las sugerencias desaparezcan si se da clic fuera
+    $(document).click(function(event) {
+        if (!$(event.target).closest(".search-container").length) {
+            $("#suggestions").hide();
+        }
+    });
+
+    // Mostrar la información de cada slide
+    $(".info").show();
+});
