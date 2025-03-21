@@ -20,6 +20,7 @@
             max-width: 90%;
             margin: auto;
             position: relative;
+            z-index: 100;
         }
         .slide img {
             width: 100%;
@@ -41,29 +42,23 @@
         .search-container {
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 5px;
-            border-radius: 5px;
+            gap: 10px;
         }
-        .info {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 300;
-        }
-        .categorias-container, .populares-container, .recientes-container, .tendencias-container, .recomendados-container, .favoritos-container, .proximos-container {
+        .categorias-container {
             display: flex;
             overflow-x: auto;
             padding: 10px 0;
-        }
-        .categoria, .populares-item, .reciente, .tendencia, .recomendado, .favorito, .proximo {
-            margin-right: 10px;
+            position: relative;
+            z-index: 50;
         }
         .categoria {
-            background: #222;
-            padding: 10px;
+            margin-right: 10px;
+            text-align: center;
+        }
+        .categoria img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
             border-radius: 5px;
         }
     </style>
@@ -73,63 +68,39 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
             <div id="search-icon" class="search-icon">🔍</div>
+            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
             <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
         </div>
     </header>
     <main>
-        <section class="slider">
-            <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="Your Sky">
-                <div class="info">
-                    <h2>Your Sky</h2>
-                    <p>⭐⭐⭐⭐✰</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_TP.png" alt="ThemePo">
-                <div class="info">
-                    <h2>ThemePo</h2>
-                    <p>⭐⭐⭐⭐⭐</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-        </section>
         <section class="categorias">
             <h2>Categorías</h2>
             <div class="categorias-container">
-                <div class="categoria">Acción</div>
-                <div class="categoria">Drama</div>
-                <div class="categoria">Comedia</div>
-                <div class="categoria">Ciencia Ficción</div>
-                <div class="categoria">Fantasía</div>
-                <div class="categoria">Terror</div>
-            </div>
-        </section>
-        <section class="tendencias">
-            <h2>Tendencias</h2>
-            <div class="tendencias-container">
-                <div class="tendencia"><img src="tendencia1.png" alt="Tendencia 1"></div>
-                <div class="tendencia"><img src="tendencia2.png" alt="Tendencia 2"></div>
-                <div class="tendencia"><img src="tendencia3.png" alt="Tendencia 3"></div>
-            </div>
-        </section>
-        <section class="favoritos">
-            <h2>Favoritos</h2>
-            <div class="favoritos-container">
-                <div class="favorito"><img src="fav1.png" alt="Favorito 1"></div>
-                <div class="favorito"><img src="fav2.png" alt="Favorito 2"></div>
-                <div class="favorito"><img src="fav3.png" alt="Favorito 3"></div>
-            </div>
-        </section>
-        <section class="proximos">
-            <h2>Próximos Estrenos</h2>
-            <div class="proximos-container">
-                <div class="proximo"><img src="prox1.png" alt="Próximo 1"></div>
-                <div class="proximo"><img src="prox2.png" alt="Próximo 2"></div>
-                <div class="proximo"><img src="prox3.png" alt="Próximo 3"></div>
+                <div class="categoria">
+                    <img src="categoria_accion.jpg" alt="Acción">
+                    <p>Acción</p>
+                </div>
+                <div class="categoria">
+                    <img src="categoria_drama.jpg" alt="Drama">
+                    <p>Drama</p>
+                </div>
+                <div class="categoria">
+                    <img src="categoria_comedia.jpg" alt="Comedia">
+                    <p>Comedia</p>
+                </div>
+                <div class="categoria">
+                    <img src="categoria_cienciaficcion.jpg" alt="Ciencia Ficción">
+                    <p>Ciencia Ficción</p>
+                </div>
+                <div class="categoria">
+                    <img src="categoria_fantasia.jpg" alt="Fantasía">
+                    <p>Fantasía</p>
+                </div>
+                <div class="categoria">
+                    <img src="categoria_terror.jpg" alt="Terror">
+                    <p>Terror</p>
+                </div>
             </div>
         </section>
     </main>
