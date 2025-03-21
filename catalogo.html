@@ -19,7 +19,6 @@
             padding: 10px;
             background: #333;
             color: white;
-            position: relative;
         }
         .logo {
             position: absolute;
@@ -28,12 +27,44 @@
             font-size: 24px;
             font-weight: bold;
         }
-        .menu-btn {
+        .menu-btn, .search-btn {
             font-size: 24px;
             cursor: pointer;
+            padding: 5px;
+        }
+        .menu {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 200px;
+            background: #222;
+            display: none;
+            flex-direction: column;
+        }
+        .menu.active {
+            display: flex;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+        .search-container {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background: #222;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .search-container input {
+            padding: 5px;
+            width: 150px;
         }
         .carousel {
-            width: 70%; /* Reducido para que no ocupe todo */
+            width: 70%;
             margin: 20px auto;
             overflow: hidden;
             border-radius: 10px;
@@ -52,7 +83,7 @@
             border-radius: 10px;
         }
 
-        /* Secciones de imágenes */
+        /* Secciones */
         .recientes-container, .estrenos-container {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -88,7 +119,19 @@
     <header>
         <div class="menu-btn">☰</div>
         <h1 class="logo">KYB</h1>
+        <div class="search-btn">🔍</div>
     </header>
+
+    <nav class="menu">
+        <a href="#">Inicio</a>
+        <a href="#">Catálogo</a>
+        <a href="#">Favoritos</a>
+        <a href="#">Configuración</a>
+    </nav>
+
+    <div class="search-container">
+        <input type="text" placeholder="Buscar...">
+    </div>
 
     <section class="carousel">
         <div class="carousel-container">
@@ -107,18 +150,6 @@
     <section class="recientes">
         <h2>Recientes</h2>
         <div class="recientes-container">
-            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 1"></div>
-            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 2"></div>
-            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 3"></div>
-            <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
-            <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
-            <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
-        </div>
-    </section>
-
-        <section class="recientes">
-        <h2>Proximamente</h2>
-        <div class="recientes-container">
             <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
             <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
             <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
@@ -127,14 +158,20 @@
             <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
         </div>
     </section>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let menuBtn = document.querySelector(".menu-btn");
             let menu = document.querySelector(".menu");
+            let searchBtn = document.querySelector(".search-btn");
+            let searchContainer = document.querySelector(".search-container");
 
             menuBtn.addEventListener("click", function () {
                 menu.classList.toggle("active");
+            });
+
+            searchBtn.addEventListener("click", function () {
+                searchContainer.style.display = searchContainer.style.display === "block" ? "none" : "block";
             });
         });
     </script>
