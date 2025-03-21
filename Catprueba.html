@@ -8,15 +8,16 @@
 </head>
 <body>
     <header>
-        <h1 style="text-align: center;">KYB</h1>
+        <h1>KYB</h1>
         <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar...">
             <button id="search-btn">🔍</button>
-            <input type="text" id="search" placeholder="Buscar..." style="display: none;">
             <div id="search-results" class="search-results"></div>
         </div>
     </header>
     
     <main>
+        <!-- Carrusel Principal -->
         <section class="carousel">
             <div class="carousel-container">
                 <div class="carousel-item active" onclick="location.href='yoursky.html'">
@@ -34,21 +35,37 @@
         <section class="estrenos">
             <h2>Estrenos</h2>
             <div class="estrenos-container">
-                <div class="estreno"><img src="poster_begins_youth.png" alt="Estreno 1"></div>
-                <div class="estreno"><img src="imagenes/estreno2.png" alt="Estreno 2"></div>
-                <div class="estreno"><img src="imagenes/estreno3.png" alt="Estreno 3"></div>
-                <div class="estreno"><img src="imagenes/estreno4.png" alt="Estreno 4"></div>
-                <div class="estreno"><img src="imagenes/estreno5.png" alt="Estreno 5"></div>
-                <div class="estreno"><img src="imagenes/estreno6.png" alt="Estreno 6"></div>
+                <div class="estreno">
+                    <img src="poster_begins_youth.png" alt="Estreno 1">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno2.png" alt="Estreno 2">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno3.png" alt="Estreno 3">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno4.png" alt="Estreno 4">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno5.png" alt="Estreno 5">
+                </div>
+                <div class="estreno">
+                    <img src="imagenes/estreno6.png" alt="Estreno 6">
+                </div>
             </div>
         </section>
-    </main>
-    
+    </main>   
+
     <script>
-        document.getElementById("search-btn").addEventListener("click", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             let searchInput = document.getElementById("search");
-            searchInput.style.display = searchInput.style.display === "none" ? "block" : "none";
-            searchInput.focus();
+            let searchResults = document.getElementById("search-results");
+
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.style.display = query.length > 0 ? "block" : "none";
+            });
         });
     </script>
 </body>
