@@ -4,22 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB - Catálogo</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
-    <script defer src="script.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #111; color: #fff; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #222; }
+        .menu-icon { cursor: pointer; font-size: 24px; }
+        .profile-img { width: 40px; height: 40px; border-radius: 50%; }
+        .menu { display: none; background: #333; padding: 10px; }
+        .menu.active { display: block; }
+        .menu ul { list-style: none; padding: 0; }
+        .menu li { padding: 10px; cursor: pointer; }
+        .slider { position: relative; overflow: hidden; white-space: nowrap; }
+        .slide { display: inline-block; width: 100%; position: relative; }
+        .slide img { width: 100%; display: block; }
+        .info { position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px; }
+        .watch-now { background: red; color: white; border: none; padding: 5px; cursor: pointer; }
+        .recientes-container { display: flex; overflow-x: scroll; }
+        .reciente img { width: 100px; margin: 5px; }
+        .search-bar { padding: 5px; width: 200px; }
+        .suggestions { background: #fff; color: #000; position: absolute; width: 200px; display: none; }
+        .suggestion { padding: 5px; cursor: pointer; }
+        .suggestion:hover { background: #ddd; }
+    </style>
 </head>
 <body>
     <header class="header">
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
-            <div id="search-icon" class="search-icon">🔍</div>
             <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
             <div id="suggestions" class="suggestions"></div>
+            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
         </div>
     </header>
 
@@ -39,10 +54,6 @@
                 <img src="Sliders_Arriba_YS.png" alt="Your Sky">
                 <div class="info">
                     <h2>Your Sky</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 45 min/ep</p>
-                    <p class="synopsis">Una historia sobre sueños y superación...</p>
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
@@ -50,52 +61,32 @@
                 <img src="Sliders_Arriba_TP.png" alt="ThemePo">
                 <div class="info">
                     <h2>ThemePo</h2>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 50 min/ep</p>
-                    <p class="synopsis">Una serie llena de misterio y emoción...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="Your Sky 2">
-                <div class="info">
-                    <h2>Your Sky 2</h2>
-                    <p class="rating">⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 40 min/ep</p>
-                    <p class="synopsis">La continuación de una gran historia...</p>
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
         </section>
     </main>
+
     <section class="recientes">
         <h2>Recientes</h2>
         <div class="recientes-container">
-            <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
-            <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
-            <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
-            <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
-            <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
-            <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
+            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 1"></div>
+            <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 2"></div>
         </div>
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let menuBtn = document.querySelector(".menu-btn");
-            let menu = document.querySelector(".menu");
-            let searchBtn = document.querySelector(".search-btn");
-            let searchContainer = document.querySelector(".search-container");
+        document.getElementById("menu-toggle").addEventListener("click", function() {
+            document.getElementById("menu").classList.toggle("active");
+        });
 
-            menuBtn.addEventListener("click", function () {
-                menu.classList.toggle("active");
-            });
-
-            searchBtn.addEventListener("click", function () {
-                searchContainer.style.display = searchContainer.style.display === "block" ? "none" : "block";
-            });
+        document.getElementById("search-bar").addEventListener("input", function() {
+            let query = this.value.toLowerCase();
+            let suggestions = document.getElementById("suggestions");
+            let series = ["Thamepo", "Begins Youth", "Your Sky"];
+            let matches = series.filter(s => s.toLowerCase().includes(query));
+            suggestions.innerHTML = matches.map(m => `<div class='suggestion'>${m}</div>`).join("");
+            suggestions.style.display = matches.length ? "block" : "none";
         });
     </script>
 </body>
