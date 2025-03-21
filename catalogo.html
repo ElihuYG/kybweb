@@ -26,19 +26,22 @@
         }
         .slide {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
         }
         .slide img {
             width: 100%;
-            height: auto;
-            max-height: 500px;
+            height: 100%;
             object-fit: cover;
         }
         .slide .info {
             position: absolute;
-            bottom: 8%;
+            bottom: 5%;
             left: 5%;
             background: rgba(0, 0, 0, 0.7);
-            padding: 12px;
+            padding: 15px;
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
@@ -56,16 +59,22 @@
             margin-top: 10px;
         }
         @media (max-width: 768px) {
+            .slide {
+                height: 350px;
+            }
             .slide .info {
-                font-size: 12px;
+                font-size: 10px;
                 padding: 6px;
                 bottom: 3%;
                 left: 3%;
-                max-width: 85%;
+                max-width: 80%;
+            }
+            .info h2 {
+                font-size: 14px;
             }
             .watch-now {
                 padding: 6px;
-                font-size: 12px;
+                font-size: 10px;
             }
         }
     </style>
