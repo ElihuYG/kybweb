@@ -71,12 +71,9 @@
         .submenu-btn.active {
             transform: rotate(180deg);
         }
-
-        /* Carrusel */
         .carousel {
             width: 100%;
             overflow: hidden;
-            max-height: 250px; /* Ajustar altura del carrusel */
         }
         .carousel-container {
             display: flex;
@@ -88,37 +85,35 @@
         }
         .carousel-item img {
             width: 100%;
-            height: 200px; /* Tamaño reducido */
-            object-fit: cover;
+            height: auto;
         }
 
-        /* Secciones */
+        /* Estilos para imágenes pequeñas y cuadradas */
         .recientes-container, .estrenos-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 5px;
+            grid-template-columns: repeat(6, 1fr); /* 6 imágenes por fila */
+            gap: 10px;
             padding: 10px;
         }
         .reciente img, .estreno img {
             width: 100%;
-            height: 140px; /* Tamaño reducido */
+            height: 160px; /* Más cuadradas */
             object-fit: cover;
             border-radius: 5px;
         }
 
         /* Responsivo */
-        @media (max-width: 600px) {
-            .carousel {
-                max-height: 150px; /* Más pequeño en móviles */
-            }
-            .carousel-item img {
-                height: 130px;
-            }
+        @media (max-width: 900px) {
             .recientes-container, .estrenos-container {
-                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                grid-template-columns: repeat(3, 1fr); /* 3 imágenes por fila en pantallas medianas */
+            }
+        }
+        @media (max-width: 600px) {
+            .recientes-container, .estrenos-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 imágenes por fila en móviles */
             }
             .reciente img, .estreno img {
-                height: 100px;
+                height: 130px; /* Tamaño más pequeño en móviles */
             }
         }
     </style>
@@ -163,35 +158,36 @@
         <section class="recientes">
             <h2>Recientes</h2>
             <div class="recientes-container">
-                <div class="reciente"><img src="poster_begins_youth.png" alt="Reciente 1"></div>
+                <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
+                <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
+                <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
+                <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
+                <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
+                <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
             </div>
         </section>
         
         <section class="nuevos-episodios">
             <h2>Nuevos Episodios</h2>
             <div class="recientes-container">
-                <div class="reciente"><img src="poster_nuevo.png" alt="Nuevo Episodio"></div>
+                <div class="reciente"><img src="poster7.png" alt="Nuevo Episodio 1"></div>
+                <div class="reciente"><img src="poster8.png" alt="Nuevo Episodio 2"></div>
+                <div class="reciente"><img src="poster9.png" alt="Nuevo Episodio 3"></div>
+                <div class="reciente"><img src="poster10.png" alt="Nuevo Episodio 4"></div>
+                <div class="reciente"><img src="poster11.png" alt="Nuevo Episodio 5"></div>
+                <div class="reciente"><img src="poster12.png" alt="Nuevo Episodio 6"></div>
             </div>
         </section>
         
         <section class="proximos-estrenos">
             <h2>Próximos Estrenos</h2>
             <div class="estrenos-container">
-                <div class="estreno"><img src="poster_proximo.png" alt="Próximo Estreno"></div>
-            </div>
-        </section>
-        
-        <section class="lo-mas-visto">
-            <h2>Lo Más Visto</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster_mas_visto.png" alt="Más Visto"></div>
-            </div>
-        </section>
-        
-        <section class="boys-love">
-            <h2>Boys Love</h2>
-            <div class="recientes-container">
-                <div class="reciente"><img src="poster_boys_love.png" alt="Boys Love"></div>
+                <div class="estreno"><img src="poster13.png" alt="Próximo 1"></div>
+                <div class="estreno"><img src="poster14.png" alt="Próximo 2"></div>
+                <div class="estreno"><img src="poster15.png" alt="Próximo 3"></div>
+                <div class="estreno"><img src="poster16.png" alt="Próximo 4"></div>
+                <div class="estreno"><img src="poster17.png" alt="Próximo 5"></div>
+                <div class="estreno"><img src="poster18.png" alt="Próximo 6"></div>
             </div>
         </section>
     </main>   
