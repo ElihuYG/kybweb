@@ -19,17 +19,27 @@
                 dots: true,
             });
 
-            $("#search-input").on("input", function() {
+            $(".favorite-icon").click(function() {
+                $(this).toggleClass("favorited");
+            });
+
+            $("#search-icon").click(function() {
+                $("#search-bar").toggle().focus();
+            });
+
+            $("#menu-toggle").click(function() {
+                $("#menu").toggle();
+            });
+
+            $("#submenu-toggle").click(function() {
+                $("#submenu").toggle();
+            });
+
+            $("#search-bar").on("input", function() {
                 let query = $(this).val().toLowerCase();
-                $("#suggestions").empty();
-                if (query.length > 0) {
-                    let suggestions = ["Serie 1", "Serie 2", "Dorama X", "Película Y"];
-                    suggestions.forEach(s => {
-                        if (s.toLowerCase().includes(query)) {
-                            $("#suggestions").append(`<div class='suggestion'>${s}</div>`);
-                        }
-                    });
-                }
+                let suggestions = ["Dorama 1", "Dorama 2", "Serie Coreana", "Película Asiática"];
+                let filtered = suggestions.filter(s => s.toLowerCase().includes(query));
+                $("#suggestions").html(filtered.map(s => `<div class='suggestion'>${s}</div>`).join(""));
             });
         });
     </script>
@@ -44,120 +54,103 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            position: absolute;
-            width: 100%;
-            z-index: 10;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .menu-icon, .search-icon, .profile-img {
+            cursor: pointer;
         }
         .menu-icon {
             font-size: 24px;
-            cursor: pointer;
         }
-        .menu {
-            display: none;
-            position: absolute;
-            top: 50px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .menu li {
-            padding: 8px;
-            cursor: pointer;
-        }
-        .submenu {
-            margin-left: 10px;
-        }
-        .search-profile {
+        .search-container {
             display: flex;
             align-items: center;
-        }
-        .search-bar {
             position: relative;
         }
-        #search-input {
+        .search-bar {
+            display: none;
+            background: white;
+            color: black;
+            border: none;
             padding: 5px;
+            margin-left: 10px;
         }
-        #suggestions {
+        .suggestions {
             position: absolute;
+            top: 30px;
             background: white;
             color: black;
             width: 100%;
+            display: none;
         }
         .suggestion {
             padding: 5px;
-            cursor: pointer;
+            border-bottom: 1px solid #ddd;
         }
-        .slider {
-            position: relative;
-            max-width: 1000px;
-            margin: auto;
+        .profile-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
         }
-        .slide {
-            position: relative;
+        .menu {
+            display: none;
+            background: black;
+            padding: 10px;
+            position: absolute;
+            left: 10px;
+            top: 50px;
         }
-        .slide img {
+        .submenu {
+            display: none;
+            padding-left: 20px;
+        }
+        .slider img {
             width: 100%;
-            height: auto;
             display: block;
+            position: relative;
         }
         .info {
             position: absolute;
             bottom: 10px;
             left: 10px;
+            width: 90%;
+            background: none;
             padding: 10px;
-            border-radius: 5px;
-        }
-        .watch-now {
-            background: red;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .watch-now:hover {
-            background: darkred;
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <div class="menu-icon" onclick="$('.menu').toggle();">☰</div>
-        <div class="menu">
-            <ul>
-                <li>Inicio</li>
-                <li>Favoritos</li>
-                <li>Más ▼
-                    <ul class="submenu">
-                        <li>Recomendador</li>
-                        <li>Próximamente</li>
-                        <li>Ayuda</li>
-                    </ul>
-                </li>
-            </ul>
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div class="search-container">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
+            <div id="suggestions" class="suggestions"></div>
         </div>
-        <div class="search-profile">
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Buscar...">
-                <div id="suggestions"></div>
-            </div>
-            <img src="Seo_Ji_hoon.jpg" alt="Perfil">
-        </div>
+        <img src="Seo_Ji_hoon.png" alt="Perfil" class="profile-img">
     </header>
+    
+    <div id="menu" class="menu">
+        <ul>
+            <li>Inicio</li>
+            <li>Favoritos</li>
+            <li id="submenu-toggle">Más</li>
+            <ul id="submenu" class="submenu">
+                <li>Recomendador</li>
+                <li>Próximamente</li>
+                <li>Ayuda</li>
+            </ul>
+        </ul>
+    </div>
+    
     <main>
         <section class="slider">
             <div class="slide">
-                <img src="serie1.jpg" alt="Serie 1">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
                 <div class="info">
-                    <h2>Nombre de la Serie 1</h2>
+                    <h2>Begins Youth</h2>
+                    <span class="favorite-icon">⭐</span>
                     <p class="rating">⭐⭐⭐⭐✰</p>
                     <p class="subtitles">Subtítulos: ESP, ING</p>
                     <p class="duration">Duración: 45 min/ep</p>
@@ -169,6 +162,7 @@
                 <img src="Sliders_Arriba_YS.png" alt="Serie 2">
                 <div class="info">
                     <h2>Nombre de la Serie 2</h2>
+                    <span class="favorite-icon">⭐</span>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
                     <p class="subtitles">Subtítulos: ESP</p>
                     <p class="duration">Duración: 50 min/ep</p>
