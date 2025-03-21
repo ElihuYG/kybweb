@@ -1,134 +1,124 @@
-/* ----- ESTILOS GENERALES ----- */
+/* Estilos generales */
 body {
-    font-family: 'Work Sans', sans-serif;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #046D5A; /* Verde esmeralda */
+    color: white;
+}
+
+/* Estilo del encabezado */
+header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: black;
-    position: relative;
-    color: white;
-}
-
-/* ----- FONDO DIFUMINADO ----- */
-.background {
-    position: absolute;
+    padding: 10px 20px;
+    background: #035C4F;
+    position: fixed;
     width: 100%;
-    height: 100%;
-    background: url('fondo.jpg') center/cover no-repeat;
-    filter: blur(5px);
-    z-index: -1;
+    top: 0;
+    z-index: 1000;
 }
 
-/* ----- CAPA OSCURA ----- */
-.overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: -1;
-}
-
-/* ----- CONTENEDOR DEL FORMULARIO ----- */
-.login-container {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    width: 90%;
-    max-width: 350px;
-    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
-}
-
-/* ----- TÍTULOS ----- */
-h1 {
+.logo {
     font-size: 24px;
-    font-weight: 700;
-}
-
-h2 {
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 20px;
-}
-
-/* ----- INPUTS ----- */
-.input-container {
-    margin-bottom: 15px;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
-}
-
-input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-/* ----- BOTÓN ----- */
-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
     font-weight: bold;
-    color: white;
-    background: red;
-    border: none;
-    border-radius: 5px;
+}
+
+.menu-btn, .search-btn {
+    font-size: 24px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-button:hover {
-    background: darkred;
+/* Menú lateral */
+.menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 250px;
+    background: #024B41;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+}
+.menu.active {
+    display: block;
+}
+.menu-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #046D5A;
 }
 
-/* ----- ENLACE PARA CAMBIAR A LOGIN ----- */
-p {
-    margin-top: 15px;
-    font-size: 14px;
+/* Submenú */
+.submenu {
+    display: none;
+    padding-left: 10px;
+}
+.submenu.active {
+    display: block;
+}
+.submenu-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.submenu-btn span {
+    transition: transform 0.3s;
+}
+.submenu-btn.active span {
+    transform: rotate(180deg);
 }
 
-p a {
-    color: red;
-    text-decoration: none;
-    font-weight: bold;
+/* Estilo del buscador */
+.search-container {
+    position: relative;
+}
+.search-container input {
+    display: none;
+    padding: 5px;
+    font-size: 16px;
+}
+.search-container.active input {
+    display: inline-block;
 }
 
-p a:hover {
-    text-decoration: underline;
+/* Carrusel */
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 70px;
+}
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.carousel-item {
+    min-width: 100%;
+    cursor: pointer;
+}
+.carousel-item img {
+    width: 100%;
+    height: auto;
 }
 
-/* ----- MENSAJES DE ERROR O ÉXITO ----- */
-.mensaje {
-    margin-top: 10px;
-    font-size: 14px;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.5s, transform 0.3s;
+/* Secciones */
+section {
+    padding: 20px;
+}
+.recientes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+.reciente img {
+    width: 100%;
+    border-radius: 5px;
 }
 
-/* Mensaje de éxito */
-.mensaje.exito {
-    color: #2ecc71;
-}
-
-/* Mensaje de error */
-.mensaje.error {
-    color: #e74c3c;
-}
-
-/* Cuando se muestra el mensaje */
-.mensaje.show {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 600px) {
+    .carousel-item img {
+        height: 180px;
+        object-fit: cover;
+    }
 }
