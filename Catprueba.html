@@ -25,6 +25,7 @@
 
             $("#search-icon").click(function() {
                 $("#search-bar").toggle().focus();
+                $("#suggestions").toggle();
             });
 
             $("#menu-toggle").click(function() {
@@ -38,10 +39,9 @@
 
             $("#search-bar").on("input", function() {
                 let query = $(this).val().toLowerCase();
-                let suggestions = ["Dorama 1", "Dorama 2", "Serie Coreana", "Película Asiática"];
+                let suggestions = []; // Se llenará dinámicamente
                 let filtered = suggestions.filter(s => s.toLowerCase().includes(query));
                 $("#suggestions").html(filtered.map(s => `<div class='suggestion'>${s}</div>`).join(""));
-                $("#suggestions").show();
             });
         });
     </script>
@@ -64,6 +64,40 @@
         .menu-icon, .search-icon, .profile-img {
             cursor: pointer;
         }
+        .menu-icon {
+            font-size: 24px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .search-bar {
+            display: none;
+            background: white;
+            color: black;
+            border: none;
+            padding: 5px;
+            margin-left: 10px;
+        }
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            background: white;
+            color: black;
+            width: 100%;
+            display: none;
+        }
+        .suggestion {
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        .profile-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
         .menu {
             display: none;
             background: black;
@@ -82,26 +116,30 @@
             margin: auto;
             position: relative;
         }
-        .slider .slide {
-            position: relative;
-        }
         .slider img {
             width: 100%;
             height: 350px;
             object-fit: cover;
             display: block;
+            position: relative;
         }
         .info {
             position: absolute;
             bottom: 10px;
             left: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            color: white;
             width: 90%;
+            color: white;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.1);
         }
         .slick-dots {
             bottom: -30px;
+        }
+        .arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+        .rotated {
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -121,7 +159,7 @@
         <ul>
             <li>Inicio</li>
             <li>Favoritos</li>
-            <li id="submenu-toggle">Más <i>▼</i></li>
+            <li id="submenu-toggle">Más <i class="arrow">▼</i></li>
             <ul id="submenu" class="submenu">
                 <li>Recomendador</li>
                 <li>Próximamente</li>
@@ -133,7 +171,7 @@
     <main>
         <section class="slider">
             <div class="slide">
-                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 1">
                 <div class="info">
                     <h2>Nombre de la Serie 1</h2>
                     <p class="rating">⭐⭐⭐⭐✰</p>
