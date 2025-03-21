@@ -9,6 +9,8 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
         }
         header {
             display: flex;
@@ -89,7 +91,7 @@
         }
         .recientes-container, .estrenos-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
             gap: 5px;
             padding: 10px;
         }
@@ -101,9 +103,6 @@
             .carousel-item img {
                 height: 150px;
                 object-fit: cover;
-            }
-            .recientes-container, .estrenos-container {
-                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
             }
         }
     </style>
@@ -133,7 +132,7 @@
     <main>
         <section class="carousel">
             <div class="carousel-container">
-                <div class="carousel-item active" onclick="location.href='yoursky.html'">
+                <div class="carousel-item" onclick="location.href='yoursky.html'">
                     <img src="Sliders_Arriba_YS.png" alt="Slider 1">
                 </div>
                 <div class="carousel-item" onclick="location.href='thamepo.html'">
