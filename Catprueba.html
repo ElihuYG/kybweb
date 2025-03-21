@@ -32,40 +32,6 @@
             cursor: pointer;
             padding: 5px;
         }
-        /* Menú hamburguesa */
-        .menu {
-            position: absolute;
-            top: 50px;
-            left: 0;
-            width: 200px;
-            background: #222;
-            display: none;
-            flex-direction: column;
-            border-radius: 5px;
-        }
-        .menu.active {
-            display: flex;
-        }
-        .menu-item {
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            border-bottom: 1px solid #444;
-        }
-        .submenu {
-            display: none;
-            flex-direction: column;
-            background: #333;
-        }
-        .submenu-item {
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-        }
-        .submenu-btn:hover + .submenu, .submenu:hover {
-            display: flex;
-        }
-
         /* Buscador */
         .search-container {
             display: none;
@@ -78,63 +44,28 @@
         }
         .search-container input {
             padding: 5px;
-            width: 150px;
+            width: 200px;
             background: #fff;
             color: #000;
             border: none;
             border-radius: 3px;
         }
-
-        /* Carrusel */
-        .carousel {
-            width: 70%;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 10px;
+        .search-results {
+            display: none;
+            position: absolute;
+            background: #333;
+            color: white;
+            width: 200px;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 5px;
         }
-        .carousel-container {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .carousel-item {
-            min-width: 100%;
+        .search-results div {
+            padding: 8px;
             cursor: pointer;
         }
-        .carousel-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        /* Secciones */
-        .recientes-container, .estrenos-container {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            padding: 10px;
-        }
-        .reciente img, .estreno img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        /* Responsivo */
-        @media (max-width: 900px) {
-            .carousel { width: 90%; }
-            .recientes-container, .estrenos-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        @media (max-width: 600px) {
-            .carousel { width: 100%; }
-            .recientes-container, .estrenos-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .reciente img, .estreno img {
-                height: 130px;
-            }
+        .search-results div:hover {
+            background: #444;
         }
     </style>
 </head>
@@ -145,84 +76,59 @@
         <div class="search-btn">🔍</div>
     </header>
 
-    <nav class="menu">
-        <div class="menu-item">New and popular</div>
-        <div class="menu-item">App móvil</div>
-        <div class="menu-item">Noticias</div>
-        <div class="menu-item submenu-btn">Más ▼</div>
-        <div class="submenu">
-            <div class="submenu-item">Calendario</div>
-            <div class="submenu-item">Próximamente</div>
-            <div class="submenu-item">Recomendador</div>
-        </div>
-    </nav>
-
     <div class="search-container">
-        <input type="text" placeholder="Buscar...">
+        <input type="text" id="searchInput" placeholder="Buscar...">
+        <div class="search-results" id="searchResults"></div>
     </div>
-
-    <section class="carousel">
-        <div class="carousel-container">
-            <div class="carousel-item active" onclick="location.href='yoursky.html'">
-                <img src="Sliders_Arriba_YS.png" alt="Slider 1">
-            </div>
-            <div class="carousel-item" onclick="location.href='thamepo.html'">
-                <img src="Sliders_Arriba_TP.png" alt="Slider 2">
-            </div>
-            <div class="carousel-item" onclick="location.href='beginsyouth.html'">
-                <img src="Sliders_Arriba_BY.png" alt="Slider 3">
-            </div>
-        </div>
-    </section>
-
-    <section class="recientes">
-        <h2>Recientes</h2>
-        <div class="recientes-container">
-            <div class="reciente"><img src="poster1.png" alt="Reciente 1"></div>
-            <div class="reciente"><img src="poster2.png" alt="Reciente 2"></div>
-            <div class="reciente"><img src="poster3.png" alt="Reciente 3"></div>
-            <div class="reciente"><img src="poster4.png" alt="Reciente 4"></div>
-            <div class="reciente"><img src="poster5.png" alt="Reciente 5"></div>
-            <div class="reciente"><img src="poster6.png" alt="Reciente 6"></div>
-        </div>
-    </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            let menuBtn = document.querySelector(".menu-btn");
-            let menu = document.querySelector(".menu");
             let searchBtn = document.querySelector(".search-btn");
             let searchContainer = document.querySelector(".search-container");
-            let submenuBtn = document.querySelector(".submenu-btn");
-            let submenu = document.querySelector(".submenu");
-
-            // Alternar menú hamburguesa
-            menuBtn.addEventListener("click", function () {
-                menu.classList.toggle("active");
-            });
+            let searchInput = document.getElementById("searchInput");
+            let searchResults = document.getElementById("searchResults");
 
             // Alternar buscador
             searchBtn.addEventListener("click", function () {
+                searchContainer.style.display = searchContainer.style.display === "block" ? "none" : "block";
                 if (searchContainer.style.display === "block") {
-                    searchContainer.style.display = "none";
+                    searchInput.focus();
+                }
+            });
+
+            // Datos simulados de búsqueda
+            let shows = [
+                "Your Sky", "Thamepo", "Begins Youth", "My Love Story",
+                "The Hidden Truth", "Shining Days", "Lost Memories"
+            ];
+
+            // Buscar y mostrar resultados
+            searchInput.addEventListener("input", function () {
+                let query = searchInput.value.toLowerCase();
+                searchResults.innerHTML = "";
+                if (query.length > 0) {
+                    let matches = shows.filter(show => show.toLowerCase().includes(query));
+                    if (matches.length > 0) {
+                        searchResults.style.display = "block";
+                        matches.forEach(match => {
+                            let div = document.createElement("div");
+                            div.textContent = match;
+                            div.onclick = () => alert("Abrir: " + match); // Aquí puedes cambiar a abrir la página de la serie
+                            searchResults.appendChild(div);
+                        });
+                    } else {
+                        searchResults.style.display = "none";
+                    }
                 } else {
-                    searchContainer.style.display = "block";
-                    searchContainer.querySelector("input").focus();
+                    searchResults.style.display = "none";
                 }
             });
 
-            // Alternar submenú
-            submenuBtn.addEventListener("click", function () {
-                submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
-            });
-
-            // Cerrar menú si se toca fuera
+            // Cerrar el buscador si se hace clic afuera
             document.addEventListener("click", function (e) {
-                if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
-                    menu.classList.remove("active");
-                }
                 if (!searchContainer.contains(e.target) && !searchBtn.contains(e.target)) {
                     searchContainer.style.display = "none";
+                    searchResults.style.display = "none";
                 }
             });
         });
