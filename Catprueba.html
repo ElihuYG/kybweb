@@ -40,16 +40,21 @@
             margin-left: 10px;
         }
 
-        /* Menú */
+        /* Menú con animación */
         .menu {
-            display: none;
-            position: absolute;
-            top: 60px;
-            left: 0;
+            position: fixed;
+            top: 0;
+            left: -250px; /* Inicia fuera de la pantalla */
+            width: 250px;
+            height: 100vh;
             background: #333;
-            width: 200px;
             padding: 10px;
-            border-radius: 5px;
+            transition: left 0.3s ease-in-out;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu.open {
+            left: 0; /* Se desliza hacia adentro */
         }
 
         .menu ul {
@@ -85,7 +90,7 @@
             text-align: center;
         }
 
-        /* Estilos del popup de búsqueda */
+        /* Popup de búsqueda */
         .search-popup {
             display: none;
             position: fixed;
@@ -127,7 +132,7 @@
             border-radius: 5px;
         }
 
-        /* Estilos para los resultados */
+        /* Resultados del buscador */
         .results {
             background: white;
             color: black;
@@ -137,7 +142,7 @@
             width: 350px;
             max-height: 200px;
             overflow-y: auto;
-            display: none; /* Oculto por defecto */
+            display: none;
         }
 
         .result-item {
@@ -169,15 +174,17 @@
         <div id="search-icon" class="search-icon">🔍</div>
         <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
     </div>
-    <div id="menu" class="menu">
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Categorías</a></li>
-            <li><a href="#">Mi Lista</a></li>
-        </ul>
-        <button id="close-menu" class="close-menu">Cerrar</button>
-    </div>
 </header>
+
+<!-- Menú con animación -->
+<div id="menu" class="menu">
+    <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Categorías</a></li>
+        <li><a href="#">Mi Lista</a></li>
+    </ul>
+    <button id="close-menu" class="close-menu">Cerrar</button>
+</div>
 
 <!-- Popup de búsqueda -->
 <div id="search-popup" class="search-popup">
@@ -194,14 +201,14 @@
     const menu = document.getElementById("menu");
     const closeMenu = document.getElementById("close-menu");
 
-    // ABRIR MENÚ con 1 solo clic
+    // ABRIR MENÚ con animación
     menuToggle.addEventListener("click", () => {
-        menu.style.display = "block";
+        menu.classList.add("open");
     });
 
     // CERRAR MENÚ solo con el botón "Cerrar"
     closeMenu.addEventListener("click", () => {
-        menu.style.display = "none";
+        menu.classList.remove("open");
     });
 
     // Variables del buscador
