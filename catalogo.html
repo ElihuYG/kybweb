@@ -149,143 +149,138 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-<!-- Botón de la lupa -->
+<!-- Botón de búsqueda en el header -->
 <div id="search-icon" class="search-icon">🔍</div>
 
-<!-- Ventana emergente de búsqueda -->
+<!-- Ventana emergente del buscador -->
 <div id="search-popup" class="search-popup">
-    <div class="search-box">
-        <input type="text" id="search-input" placeholder="Buscar series..." autofocus>
-        <div id="search-results">
-            <!-- Resultados aparecerán aquí -->
-        </div>
-        <button id="close-search">✖</button>
+    <div class="search-popup-content">
+        <input type="text" id="search-input" class="search-input" placeholder="Buscar series..." autofocus>
+        <button id="close-search" class="close-btn">✖</button>
     </div>
+    <div id="search-results" class="search-results"></div>
 </div>
 
 <style>
-    /* Estilos para el buscador */
-    .search-popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-    }
+/* Estilos del popup */
+.search-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
-    .search-box {
-        background: #222;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        width: 90%;
-        max-width: 400px;
-        position: relative;
-    }
+.search-popup-content {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+}
 
-    #search-input {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border: none;
-        outline: none;
-    }
+.search-input {
+    width: 250px;
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
 
-    #close-search {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 18px;
-        cursor: pointer;
-    }
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
 
-    #search-results {
-        margin-top: 15px;
-        text-align: left;
-        color: white;
-    }
+/* Resultados de búsqueda */
+.search-results {
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: none;
+    padding: 10px;
+}
 
-    .result-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 10px;
-        cursor: pointer;
-    }
+.search-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
+    cursor: pointer;
+}
 
-    .result-item img {
-        width: 50px;
-        height: 70px;
-        object-fit: cover;
-        border-radius: 5px;
-    }
+.search-item img {
+    width: 50px;
+    height: 70px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
 
-    .separator {
-        width: 100%;
-        height: 1px;
-        background: white;
-        margin: 10px 0;
-    }
+.search-item span {
+    font-size: 14px;
+}
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const searchIcon = document.getElementById("search-icon");
-        const searchPopup = document.getElementById("search-popup");
-        const closeSearch = document.getElementById("close-search");
-        const searchInput = document.getElementById("search-input");
-        const searchResults = document.getElementById("search-results");
+// Lista de series con imágenes y enlaces
+const series = [
+    { title: "Begins Youth", img: "posters_begins_youth.png", link: "begins_youth.html" },
+    { title: "Thamepo", img: "thamepo.png", link: "thamepo.html" },
+    { title: "Yoursky", img: "yoursky.png", link: "yoursky.html" }
+];
 
-        const series = [
-            { name: "Begins Youth", img: "posters_begins_youth.png", link: "begins_youth.html" },
-            { name: "Thamepo", img: "thamepo_poster.png", link: "thamepo.html" },
-            { name: "Yoursky", img: "yoursky_poster.png", link: "yoursky.html" }
-        ];
+document.getElementById("search-icon").addEventListener("click", function() {
+    document.getElementById("search-popup").style.display = "flex";
+    document.getElementById("search-input").focus();
+});
 
-        searchIcon.addEventListener("click", function() {
-            searchPopup.style.display = "flex";
-            searchInput.focus();
+document.getElementById("close-search").addEventListener("click", function() {
+    document.getElementById("search-popup").style.display = "none";
+    document.getElementById("search-results").style.display = "none";
+});
+
+// Función para filtrar y mostrar resultados
+document.getElementById("search-input").addEventListener("input", function() {
+    let query = this.value.toLowerCase();
+    let resultsContainer = document.getElementById("search-results");
+    resultsContainer.innerHTML = ""; // Limpiar resultados anteriores
+
+    if (query === "") {
+        resultsContainer.style.display = "none";
+        return;
+    }
+
+    let filteredSeries = series.filter(s => s.title.toLowerCase().includes(query));
+
+    if (filteredSeries.length > 0) {
+        resultsContainer.style.display = "block";
+        filteredSeries.forEach(s => {
+            let item = document.createElement("div");
+            item.classList.add("search-item");
+            item.innerHTML = `<img src="${s.img}" alt="${s.title}"><span>${s.title}</span>`;
+            item.addEventListener("click", () => {
+                window.location.href = s.link;
+            });
+            resultsContainer.appendChild(item);
         });
-
-        closeSearch.addEventListener("click", function() {
-            searchPopup.style.display = "none";
-            searchInput.value = "";
-            searchResults.innerHTML = "";
-        });
-
-        searchInput.addEventListener("input", function() {
-            const query = searchInput.value.toLowerCase();
-            searchResults.innerHTML = "";
-
-            if (query.trim() === "") return;
-
-            const matchedSeries = series.filter(s => s.name.toLowerCase().includes(query));
-
-            if (matchedSeries.length > 0) {
-                matchedSeries.forEach(s => {
-                    const item = document.createElement("div");
-                    item.classList.add("result-item");
-                    item.innerHTML = `<img src="${s.img}" alt="${s.name}"><span>${s.name}</span>`;
-                    item.addEventListener("click", function() {
-                        window.location.href = s.link;
-                    });
-                    searchResults.appendChild(item);
-                });
-                searchResults.innerHTML += '<div class="separator"></div><p>Otros dramas similares...</p>';
-            } else {
-                searchResults.innerHTML = "<p>No se encontraron resultados</p>";
-            }
-        });
-    });
+    } else {
+        resultsContainer.style.display = "none";
+    }
+});
 </script>
+
 
 
 
