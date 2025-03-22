@@ -149,89 +149,146 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <div id="search-popup" class="search-popup">
+<!-- Ícono de búsqueda -->
+<div id="search-icon" class="search-icon">🔍</div>
+
+<!-- Ventana emergente del buscador -->
+<div id="search-popup" class="search-popup">
     <div class="search-content">
-        <span id="close-search" class="close-btn">&times;</span>
-        <input type="text" id="search-input" placeholder="Buscar series...">
-        <div class="search-results">
-            <div class="search-main">
-                <img id="searched-img" src="" alt="Serie encontrada">
-                <span id="searched-title">Nombre de la Serie</span>
-            </div>
+        <span class="close-btn" onclick="closeSearchPopup()">×</span>
+        <input type="text" id="search-input" placeholder="Buscar series..." oninput="searchSeries()">
+        
+        <div id="search-results-container">
+            <div id="search-main-result"></div>
             <div class="separator"></div>
-            <div class="similar-results">
-                <h3>Similares</h3>
-                <ul id="similar-list">
-                    <li>Serie 1</li>
-                    <li>Serie 2</li>
-                    <li>Serie 3</li>
-                </ul>
-            </div>
+            <div id="search-similar-results"></div>
         </div>
     </div>
 </div>
 
 <style>
-.search-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
-.search-content {
-    background: #141414;
-    padding: 20px;
-    border-radius: 10px;
-    width: 50%;
-    text-align: center;
-    position: relative;
-}
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 25px;
-    cursor: pointer;
-}
-.search-results {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-.search-main img {
-    width: 100px;
-    height: 150px;
-    object-fit: cover;
-}
-.separator {
-    width: 2px;
-    background: white;
-    height: 150px;
-}
-.similar-results ul {
-    list-style: none;
-    padding: 0;
-}
-.similar-results ul li {
-    padding: 5px 0;
-}
+    .search-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        background: black;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 1000;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 25px;
+        cursor: pointer;
+        color: white;
+    }
+
+    #search-input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    #search-results-container {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    #search-main-result {
+        flex: 1;
+        text-align: center;
+    }
+
+    #search-main-result img {
+        width: 100px;
+        height: 150px;
+    }
+
+    .separator {
+        width: 2px;
+        background: white;
+        height: 150px;
+        margin: 0 20px;
+    }
+
+    #search-similar-results {
+        flex: 1;
+    }
+
+    .search-result-item {
+        display: flex;
+        align-items: center;
+        background: #222;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .search-result-item img {
+        width: 50px;
+        height: 75px;
+        margin-right: 10px;
+    }
+
+    .search-result-item:hover {
+        background: #333;
+    }
 </style>
 
 <script>
-document.getElementById("search-icon").addEventListener("click", function() {
-    document.getElementById("search-popup").style.display = "flex";
-});
+    const seriesData = [
+        { name: "Begins Youth", image: "posters_begins_youth.png", similar: ["Thamepo", "Yoursky"] },
+        { name: "Thamepo", image: "posters_thamepo.png", similar: ["Begins Youth", "Yoursky"] },
+        { name: "Yoursky", image: "posters_yoursky.png", similar: ["Begins Youth", "Thamepo"] }
+    ];
 
-document.getElementById("close-search").addEventListener("click", function() {
-    document.getElementById("search-popup").style.display = "none";
-});
+    document.getElementById("search-icon").addEventListener("click", () => {
+        document.getElementById("search-popup").style.display = "block";
+    });
+
+    function closeSearchPopup() {
+        document.getElementById("search-popup").style.display = "none";
+    }
+
+    function searchSeries() {
+        const query = document.getElementById("search-input").value.toLowerCase();
+        const mainResultDiv = document.getElementById("search-main-result");
+        const similarResultsDiv = document.getElementById("search-similar-results");
+
+        mainResultDiv.innerHTML = "";
+        similarResultsDiv.innerHTML = "";
+
+        const foundSeries = seriesData.find(series => series.name.toLowerCase().includes(query));
+
+        if (foundSeries) {
+            mainResultDiv.innerHTML = `
+                <h3>${foundSeries.name}</h3>
+                <img src="${foundSeries.image}" alt="${foundSeries.name}">
+            `;
+
+            foundSeries.similar.forEach(similarName => {
+                const similarSeries = seriesData.find(s => s.name === similarName);
+                if (similarSeries) {
+                    similarResultsDiv.innerHTML += `
+                        <div class="search-result-item">
+                            <img src="${similarSeries.image}" alt="${similarSeries.name}">
+                            <span>${similarSeries.name}</span>
+                        </div>
+                    `;
+                }
+            });
+        }
+    }
 </script>
+
 
             <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
         </div>
