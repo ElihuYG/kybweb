@@ -22,7 +22,7 @@
             max-width: 100%;
             margin: auto;
             position: relative;
-            z-index: 100;
+            z-index: 1;
         }
         .slide {
             position: relative;
@@ -35,7 +35,7 @@
         }
         .slide .info {
             position: absolute;
-            bottom: 5%;
+            bottom: 10%;
             left: 5%;
             background: rgba(0, 0, 0, 0.7);
             padding: 15px;
@@ -55,15 +55,24 @@
             cursor: pointer;
             margin-top: 10px;
         }
+        .menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            background: black;
+            width: 200px;
+            padding: 10px;
+        }
         @media (max-width: 768px) {
             .slide img {
                 max-height: 300px;
                 object-fit: contain;
             }
             .slide .info {
-                font-size: 10px;
+                font-size: 12px;
                 padding: 8px;
-                bottom: 3%;
+                bottom: 5%;
                 left: 2%;
                 max-width: 80%;
             }
@@ -78,15 +87,8 @@
     </style>
     <script>
         $(document).ready(function(){
-            $('.slider').slick({
-                autoplay: true,
-                autoplaySpeed: 3000,
-                dots: true,
-                arrows: false,
-                infinite: true,
-                speed: 500,
-                fade: true,
-                cssEase: 'linear'
+            $("#menu-toggle").click(function(){
+                $(".menu").slideToggle();
             });
         });
     </script>
@@ -97,10 +99,15 @@
         <div class="title">KYB</div>
         <div class="search-container">
             <div id="search-icon" class="search-icon">🔍</div>
-            <a href="cuenta.html">
-                <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
-            </a>
+            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
             <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Mi Lista</a></li>
+            </ul>
         </div>
     </header>
     <main>
@@ -113,7 +120,7 @@
                     <p class="subtitles">Subtítulos: ESP, ING</p>
                     <p class="duration">Duración: 45 min/ep</p>
                     <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                    <button class="watch-now" onclick="location.href='serie1.html'">Ver Ahora</button>
+                    <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
             <div class="slide">
@@ -124,7 +131,7 @@
                     <p class="subtitles">Subtítulos: ESP, ING</p>
                     <p class="duration">Duración: 50 min/ep</p>
                     <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                    <button class="watch-now" onclick="location.href='serie2.html'">Ver Ahora</button>
+                    <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
         </section>
