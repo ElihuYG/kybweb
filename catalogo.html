@@ -273,11 +273,13 @@
 </style>
 
 
+<!-- Aquí va tu menú superior y otras secciones previas -->
+
 <main>
-    <!-- Carrusel -->
-    <section class="slider" style="margin-top: 100px;">
-        <div class="slide">
-            <img src="Sliders_Arriba_YS.png" alt="Serie 1">
+    <!-- Carrusel centrado -->
+    <section class="slider" style="margin-top: 100px; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+        <div class="slide" style="width: 500px;">
+            <img src="Sliders_Arriba_YS.png" alt="Serie 1" style="width: 100%; height: auto;">
             <div class="info">
                 <h2>Nombre de la Serie 1</h2>
                 <p class="rating">⭐⭐⭐⭐✰</p>
@@ -287,8 +289,8 @@
                 <button class="watch-now">Ver Ahora</button>
             </div>
         </div>
-        <div class="slide">
-            <img src="Sliders_Arriba_BY.png" alt="Serie 2">
+        <div class="slide" style="width: 500px;">
+            <img src="Sliders_Arriba_BY.png" alt="Serie 2" style="width: 100%; height: auto;">
             <div class="info">
                 <h2>Nombre de la Serie 2</h2>
                 <p class="rating">⭐⭐⭐⭐⭐</p>
@@ -298,8 +300,8 @@
                 <button class="watch-now">Ver Ahora</button>
             </div>
         </div>
-        <div class="slide">
-            <img src="Sliders_Arriba_TP.png" alt="Serie 3">
+        <div class="slide" style="width: 500px;">
+            <img src="Sliders_Arriba_TP.png" alt="Serie 3" style="width: 100%; height: auto;">
             <div class="info">
                 <h2>Nombre de la Serie 3</h2>
                 <p class="rating">⭐⭐⭐⭐⭐</p>
@@ -323,7 +325,7 @@
             infinite: true,
             slidesToShow: 1,
             slidesToScroll: 1,
-            arrows: true, // Flechas activadas
+            arrows: false, // Flechas desactivadas
             dots: true, // Puntos activados
             autoplay: true, // Reproducción automática
             autoplaySpeed: 7000, // Cambiar cada 7 segundos
