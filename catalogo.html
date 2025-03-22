@@ -24,7 +24,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: #026670; /* Verde Esmeralda */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -64,18 +64,28 @@
             cursor: pointer;
         }
 
-        /* Menú lateral */
+        /* Menú Lateral */
         .menu {
             display: none;
             position: absolute;
             top: 60px;
             left: 0;
             background: #004d40;
-            padding: 10px;
+            width: 250px;
+            height: 100%;
+            padding: 20px;
             border-radius: 5px;
+            z-index: 999;
         }
 
         .menu.active {
+            display: block;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin: 15px 0;
             display: block;
         }
 
@@ -90,7 +100,7 @@
             text-align: left;
         }
 
-        /* Estilos del carrusel */
+        /* Carrusel */
         .slider-container {
             position: relative;
             width: 100%;
@@ -231,21 +241,22 @@
         .result-item:hover {
             background: #f0f0f0;
         }
+
     </style>
 </head>
 <body>
 
     <!-- Menú Superior -->
     <nav class="top-menu">
-        <button id="menu-toggle" class="menu-button">☰</button>
+        <button class="menu-button" id="menu-toggle">☰</button>
         <div class="logo">KYB</div>
         <div class="menu-icons">
             <div id="search-icon" class="search-icon">🔍</div>
-            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-pic"></a>
+            <img src="In_Inthira.jpg" alt="Perfil" class="profile-pic">
         </div>
     </nav>
 
-    <!-- Menú lateral -->
+    <!-- Menú Lateral -->
     <div id="menu" class="menu">
         <ul>
             <li><a href="#">Inicio</a></li>
@@ -253,15 +264,6 @@
             <li><a href="#">Mi Lista</a></li>
             <li><button id="close-menu" class="close-btn">Cerrar</button></li>
         </ul>
-    </div>
-
-    <!-- Popup de búsqueda -->
-    <div id="search-popup" class="search-popup">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar series...">
-            <button class="close-btn" id="close-search">X</button>
-        </div>
-        <div id="search-results" class="results"></div>
     </div>
 
     <!-- Carrusel -->
@@ -294,8 +296,16 @@
         <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </section>
 
+    <!-- Popup de búsqueda -->
+    <div id="search-popup" class="search-popup">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar series...">
+            <button class="close-btn" id="close-search">X</button>
+        </div>
+        <div id="search-results" class="results"></div>
+    </div>
+
     <script>
-        // Función del carrusel
         let slideIndex = 0;
 
         function moveSlide(n) {
@@ -305,44 +315,38 @@
             slides[slideIndex].classList.add("active");
         }
 
-        // Funciones para el menú y el buscador
         document.addEventListener("DOMContentLoaded", function () {
-            const menuToggle = document.getElementById("menu-toggle");
-            const menu = document.getElementById("menu");
-            const closeMenu = document.getElementById("close-menu");
-            const searchIcon = document.getElementById("search-icon");
-            const searchPopup = document.getElementById("search-popup");
-            const closeSearch = document.getElementById("close-search");
-
-            menuToggle.addEventListener("click", function () {
-                menu.classList.toggle("active");
-            });
-
-            closeMenu.addEventListener("click", function () {
-                menu.classList.remove("active");
-            });
-
-            searchIcon.addEventListener("click", function () {
-                searchPopup.style.display = "flex";
-            });
-
-            closeSearch.addEventListener("click", function () {
-                searchPopup.style.display = "none";
-            });
-
-            document.getElementById("search-input").addEventListener("input", function () {
-                const query = this.value.toLowerCase();
-                const results = document.getElementById("search-results");
-                if (query.length > 0) {
-                    results.innerHTML = `<div class="result-item"><img src="poster1.jpg" alt="Serie 1">Serie 1</div>
-                                         <div class="result-item"><img src="poster2.jpg" alt="Serie 2">Serie 2</div>`;
-                    results.style.display = "block";
-                } else {
-                    results.style.display = "none";
-                }
-            });
+            setInterval(() => moveSlide(1), 4000); // Cambia de slide cada 4 segundos
         });
-    </script>
 
-</body>
-</html>
+        // Menú Lateral
+        const menuToggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("menu");
+
+        menuToggle.addEventListener("click", () => {
+            menu.classList.toggle("active");
+        });
+
+        // Buscador
+        const searchIcon = document.getElementById("search-icon");
+        const searchPopup = document.getElementById("search-popup");
+        const closeSearch = document.getElementById("close-search");
+        const searchInput = document.getElementById("search-input");
+        const searchResults = document.getElementById("search-results");
+
+        // Abrir buscador
+        searchIcon.addEventListener("click", () => {
+            searchPopup.style.display = "flex";
+            searchInput.focus();
+        });
+
+        // Cerrar buscador
+        closeSearch.addEventListener("click", () => {
+            searchPopup.style.display = "none";
+            searchInput.value = "";
+            searchResults.style.display = "none";
+        });
+
+        // Series en el buscador
+        const series = [
+            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth
