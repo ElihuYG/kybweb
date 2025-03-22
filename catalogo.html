@@ -173,156 +173,12 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 40%;
-        background: black;
-        padding: 20px;
-        border-radius: 10px;
-        z-index: 1000;
-        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 20px;
-        cursor: pointer;
-        color: white;
-    }
-
-    #search-input {
         width: 90%;
-        padding: 8px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-    }
-
-    #search-results-container {
-        display: flex;
-        align-items: center;
-        margin-top: 15px;
-    }
-
-    #search-main-result {
-        flex: 1;
-        text-align: center;
-    }
-
-    #search-main-result img {
-        width: 80px;
-        height: 120px;
-        border-radius: 5px;
-    }
-
-    .separator {
-        width: 1px;
-        background: white;
-        height: 120px;
-        margin: 0 15px;
-    }
-
-    #search-similar-results {
-        flex: 1;
-    }
-
-    .search-result-item {
-        display: flex;
-        align-items: center;
-        background: #222;
-        padding: 8px;
-        margin: 3px 0;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .search-result-item img {
-        width: 40px;
-        height: 60px;
-        margin-right: 10px;
-        border-radius: 3px;
-    }
-
-    .search-result-item:hover {
-        background: #333;
-    }
-</style>
-
-<script>
-    const seriesData = [
-        { name: "Begins Youth", image: "posters_begins_youth.png", similar: ["Thamepo", "Yoursky"] },
-        { name: "Thamepo", image: "posters_thamepo.png", similar: ["Begins Youth", "Yoursky"] },
-        { name: "Yoursky", image: "posters_yoursky.png", similar: ["Begins Youth", "Thamepo"] }
-    ];
-
-    document.getElementById("search-icon").addEventListener("click", () => {
-        document.getElementById("search-popup").style.display = "block";
-        document.getElementById("search-input").focus(); // Permite escribir inmediatamente
-    });
-
-    function closeSearchPopup() {
-        document.getElementById("search-popup").style.display = "none";
-    }
-
-    function searchSeries() {
-        const query = document.getElementById("search-input").value.toLowerCase();
-        const mainResultDiv = document.getElementById("search-main-result");
-        const similarResultsDiv = document.getElementById("search-similar-results");
-
-        mainResultDiv.innerHTML = "";
-        similarResultsDiv.innerHTML = "";
-
-        const foundSeries = seriesData.find(series => series.name.toLowerCase().includes(query));
-
-        if (foundSeries) {
-            mainResultDiv.innerHTML = `
-                <h3 style="color: white;">${foundSeries.name}</h3>
-                <img src="${foundSeries.image}" alt="${foundSeries.name}">
-            `;
-
-            foundSeries.similar.forEach(similarName => {
-                const similarSeries = seriesData.find(s => s.name === similarName);
-                if (similarSeries) {
-                    similarResultsDiv.innerHTML += `
-                        <div class="search-result-item">
-                            <img src="${similarSeries.image}" alt="${similarSeries.name}">
-                            <span style="color: white;">${similarSeries.name}</span>
-                        </div>
-                    `;
-                }
-            });
-        }
-    }
-</script><!-- Ícono de búsqueda -->
-<div id="search-icon" class="search-icon">🔍</div>
-
-<!-- Ventana emergente del buscador -->
-<div id="search-popup" class="search-popup">
-    <div class="search-content">
-        <span class="close-btn" onclick="closeSearchPopup()">×</span>
-        <input type="text" id="search-input" placeholder="Buscar series..." oninput="searchSeries()">
-        
-        <div id="search-results-container">
-            <div id="search-main-result"></div>
-            <div class="separator"></div>
-            <div id="search-similar-results"></div>
-        </div>
-    </div>
-</div>
-
-<style>
-    .search-popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px;
+        max-width: 400px;
         background: black;
         padding: 15px;
         border-radius: 10px;
-        z-index: 1000;
+        z-index: 9999;
         box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
     }
 
@@ -341,8 +197,8 @@
 
     #search-input {
         width: 100%;
-        padding: 5px;
-        font-size: 12px;
+        padding: 8px;
+        font-size: 14px;
         border: 1px solid #ccc;
         border-radius: 5px;
         outline: none;
@@ -362,15 +218,15 @@
     }
 
     #search-main-result img {
-        width: 60px;
-        height: 90px;
+        width: 80px;
+        height: 120px;
         border-radius: 5px;
     }
 
     .separator {
         width: 1px;
         background: white;
-        height: 90px;
+        height: 100px;
         margin: 0 10px;
     }
 
@@ -389,8 +245,8 @@
     }
 
     .search-result-item img {
-        width: 30px;
-        height: 45px;
+        width: 40px;
+        height: 60px;
         margin-right: 8px;
         border-radius: 3px;
     }
@@ -407,9 +263,24 @@
         { name: "Yoursky", image: "posters_yoursky.png", similar: ["Begins Youth", "Thamepo"] }
     ];
 
-    document.getElementById("search-icon").addEventListener("click", () => {
-        document.getElementById("search-popup").style.display = "block";
-        document.getElementById("search-input").focus();
+    document.addEventListener("DOMContentLoaded", () => {
+        const searchIcon = document.getElementById("search-icon");
+        const searchPopup = document.getElementById("search-popup");
+        const searchInput = document.getElementById("search-input");
+
+        searchIcon.addEventListener("click", () => {
+            searchPopup.style.display = "block";
+            searchInput.value = ""; // Limpia el input al abrir
+            searchInput.focus();
+        });
+
+        searchInput.addEventListener("input", searchSeries);
+
+        document.addEventListener("click", (event) => {
+            if (!searchPopup.contains(event.target) && event.target !== searchIcon) {
+                closeSearchPopup();
+            }
+        });
     });
 
     function closeSearchPopup() {
@@ -446,6 +317,7 @@
         }
     }
 </script>
+
 
 
 
