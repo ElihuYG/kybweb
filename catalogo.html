@@ -34,19 +34,35 @@
     </div>
 <main>
     <section class="slider">
-        <div class="slide">
-            <img src="Sliders_Arriba_BY.png" alt="Serie 1">
-            <div class="info">
-                <h2>Nombre de la Serie 1</h2>
-                <p class="rating">⭐⭐⭐⭐✰</p>
-                <p class="subtitles">Subtítulos: ESP, ING</p>
-                <p class="duration">Duración: 45 min/ep</p>
-                <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                <button class="watch-now">Ver Ahora</button>
+        <button class="prev">&#10094;</button> <!-- Flecha izquierda -->
+        <div class="slide-container">
+            <div class="slide active">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+                <div class="info">
+                    <h2>Nombre de la Serie 1</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_BY_2.png" alt="Serie 2">
+                <div class="info">
+                    <h2>Nombre de la Serie 2</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP, ING, FR</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
         </div>
+        <button class="next">&#10095;</button> <!-- Flecha derecha -->
     </section>
 
+    <!-- Secciones originales -->
     <section class="category">
         <div class="category-header">
             <h2>Recientes</h2>
@@ -62,24 +78,67 @@
         </div>
     </section>
 
+    <section class="category">
+        <div class="category-header">
+            <h2>Nuevos Episodios</h2>
+            <a href="nuevos.html" class="view-more">Ver Más</a>
+        </div>
+        <div class="category-content horizontal">
+            <img src="nuevo1.jpg" alt="Nuevo Episodio 1">
+            <img src="nuevo2.jpg" alt="Nuevo Episodio 2">
+            <img src="nuevo3.jpg" alt="Nuevo Episodio 3">
+            <img src="nuevo4.jpg" alt="Nuevo Episodio 4">
+            <img src="nuevo5.jpg" alt="Nuevo Episodio 5">
+            <img src="nuevo6.jpg" alt="Nuevo Episodio 6">
+        </div>
+    </section>
+
+    <section class="category">
+        <div class="category-header">
+            <h2>Próximamente</h2>
+            <a href="proximamente.html" class="view-more">Ver Más</a>
+        </div>
+        <div class="category-content">
+            <img src="proximo1.jpg" alt="Próximamente 1">
+            <img src="proximo2.jpg" alt="Próximamente 2">
+            <img src="proximo3.jpg" alt="Próximamente 3">
+            <img src="proximo4.jpg" alt="Próximamente 4">
+            <img src="proximo5.jpg" alt="Próximamente 5">
+            <img src="proximo6.jpg" alt="Próximamente 6">
+        </div>
+    </section>
+
     <style>
         .slider {
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             position: relative;
-            width: 100%;
             max-width: 800px;
             margin: auto;
         }
-        .slide {
-            position: relative;
+
+        .slide-container {
             width: 100%;
+            position: relative;
+            overflow: hidden;
         }
+
+        .slide {
+            display: none;
+            position: relative;
+            text-align: left;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
         .slide img {
             width: 100%;
             border-radius: 10px;
         }
+
         .info {
             position: absolute;
             bottom: 10px;
@@ -90,11 +149,13 @@
             border-radius: 5px;
             width: 90%;
         }
+
         .info h2 {
             margin: 0;
             font-size: 18px;
             color: #50C878;
         }
+
         .watch-now {
             background-color: #50C878;
             color: white;
@@ -104,11 +165,95 @@
             font-size: 14px;
             border-radius: 5px;
         }
+
         .watch-now:hover {
             background-color: #3a9e62;
         }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: -40px;
+        }
+
+        .next {
+            right: -40px;
+        }
+
+        .category {
+            margin: 20px 0;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .category-header h2 {
+            margin: 0;
+            color: #50C878;
+        }
+
+        .view-more {
+            color: #50C878;
+            text-decoration: none;
+        }
+
+        .category-content {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .category-content img {
+            height: 250px;
+            width: auto;
+            border-radius: 5px;
+        }
+
+        .category-content.horizontal img {
+            height: 150px;
+        }
     </style>
 </main>
+
+<script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+    }
+
+    prevBtn.addEventListener('click', () => {
+        slideIndex = (slideIndex === 0) ? slides.length - 1 : slideIndex - 1;
+        showSlide(slideIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        slideIndex = (slideIndex === slides.length - 1) ? 0 : slideIndex + 1;
+        showSlide(slideIndex);
+    });
+
+    showSlide(slideIndex);
+</script>
+
 
 
     <script src="script.js"></script>
