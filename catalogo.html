@@ -34,12 +34,12 @@
     </div>
     
 <main>
-    <section class="slider" style="margin-top: 100px;">
-        <button class="prev">&#10094;</button> <!-- Flecha izquierda -->
+    <section class="slider" style="margin-top: 100px; position: relative;">
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
         <div class="slide-container">
             <div class="slide active">
                 <img src="Sliders_Arriba_BY.png" alt="Serie 1">
-                <div class="info">
+                <div class="info" style="background: rgba(0, 0, 0, 0.3);">
                     <h2 style="color: white;">Nombre de la Serie 1</h2>
                     <p class="rating">⭐⭐⭐⭐✰</p>
                     <p class="subtitles">Subtítulos: ESP, ING</p>
@@ -50,7 +50,7 @@
             </div>
             <div class="slide">
                 <img src="Sliders_Arriba_BY_2.png" alt="Serie 2">
-                <div class="info">
+                <div class="info" style="background: rgba(0, 0, 0, 0.3);">
                     <h2 style="color: white;">Nombre de la Serie 2</h2>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
                     <p class="subtitles">Subtítulos: ESP, ING, FR</p>
@@ -60,12 +60,16 @@
                 </div>
             </div>
         </div>
-        <button class="next">&#10095;</button> <!-- Flecha derecha -->
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
     </section>
 
     <section class="category">
         <div class="category-header">
-            <h2>Recientes</h2>
+            <h2 style="color: #50C878;">Recientes</h2>
             <a href="recientes.html" class="view-more">Ver Más</a>
         </div>
         <div class="category-content">
@@ -80,7 +84,7 @@
 
     <section class="category">
         <div class="category-header">
-            <h2>Nuevos Episodios</h2>
+            <h2 style="color: #50C878;">Nuevos Episodios</h2>
             <a href="nuevos.html" class="view-more">Ver Más</a>
         </div>
         <div class="category-content horizontal">
@@ -95,7 +99,7 @@
 
     <section class="category">
         <div class="category-header">
-            <h2>Próximamente</h2>
+            <h2 style="color: #50C878;">Próximamente</h2>
             <a href="proximamente.html" class="view-more">Ver Más</a>
         </div>
         <div class="category-content">
@@ -107,118 +111,63 @@
             <img src="proximo6.jpg" alt="Próximamente 6">
         </div>
     </section>
-
-    <style>
-        .slider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            max-width: 100%;
-            margin: auto;
-            padding: 10px;
-        }
-
-        .slide-container {
-            width: 90%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slide {
-            display: none;
-            position: relative;
-            text-align: left;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        .slide img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .info {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            width: 90%;
-        }
-
-        .info h2 {
-            margin: 0;
-            font-size: 18px;
-            color: white;
-        }
-
-        .watch-now {
-            background-color: #50C878;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 5px;
-        }
-
-        .watch-now:hover {
-            background-color: #3a9e62;
-        }
-
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 20px;
-            border-radius: 50%;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .slide-container {
-                width: 100%;
-            }
-
-            .info {
-                font-size: 12px;
-                padding: 8px;
-                width: 95%;
-            }
-
-            .info h2 {
-                font-size: 16px;
-            }
-
-            .watch-now {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-
-            .prev, .next {
-                padding: 8px;
-                font-size: 16px;
-            }
-        }
-    </style>
 </main>
+
+<style>
+    .slider {
+        position: relative;
+    }
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .dots-container {
+        text-align: center;
+        margin-top: 10px;
+    }
+    .dot {
+        height: 10px;
+        width: 10px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+    .dot.active {
+        background-color: #50C878;
+    }
+</style>
+
+<script>
+    let slideIndex = 0;
+    function moveSlide(n) {
+        let slides = document.querySelectorAll(".slide");
+        let dots = document.querySelectorAll(".dot");
+        slides[slideIndex].classList.remove("active");
+        dots[slideIndex].classList.remove("active");
+        slideIndex = (slideIndex + n + slides.length) % slides.length;
+        slides[slideIndex].classList.add("active");
+        dots[slideIndex].classList.add("active");
+    }
+    function currentSlide(n) {
+        let slides = document.querySelectorAll(".slide");
+        let dots = document.querySelectorAll(".dot");
+        slides[slideIndex].classList.remove("active");
+        dots[slideIndex].classList.remove("active");
+        slideIndex = n - 1;
+        slides[slideIndex].classList.add("active");
+        dots[slideIndex].classList.add("active");
+    }
+</script>
 
 
 
