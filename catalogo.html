@@ -2,8 +2,8 @@
     <div id="menu-toggle" class="menu-icon">☰</div>
     <div class="title">KYB</div>
     <div class="search-container">
-        <div id="search-icon" class="search-icon">🔍</div>
         <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+        <div id="search-icon" class="search-icon">🔍</div>
     </div>
 </header>
 
@@ -36,7 +36,7 @@
         const searchInput = document.getElementById("search-input");
         const searchResults = document.getElementById("search-results");
 
-        // Toggle del menú
+        // Toggle del menú con animación suave
         menuToggle.addEventListener("click", () => {
             menu.classList.toggle("active");
         });
@@ -102,13 +102,19 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px;
+        padding: 10px 20px;
         background: #026670;
     }
 
     .menu-icon {
-        font-size: 28px;
+        font-size: 24px;  /* Menú más pequeño */
         cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
     }
 
     /* Menú lateral */
@@ -120,10 +126,28 @@
         background: #004d40;
         padding: 10px;
         border-radius: 5px;
+        width: 200px;
+        transition: transform 0.3s ease;
+        transform: translateX(-100%);
     }
 
     .menu.active {
         display: block;
+        transform: translateX(0);
+    }
+
+    .menu ul {
+        padding: 0;
+        list-style: none;
+    }
+
+    .menu ul li {
+        padding: 10px 0;
+    }
+
+    .menu ul li a {
+        text-decoration: none;
+        color: white;
     }
 
     /* Buscador */
@@ -160,7 +184,7 @@
     }
 
     .close-btn {
-        font-size: 18px;
+        font-size: 16px;  /* X más pequeña */
         background: transparent;
         color: #000;
         border: none;
