@@ -17,7 +17,6 @@
             width: 90%;
             margin: 100px auto 0; /* Desplazado 100px hacia abajo */
             overflow: hidden;
-            background-color: #50C878; /* Verde esmeralda */
         }
 
         .slide {
@@ -50,23 +49,22 @@
 
         .arrow {
             font-size: 30px;
-            color: black;
+            color: white;
             cursor: pointer;
-            user-select: none;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo transparente negro */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
         .arrow:hover {
-            opacity: 0.7;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro al pasar el mouse */
         }
 
-        /* Flechas de navegación */
-        .arrow {
-            font-size: 30px;
-            color: black;
-            cursor: pointer;
-        }
-        .arrow:hover {
-            opacity: 0.7;
+        /* Estilos para botones */
+        .arrow:focus {
+            outline: none;
         }
     </style>
 </head>
@@ -111,8 +109,8 @@
                 </div>
             </div>
             <div class="arrows">
-                <span id="prev" class="arrow">&#8592;</span>
-                <span id="next" class="arrow">&#8594;</span>
+                <button id="prev" class="arrow">&#8592;</button>
+                <button id="next" class="arrow">&#8594;</button>
             </div>
         </section>
     </main>
