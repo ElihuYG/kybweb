@@ -165,13 +165,11 @@
     const menuToggle = document.getElementById("menu-toggle");
     const menu = document.getElementById("menu");
 
-    // Abrir y cerrar menú con un solo clic
     menuToggle.addEventListener("click", (event) => {
-        event.stopPropagation(); // Evita que el documento lo cierre inmediatamente
+        event.stopPropagation(); // Evita que el documento lo cierre de inmediato
         menu.classList.toggle("active");
     });
 
-    // Cerrar menú si se hace clic fuera
     document.addEventListener("click", (event) => {
         if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
             menu.classList.remove("active");
@@ -181,7 +179,10 @@
 
 <style>
     .menu {
-        display: none;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: visibility 0s linear 0.2s, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
         position: absolute;
         top: 60px;
         left: 15px;
@@ -191,7 +192,10 @@
     }
 
     .menu.active {
-        display: block;
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0s;
     }
 </style>
 
