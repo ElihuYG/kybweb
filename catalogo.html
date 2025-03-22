@@ -184,7 +184,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", function() {
         const menuToggle = document.getElementById("menu-toggle");
         const menu = document.getElementById("menu");
         const closeMenu = document.getElementById("close-menu");
@@ -196,23 +196,23 @@
         const searchResults = document.getElementById("search-results");
 
         // Abrir/cerrar el menú con el mismo botón
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener("click", function() {
             menu.classList.toggle("active");
         });
 
         // Botón dentro del menú para cerrarlo
-        closeMenu.addEventListener("click", () => {
+        closeMenu.addEventListener("click", function() {
             menu.classList.remove("active");
         });
 
         // Abrir buscador
-        searchIcon.addEventListener("click", () => {
+        searchIcon.addEventListener("click", function() {
             searchPopup.style.display = "flex";
             searchInput.focus();
         });
 
         // Cerrar buscador
-        closeSearch.addEventListener("click", () => {
+        closeSearch.addEventListener("click", function() {
             searchPopup.style.display = "none";
             searchInput.value = "";
             searchResults.style.display = "none";
@@ -225,17 +225,19 @@
             { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
         ];
 
-        searchInput.addEventListener("input", () => {
+        searchInput.addEventListener("input", function() {
             let query = searchInput.value.toLowerCase();
-            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+            let filtered = series.filter(function(s) {
+                return s.name.toLowerCase().includes(query);
+            });
 
             if (query.length > 0 && filtered.length > 0) {
-                searchResults.innerHTML = filtered.map(s =>
-                    `<div class="result-item" onclick="window.location.href='${s.link}'">
-                        <img src="${s.image}" alt="${s.name}">
-                        <span>${s.name}</span>
-                    </div>`
-                ).join("");
+                searchResults.innerHTML = filtered.map(function(s) {
+                    return `<div class="result-item" onclick="window.location.href='${s.link}'">
+                                <img src="${s.image}" alt="${s.name}">
+                                <span>${s.name}</span>
+                            </div>`;
+                }).join("");
                 searchResults.style.display = "block";
             } else {
                 searchResults.style.display = "none";
