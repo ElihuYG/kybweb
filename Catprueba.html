@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Buscador</title>
+    <title>KYB</title>
     <style>
         /* Estilos generales */
         body {
@@ -21,40 +21,30 @@
             align-items: center;
             padding: 15px;
             background: #222;
+            position: relative;
         }
 
-        .search-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-icon {
+        /* Botón del menú */
+        .menu-icon {
             cursor: pointer;
-            font-size: 20px;
+            font-size: 24px;
+            user-select: none;
         }
 
-        .profile-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-left: 10px;
-        }
-
-        /* Menú con animación */
+        /* Menú desplegable */
         .menu {
-            position: fixed;
-            top: 0;
-            left: -250px; /* Inicia fuera de la pantalla */
-            width: 250px;
-            height: 100vh;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
             background: #333;
-            padding: 10px;
-            transition: left 0.3s ease-in-out;
-            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-in-out;
         }
 
-        .menu.open {
-            left: 0; /* Se desliza hacia adentro */
+        .menu.show {
+            max-height: 200px; /* Ajusta según el contenido */
         }
 
         .menu ul {
@@ -63,198 +53,106 @@
             margin: 0;
         }
 
-        .menu ul li {
+        .menu li {
             padding: 10px;
             border-bottom: 1px solid #444;
+            text-align: center;
         }
 
-        .menu ul li a {
+        .menu li a {
             text-decoration: none;
             color: white;
             display: block;
         }
 
-        .menu-icon {
-            cursor: pointer;
-            font-size: 24px;
-        }
-
+        /* Botón de cierre dentro del menú */
         .close-menu {
-            margin-top: 10px;
             background: red;
             color: white;
+            padding: 5px 10px;
             border: none;
-            padding: 5px;
             cursor: pointer;
-            width: 100%;
-            text-align: center;
+            display: block;
+            margin: 10px auto;
+            border-radius: 5px;
         }
 
-        /* Popup de búsqueda */
-        .search-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .search-box {
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            width: 350px;
+        /* Estilos del buscador */
+        .search-container {
             position: relative;
         }
 
+        .search-icon {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .search-box {
+            position: absolute;
+            top: 30px;
+            right: 0;
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #fff;
+            background: #222;
+            display: none;
+            border-radius: 5px;
+        }
+
         .search-box input {
-            flex: 1;
+            width: 100%;
+            padding: 5px;
+            background: #333;
+            color: white;
             border: none;
-            padding: 10px;
-            font-size: 16px;
             outline: none;
         }
 
-        .close-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        /* Resultados del buscador */
-        .results {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 350px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .result-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .result-item:hover {
-            background: #f0f0f0;
-        }
     </style>
 </head>
 <body>
 
-<header class="header">
-    <div id="menu-toggle" class="menu-icon">☰</div>
-    <div class="title">KYB</div>
-    <div class="search-container">
-        <div id="search-icon" class="search-icon">🔍</div>
-        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+    <header class="header">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div class="title">KYB</div>
+        <div class="search-container">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <div class="search-box" id="search-box">
+                <input type="text" placeholder="Buscar...">
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú desplegable -->
+    <div class="menu" id="menu">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Mi Lista</a></li>
+        </ul>
+        <button class="close-menu" id="close-menu">Cerrar</button>
     </div>
-</header>
 
-<!-- Menú con animación -->
-<div id="menu" class="menu">
-    <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Categorías</a></li>
-        <li><a href="#">Mi Lista</a></li>
-    </ul>
-    <button id="close-menu" class="close-menu">Cerrar</button>
-</div>
+    <script>
+        const menuToggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("menu");
+        const closeMenu = document.getElementById("close-menu");
 
-<!-- Popup de búsqueda -->
-<div id="search-popup" class="search-popup">
-    <div class="search-box">
-        <input type="text" id="search-input" placeholder="Buscar series...">
-        <button class="close-btn" id="close-btn">X</button>
-    </div>
-    <div id="search-results" class="results"></div>
-</div>
+        const searchIcon = document.getElementById("search-icon");
+        const searchBox = document.getElementById("search-box");
 
-<script>
-    // Variables del menú
-    const menuToggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("menu");
-    const closeMenu = document.getElementById("close-menu");
+        menuToggle.addEventListener("click", () => {
+            menu.classList.toggle("show");
+        });
 
-    // ABRIR MENÚ con animación
-    menuToggle.addEventListener("click", () => {
-        menu.classList.add("open");
-    });
+        closeMenu.addEventListener("click", () => {
+            menu.classList.remove("show");
+        });
 
-    // CERRAR MENÚ solo con el botón "Cerrar"
-    closeMenu.addEventListener("click", () => {
-        menu.classList.remove("open");
-    });
-
-    // Variables del buscador
-    const searchIcon = document.getElementById("search-icon");
-    const searchPopup = document.getElementById("search-popup");
-    const closeBtn = document.getElementById("close-btn");
-    const searchInput = document.getElementById("search-input");
-    const searchResults = document.getElementById("search-results");
-
-    // Mostrar popup
-    searchIcon.addEventListener("click", () => {
-        searchPopup.style.display = "flex";
-        searchInput.focus();
-    });
-
-    // Cerrar popup
-    closeBtn.addEventListener("click", () => {
-        searchPopup.style.display = "none";
-        searchInput.value = "";
-        searchResults.style.display = "none";
-    });
-
-    // Series en el buscador
-    const series = [
-        { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
-        { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-        { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-    ];
-
-    searchInput.addEventListener("input", () => {
-        let query = searchInput.value.toLowerCase();
-        let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-        if (query.length > 0 && filtered.length > 0) {
-            searchResults.innerHTML = filtered.map(s =>
-                `<div class="result-item" onclick="window.location.href='${s.link}'">
-                    <img src="${s.image}" alt="${s.name}">
-                    <span>${s.name}</span>
-                </div>`
-            ).join("");
-            searchResults.style.display = "block";
-        } else {
-            searchResults.style.display = "none";
-        }
-    });
-</script>
+        searchIcon.addEventListener("click", () => {
+            searchBox.style.display = searchBox.style.display === "block" ? "none" : "block";
+        });
+    </script>
 
 </body>
 </html>
