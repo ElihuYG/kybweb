@@ -3,90 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Inicio</title>
+    <title>KYB</title>
     <style>
-        * {
+        /* Estilos Generales */
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
             background: #111;
             color: white;
-            padding-top: 60px; /* Espacio para el menú superior */
         }
 
-        /* Menú Superior */
-        .top-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #026670; /* Verde Esmeralda */
+        /* Header */
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
-            z-index: 1000;
+            padding: 15px;
+            background: #026670; /* Verde esmeralda */
         }
 
-        .menu-button {
-            font-size: 22px;
+        .menu-icon {
             cursor: pointer;
-            background: none;
-            border: none;
-            color: white;
+            font-size: 30px;
         }
 
-        .logo {
-            font-size: 20px;
+        .title {
+            font-size: 24px;
             font-weight: bold;
         }
 
-        .menu-icons {
+        .search-container {
             display: flex;
             align-items: center;
-            gap: 15px;
         }
 
-        .menu-icons img {
-            width: 24px;
-            height: 24px;
+        .search-icon {
             cursor: pointer;
+            font-size: 30px;
+            margin-right: 15px;
         }
 
-        .profile-pic {
-            width: 32px;
-            height: 32px;
+        .profile-img {
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
         }
 
-        /* Menú Lateral */
+        /* Menú */
         .menu {
             display: none;
             position: absolute;
             top: 60px;
             left: 0;
             background: #004d40;
-            width: 250px;
-            height: 100%;
-            padding: 20px;
+            padding: 10px;
             border-radius: 5px;
-            z-index: 999;
         }
 
         .menu.active {
             display: block;
         }
 
-        .menu a {
-            color: white;
-            text-decoration: none;
-            margin: 15px 0;
-            display: block;
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
         }
 
         .close-btn {
@@ -99,84 +86,6 @@
             width: 100%;
             text-align: left;
         }
-
-        /* Carrusel */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin: 80px auto 20px;
-            overflow: hidden;
-        }
-
-        .slide {
-            display: none;
-            position: relative;
-            width: 100%;
-        }
-
-        .slide.active {
-            display: block;
-        }
-
-        .slide img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .slide .info {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.6);
-        }
-
-        .info h2 {
-            margin: 0;
-            font-size: 18px;
-            color: white;
-            display: inline;
-        }
-
-        .info .view-more {
-            color: #50C878;
-            margin-left: 10px;
-            text-decoration: none;
-        }
-
-        .info p {
-            margin: 5px 0;
-            font-size: 14px;
-        }
-
-        .watch-now {
-            background: #50C878;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-
-        /* Flechas de navegación */
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 18px;
-            z-index: 10;
-            border-radius: 50%;
-        }
-
-        .prev { left: 10px; }
-        .next { right: 10px; }
 
         /* Buscador */
         .search-popup {
@@ -246,93 +155,55 @@
 </head>
 <body>
 
-    <!-- Menú Superior -->
-    <nav class="top-menu">
-        <button class="menu-button" id="menu-toggle">☰</button>
-        <div class="logo">KYB</div>
-        <div class="menu-icons">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <img src="In_Inthira.jpg" alt="Perfil" class="profile-pic">
-        </div>
-    </nav>
-
-    <!-- Menú Lateral -->
-    <div id="menu" class="menu">
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Categorías</a></li>
-            <li><a href="#">Mi Lista</a></li>
-            <li><button id="close-menu" class="close-btn">Cerrar</button></li>
-        </ul>
+<header class="header">
+    <div id="menu-toggle" class="menu-icon">☰</div>
+    <div class="title">KYB</div>
+    <div class="search-container">
+        <div id="search-icon" class="search-icon">🔍</div>
+        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
     </div>
+</header>
 
-    <!-- Carrusel -->
-    <section class="slider-container">
-        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-        <div class="slide active">
-            <img src="Sliders_Arriba_BY.png" alt="Serie 1">
-            <div class="info">
-                <h2>Nombre de la Serie 1</h2>
-                <a href="#" class="view-more">Ver Más</a>
-                <p class="rating">⭐⭐⭐⭐✰</p>
-                <p class="subtitles">Subtítulos: ESP, ING</p>
-                <p class="duration">Duración: 45 min/ep</p>
-                <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                <button class="watch-now">Ver Ahora</button>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="Sliders_Arriba_YS.png" alt="Serie 2">
-            <div class="info">
-                <h2>Nombre de la Serie 2</h2>
-                <a href="#" class="view-more">Ver Más</a>
-                <p class="rating">⭐⭐⭐⭐⭐</p>
-                <p class="subtitles">Subtítulos: ESP, ING, FR</p>
-                <p class="duration">Duración: 50 min/ep</p>
-                <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                <button class="watch-now">Ver Ahora</button>
-            </div>
-        </div>
-        <button class="next" onclick="moveSlide(1)">&#10095;</button>
-    </section>
+<!-- Menú lateral -->
+<div id="menu" class="menu">
+    <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Categorías</a></li>
+        <li><a href="#">Mi Lista</a></li>
+        <li><button id="close-menu" class="close-btn">Cerrar</button></li>
+    </ul>
+</div>
 
-    <!-- Popup de búsqueda -->
-    <div id="search-popup" class="search-popup">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar series...">
-            <button class="close-btn" id="close-search">X</button>
-        </div>
-        <div id="search-results" class="results"></div>
+<!-- Popup de búsqueda -->
+<div id="search-popup" class="search-popup">
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar series...">
+        <button class="close-btn" id="close-search">X</button>
     </div>
+    <div id="search-results" class="results"></div>
+</div>
 
-    <script>
-        let slideIndex = 0;
-
-        function moveSlide(n) {
-            let slides = document.querySelectorAll(".slide");
-            slides[slideIndex].classList.remove("active");
-            slideIndex = (slideIndex + n + slides.length) % slides.length;
-            slides[slideIndex].classList.add("active");
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            setInterval(() => moveSlide(1), 4000); // Cambia de slide cada 4 segundos
-        });
-
-        // Menú Lateral
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
         const menuToggle = document.getElementById("menu-toggle");
         const menu = document.getElementById("menu");
+        const closeMenu = document.getElementById("close-menu");
 
-        menuToggle.addEventListener("click", () => {
-            menu.classList.toggle("active");
-        });
-
-        // Buscador
         const searchIcon = document.getElementById("search-icon");
         const searchPopup = document.getElementById("search-popup");
         const closeSearch = document.getElementById("close-search");
         const searchInput = document.getElementById("search-input");
         const searchResults = document.getElementById("search-results");
+
+        // Abrir/cerrar el menú con el mismo botón
+        menuToggle.addEventListener("click", () => {
+            menu.classList.toggle("active");
+        });
+
+        // Botón dentro del menú para cerrarlo
+        closeMenu.addEventListener("click", () => {
+            menu.classList.remove("active");
+        });
 
         // Abrir buscador
         searchIcon.addEventListener("click", () => {
@@ -347,44 +218,31 @@
             searchResults.style.display = "none";
         });
 
-                 // Series en el buscador
-            const series = [
-                { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
-                { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-                { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-            ];
+        // Series en el buscador
+        const series = [
+            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+        ];
 
-            searchInput.addEventListener("input", () => {
-                let query = searchInput.value.toLowerCase();
-                let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+        searchInput.addEventListener("input", () => {
+            let query = searchInput.value.toLowerCase();
+            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
 
-                if (query.length > 0 && filtered.length > 0) {
-                    searchResults.innerHTML = filtered.map(s =>
-                        `<div class="result-item" onclick="window.location.href='${s.link}'">
-                            <img src="${s.image}" alt="${s.name}">
-                            <span>${s.name}</span>
-                        </div>`
-                    ).join("");
-                    searchResults.style.display = "block";
-                } else {
-                    searchResults.style.display = "none";
-                }
-            });
+            if (query.length > 0 && filtered.length > 0) {
+                searchResults.innerHTML = filtered.map(s =>
+                    `<div class="result-item" onclick="window.location.href='${s.link}'">
+                        <img src="${s.image}" alt="${s.name}">
+                        <span>${s.name}</span>
+                    </div>`
+                ).join("");
+                searchResults.style.display = "block";
+            } else {
+                searchResults.style.display = "none";
+            }
         });
-
-        let slideIndex = 0;
-
-        function moveSlide(n) {
-            let slides = document.querySelectorAll(".slide");
-            slides[slideIndex].classList.remove("active");
-            slideIndex = (slideIndex + n + slides.length) % slides.length;
-            slides[slideIndex].classList.add("active");
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            setInterval(() => moveSlide(1), 4000); // Cambia de slide cada 4 segundos
-        });
-    </script>
+    });
+</script>
 
 </body>
 </html>
