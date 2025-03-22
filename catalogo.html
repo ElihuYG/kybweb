@@ -148,139 +148,64 @@
     <header class="header">
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
-        <div class="search-container">
-<!-- Botón de búsqueda en el header -->
-<div id="search-icon" class="search-icon">🔍</div>
-
-<!-- Ventana emergente del buscador -->
-<div id="search-popup" class="search-popup">
-    <div class="search-popup-content">
-        <input type="text" id="search-input" class="search-input" placeholder="Buscar series..." autofocus>
-        <button id="close-search" class="close-btn">✖</button>
-    </div>
-    <div id="search-results" class="search-results"></div>
+<div class="search-container">
+    <div id="search-icon" class="search-icon">🔍</div>
 </div>
 
-<style>
-/* Estilos del popup */
-.search-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.search-popup-content {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 10px;
-    border-radius: 10px;
-    position: relative;
-}
-
-.search-input {
-    width: 250px;
-    padding: 8px;
-    border: none;
-    outline: none;
-    font-size: 16px;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-/* Resultados de búsqueda */
-.search-results {
-    width: 300px;
-    max-height: 300px;
-    overflow-y: auto;
-    background: white;
-    border-radius: 10px;
-    margin-top: 10px;
-    display: none;
-    padding: 10px;
-}
-
-.search-item {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding: 8px;
-    cursor: pointer;
-}
-
-.search-item img {
-    width: 50px;
-    height: 70px;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.search-item span {
-    font-size: 14px;
-}
-</style>
+<!-- Popup de búsqueda -->
+<div id="search-popup" class="search-popup">
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar series...">
+        <button class="close-btn" id="close-btn">X</button>
+    </div>
+    <div id="search-results" class="results"></div>
+</div>
 
 <script>
-// Lista de series con imágenes y enlaces
-const series = [
-    { title: "Begins Youth", img: "posters_begins_youth.png", link: "begins_youth.html" },
-    { title: "Thamepo", img: "thamepo.png", link: "thamepo.html" },
-    { title: "Yoursky", img: "yoursky.png", link: "yoursky.html" }
-];
+    // Variables
+    const searchIcon = document.getElementById("search-icon");
+    const searchPopup = document.getElementById("search-popup");
+    const closeBtn = document.getElementById("close-btn");
+    const searchInput = document.getElementById("search-input");
+    const searchResults = document.getElementById("search-results");
 
-document.getElementById("search-icon").addEventListener("click", function() {
-    document.getElementById("search-popup").style.display = "flex";
-    document.getElementById("search-input").focus();
-});
+    // Mostrar popup
+    searchIcon.addEventListener("click", () => {
+        searchPopup.style.display = "flex";
+        searchInput.focus();
+    });
 
-document.getElementById("close-search").addEventListener("click", function() {
-    document.getElementById("search-popup").style.display = "none";
-    document.getElementById("search-results").style.display = "none";
-});
+    // Cerrar popup
+    closeBtn.addEventListener("click", () => {
+        searchPopup.style.display = "none";
+        searchInput.value = "";
+        searchResults.style.display = "none";
+    });
 
-// Función para filtrar y mostrar resultados
-document.getElementById("search-input").addEventListener("input", function() {
-    let query = this.value.toLowerCase();
-    let resultsContainer = document.getElementById("search-results");
-    resultsContainer.innerHTML = ""; // Limpiar resultados anteriores
+    // Series en el buscador
+    const series = [
+        { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+        { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+        { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+    ];
 
-    if (query === "") {
-        resultsContainer.style.display = "none";
-        return;
-    }
+    searchInput.addEventListener("input", () => {
+        let query = searchInput.value.toLowerCase();
+        let filtered = series.filter(s => s.name.toLowerCase().includes(query));
 
-    let filteredSeries = series.filter(s => s.title.toLowerCase().includes(query));
-
-    if (filteredSeries.length > 0) {
-        resultsContainer.style.display = "block";
-        filteredSeries.forEach(s => {
-            let item = document.createElement("div");
-            item.classList.add("search-item");
-            item.innerHTML = `<img src="${s.img}" alt="${s.title}"><span>${s.title}</span>`;
-            item.addEventListener("click", () => {
-                window.location.href = s.link;
-            });
-            resultsContainer.appendChild(item);
-        });
-    } else {
-        resultsContainer.style.display = "none";
-    }
-});
+        if (query.length > 0 && filtered.length > 0) {
+            searchResults.innerHTML = filtered.map(s =>
+                `<div class="result-item" onclick="window.location.href='${s.link}'">
+                    <img src="${s.image}" alt="${s.name}">
+                    <span>${s.name}</span>
+                </div>`
+            ).join("");
+            searchResults.style.display = "block";
+        } else {
+            searchResults.style.display = "none";
+        }
+    });
 </script>
-
 
 
 
