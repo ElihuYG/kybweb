@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="Sliders_Arriba_BY_2.png" alt="Serie 2">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 2">
                 <div class="info" style="background: rgba(0, 0, 0, 0.3); position: absolute; bottom: 0; width: 100%; padding: 10px;">
                     <h2 style="color: white;">Nombre de la Serie 2</h2>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
@@ -96,6 +96,18 @@
             <img src="nuevo6.jpg" alt="Nuevo Episodio 6">
         </div>
     </section>
+    
+    <section class="category">
+        <div class="category-header">
+            <h2 style="color: #50C878;">Próximamente</h2>
+            <a href="proximamente.html" class="view-more">Ver Más</a>
+        </div>
+        <div class="category-content horizontal">
+            <img src="proximamente1.jpg" alt="Próximamente 1">
+            <img src="proximamente2.jpg" alt="Próximamente 2">
+            <img src="proximamente3.jpg" alt="Próximamente 3">
+        </div>
+    </section>
 </main>
 
 <style>
@@ -108,12 +120,13 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.5);
         color: white;
         border: none;
         padding: 10px;
         cursor: pointer;
         z-index: 2;
+        font-size: 24px;
+        background: none;
     }
     .prev { left: -50px; }
     .next { right: -50px; }
@@ -158,6 +171,7 @@
         dots[slideIndex].classList.add("active");
     }
 </script>
+
 
 
 
