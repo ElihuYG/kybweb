@@ -3,143 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - KYB</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>KYB - Inicio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #111;
+            color: white;
+            padding-bottom: 60px; /* Para que el contenido no quede tapado por el menú */
+        }
+
+        /* Estilos del carrusel */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 100px auto 20px;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+            width: 100%;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .slide .info {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .info h2 {
+            margin: 0;
+            font-size: 18px;
+            color: white;
+            display: inline;
+        }
+
+        .info .view-more {
+            color: #50C878;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        .info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .watch-now {
+            background: #50C878;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        /* Flechas de navegación */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+            border-radius: 50%;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* Menú Inferior */
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888;
+            font-size: 12px;
+            transition: color 0.3s;
+        }
+
+        .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .menu-item.active,
+        .menu-item:hover {
+            color: #50C878;
+        }
+
+        .menu-item.active img,
+        .menu-item:hover img {
+            filter: grayscale(0%);
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div id="menu-toggle" class="menu-icon">☰</div>
-        <div class="title">KYB</div>
-        <div class="search-container">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
-        </div>
-    </header>
 
-    <div class="menu" id="menu">
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Categorías</a></li>
-            <li><a href="#">Mi Lista</a></li>
-        </ul>
-    </div>
-
-    <!-- Popup de búsqueda -->
-    <div id="search-popup" class="search-popup">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar series...">
-            <button class="close-btn" id="close-search">✖</button>
-        </div>
-        <div id="search-results" class="results"></div>
-    </div>
-    
-<main>
-    <section class="slider" style="margin-top: 100px; position: relative; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto;">
+    <!-- Carrusel -->
+    <section class="slider-container">
         <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-        <div class="slide-container">
-            <div class="slide active">
-                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
-                <div class="info" style="background: rgba(0, 0, 0, 0.3); position: absolute; bottom: 0; width: 100%; padding: 10px;">
-                    <h2 style="color: white; display: inline;">Nombre de la Serie 1</h2>
-                    <a href="#" class="view-more" style="color: #50C878; margin-left: 10px;">Ver Más</a>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 45 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
+        <div class="slide active">
+            <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+            <div class="info">
+                <h2>Nombre de la Serie 1</h2>
+                <a href="#" class="view-more">Ver Más</a>
+                <p class="rating">⭐⭐⭐⭐✰</p>
+                <p class="subtitles">Subtítulos: ESP, ING</p>
+                <p class="duration">Duración: 45 min/ep</p>
+                <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                <button class="watch-now">Ver Ahora</button>
             </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="Serie 2">
-                <div class="info" style="background: rgba(0, 0, 0, 0.3); position: absolute; bottom: 0; width: 100%; padding: 10px;">
-                    <h2 style="color: white; display: inline;">Nombre de la Serie 2</h2>
-                    <a href="#" class="view-more" style="color: #50C878; margin-left: 10px;">Ver Más</a>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP, ING, FR</p>
-                    <p class="duration">Duración: 50 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
+        </div>
+        <div class="slide">
+            <img src="Sliders_Arriba_YS.png" alt="Serie 2">
+            <div class="info">
+                <h2>Nombre de la Serie 2</h2>
+                <a href="#" class="view-more">Ver Más</a>
+                <p class="rating">⭐⭐⭐⭐⭐</p>
+                <p class="subtitles">Subtítulos: ESP, ING, FR</p>
+                <p class="duration">Duración: 50 min/ep</p>
+                <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                <button class="watch-now">Ver Ahora</button>
             </div>
         </div>
         <button class="next" onclick="moveSlide(1)">&#10095;</button>
-        <div class="dots-container">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-        </div>
     </section>
 
-    <section class="category">
-        <div class="category-header">
-            <h2 style="color: #50C878;">Recientes</h2>
-            <a href="recientes.html" class="view-more">Ver Más</a>
-        </div>
-        <div class="category-content horizontal">
-            <img src="poster_begins_youth.png" alt="Reciente 1">
-            <img src="poster_begins_youth.png" alt="Reciente 2">
-            <img src="poster_begins_youth.png" alt="Reciente 3">
-            <img src="reciente4.jpg" alt="Reciente 4">
-            <img src="reciente5.jpg" alt="Reciente 5">
-            <img src="reciente6.jpg" alt="Reciente 6">
-        </div>
-    </section>
+    <!-- Menú Inferior -->
+    <nav class="bottom-menu">
+        <a href="#" class="menu-item active">
+            <img src="iconos/home.svg" alt="Inicio">
+            <span>Inicio</span>
+        </a>
+        <a href="#" class="menu-item">
+            <img src="iconos/search.svg" alt="Buscar">
+            <span>Buscar</span>
+        </a>
+        <a href="#" class="menu-item">
+            <img src="iconos/library.svg" alt="Mi lista">
+            <span>Mi Lista</span>
+        </a>
+        <a href="#" class="menu-item">
+            <img src="iconos/profile.svg" alt="Perfil">
+            <span>Perfil</span>
+        </a>
+    </nav>
 
-    <section class="category">
-        <div class="category-header">
-            <h2 style="color: #50C878;">Nuevos Episodios</h2>
-            <a href="nuevos.html" class="view-more">Ver Más</a>
-        </div>
-        <div class="category-content horizontal">
-            <img src="nuevo1.jpg" alt="Nuevo Episodio 1">
-            <img src="nuevo2.jpg" alt="Nuevo Episodio 2">
-            <img src="nuevo3.jpg" alt="Nuevo Episodio 3">
-            <img src="nuevo4.jpg" alt="Nuevo Episodio 4">
-            <img src="nuevo5.jpg" alt="Nuevo Episodio 5">
-            <img src="nuevo6.jpg" alt="Nuevo Episodio 6">
-        </div>
-    </section>
-    
-    <section class="category">
-        <div class="category-header">
-            <h2 style="color: #50C878;">Próximamente</h2>
-            <a href="proximamente.html" class="view-more">Ver Más</a>
-        </div>
-        <div class="category-content horizontal">
-            <img src="proximamente1.jpg" alt="Próximamente 1">
-            <img src="proximamente2.jpg" alt="Próximamente 2">
-            <img src="proximamente3.jpg" alt="Próximamente 3">
-        </div>
-    </section>
-</main>
+    <script>
+        let slideIndex = 0;
 
-<script>
-    let slideIndex = 0;
-    function moveSlide(n) {
-        let slides = document.querySelectorAll(".slide");
-        let dots = document.querySelectorAll(".dot");
-        slides[slideIndex].classList.remove("active");
-        dots[slideIndex].classList.remove("active");
-        slideIndex = (slideIndex + n + slides.length) % slides.length;
-        slides[slideIndex].classList.add("active");
-        dots[slideIndex].classList.add("active");
-    }
-    function currentSlide(n) {
-        let slides = document.querySelectorAll(".slide");
-        let dots = document.querySelectorAll(".dot");
-        slides[slideIndex].classList.remove("active");
-        dots[slideIndex].classList.remove("active");
-        slideIndex = n - 1;
-        slides[slideIndex].classList.add("active");
-        dots[slideIndex].classList.add("active");
-    }
-    setInterval(() => moveSlide(1), 3000);
-</script>
+        function moveSlide(n) {
+            let slides = document.querySelectorAll(".slide");
+            slides[slideIndex].classList.remove("active");
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides[slideIndex].classList.add("active");
+        }
 
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuItems = document.querySelectorAll(".menu-item");
 
+            menuItems.forEach((item) => {
+                item.addEventListener("click", function () {
+                    menuItems.forEach((el) => el.classList.remove("active"));
+                    this.classList.add("active");
+                });
+            });
 
+            setInterval(() => moveSlide(1), 4000); // Cambia de slide cada 4 segundos
+        });
+    </script>
 
-
-
-    <script src="script.js"></script>
 </body>
 </html>
