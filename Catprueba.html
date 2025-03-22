@@ -1,165 +1,82 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Inicio</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
-    <script>
-        $(document).ready(function(){
-            $('.slider').slick({
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                dots: true,
-            });
-
-            $(".favorite-icon").click(function() {
-                $(this).toggleClass("favorited");
-            });
-
-            $("#search-icon").click(function() {
-                $("#search-bar").toggle().focus();
-                $("#suggestions").toggle();
-            });
-
-            $("#menu-toggle").click(function() {
-                $("#menu").toggle();
-            });
-
-            $("#search-bar").on("input", function() {
-                let query = $(this).val().toLowerCase();
-                let suggestions = ["Thamepo", "Begins Youth", "Your Sky"];
-                let filtered = suggestions.filter(s => s.toLowerCase().includes(query));
-                $("#suggestions").html(filtered.map(s => `<div class='suggestion'>${s}</div>`).join(""));
-            });
-        });
-    </script>
-    <style>
-        body {
-            background: black;
-            color: white;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            position: relative;
-            z-index: 10;
-        }
-        .menu-icon, .search-icon, .profile-img {
-            cursor: pointer;
-        }
-        .menu-icon {
-            font-size: 24px;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        .search-bar {
-            display: none;
-            background: white;
-            color: black;
-            border: none;
-            padding: 5px;
-            margin-left: 10px;
-        }
-        .suggestions {
-            position: absolute;
-            top: 100%;
-            background: white;
-            color: black;
-            width: 100%;
-            display: none;
-            z-index: 5;
-        }
-        .suggestion {
-            padding: 5px;
-            border-bottom: 1px solid #ddd;
-        }
-        .profile-img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-left: 10px;
-        }
-        .menu {
-            display: none;
-            background: black;
-            padding: 10px;
-            position: absolute;
-            left: 10px;
-            top: 50px;
-            z-index: 15;
-        }
-        .slider {
-            width: 90%;
-            margin: auto;
-            position: relative;
-        }
-        .slider img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            display: block;
-            position: relative;
-        }
-        .info {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 90%;
-            color: white;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.7);
-        }
-    </style>
-</head>
-<body>
-    <header class="header">
-        <div id="menu-toggle" class="menu-icon">☰</div>
-        <div class="title">KYB</div>
-        <div class="search-container">
-            <img src="In_Inthira.jpg" alt="Perfil" class="profile-img">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
-            <div id="suggestions" class="suggestions"></div>
+<div id="search-popup" class="search-popup">
+    <div class="search-content">
+        <span id="close-search" class="close-btn">&times;</span>
+        <input type="text" id="search-input" placeholder="Buscar series...">
+        <div class="search-results">
+            <div class="search-main">
+                <img id="searched-img" src="" alt="Serie encontrada">
+                <span id="searched-title">Nombre de la Serie</span>
+            </div>
+            <div class="separator"></div>
+            <div class="similar-results">
+                <h3>Similares</h3>
+                <ul id="similar-list">
+                    <li>Serie 1</li>
+                    <li>Serie 2</li>
+                    <li>Serie 3</li>
+                </ul>
+            </div>
         </div>
-    </header>
-    
-    <div id="menu" class="menu">
-        <ul>
-            <li>Inicio</li>
-            <li>Favoritos</li>
-            <li>Recomendador</li>
-            <li>Próximamente</li>
-            <li>Ayuda</li>
-        </ul>
     </div>
-    
-    <main>
-        <section class="slider">
-            <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="Serie 1">
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_TP.png" alt="Serie 2">
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="Serie 3">
-            </div>
-        </section>
-    </main>
-</body>
-</html>
+</div>
+
+<style>
+.search-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+.search-content {
+    background: #141414;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.search-results {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.search-main img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+}
+.separator {
+    width: 2px;
+    background: white;
+    height: 150px;
+}
+.similar-results ul {
+    list-style: none;
+    padding: 0;
+}
+.similar-results ul li {
+    padding: 5px 0;
+}
+</style>
+
+<script>
+document.getElementById("search-icon").addEventListener("click", function() {
+    document.getElementById("search-popup").style.display = "flex";
+});
+
+document.getElementById("close-search").addEventListener("click", function() {
+    document.getElementById("search-popup").style.display = "none";
+});
+</script>
