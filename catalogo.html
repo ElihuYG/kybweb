@@ -149,94 +149,144 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-<!-- Botón de búsqueda -->
+<!-- Botón de la lupa -->
 <div id="search-icon" class="search-icon">🔍</div>
 
-<!-- Ventana emergente del buscador -->
+<!-- Ventana emergente de búsqueda -->
 <div id="search-popup" class="search-popup">
-    <div class="search-content">
-        <span class="close-btn" onclick="closeSearchPopup()">&times;</span>
-        <input type="text" id="search-input" placeholder="Buscar series...">
-        <div id="search-results"></div>
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar series..." autofocus>
+        <div id="search-results">
+            <!-- Resultados aparecerán aquí -->
+        </div>
+        <button id="close-search">✖</button>
     </div>
 </div>
 
 <style>
+    /* Estilos para el buscador */
     .search-popup {
         display: none;
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .search-box {
+        background: #222;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
         width: 90%;
         max-width: 400px;
-        background: #000;
-        padding: 15px;
-        border-radius: 10px;
-        z-index: 99999;
-        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
-    }
-
-    .search-content {
         position: relative;
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        font-size: 18px;
-        cursor: pointer;
-        color: white;
     }
 
     #search-input {
         width: 100%;
-        padding: 8px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
         outline: none;
-        background: #222;
+    }
+
+    #close-search {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
         color: white;
+        font-size: 18px;
+        cursor: pointer;
     }
 
     #search-results {
-        margin-top: 10px;
+        margin-top: 15px;
+        text-align: left;
         color: white;
+    }
+
+    .result-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .result-item img {
+        width: 50px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .separator {
+        width: 100%;
+        height: 1px;
+        background: white;
+        margin: 10px 0;
     }
 </style>
 
 <script>
-    const seriesData = [
-        { name: "Begins Youth", image: "posters_begins_youth.png" },
-        { name: "Thamepo", image: "posters_thamepo.png" },
-        { name: "Yoursky", image: "posters_yoursky.png" }
-    ];
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchIcon = document.getElementById("search-icon");
+        const searchPopup = document.getElementById("search-popup");
+        const closeSearch = document.getElementById("close-search");
+        const searchInput = document.getElementById("search-input");
+        const searchResults = document.getElementById("search-results");
 
-    document.getElementById("search-icon").addEventListener("click", () => {
-        document.getElementById("search-popup").style.display = "block";
-        setTimeout(() => document.getElementById("search-input").focus(), 200);
-    });
+        const series = [
+            { name: "Begins Youth", img: "posters_begins_youth.png", link: "begins_youth.html" },
+            { name: "Thamepo", img: "thamepo_poster.png", link: "thamepo.html" },
+            { name: "Yoursky", img: "yoursky_poster.png", link: "yoursky.html" }
+        ];
 
-    document.getElementById("search-input").addEventListener("input", function () {
-        const query = this.value.toLowerCase();
-        const resultsContainer = document.getElementById("search-results");
-        resultsContainer.innerHTML = "";
+        searchIcon.addEventListener("click", function() {
+            searchPopup.style.display = "flex";
+            searchInput.focus();
+        });
 
-        const filteredSeries = seriesData.filter(series => series.name.toLowerCase().includes(query));
-        
-        filteredSeries.forEach(series => {
-            const resultItem = document.createElement("div");
-            resultItem.innerHTML = `<img src="${series.image}" style="width: 50px; margin-right: 10px;"> ${series.name}`;
-            resultsContainer.appendChild(resultItem);
+        closeSearch.addEventListener("click", function() {
+            searchPopup.style.display = "none";
+            searchInput.value = "";
+            searchResults.innerHTML = "";
+        });
+
+        searchInput.addEventListener("input", function() {
+            const query = searchInput.value.toLowerCase();
+            searchResults.innerHTML = "";
+
+            if (query.trim() === "") return;
+
+            const matchedSeries = series.filter(s => s.name.toLowerCase().includes(query));
+
+            if (matchedSeries.length > 0) {
+                matchedSeries.forEach(s => {
+                    const item = document.createElement("div");
+                    item.classList.add("result-item");
+                    item.innerHTML = `<img src="${s.img}" alt="${s.name}"><span>${s.name}</span>`;
+                    item.addEventListener("click", function() {
+                        window.location.href = s.link;
+                    });
+                    searchResults.appendChild(item);
+                });
+                searchResults.innerHTML += '<div class="separator"></div><p>Otros dramas similares...</p>';
+            } else {
+                searchResults.innerHTML = "<p>No se encontraron resultados</p>";
+            }
         });
     });
-
-    function closeSearchPopup() {
-        document.getElementById("search-popup").style.display = "none";
-    }
 </script>
+
 
 
 
