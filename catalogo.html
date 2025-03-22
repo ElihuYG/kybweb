@@ -174,6 +174,82 @@
                 </div>
             </div>
         </section>
+        <section class="category">
+    <div class="category-header">
+        <h2>Recientes</h2>
+        <a href="recientes.html" class="view-more">Ver Más</a>
+    </div>
+    <div class="category-content">
+        <img src="reciente1.jpg" alt="Reciente 1">
+        <img src="reciente2.jpg" alt="Reciente 2">
+        <img src="reciente3.jpg" alt="Reciente 3">
+        <img src="reciente4.jpg" alt="Reciente 4">
+        <img src="reciente5.jpg" alt="Reciente 5">
+        <img src="reciente6.jpg" alt="Reciente 6">
+    </div>
+</section>
+
+<section class="category">
+    <div class="category-header">
+        <h2>Nuevos Episodios</h2>
+        <a href="nuevos.html" class="view-more">Ver Más</a>
+    </div>
+    <div class="category-content horizontal">
+        <img src="nuevo1.jpg" alt="Nuevo Episodio 1">
+        <img src="nuevo2.jpg" alt="Nuevo Episodio 2">
+        <img src="nuevo3.jpg" alt="Nuevo Episodio 3">
+        <img src="nuevo4.jpg" alt="Nuevo Episodio 4">
+        <img src="nuevo5.jpg" alt="Nuevo Episodio 5">
+        <img src="nuevo6.jpg" alt="Nuevo Episodio 6">
+    </div>
+</section>
+
+<section class="category">
+    <div class="category-header">
+        <h2>Próximamente</h2>
+        <a href="proximamente.html" class="view-more">Ver Más</a>
+    </div>
+    <div class="category-content">
+        <img src="proximo1.jpg" alt="Próximamente 1">
+        <img src="proximo2.jpg" alt="Próximamente 2">
+        <img src="proximo3.jpg" alt="Próximamente 3">
+        <img src="proximo4.jpg" alt="Próximamente 4">
+        <img src="proximo5.jpg" alt="Próximamente 5">
+        <img src="proximo6.jpg" alt="Próximamente 6">
+    </div>
+</section>
+
+<style>
+    .category {
+        margin: 20px 0;
+    }
+    .category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+    .category-header h2 {
+        margin: 0;
+    }
+    .view-more {
+        color: red;
+        text-decoration: none;
+    }
+    .category-content {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+    }
+    .category-content img {
+        height: 250px;
+        width: auto;
+        border-radius: 5px;
+    }
+    .category-content.horizontal img {
+        height: 150px;
+    }
+</style>
     </main>
 </body>
 </html>
