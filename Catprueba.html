@@ -1,110 +1,117 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Buscador</title>
-    <style>
-        /* Estilos para el buscador emergente */
-        .search-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
-            display: none; /* Oculto por defecto */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* 🔥 Hace que esté al frente */
-        }
+<!-- Ícono de búsqueda -->
+<div id="search-icon" class="search-icon">🔍</div>
 
-        /* Caja de búsqueda */
-        .search-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 50%;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Botón para cerrar */
-        #close-search {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 20px;
-            cursor: pointer;
-            color: red;
-        }
-
-        /* Estilos para el input */
-        #search-input {
-            width: 80%;
-            padding: 10px;
-            margin-top: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        /* Estilos para los resultados de búsqueda */
-        #search-results {
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        /* Ícono de búsqueda */
-        .search-icon {
-            cursor: pointer;
-            font-size: 20px;
-            margin-left: 10px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Encabezado -->
-    <header class="header">
-        <div id="menu-toggle" class="menu-icon">☰</div>
-        <div class="title">KYB</div>
-        <div class="search-container">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
-        </div>
-        <div class="menu">
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Categorías</a></li>
-                <li><a href="#">Mi Lista</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- Ventana emergente del buscador -->
-    <div id="search-modal" class="search-modal">
-        <div class="search-box">
-            <span id="close-search" class="close-btn">✖</span>
-            <h2>Buscar series</h2>
-            <input type="text" id="search-input" placeholder="Escribe el nombre de la serie...">
-            <div id="search-results">
-                <!-- Aquí aparecerán los resultados -->
-            </div>
+<!-- Ventana emergente del buscador -->
+<div id="search-popup" class="search-popup">
+    <div class="search-content">
+        <span class="close-btn" onclick="closeSearchPopup()">×</span>
+        <input type="text" id="search-input" placeholder="Buscar series..." oninput="searchSeries()">
+        <div id="search-results">
+            <!-- Resultados de búsqueda aparecerán aquí -->
         </div>
     </div>
+</div>
 
-    <script>
-        // Mostrar el buscador cuando se hace clic en la lupa
-        document.getElementById("search-icon").addEventListener("click", function () {
-            document.getElementById("search-modal").style.display = "flex";
-        });
+<style>
+    .search-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
 
-        // Cerrar el buscador cuando se toca la "X"
-        document.getElementById("close-search").addEventListener("click", function () {
-            document.getElementById("search-modal").style.display = "none";
-        });
-    </script>
+    .search-content {
+        background: black;
+        padding: 20px;
+        border-radius: 10px;
+        width: 60%;
+        text-align: center;
+        position: relative;
+    }
 
-</body>
-</html>
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 25px;
+        cursor: pointer;
+        color: white;
+    }
+
+    #search-input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 16px;
+    }
+
+    #search-results {
+        margin-top: 10px;
+        color: white;
+        text-align: left;
+    }
+
+    .search-result-item {
+        display: flex;
+        align-items: center;
+        background: #222;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .search-result-item img {
+        width: 50px;
+        height: 75px;
+        margin-right: 10px;
+    }
+
+    .search-result-item:hover {
+        background: #333;
+    }
+</style>
+
+<script>
+    const series = [
+        { title: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+        { title: "Thamepo", image: "posters_thamepo.png", link: "thamepo.html" },
+        { title: "Yoursky", image: "posters_yoursky.png", link: "yoursky.html" }
+    ];
+
+    document.getElementById("search-icon").addEventListener("click", function () {
+        document.getElementById("search-popup").style.display = "flex";
+    });
+
+    function closeSearchPopup() {
+        document.getElementById("search-popup").style.display = "none";
+    }
+
+    function searchSeries() {
+        let input = document.getElementById("search-input").value.toLowerCase();
+        let resultsContainer = document.getElementById("search-results");
+        resultsContainer.innerHTML = "";
+
+        let filteredSeries = series.filter(serie => serie.title.toLowerCase().includes(input));
+
+        if (filteredSeries.length === 0) {
+            resultsContainer.innerHTML = "<p>No se encontraron resultados</p>";
+        } else {
+            filteredSeries.forEach(serie => {
+                let resultItem = document.createElement("div");
+                resultItem.classList.add("search-result-item");
+                resultItem.innerHTML = `
+                    <img src="${serie.image}" alt="${serie.title}">
+                    <a href="${serie.link}" style="color: white; text-decoration: none;">${serie.title}</a>
+                `;
+                resultsContainer.appendChild(resultItem);
+            });
+        }
+    }
+</script>
