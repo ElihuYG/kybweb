@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB</title>
+    <title>KYB - Buscador</title>
     <style>
         /* Estilos generales */
         body {
@@ -24,27 +24,23 @@
             position: relative;
         }
 
-        /* Botón del menú */
-        .menu-icon {
-            cursor: pointer;
-            font-size: 24px;
-            user-select: none;
-        }
-
-        /* Menú desplegable */
+        /* Estilos del menú */
         .menu {
             position: absolute;
             top: 60px;
             left: 0;
             width: 100%;
             background: #333;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease-in-out;
+            display: none;
+            flex-direction: column;
+            padding: 10px;
+            transition: transform 0.3s ease-in-out;
+            transform: translateY(-100%);
         }
 
-        .menu.show {
-            max-height: 200px; /* Ajusta según el contenido */
+        .menu.active {
+            display: flex;
+            transform: translateY(0);
         }
 
         .menu ul {
@@ -53,28 +49,29 @@
             margin: 0;
         }
 
-        .menu li {
+        .menu ul li {
             padding: 10px;
             border-bottom: 1px solid #444;
-            text-align: center;
         }
 
-        .menu li a {
-            text-decoration: none;
+        .menu ul li a {
             color: white;
-            display: block;
+            text-decoration: none;
         }
 
-        /* Botón de cierre dentro del menú */
+        .menu-icon {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
         .close-menu {
             background: red;
             color: white;
-            padding: 5px 10px;
             border: none;
+            padding: 5px;
             cursor: pointer;
-            display: block;
-            margin: 10px auto;
-            border-radius: 5px;
+            margin-top: 10px;
+            align-self: center;
         }
 
         /* Estilos del buscador */
@@ -108,6 +105,39 @@
             outline: none;
         }
 
+        /* Estilos para los resultados */
+        .results {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 200px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            right: 0;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -118,12 +148,13 @@
         <div class="search-container">
             <div id="search-icon" class="search-icon">🔍</div>
             <div class="search-box" id="search-box">
-                <input type="text" placeholder="Buscar...">
+                <input type="text" id="search-input" placeholder="Buscar series...">
+                <div id="search-results" class="results"></div>
             </div>
         </div>
+        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
     </header>
 
-    <!-- Menú desplegable -->
     <div class="menu" id="menu">
         <ul>
             <li><a href="#">Inicio</a></li>
@@ -134,23 +165,51 @@
     </div>
 
     <script>
+        // Funcionalidad del menú
         const menuToggle = document.getElementById("menu-toggle");
         const menu = document.getElementById("menu");
         const closeMenu = document.getElementById("close-menu");
 
-        const searchIcon = document.getElementById("search-icon");
-        const searchBox = document.getElementById("search-box");
-
         menuToggle.addEventListener("click", () => {
-            menu.classList.toggle("show");
+            menu.classList.add("active");
         });
 
         closeMenu.addEventListener("click", () => {
-            menu.classList.remove("show");
+            menu.classList.remove("active");
         });
+
+        // Funcionalidad del buscador
+        const searchIcon = document.getElementById("search-icon");
+        const searchBox = document.getElementById("search-box");
+        const searchInput = document.getElementById("search-input");
+        const searchResults = document.getElementById("search-results");
 
         searchIcon.addEventListener("click", () => {
             searchBox.style.display = searchBox.style.display === "block" ? "none" : "block";
+            searchInput.focus();
+        });
+
+        const series = [
+            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+        ];
+
+        searchInput.addEventListener("input", () => {
+            let query = searchInput.value.toLowerCase();
+            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+
+            if (query.length > 0 && filtered.length > 0) {
+                searchResults.innerHTML = filtered.map(s =>
+                    `<div class="result-item" onclick="window.location.href='${s.link}'">
+                        <img src="${s.image}" alt="${s.name}">
+                        <span>${s.name}</span>
+                    </div>`
+                ).join("");
+                searchResults.style.display = "block";
+            } else {
+                searchResults.style.display = "none";
+            }
         });
     </script>
 
