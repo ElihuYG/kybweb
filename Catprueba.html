@@ -1,117 +1,253 @@
-<!-- Ícono de búsqueda -->
-<div id="search-icon" class="search-icon">🔍</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB - Buscador</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: white;
+        }
 
-<!-- Ventana emergente del buscador -->
-<div id="search-popup" class="search-popup">
-    <div class="search-content">
-        <span class="close-btn" onclick="closeSearchPopup()">×</span>
-        <input type="text" id="search-input" placeholder="Buscar series..." oninput="searchSeries()">
-        <div id="search-results">
-            <!-- Resultados de búsqueda aparecerán aquí -->
-        </div>
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #222;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+
+        /* Menú */
+        .menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: #333;
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu ul li {
+            padding: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .close-menu {
+            margin-top: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Estilos del popup de búsqueda */
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            position: relative;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Estilos para los resultados */
+        .results {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 350px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none; /* Oculto por defecto */
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div id="menu-toggle" class="menu-icon">☰</div>
+    <div class="title">KYB</div>
+    <div class="search-container">
+        <div id="search-icon" class="search-icon">🔍</div>
+        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
     </div>
+    <div id="menu" class="menu">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Mi Lista</a></li>
+        </ul>
+        <button id="close-menu" class="close-menu">Cerrar</button>
+    </div>
+</header>
+
+<!-- Popup de búsqueda -->
+<div id="search-popup" class="search-popup">
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar series...">
+        <button class="close-btn" id="close-btn">X</button>
+    </div>
+    <div id="search-results" class="results"></div>
 </div>
 
-<style>
-    .search-popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .search-content {
-        background: black;
-        padding: 20px;
-        border-radius: 10px;
-        width: 60%;
-        text-align: center;
-        position: relative;
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 25px;
-        cursor: pointer;
-        color: white;
-    }
-
-    #search-input {
-        width: 80%;
-        padding: 10px;
-        margin: 10px 0;
-        font-size: 16px;
-    }
-
-    #search-results {
-        margin-top: 10px;
-        color: white;
-        text-align: left;
-    }
-
-    .search-result-item {
-        display: flex;
-        align-items: center;
-        background: #222;
-        padding: 10px;
-        margin: 5px 0;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .search-result-item img {
-        width: 50px;
-        height: 75px;
-        margin-right: 10px;
-    }
-
-    .search-result-item:hover {
-        background: #333;
-    }
-</style>
-
 <script>
-    const series = [
-        { title: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
-        { title: "Thamepo", image: "posters_thamepo.png", link: "thamepo.html" },
-        { title: "Yoursky", image: "posters_yoursky.png", link: "yoursky.html" }
-    ];
+    // Variables del menú
+    const menuToggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("menu");
+    const closeMenu = document.getElementById("close-menu");
 
-    document.getElementById("search-icon").addEventListener("click", function () {
-        document.getElementById("search-popup").style.display = "flex";
+    // ABRIR MENÚ con 1 solo clic
+    menuToggle.addEventListener("click", () => {
+        menu.style.display = "block";
     });
 
-    function closeSearchPopup() {
-        document.getElementById("search-popup").style.display = "none";
-    }
+    // CERRAR MENÚ solo con el botón "Cerrar"
+    closeMenu.addEventListener("click", () => {
+        menu.style.display = "none";
+    });
 
-    function searchSeries() {
-        let input = document.getElementById("search-input").value.toLowerCase();
-        let resultsContainer = document.getElementById("search-results");
-        resultsContainer.innerHTML = "";
+    // Variables del buscador
+    const searchIcon = document.getElementById("search-icon");
+    const searchPopup = document.getElementById("search-popup");
+    const closeBtn = document.getElementById("close-btn");
+    const searchInput = document.getElementById("search-input");
+    const searchResults = document.getElementById("search-results");
 
-        let filteredSeries = series.filter(serie => serie.title.toLowerCase().includes(input));
+    // Mostrar popup
+    searchIcon.addEventListener("click", () => {
+        searchPopup.style.display = "flex";
+        searchInput.focus();
+    });
 
-        if (filteredSeries.length === 0) {
-            resultsContainer.innerHTML = "<p>No se encontraron resultados</p>";
+    // Cerrar popup
+    closeBtn.addEventListener("click", () => {
+        searchPopup.style.display = "none";
+        searchInput.value = "";
+        searchResults.style.display = "none";
+    });
+
+    // Series en el buscador
+    const series = [
+        { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+        { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+        { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+    ];
+
+    searchInput.addEventListener("input", () => {
+        let query = searchInput.value.toLowerCase();
+        let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+
+        if (query.length > 0 && filtered.length > 0) {
+            searchResults.innerHTML = filtered.map(s =>
+                `<div class="result-item" onclick="window.location.href='${s.link}'">
+                    <img src="${s.image}" alt="${s.name}">
+                    <span>${s.name}</span>
+                </div>`
+            ).join("");
+            searchResults.style.display = "block";
         } else {
-            filteredSeries.forEach(serie => {
-                let resultItem = document.createElement("div");
-                resultItem.classList.add("search-result-item");
-                resultItem.innerHTML = `
-                    <img src="${serie.image}" alt="${serie.title}">
-                    <a href="${serie.link}" style="color: white; text-decoration: none;">${serie.title}</a>
-                `;
-                resultsContainer.appendChild(resultItem);
-            });
+            searchResults.style.display = "none";
         }
-    }
+    });
 </script>
+
+</body>
+</html>
