@@ -271,3 +271,187 @@
         }
     }
 </style>
+<main>
+    <section class="slider">
+        <!-- Primer slide -->
+        <div class="slide">
+            <img src="serie1.jpg" alt="Serie 1">
+            <div class="info">
+                <h2>Nombre de la Serie 1</h2>
+                <p class="rating">⭐⭐⭐⭐✰</p>
+                <p class="subtitles">Subtítulos: ESP, ING</p>
+                <p class="duration">Duración: 45 min/ep</p>
+                <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                <button class="watch-now">Ver Ahora</button>
+            </div>
+        </div>
+
+        <!-- Segundo slide -->
+        <div class="slide">
+            <img src="serie2.jpg" alt="Serie 2">
+            <div class="info">
+                <h2>Nombre de la Serie 2</h2>
+                <p class="rating">⭐⭐⭐⭐⭐</p>
+                <p class="subtitles">Subtítulos: ESP</p>
+                <p class="duration">Duración: 50 min/ep</p>
+                <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                <button class="watch-now">Ver Ahora</button>
+            </div>
+        </div>
+
+        <!-- Agrega más slides aquí si es necesario -->
+    </section>
+</main>
+
+<style>
+    /* Estilos generales del slider */
+    .slider {
+        position: relative;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    /* Contenedor de cada slide */
+    .slide {
+        position: relative;
+        width: 100%;
+        transition: transform 0.5s ease-in-out; /* Animación suave */
+    }
+
+    /* Estilos de la imagen */
+    .slide img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* Información sobre la imagen */
+    .info {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.8);  /* Fondo oscuro con opacidad 0.8 */
+        padding: 15px;
+        border-radius: 10px;
+        z-index: 2;
+        max-width: 300px;
+    }
+
+    .info h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .info p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+
+    .info .rating {
+        font-size: 18px;
+    }
+
+    .info .subtitles, .info .duration {
+        font-size: 12px;
+    }
+
+    .info .watch-now {
+        background-color: #009688; /* Color similar al verde esmeralda */
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .info .watch-now:hover {
+        background-color: #00796b; /* Sombra más oscura */
+    }
+
+    /* Carrusel de varios slides */
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .slider .slide {
+        flex: 0 0 100%;
+    }
+
+    /* Botones de navegación (prev y next) */
+    .carousel-prev, .carousel-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 30px;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .carousel-prev {
+        left: 10px;
+    }
+
+    .carousel-next {
+        right: 10px;
+    }
+
+    /* Responsividad para pantallas pequeñas */
+    @media screen and (max-width: 768px) {
+        .info {
+            font-size: 12px;
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .info h2 {
+            font-size: 18px;
+        }
+
+        .info p {
+            font-size: 10px;
+        }
+
+        .carousel-prev, .carousel-next {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const prevBtn = document.querySelector(".carousel-prev");
+        const nextBtn = document.querySelector(".carousel-next");
+        const slides = document.querySelectorAll(".slide");
+        let currentIndex = 0;
+
+        // Mover al siguiente slide
+        nextBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        });
+
+        // Mover al slide anterior
+        prevBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        });
+
+        // Actualizar la posición del carrusel
+        function updateSlider() {
+            const offset = -currentIndex * 100;
+            document.querySelector(".slider").style.transform = `translateX(${offset}%)`;
+        }
+
+        updateSlider();  // Inicializar el carrusel
+    });
+</script>
