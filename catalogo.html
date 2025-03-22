@@ -149,20 +149,15 @@
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
         <div class="search-container">
-<!-- Ícono de búsqueda -->
+<!-- Botón de búsqueda -->
 <div id="search-icon" class="search-icon">🔍</div>
 
 <!-- Ventana emergente del buscador -->
 <div id="search-popup" class="search-popup">
     <div class="search-content">
-        <span class="close-btn" onclick="closeSearchPopup()">×</span>
-        <input type="text" id="search-input" placeholder="Buscar series..." onfocus="this.value = this.value;">
-        
-        <div id="search-results-container">
-            <div id="search-main-result"></div>
-            <div class="separator"></div>
-            <div id="search-similar-results"></div>
-        </div>
+        <span class="close-btn" onclick="closeSearchPopup()">&times;</span>
+        <input type="text" id="search-input" placeholder="Buscar series...">
+        <div id="search-results"></div>
     </div>
 </div>
 
@@ -175,7 +170,7 @@
         transform: translate(-50%, -50%);
         width: 90%;
         max-width: 400px;
-        background: black;
+        background: #000;
         padding: 15px;
         border-radius: 10px;
         z-index: 99999;
@@ -206,123 +201,42 @@
         color: white;
     }
 
-    #search-results-container {
-        display: flex;
-        align-items: center;
+    #search-results {
         margin-top: 10px;
-    }
-
-    #search-main-result {
-        flex: 1;
-        text-align: center;
-    }
-
-    #search-main-result img {
-        width: 80px;
-        height: 120px;
-        border-radius: 5px;
-    }
-
-    .separator {
-        width: 1px;
-        background: white;
-        height: 100px;
-        margin: 0 10px;
-    }
-
-    #search-similar-results {
-        flex: 1;
-    }
-
-    .search-result-item {
-        display: flex;
-        align-items: center;
-        background: #222;
-        padding: 5px;
-        margin: 2px 0;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .search-result-item img {
-        width: 40px;
-        height: 60px;
-        margin-right: 8px;
-        border-radius: 3px;
-    }
-
-    .search-result-item:hover {
-        background: #333;
+        color: white;
     }
 </style>
 
 <script>
     const seriesData = [
-        { name: "Begins Youth", image: "posters_begins_youth.png", similar: ["Thamepo", "Yoursky"] },
-        { name: "Thamepo", image: "posters_thamepo.png", similar: ["Begins Youth", "Yoursky"] },
-        { name: "Yoursky", image: "posters_yoursky.png", similar: ["Begins Youth", "Thamepo"] }
+        { name: "Begins Youth", image: "posters_begins_youth.png" },
+        { name: "Thamepo", image: "posters_thamepo.png" },
+        { name: "Yoursky", image: "posters_yoursky.png" }
     ];
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const searchIcon = document.getElementById("search-icon");
-        const searchPopup = document.getElementById("search-popup");
-        const searchInput = document.getElementById("search-input");
+    document.getElementById("search-icon").addEventListener("click", () => {
+        document.getElementById("search-popup").style.display = "block";
+        setTimeout(() => document.getElementById("search-input").focus(), 200);
+    });
 
-        searchIcon.addEventListener("click", () => {
-            searchPopup.style.display = "block";
+    document.getElementById("search-input").addEventListener("input", function () {
+        const query = this.value.toLowerCase();
+        const resultsContainer = document.getElementById("search-results");
+        resultsContainer.innerHTML = "";
 
-            // Asegurar que el input reciba foco en móviles
-            setTimeout(() => {
-                searchInput.focus();
-                searchInput.select();
-            }, 300);
-        });
-
-        searchInput.addEventListener("input", searchSeries);
-
-        document.addEventListener("click", (event) => {
-            if (!searchPopup.contains(event.target) && event.target !== searchIcon) {
-                closeSearchPopup();
-            }
+        const filteredSeries = seriesData.filter(series => series.name.toLowerCase().includes(query));
+        
+        filteredSeries.forEach(series => {
+            const resultItem = document.createElement("div");
+            resultItem.innerHTML = `<img src="${series.image}" style="width: 50px; margin-right: 10px;"> ${series.name}`;
+            resultsContainer.appendChild(resultItem);
         });
     });
 
     function closeSearchPopup() {
         document.getElementById("search-popup").style.display = "none";
     }
-
-    function searchSeries() {
-        const query = document.getElementById("search-input").value.toLowerCase();
-        const mainResultDiv = document.getElementById("search-main-result");
-        const similarResultsDiv = document.getElementById("search-similar-results");
-
-        mainResultDiv.innerHTML = "";
-        similarResultsDiv.innerHTML = "";
-
-        const foundSeries = seriesData.find(series => series.name.toLowerCase().includes(query));
-
-        if (foundSeries) {
-            mainResultDiv.innerHTML = `
-                <h3 style="color: white; font-size: 14px;">${foundSeries.name}</h3>
-                <img src="${foundSeries.image}" alt="${foundSeries.name}">
-            `;
-
-            foundSeries.similar.forEach(similarName => {
-                const similarSeries = seriesData.find(s => s.name === similarName);
-                if (similarSeries) {
-                    similarResultsDiv.innerHTML += `
-                        <div class="search-result-item">
-                            <img src="${similarSeries.image}" alt="${similarSeries.name}">
-                            <span style="color: white; font-size: 12px;">${similarSeries.name}</span>
-                        </div>
-                    `;
-                }
-            });
-        }
-    }
 </script>
-
-
 
 
 
