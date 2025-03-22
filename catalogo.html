@@ -64,6 +64,32 @@
             cursor: pointer;
         }
 
+        /* Menú lateral */
+        .menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: #004d40;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .menu.active {
+            display: block;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            text-align: left;
+        }
+
         /* Estilos del carrusel */
         .slider-container {
             position: relative;
@@ -142,19 +168,101 @@
         .prev { left: 10px; }
         .next { right: 10px; }
 
+        /* Buscador */
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            position: relative;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .results {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 350px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
 
     <!-- Menú Superior -->
     <nav class="top-menu">
-        <button class="menu-button">☰</button>
+        <button id="menu-toggle" class="menu-button">☰</button>
         <div class="logo">KYB</div>
         <div class="menu-icons">
-            <img src="iconos/search.svg" alt="Buscar" onclick="searchFunction()">
-            <img src="iconos/profile.jpg" alt="Perfil" class="profile-pic">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-pic"></a>
         </div>
     </nav>
+
+    <!-- Menú lateral -->
+    <div id="menu" class="menu">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Mi Lista</a></li>
+            <li><button id="close-menu" class="close-btn">Cerrar</button></li>
+        </ul>
+    </div>
+
+    <!-- Popup de búsqueda -->
+    <div id="search-popup" class="search-popup">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar series...">
+            <button class="close-btn" id="close-search">X</button>
+        </div>
+        <div id="search-results" class="results"></div>
+    </div>
 
     <!-- Carrusel -->
     <section class="slider-container">
@@ -187,6 +295,7 @@
     </section>
 
     <script>
+        // Función del carrusel
         let slideIndex = 0;
 
         function moveSlide(n) {
@@ -196,16 +305,42 @@
             slides[slideIndex].classList.add("active");
         }
 
-        function searchFunction() {
-            let query = prompt("¿Qué deseas buscar?");
-            if (query) {
-                alert("Buscando: " + query);
-                // Aquí puedes redirigir a la página de resultados
-            }
-        }
-
+        // Funciones para el menú y el buscador
         document.addEventListener("DOMContentLoaded", function () {
-            setInterval(() => moveSlide(1), 4000); // Cambia de slide cada 4 segundos
+            const menuToggle = document.getElementById("menu-toggle");
+            const menu = document.getElementById("menu");
+            const closeMenu = document.getElementById("close-menu");
+            const searchIcon = document.getElementById("search-icon");
+            const searchPopup = document.getElementById("search-popup");
+            const closeSearch = document.getElementById("close-search");
+
+            menuToggle.addEventListener("click", function () {
+                menu.classList.toggle("active");
+            });
+
+            closeMenu.addEventListener("click", function () {
+                menu.classList.remove("active");
+            });
+
+            searchIcon.addEventListener("click", function () {
+                searchPopup.style.display = "flex";
+            });
+
+            closeSearch.addEventListener("click", function () {
+                searchPopup.style.display = "none";
+            });
+
+            document.getElementById("search-input").addEventListener("input", function () {
+                const query = this.value.toLowerCase();
+                const results = document.getElementById("search-results");
+                if (query.length > 0) {
+                    results.innerHTML = `<div class="result-item"><img src="poster1.jpg" alt="Serie 1">Serie 1</div>
+                                         <div class="result-item"><img src="poster2.jpg" alt="Serie 2">Serie 2</div>`;
+                    results.style.display = "block";
+                } else {
+                    results.style.display = "none";
+                }
+            });
         });
     </script>
 
