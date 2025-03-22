@@ -156,7 +156,7 @@
 <div id="search-popup" class="search-popup">
     <div class="search-content">
         <span class="close-btn" onclick="closeSearchPopup()">×</span>
-        <input type="text" id="search-input" placeholder="Buscar series..." oninput="searchSeries()">
+        <input type="text" id="search-input" placeholder="Buscar series..." oninput="searchSeries()" autofocus>
         
         <div id="search-results-container">
             <div id="search-main-result"></div>
@@ -178,7 +178,7 @@
         background: black;
         padding: 15px;
         border-radius: 10px;
-        z-index: 9999;
+        z-index: 99999;
         box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
     }
 
@@ -270,8 +270,9 @@
 
         searchIcon.addEventListener("click", () => {
             searchPopup.style.display = "block";
-            searchInput.value = ""; // Limpia el input al abrir
-            searchInput.focus();
+            setTimeout(() => {
+                searchInput.focus(); // Asegura que el input se active en PC y móvil
+            }, 100);
         });
 
         searchInput.addEventListener("input", searchSeries);
