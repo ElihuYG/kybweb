@@ -1,82 +1,110 @@
-<div id="search-popup" class="search-popup">
-    <div class="search-content">
-        <span id="close-search" class="close-btn">&times;</span>
-        <input type="text" id="search-input" placeholder="Buscar series...">
-        <div class="search-results">
-            <div class="search-main">
-                <img id="searched-img" src="" alt="Serie encontrada">
-                <span id="searched-title">Nombre de la Serie</span>
-            </div>
-            <div class="separator"></div>
-            <div class="similar-results">
-                <h3>Similares</h3>
-                <ul id="similar-list">
-                    <li>Serie 1</li>
-                    <li>Serie 2</li>
-                    <li>Serie 3</li>
-                </ul>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB - Buscador</title>
+    <style>
+        /* Estilos para el buscador emergente */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+            display: none; /* Oculto por defecto */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* 🔥 Hace que esté al frente */
+        }
+
+        /* Caja de búsqueda */
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Botón para cerrar */
+        #close-search {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: red;
+        }
+
+        /* Estilos para el input */
+        #search-input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Estilos para los resultados de búsqueda */
+        #search-results {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        /* Ícono de búsqueda */
+        .search-icon {
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header class="header">
+        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div class="title">KYB</div>
+        <div class="search-container">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Mi Lista</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Ventana emergente del buscador -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-box">
+            <span id="close-search" class="close-btn">✖</span>
+            <h2>Buscar series</h2>
+            <input type="text" id="search-input" placeholder="Escribe el nombre de la serie...">
+            <div id="search-results">
+                <!-- Aquí aparecerán los resultados -->
             </div>
         </div>
     </div>
-</div>
 
-<style>
-.search-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
-.search-content {
-    background: #141414;
-    padding: 20px;
-    border-radius: 10px;
-    width: 50%;
-    text-align: center;
-    position: relative;
-}
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 25px;
-    cursor: pointer;
-}
-.search-results {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-.search-main img {
-    width: 100px;
-    height: 150px;
-    object-fit: cover;
-}
-.separator {
-    width: 2px;
-    background: white;
-    height: 150px;
-}
-.similar-results ul {
-    list-style: none;
-    padding: 0;
-}
-.similar-results ul li {
-    padding: 5px 0;
-}
-</style>
+    <script>
+        // Mostrar el buscador cuando se hace clic en la lupa
+        document.getElementById("search-icon").addEventListener("click", function () {
+            document.getElementById("search-modal").style.display = "flex";
+        });
 
-<script>
-document.getElementById("search-icon").addEventListener("click", function() {
-    document.getElementById("search-popup").style.display = "flex";
-});
+        // Cerrar el buscador cuando se toca la "X"
+        document.getElementById("close-search").addEventListener("click", function () {
+            document.getElementById("search-modal").style.display = "none";
+        });
+    </script>
 
-document.getElementById("close-search").addEventListener("click", function() {
-    document.getElementById("search-popup").style.display = "none";
-});
-</script>
+</body>
+</html>
