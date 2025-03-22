@@ -23,7 +23,7 @@
             margin: auto;
             position: relative;
             z-index: 1;
-            margin-top: 450px;
+            margin-top: 450px; /* Ajuste para bajar el carrusel */
         }
         .slide {
             position: relative;
@@ -38,7 +38,7 @@
             position: absolute;
             bottom: 10%;
             left: 5%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5); /* Bajando la opacidad del fondo */
             padding: 15px;
             border-radius: 5px;
             font-size: 16px;
@@ -56,33 +56,6 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        .nuevas-adiciones {
-            margin: 50px auto;
-            max-width: 1200px;
-            padding: 20px;
-        }
-        .nuevas-adiciones h2 {
-            text-align: left;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .nuevas-adiciones .items {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-        }
-        .nuevas-adiciones .item {
-            min-width: 200px;
-            background: #222;
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-            padding: 10px;
-        }
-        .nuevas-adiciones img {
-            width: 100%;
-            border-radius: 10px;
-        }
         .menu {
             display: none;
             position: absolute;
@@ -94,17 +67,82 @@
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
         }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu ul li {
+            padding: 10px;
+            text-align: center;
+        }
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .menu-icon {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .slide img {
+                max-height: 300px;
+                object-fit: contain;
+            }
+            .slide .info {
+                font-size: 12px;
+                padding: 8px;
+                bottom: 5%;
+                left: 2%;
+                max-width: 80%;
+            }
+            .info h2 {
+                font-size: 14px;
+            }
+            .watch-now {
+                padding: 6px;
+                font-size: 10px;
+            }
+            .menu {
+                width: 120px;
+                top: 40px;
+                right: 5px;
+            }
+        }
     </style>
+    <script>
+        $(document).ready(function(){
+            $("#menu-toggle").click(function(){
+                $(".menu").slideToggle();
+            });
+        });
+    </script>
 </head>
 <body>
     <header class="header">
         <div id="menu-toggle" class="menu-icon">☰</div>
         <div class="title">KYB</div>
+        <div class="search-container">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+            <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Mi Lista</a></li>
+            </ul>
+        </div>
     </header>
     <main>
         <section class="slider">
             <div class="slide">
-                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 1">
                 <div class="info">
                     <h2>Nombre de la Serie 1</h2>
                     <p class="rating">⭐⭐⭐⭐✰</p>
@@ -114,22 +152,15 @@
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
-        </section>
-        
-        <section class="nuevas-adiciones">
-            <h2>Nuevas Adiciones</h2>
-            <div class="items">
-                <div class="item">
-                    <img src="nueva1.jpg" alt="Nueva Serie 1">
-                    <p>Nombre de la Nueva Serie 1</p>
-                </div>
-                <div class="item">
-                    <img src="nueva2.jpg" alt="Nueva Serie 2">
-                    <p>Nombre de la Nueva Serie 2</p>
-                </div>
-                <div class="item">
-                    <img src="nueva3.jpg" alt="Nueva Serie 3">
-                    <p>Nombre de la Nueva Serie 3</p>
+            <div class="slide">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 2">
+                <div class="info">
+                    <h2>Nombre de la Serie 2</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
         </section>
