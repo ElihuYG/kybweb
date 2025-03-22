@@ -148,3 +148,17 @@ body {
     color: white;
     padding: 10px;
     background: r
+.menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 15px;
+    background: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.menu.active {
+    display: block;
+}
