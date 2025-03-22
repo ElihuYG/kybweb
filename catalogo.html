@@ -63,6 +63,51 @@
         <button class="next">&#10095;</button> <!-- Flecha derecha -->
     </section>
 
+    <section class="category">
+        <div class="category-header">
+            <h2>Recientes</h2>
+            <a href="recientes.html" class="view-more">Ver Más</a>
+        </div>
+        <div class="category-content">
+            <img src="poster_begins_youth.png" alt="Reciente 1">
+            <img src="poster_begins_youth.png" alt="Reciente 2">
+            <img src="poster_begins_youth.png" alt="Reciente 3">
+            <img src="reciente4.jpg" alt="Reciente 4">
+            <img src="reciente5.jpg" alt="Reciente 5">
+            <img src="reciente6.jpg" alt="Reciente 6">
+        </div>
+    </section>
+
+    <section class="category">
+        <div class="category-header">
+            <h2>Nuevos Episodios</h2>
+            <a href="nuevos.html" class="view-more">Ver Más</a>
+        </div>
+        <div class="category-content horizontal">
+            <img src="nuevo1.jpg" alt="Nuevo Episodio 1">
+            <img src="nuevo2.jpg" alt="Nuevo Episodio 2">
+            <img src="nuevo3.jpg" alt="Nuevo Episodio 3">
+            <img src="nuevo4.jpg" alt="Nuevo Episodio 4">
+            <img src="nuevo5.jpg" alt="Nuevo Episodio 5">
+            <img src="nuevo6.jpg" alt="Nuevo Episodio 6">
+        </div>
+    </section>
+
+    <section class="category">
+        <div class="category-header">
+            <h2>Próximamente</h2>
+            <a href="proximamente.html" class="view-more">Ver Más</a>
+        </div>
+        <div class="category-content">
+            <img src="proximo1.jpg" alt="Próximamente 1">
+            <img src="proximo2.jpg" alt="Próximamente 2">
+            <img src="proximo3.jpg" alt="Próximamente 3">
+            <img src="proximo4.jpg" alt="Próximamente 4">
+            <img src="proximo5.jpg" alt="Próximamente 5">
+            <img src="proximo6.jpg" alt="Próximamente 6">
+        </div>
+    </section>
+
     <style>
         .slider {
             display: flex;
@@ -175,29 +220,6 @@
     </style>
 </main>
 
-<script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[index].classList.add('active');
-    }
-
-    prevBtn.addEventListener('click', () => {
-        slideIndex = (slideIndex === 0) ? slides.length - 1 : slideIndex - 1;
-        showSlide(slideIndex);
-    });
-
-    nextBtn.addEventListener('click', () => {
-        slideIndex = (slideIndex === slides.length - 1) ? 0 : slideIndex + 1;
-        showSlide(slideIndex);
-    });
-
-    showSlide(slideIndex);
-</script>
 
 
 
