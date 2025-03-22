@@ -14,7 +14,7 @@
 
         .slider {
             position: relative;
-            width: 90%;
+            width: 80%; /* Un poco más pequeño */
             margin: 100px auto 0; /* Desplazado 100px hacia abajo */
             overflow: hidden;
         }
@@ -26,7 +26,7 @@
 
         .slide img {
             width: 100%;
-            height: 500px; /* Ajustado a 500px de altura */
+            height: 450px; /* Ajustado a 450px de altura */
             object-fit: cover; /* Ajusta la imagen sin recortarla */
         }
 
@@ -39,47 +39,32 @@
             padding: 10px;
             background: rgba(0, 0, 0, 0.7); /* Fondo con opacidad */
             border-radius: 8px;
+            font-size: 14px; /* Texto más pequeño */
         }
 
-        .arrows {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
+        .info h2 {
+            font-size: 18px; /* Título más pequeño */
+            margin: 0;
         }
 
-        .arrow {
-            font-size: 30px;
+        .info p {
+            margin: 5px 0;
+            font-size: 12px; /* Tamaño del texto reducido */
+        }
+
+        .watch-now {
+            background-color: #00b894;
             color: white;
-            cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo transparente negro */
+            padding: 8px 16px;
             border: none;
-            padding: 15px;
-            border-radius: 50%; /* Flechas redondas */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
             transition: background-color 0.3s;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 502px; /* Altura de las flechas */
         }
 
-        .arrow:hover {
-            background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro al pasar el mouse */
-        }
-
-        #prev {
-            left: 10px; /* Alineado a la izquierda */
-        }
-
-        #next {
-            right: 10px; /* Alineado a la derecha */
-        }
-
-        /* Estilos para botones */
-        .arrow:focus {
-            outline: none;
+        .watch-now:hover {
+            background-color: #098a6a;
         }
     </style>
 </head>
@@ -123,10 +108,6 @@
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
-            <div class="arrows">
-                <button id="prev" class="arrow">&#8592;</button>
-                <button id="next" class="arrow">&#8594;</button>
-            </div>
         </section>
     </main>
 
@@ -150,16 +131,11 @@
         // Inicializa el carrusel mostrando la primera imagen
         showSlide(currentIndex);
 
-        // Funcionalidad de las flechas
-        document.getElementById('next').addEventListener('click', () => {
+        // Cambia las imágenes cada 7 segundos
+        setInterval(() => {
             currentIndex++;
             showSlide(currentIndex);
-        });
-
-        document.getElementById('prev').addEventListener('click', () => {
-            currentIndex--;
-            showSlide(currentIndex);
-        });
+        }, 7000);
     </script>
 </body>
 </html>
