@@ -271,11 +271,13 @@
         }
     }
 </style>
+
+
 <main>
-    <section class="slider">
+    <section class="slider" style="margin-top: 100px;"> <!-- Moved 100px down -->
         <!-- Primer slide -->
         <div class="slide">
-            <img src="Sliders_Arriba_TP.png" alt="Serie 1">
+            <img src="serie1.jpg" alt="Serie 1">
             <div class="info">
                 <h2>Nombre de la Serie 1</h2>
                 <p class="rating">⭐⭐⭐⭐✰</p>
@@ -288,7 +290,7 @@
 
         <!-- Segundo slide -->
         <div class="slide">
-            <img src="Sliders_Arriba_YS.png" alt="Serie 2">
+            <img src="serie2.jpg" alt="Serie 2">
             <div class="info">
                 <h2>Nombre de la Serie 2</h2>
                 <p class="rating">⭐⭐⭐⭐⭐</p>
@@ -300,6 +302,10 @@
         </div>
 
         <!-- Agrega más slides aquí si es necesario -->
+        
+        <!-- Flechas de navegación -->
+        <button class="carousel-prev">❮</button>
+        <button class="carousel-next">❯</button>
     </section>
 </main>
 
@@ -407,10 +413,19 @@
 
     /* Responsividad para pantallas pequeñas */
     @media screen and (max-width: 768px) {
+        .slider {
+            flex-direction: column;
+        }
+
+        .slide {
+            width: 100%;
+        }
+
         .info {
             font-size: 12px;
             bottom: 10px;
             left: 10px;
+            max-width: 250px;
         }
 
         .info h2 {
@@ -423,6 +438,12 @@
 
         .carousel-prev, .carousel-next {
             font-size: 24px;
+        }
+    }
+
+    @media screen and (min-width: 769px) {
+        .slide {
+            width: 500px; /* Tamaño de cada slide en escritorio */
         }
     }
 </style>
