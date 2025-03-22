@@ -23,6 +23,7 @@
             margin: auto;
             position: relative;
             z-index: 1;
+            margin-top: 500px; /* Ajuste para bajar el carrusel */
         }
         .slide {
             position: relative;
@@ -59,10 +60,33 @@
             display: none;
             position: absolute;
             top: 50px;
-            left: 0;
+            right: 10px;
             background: black;
-            width: 200px;
+            width: 150px;
             padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu ul li {
+            padding: 10px;
+            text-align: center;
+        }
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        .menu-icon {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
         }
         @media (max-width: 768px) {
             .slide img {
@@ -82,6 +106,11 @@
             .watch-now {
                 padding: 6px;
                 font-size: 10px;
+            }
+            .menu {
+                width: 120px;
+                top: 40px;
+                right: 5px;
             }
         }
     </style>
