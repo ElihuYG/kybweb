@@ -2,8 +2,8 @@
     <div id="menu-toggle" class="menu-icon">☰</div>
     <div class="title">KYB</div>
     <div class="search-container">
-        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
         <div id="search-icon" class="search-icon">🔍</div>
+        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
     </div>
 </header>
 
@@ -107,7 +107,7 @@
     }
 
     .menu-icon {
-        font-size: 24px;  /* Menú más pequeño */
+        font-size: 24px;
         cursor: pointer;
         transition: transform 0.3s ease;
     }
@@ -115,6 +115,26 @@
     .title {
         font-size: 20px;
         font-weight: bold;
+    }
+
+    /* Contenedor de búsqueda */
+    .search-container {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Estilo de la lupa y la imagen de perfil */
+    .search-icon {
+        font-size: 20px;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+
+    .profile-img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%; /* Redonda */
+        border: 2px solid white;
     }
 
     /* Menú lateral */
@@ -184,7 +204,7 @@
     }
 
     .close-btn {
-        font-size: 16px;  /* X más pequeña */
+        font-size: 16px;
         background: transparent;
         color: #000;
         border: none;
@@ -221,5 +241,33 @@
 
     .result-item:hover {
         background: #f0f0f0;
+    }
+
+    /* Responsivo */
+    @media screen and (max-width: 768px) {
+        .header {
+            padding: 10px 15px;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+        }
+
+        .search-container {
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .search-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .profile-img {
+            width: 25px;
+            height: 25px;
+        }
     }
 </style>
