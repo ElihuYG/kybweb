@@ -40,7 +40,8 @@
             <div class="slide active">
                 <img src="Sliders_Arriba_BY.png" alt="Serie 1">
                 <div class="info" style="background: rgba(0, 0, 0, 0.3); position: absolute; bottom: 0; width: 100%; padding: 10px;">
-                    <h2 style="color: white;">Nombre de la Serie 1</h2>
+                    <h2 style="color: white; display: inline;">Nombre de la Serie 1</h2>
+                    <a href="#" class="view-more" style="color: #50C878; margin-left: 10px;">Ver Más</a>
                     <p class="rating">⭐⭐⭐⭐✰</p>
                     <p class="subtitles">Subtítulos: ESP, ING</p>
                     <p class="duration">Duración: 45 min/ep</p>
@@ -49,9 +50,10 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="Sliders_Arriba_BY_2.png" alt="Serie 2">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 2">
                 <div class="info" style="background: rgba(0, 0, 0, 0.3); position: absolute; bottom: 0; width: 100%; padding: 10px;">
-                    <h2 style="color: white;">Nombre de la Serie 2</h2>
+                    <h2 style="color: white; display: inline;">Nombre de la Serie 2</h2>
+                    <a href="#" class="view-more" style="color: #50C878; margin-left: 10px;">Ver Más</a>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
                     <p class="subtitles">Subtítulos: ESP, ING, FR</p>
                     <p class="duration">Duración: 50 min/ep</p>
@@ -110,46 +112,6 @@
     </section>
 </main>
 
-<style>
-    .slider {
-        position: relative;
-        max-width: 500px;
-        margin: auto;
-    }
-    .prev, .next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        z-index: 2;
-        font-size: 24px;
-        background: none;
-    }
-    .prev { left: -50px; }
-    .next { right: -50px; }
-    .dots-container {
-        text-align: center;
-        margin-top: 10px;
-        position: relative;
-        bottom: -20px;
-    }
-    .dot {
-        height: 10px;
-        width: 10px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        margin: 0 5px;
-        cursor: pointer;
-    }
-    .dot.active {
-        background-color: #50C878;
-    }
-</style>
-
 <script>
     let slideIndex = 0;
     function moveSlide(n) {
@@ -170,7 +132,9 @@
         slides[slideIndex].classList.add("active");
         dots[slideIndex].classList.add("active");
     }
+    setInterval(() => moveSlide(1), 3000);
 </script>
+
 
 
 
