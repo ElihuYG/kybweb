@@ -347,6 +347,44 @@
             searchResults.style.display = "none";
         });
 
-        // Series en el buscador
-        const series = [
-            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth
+                 // Series en el buscador
+            const series = [
+                { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+                { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+                { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+            ];
+
+            searchInput.addEventListener("input", () => {
+                let query = searchInput.value.toLowerCase();
+                let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+
+                if (query.length > 0 && filtered.length > 0) {
+                    searchResults.innerHTML = filtered.map(s =>
+                        `<div class="result-item" onclick="window.location.href='${s.link}'">
+                            <img src="${s.image}" alt="${s.name}">
+                            <span>${s.name}</span>
+                        </div>`
+                    ).join("");
+                    searchResults.style.display = "block";
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+        });
+
+        let slideIndex = 0;
+
+        function moveSlide(n) {
+            let slides = document.querySelectorAll(".slide");
+            slides[slideIndex].classList.remove("active");
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides[slideIndex].classList.add("active");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            setInterval(() => moveSlide(1), 4000); // Cambia de slide cada 4 segundos
+        });
+    </script>
+
+</body>
+</html>
