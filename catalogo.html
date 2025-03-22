@@ -1,160 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB</title>
-    <style>
-        /* Estilos Generales */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #111;
-            color: white;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: #026670; /* Verde esmeralda */
-        }
-
-        .menu-icon {
-            cursor: pointer;
-            font-size: 30px;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-icon {
-            cursor: pointer;
-            font-size: 30px;
-            margin-right: 15px;
-        }
-
-        .profile-img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        /* Menú */
-        .menu {
-            display: none;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            background: #004d40;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .menu.active {
-            display: block;
-        }
-
-        .menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .menu li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .close-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 100%;
-            text-align: left;
-        }
-
-        /* Buscador */
-        .search-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .search-box {
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            width: 350px;
-            position: relative;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .results {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 350px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .result-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .result-item:hover {
-            background: #f0f0f0;
-        }
-
-    </style>
-</head>
-<body>
-
 <header class="header">
     <div id="menu-toggle" class="menu-icon">☰</div>
     <div class="title">KYB</div>
@@ -170,7 +13,6 @@
         <li><a href="#">Inicio</a></li>
         <li><a href="#">Categorías</a></li>
         <li><a href="#">Mi Lista</a></li>
-        <li><button id="close-menu" class="close-btn">Cerrar</button></li>
     </ul>
 </div>
 
@@ -184,10 +26,9 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", () => {
         const menuToggle = document.getElementById("menu-toggle");
         const menu = document.getElementById("menu");
-        const closeMenu = document.getElementById("close-menu");
 
         const searchIcon = document.getElementById("search-icon");
         const searchPopup = document.getElementById("search-popup");
@@ -195,24 +36,19 @@
         const searchInput = document.getElementById("search-input");
         const searchResults = document.getElementById("search-results");
 
-        // Abrir/cerrar el menú con el mismo botón
-        menuToggle.addEventListener("click", function() {
+        // Toggle del menú
+        menuToggle.addEventListener("click", () => {
             menu.classList.toggle("active");
         });
 
-        // Botón dentro del menú para cerrarlo
-        closeMenu.addEventListener("click", function() {
-            menu.classList.remove("active");
-        });
-
         // Abrir buscador
-        searchIcon.addEventListener("click", function() {
+        searchIcon.addEventListener("click", () => {
             searchPopup.style.display = "flex";
             searchInput.focus();
         });
 
         // Cerrar buscador
-        closeSearch.addEventListener("click", function() {
+        closeSearch.addEventListener("click", () => {
             searchPopup.style.display = "none";
             searchInput.value = "";
             searchResults.style.display = "none";
@@ -225,26 +61,141 @@
             { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
         ];
 
-        searchInput.addEventListener("input", function() {
+        searchInput.addEventListener("input", () => {
             let query = searchInput.value.toLowerCase();
-            let filtered = series.filter(function(s) {
-                return s.name.toLowerCase().includes(query);
-            });
+            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
 
             if (query.length > 0 && filtered.length > 0) {
-                searchResults.innerHTML = filtered.map(function(s) {
-                    return `<div class="result-item" onclick="window.location.href='${s.link}'">
-                                <img src="${s.image}" alt="${s.name}">
-                                <span>${s.name}</span>
-                            </div>`;
-                }).join("");
+                searchResults.innerHTML = filtered.map(s =>
+                    `<div class="result-item" onclick="window.location.href='${s.link}'">
+                        <img src="${s.image}" alt="${s.name}">
+                        <span>${s.name}</span>
+                    </div>`
+                ).join("");
                 searchResults.style.display = "block";
             } else {
                 searchResults.style.display = "none";
             }
         });
+
+        // Cerrar menú al hacer clic fuera
+        window.addEventListener('click', function(event) {
+            if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
     });
 </script>
 
-</body>
-</html>
+<style>
+    /* Estilos Generales */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #111;
+        color: white;
+    }
+
+    /* Header */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: #026670;
+    }
+
+    .menu-icon {
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    /* Menú lateral */
+    .menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background: #004d40;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .menu.active {
+        display: block;
+    }
+
+    /* Buscador */
+    .search-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+    }
+
+    .search-box {
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        width: 350px;
+        position: relative;
+    }
+
+    .search-box input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .close-btn {
+        font-size: 18px;
+        background: transparent;
+        color: #000;
+        border: none;
+        cursor: pointer;
+        padding: 0 10px;
+    }
+
+    .results {
+        background: white;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        width: 350px;
+        max-height: 200px;
+        overflow-y: auto;
+        display: none;
+    }
+
+    .result-item {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    .result-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border-radius: 5px;
+    }
+
+    .result-item:hover {
+        background: #f0f0f0;
+    }
+</style>
