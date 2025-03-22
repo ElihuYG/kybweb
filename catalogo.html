@@ -145,12 +145,21 @@
     </script>
 </head>
 <body>
-    <header class="header">
-        <div id="menu-toggle" class="menu-icon">☰</div>
-        <div class="title">KYB</div>
-<div class="search-container">
-    <div id="search-icon" class="search-icon">🔍</div>
-</div>
+ <header class="header">
+    <div id="menu-toggle" class="menu-icon">☰</div>
+    <div class="title">KYB</div>
+    <div class="search-container">
+        <div id="search-icon" class="search-icon">🔍</div>
+        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+    </div>
+    <div class="menu">
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Mi Lista</a></li>
+        </ul>
+    </div>
+</header>
 
 <!-- Popup de búsqueda -->
 <div id="search-popup" class="search-popup">
@@ -168,6 +177,8 @@
     const closeBtn = document.getElementById("close-btn");
     const searchInput = document.getElementById("search-input");
     const searchResults = document.getElementById("search-results");
+    const menuToggle = document.getElementById("menu-toggle");
+    const menu = document.querySelector(".menu");
 
     // Mostrar popup
     searchIcon.addEventListener("click", () => {
@@ -180,6 +191,11 @@
         searchPopup.style.display = "none";
         searchInput.value = "";
         searchResults.style.display = "none";
+    });
+
+    // Alternar menú hamburguesa
+    menuToggle.addEventListener("click", () => {
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
     });
 
     // Series en el buscador
@@ -207,19 +223,6 @@
     });
 </script>
 
-
-
-
-            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
-        </div>
-        <div class="menu">
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Categorías</a></li>
-                <li><a href="#">Mi Lista</a></li>
-            </ul>
-        </div>
-    </header>
     <main>
         <section class="slider">
             <div class="slide">
