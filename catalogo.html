@@ -273,11 +273,9 @@
 </style>
 
 
-<!-- Aquí va tu menú superior y otras secciones previas -->
-
 <main>
     <!-- Carrusel centrado -->
-    <section class="slider" style="margin-top: 100px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; z-index: 9999;">
+    <section class="slider" style="margin-top: 100px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; z-index: 10;">
         <div class="slide" style="width: 500px;">
             <img src="Sliders_Arriba_YS.png" alt="Serie 1" style="width: 100%; height: auto;">
             <div class="info">
@@ -314,8 +312,6 @@
     </section>
 </main>
 
-<!-- Aquí podría ir el pie de página u otras secciones posteriores -->
-
 <!-- Agrega los scripts al final de tu archivo -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
@@ -323,10 +319,10 @@
     $(document).ready(function(){
         $('.slider').slick({
             infinite: true,
-            slidesToShow: 1,
+            slidesToShow: 3,  // Muestra 3 slides a la vez
             slidesToScroll: 1,
-            arrows: false, // Flechas desactivadas
-            dots: true, // Puntos activados
+            arrows: true, // Si deseas que se vean flechas de navegación
+            dots: true,   // Puntos de navegación
             autoplay: true, // Reproducción automática
             autoplaySpeed: 7000, // Cambiar cada 7 segundos
         });
