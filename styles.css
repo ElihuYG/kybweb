@@ -1,13 +1,29 @@
-/* Estilos generales */
+/* General */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
+    background-color: #000;
     color: white;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Estilo del slider */
+/* Menú inferior */
+.menu-inferior {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+.menu-inferior a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Slider principal */
 .slider {
     margin-top: 100px;
     position: relative;
@@ -17,145 +33,81 @@ body {
     margin-right: auto;
     overflow: hidden;
 }
-
-/* Contenedor de slides */
 .slide-container {
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
-
-/* Slides individuales */
 .slide {
     min-width: 100%;
-    transition: opacity 0.5s;
+    display: none;
     position: relative;
 }
-
+.slide.active {
+    display: block;
+}
 .slide img {
     width: 100%;
     display: block;
 }
 
-/* Información sobre la imagen */
-.info {
-    background: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-}
-
-.info h2 {
-    color: white;
-    display: inline;
-}
-
-.view-more {
-    color: #50C878;
-    margin-left: 10px;
-}
-
-/* Botón Ver Ahora */
-.watch-now {
-    background-color: #50C878;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-/* Flechas de navegación */
+/* Flechas */
 .prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: none;
+    border: none;
     color: white;
     font-size: 24px;
-    border: none;
     cursor: pointer;
-    z-index: 10;
 }
+.prev { left: 10px; }
+.next { right: 10px; }
 
-.prev {
-    left: -40px;
-}
-
-.next {
-    right: -40px;
-}
-
-/* Puntos debajo del slider */
+/* Puntos indicadores */
 .dots-container {
     text-align: center;
     margin-top: 10px;
 }
-
 .dot {
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
-    background-color: white;
+    height: 10px;
+    width: 10px;
+    background-color: gray;
     border-radius: 50%;
     display: inline-block;
+    margin: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
-
 .dot.active {
-    background-color: #50C878;
+    background-color: white;
 }
 
-/* Secciones */
+/* Categorías */
 .category {
-    margin-top: 50px;
-    padding: 20px;
+    margin: 20px;
 }
-
 .category-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    border-bottom: 2px solid #50C878;
+    padding-bottom: 5px;
 }
-
 .category-header h2 {
     color: #50C878;
 }
-
+.view-more {
+    color: #50C878;
+    text-decoration: none;
+    font-size: 16px;
+}
 .category-content {
     display: flex;
-    gap: 10px;
     overflow-x: auto;
+    padding: 10px 0;
 }
-
 .category-content img {
-    width: 150px;
-    height: 225px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .slider {
-        max-width: 90%;
-    }
-
-    .prev, .next {
-        font-size: 20px;
-    }
-
-    .prev {
-        left: -20px;
-    }
-
-    .next {
-        right: -20px;
-    }
-
-    .category-content img {
-        width: 120px;
-        height: 180px;
-    }
+    width: 120px;
+    margin-right: 10px;
+    border-radius: 5px;
 }
