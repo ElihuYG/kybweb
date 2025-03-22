@@ -1,218 +1,94 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Buscador</title>
-    <style>
-        /* Estilos generales */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #111;
-            color: white;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: #222;
-            position: relative;
-        }
-
-        /* Estilos del menú */
-        .menu {
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            background: #333;
-            display: none;
-            flex-direction: column;
-            padding: 10px;
-            transition: transform 0.3s ease-in-out;
-            transform: translateY(-100%);
-        }
-
-        .menu.active {
-            display: flex;
-            transform: translateY(0);
-        }
-
-        .menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .menu ul li {
-            padding: 10px;
-            border-bottom: 1px solid #444;
-        }
-
-        .menu ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .menu-icon {
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        .close-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 8px;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        /* Estilos del buscador */
-        .search-container {
-            position: relative;
-        }
-
-        .search-icon {
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        .search-box {
-            position: absolute;
-            top: 30px;
-            right: 0;
-            width: 200px;
-            padding: 5px;
-            border: 1px solid #fff;
-            background: #222;
-            display: none;
-            border-radius: 5px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 5px;
-            background: #333;
-            color: white;
-            border: none;
-            outline: none;
-        }
-
-        /* Estilos para los resultados */
-        .results {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 200px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-            position: absolute;
-            right: 0;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .result-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .result-item:hover {
-            background: #f0f0f0;
-        }
-    </style>
-</head>
-<body>
-
-    <header class="header">
-        <div id="menu-toggle" class="menu-icon">☰</div>
-        <div class="title">KYB</div>
-        <div class="search-container">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <div class="search-box" id="search-box">
-                <input type="text" id="search-input" placeholder="Buscar series...">
-                <div id="search-results" class="results"></div>
+   <main>
+        <section class="slider">
+            <div class="slide">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+                <div class="info">
+                    <h2>Nombre de la Serie 1</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
-        </div>
-        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
-    </header>
-
-    <div class="menu" id="menu">
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Categorías</a></li>
-            <li><a href="#">Mi Lista</a></li>
-            <li><button id="close-menu" class="close-btn">Cerrar</button></li>
-        </ul>
+        </section>
+        <section class="category">
+    <div class="category-header">
+        <h2>Recientes</h2>
+        <a href="recientes.html" class="view-more">Ver Más</a>
     </div>
+    <div class="category-content">
+        <img src="
+poster_begins_youth.png" alt="Reciente 1">
+        <img src="
+poster_begins_youth.png" alt="Reciente 2">
+        <img src="
+poster_begins_youth.png" alt="Reciente 3">
+        <img src="reciente4.jpg" alt="Reciente 4">
+        <img src="reciente5.jpg" alt="Reciente 5">
+        <img src="reciente6.jpg" alt="Reciente 6">
+    </div>
+</section>
 
-    <script>
-        // Funcionalidad del menú
-        const menuToggle = document.getElementById("menu-toggle");
-        const menu = document.getElementById("menu");
-        const closeMenu = document.getElementById("close-menu");
+<section class="category">
+    <div class="category-header">
+        <h2>Nuevos Episodios</h2>
+        <a href="nuevos.html" class="view-more">Ver Más</a>
+    </div>
+    <div class="category-content horizontal">
+        <img src="nuevo1.jpg" alt="Nuevo Episodio 1">
+        <img src="nuevo2.jpg" alt="Nuevo Episodio 2">
+        <img src="nuevo3.jpg" alt="Nuevo Episodio 3">
+        <img src="nuevo4.jpg" alt="Nuevo Episodio 4">
+        <img src="nuevo5.jpg" alt="Nuevo Episodio 5">
+        <img src="nuevo6.jpg" alt="Nuevo Episodio 6">
+    </div>
+</section>
 
-        menuToggle.addEventListener("click", () => {
-            menu.classList.add("active");
-        });
+<section class="category">
+    <div class="category-header">
+        <h2>Próximamente</h2>
+        <a href="proximamente.html" class="view-more">Ver Más</a>
+    </div>
+    <div class="category-content">
+        <img src="proximo1.jpg" alt="Próximamente 1">
+        <img src="proximo2.jpg" alt="Próximamente 2">
+        <img src="proximo3.jpg" alt="Próximamente 3">
+        <img src="proximo4.jpg" alt="Próximamente 4">
+        <img src="proximo5.jpg" alt="Próximamente 5">
+        <img src="proximo6.jpg" alt="Próximamente 6">
+    </div>
+</section>
 
-        closeMenu.addEventListener("click", () => {
-            menu.classList.remove("active");
-        });
-
-        // Funcionalidad del buscador
-        const searchIcon = document.getElementById("search-icon");
-        const searchBox = document.getElementById("search-box");
-        const searchInput = document.getElementById("search-input");
-        const searchResults = document.getElementById("search-results");
-
-        searchIcon.addEventListener("click", () => {
-            searchBox.style.display = searchBox.style.display === "block" ? "none" : "block";
-            searchInput.focus();
-        });
-
-        const series = [
-            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
-            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-        ];
-
-        searchInput.addEventListener("input", () => {
-            let query = searchInput.value.toLowerCase();
-            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-            if (query.length > 0 && filtered.length > 0) {
-                searchResults.innerHTML = filtered.map(s =>
-                    `<div class="result-item" onclick="window.location.href='${s.link}'">
-                        <img src="${s.image}" alt="${s.name}">
-                        <span>${s.name}</span>
-                    </div>`
-                ).join("");
-                searchResults.style.display = "block";
-            } else {
-                searchResults.style.display = "none";
-            }
-        });
-    </script>
-
-</body>
-</html>
+<style>
+    .category {
+        margin: 20px 0;
+    }
+    .category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+    .category-header h2 {
+        margin: 0;
+    }
+    .view-more {
+        color: red;
+        text-decoration: none;
+    }
+    .category-content {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+    }
+    .category-content img {
+        height: 250px;
+        width: auto;
+        border-radius: 5px;
+    }
+    .category-content.horizontal img {
+        height: 150px;
+    }
+</style>
+    </main>
