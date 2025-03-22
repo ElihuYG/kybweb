@@ -84,3 +84,8 @@ $(document).ready(function(){
     // Mostrar la información de cada slide
     $(".info").show();
 });
+document.addEventListener("click", (event) => {
+    if (!menu.contains(event.target) && event.target !== menuToggle) {
+        menu.classList.remove("active");
+    }
+});
