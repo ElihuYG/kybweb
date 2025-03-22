@@ -32,8 +32,7 @@
         </div>
         <div id="search-results" class="results"></div>
     </div>
-
-    <main>
+<main>
     <section class="slider">
         <div class="slide">
             <img src="Sliders_Arriba_BY.png" alt="Serie 1">
@@ -63,75 +62,46 @@
         </div>
     </section>
 
-    <section class="category">
-        <div class="category-header">
-            <h2>Nuevos Episodios</h2>
-            <a href="nuevos.html" class="view-more">Ver Más</a>
-        </div>
-        <div class="category-content horizontal">
-            <img src="nuevo1.jpg" alt="Nuevo Episodio 1">
-            <img src="nuevo2.jpg" alt="Nuevo Episodio 2">
-            <img src="nuevo3.jpg" alt="Nuevo Episodio 3">
-            <img src="nuevo4.jpg" alt="Nuevo Episodio 4">
-            <img src="nuevo5.jpg" alt="Nuevo Episodio 5">
-            <img src="nuevo6.jpg" alt="Nuevo Episodio 6">
-        </div>
-    </section>
-
-    <section class="category">
-        <div class="category-header">
-            <h2>Próximamente</h2>
-            <a href="proximamente.html" class="view-more">Ver Más</a>
-        </div>
-        <div class="category-content">
-            <img src="proximo1.jpg" alt="Próximamente 1">
-            <img src="proximo2.jpg" alt="Próximamente 2">
-            <img src="proximo3.jpg" alt="Próximamente 3">
-            <img src="proximo4.jpg" alt="Próximamente 4">
-            <img src="proximo5.jpg" alt="Próximamente 5">
-            <img src="proximo6.jpg" alt="Próximamente 6">
-        </div>
-    </section>
-
     <style>
-        .category {
-            margin: 20px 0;
-        }
-        .category-header {
+        .slider {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+        .slide {
+            position: relative;
+            width: 100%;
+        }
+        .slide img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
             padding: 10px;
-        }
-        .category-header h2 {
-            margin: 0;
-            color: #50C878; /* Verde esmeralda */
-        }
-        .view-more {
-            color: #50C878; /* Verde esmeralda */
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .category-content {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-        }
-        .category-content img {
-            height: 250px;
-            width: auto;
             border-radius: 5px;
+            width: 90%;
         }
-        .category-content.horizontal img {
-            height: 150px;
+        .info h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #50C878;
         }
         .watch-now {
-            background-color: #50C878; /* Verde esmeralda */
+            background-color: #50C878;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             border-radius: 5px;
         }
         .watch-now:hover {
@@ -139,6 +109,7 @@
         }
     </style>
 </main>
+
 
     <script src="script.js"></script>
 </body>
