@@ -277,7 +277,7 @@
     <section class="slider" style="margin-top: 100px;"> <!-- Moved 100px down -->
         <!-- Primer slide -->
         <div class="slide">
-            <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+            <img src="serie1.jpg" alt="Serie 1">
             <div class="info">
                 <h2>Nombre de la Serie 1</h2>
                 <p class="rating">⭐⭐⭐⭐✰</p>
@@ -290,7 +290,7 @@
 
         <!-- Segundo slide -->
         <div class="slide">
-            <img src="Sliders_Arriba_YS.png" alt="Serie 2">
+            <img src="serie2.jpg" alt="Serie 2">
             <div class="info">
                 <h2>Nombre de la Serie 2</h2>
                 <p class="rating">⭐⭐⭐⭐⭐</p>
@@ -453,26 +453,30 @@
         const prevBtn = document.querySelector(".carousel-prev");
         const nextBtn = document.querySelector(".carousel-next");
         const slides = document.querySelectorAll(".slide");
+        const slider = document.querySelector(".slider");
         let currentIndex = 0;
 
         // Mover al siguiente slide
         nextBtn.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % slides.length;
+            currentIndex = (currentIndex + 1) % slides.length; // El índice se reinicia al llegar al final
             updateSlider();
         });
 
         // Mover al slide anterior
         prevBtn.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length; // El índice va hacia atrás y se reinicia
             updateSlider();
         });
 
         // Actualizar la posición del carrusel
         function updateSlider() {
-            const offset = -currentIndex * 100;
-            document.querySelector(".slider").style.transform = `translateX(${offset}%)`;
+            const offset = -currentIndex * 100; // Desplaza el carrusel
+            slider.style.transform = `translateX(${offset}%)`;
         }
 
         updateSlider();  // Inicializar el carrusel
     });
+    currentIndex = (currentIndex + 1) % slides.length; // Reinicia al primer slide
+currentIndex = (currentIndex - 1 + slides.length) % slides.length; // Vuelve al último slide
+
 </script>
