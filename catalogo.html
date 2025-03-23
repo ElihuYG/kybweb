@@ -3,48 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - KYB</title>
-    <link rel="stylesheet" href="style.css">
+    <title>KYB - Catalogo</title>
+    <style>
+        body {
+            background: #000; /* Fondo negro */
+            color: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #111;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .slider {
+            position: relative;
+            width: 80%; /* Un poco más pequeño */
+            margin: 100px auto 0; /* Desplazado 100px hacia abajo */
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 450px; /* Ajustado a 450px de altura */
+            object-fit: cover; /* Ajusta la imagen sin recortarla */
+        }
+
+        .info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 90%;
+            color: white;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7); /* Fondo con opacidad */
+            border-radius: 8px;
+            font-size: 14px; /* Texto más pequeño */
+        }
+
+        .info h2 {
+            font-size: 18px; /* Título más pequeño */
+            margin: 0;
+        }
+
+        .info p {
+            margin: 5px 0;
+            font-size: 12px; /* Tamaño del texto reducido */
+        }
+
+        .watch-now {
+            background-color: #00b894;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .watch-now:hover {
+            background-color: #098a6a;
+        }
+
+        /* Botones de navegación */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 24px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Menú Superior -->
-    <header class="menu">
-        <div class="logo">KYB</div>
-        <div class="menu-items">
-            <div class="search-icon"></div>
-            <a href="cuenta.html"><img src="assets/In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
-        </div>
-        <div class="hamburger" id="hamburger-icon">☰</div>
+    <header>
+        <h1>Bienvenido al Catálogo KYB</h1>
     </header>
-
-    <!-- Menú Lateral Móvil -->
-    <div class="mobile-menu" id="mobile-menu">
-        <a href="#">Inicio</a>
-        <a href="#">Categorías</a>
-        <a href="#">Mi Lista</a>
-    </div>
-
-    <!-- Catálogo de Series y Películas -->
-    <section class="catalogo">
-        <h1>Bienvenido a nuestro catálogo</h1>
-        <div class="catalogo-items">
-            <div class="catalogo-item">
-                <img src="assets/posters_begins_youth.png" alt="Begins Youth">
-                <h2>Begins Youth</h2>
+    
+    <main>
+        <section class="slider" id="slider">
+            <div class="slide">
+                <img src="Sliders_Arriba_YS.png" alt="Begins Youth">
+                <div class="info">
+                    <h2>Begins Youth</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de Begins Youth...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
-            <div class="catalogo-item">
-                <img src="assets/posters_thamepo.png" alt="Thamepo">
-                <h2>Thamepo</h2>
+            <div class="slide">
+                <img src="Sliders_Arriba_BY.png" alt="Thamepo">
+                <div class="info">
+                    <h2>Thamepo</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de Thamepo...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
-            <div class="catalogo-item">
-                <img src="assets/posters_yoursky.png" alt="Yoursky">
-                <h2>Yoursky</h2>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="Yoursky">
+                <div class="info">
+                    <h2>Yoursky</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 40 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de Yoursky...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
-        </div>
-    </section>
+            <!-- Botones de navegación -->
+            <button class="nav-button prev" onclick="changeSlide(currentIndex - 1)">&#10094;</button>
+            <button class="nav-button next" onclick="changeSlide(currentIndex + 1)">&#10095;</button>
+        </section>
+    </main>
 
-    <script src="script.js"></script>
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
 
+        const showSlide = (index) => {
+            // Asegura que el índice esté dentro del rango
+            if (index >= totalSlides) currentIndex = 0;
+            if (index < 0) currentIndex = totalSlides - 1;
+
+            // Oculta todas las imágenes
+            slides.forEach(slide => slide.style.display = 'none');
+
+            // Muestra la imagen actual
+            slides[currentIndex].style.display = 'block';
+        };
+
+        // Inicializa el carrusel mostrando la primera imagen
+        showSlide(currentIndex);
+
+        // Cambia las imágenes cada 7 segundos
+        setInterval(() => {
+            currentIndex++;
+            showSlide(currentIndex);
+        }, 7000);
+
+        // Función para cambiar la imagen al hacer clic en los botones
+        const changeSlide = (index) => {
+            currentIndex = index;
+            showSlide(currentIndex);
+        };
+    </script>
 </body>
 </html>
