@@ -96,6 +96,69 @@
             }
         }
 
+        /* Popup de búsqueda */
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            position: relative;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .results {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 350px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -122,6 +185,15 @@
         <a href="#cerrar-sesion">Cerrar sesión</a>
     </div>
 
+    <!-- Popup de búsqueda -->
+    <div id="search-popup" class="search-popup">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar series...">
+            <button class="close-btn" id="close-search">X</button>
+        </div>
+        <div id="search-results" class="results"></div>
+    </div>
+
     <script>
         // Función para mostrar/ocultar el menú de perfil
         function toggleProfileMenu() {
@@ -131,8 +203,41 @@
 
         // Función para mostrar/ocultar el buscador
         function toggleSearch() {
-            alert('Buscador activado');
+            const searchPopup = document.getElementById("search-popup");
+            searchPopup.style.display = "flex";
+            document.getElementById("search-input").focus();
         }
+
+        // Función para cerrar el popup de búsqueda
+        document.getElementById("close-search").addEventListener("click", () => {
+            document.getElementById("search-popup").style.display = "none";
+            document.getElementById("search-input").value = "";
+            document.getElementById("search-results").style.display = "none";
+        });
+
+        // Función para mostrar los resultados de búsqueda
+        const series = [
+            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+        ];
+
+        document.getElementById("search-input").addEventListener("input", () => {
+            let query = document.getElementById("search-input").value.toLowerCase();
+            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+
+            if (query.length > 0 && filtered.length > 0) {
+                document.getElementById("search-results").innerHTML = filtered.map(s =>
+                    `<div class="result-item" onclick="window.location.href='${s.link}'">
+                        <img src="${s.image}" alt="${s.name}">
+                        <span>${s.name}</span>
+                    </div>`
+                ).join("");
+                document.getElementById("search-results").style.display = "block";
+            } else {
+                document.getElementById("search-results").style.display = "none";
+            }
+        });
     </script>
 
 </body>
