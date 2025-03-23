@@ -3,112 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Series</title>
+    <title>Menú Superior</title>
     <style>
         /* Estilos generales */
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
             background-color: #111;
             color: white;
         }
-        .search-container {
-            position: relative;
-            margin: 20px;
-        }
-        .search-input {
-            width: 100%;
-            padding: 10px;
+        
+        /* Menú superior */
+        .menu {
             background-color: #222;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
         }
-        .search-results {
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Icono de hamburguesa */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            height: 4px;
+            background-color: white;
+        }
+
+        /* Menú desplegable */
+        .menu-items {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu-item {
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu-item:hover {
+            color: #00b300;
+        }
+
+        /* Estilos del menú desplegable en móvil */
+        .mobile-menu {
             display: none;
             position: absolute;
-            top: 100%;
+            top: 60px;
             left: 0;
             width: 100%;
             background-color: #333;
-            border-radius: 5px;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-        }
-        .result-item {
-            display: flex;
-            align-items: center;
+            flex-direction: column;
+            gap: 15px;
             padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .result-item:hover {
-            background-color: #444;
-        }
-        .result-item img {
-            width: 40px;  /* Ajusta el tamaño */
-            height: 40px;
-            margin-right: 10px;
             border-radius: 5px;
         }
-        .result-item span {
-            font-size: 16px;
+
+        .mobile-menu a {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
         }
+
+        .mobile-menu a:hover {
+            color: #00b300;
+        }
+
+        /* Estilos para dispositivos móviles */
+        @media screen and (max-width: 768px) {
+            .menu-items {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu.open {
+                display: flex;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Contenedor del buscador -->
-    <div class="search-container">
-        <input type="text" class="search-input" id="search-input" placeholder="Buscar serie...">
-        <div class="search-results" id="search-results"></div>
+    <!-- Menú superior -->
+    <div class="menu">
+        <div class="logo">KYB</div>
+        <div class="menu-items">
+            <a href="#inicio" class="menu-item">Inicio</a>
+            <a href="#series" class="menu-item">Series</a>
+            <a href="#peliculas" class="menu-item">Películas</a>
+            <a href="#contacto" class="menu-item">Contacto</a>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
 
-    <!-- Contenido de la página -->
-    <div>
-        <h1>Bienvenido a KYB</h1>
-        <p>Encuentra tus series favoritas.</p>
+    <!-- Menú desplegable para móvil -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#inicio" class="menu-item">Inicio</a>
+        <a href="#series" class="menu-item">Series</a>
+        <a href="#peliculas" class="menu-item">Películas</a>
+        <a href="#contacto" class="menu-item">Contacto</a>
     </div>
 
     <script>
-        // Definir las series con sus imágenes y enlaces
-        const series = [
-            { name: "Begins Youth", image: "imagenes/posters_begins_youth.png", link: "begins_youth.html" },
-            { name: "Thamepo", image: "imagenes/thamepo.png", link: "thamepo.html" },
-            { name: "Yoursky", image: "imagenes/yoursky.png", link: "yoursky.html" }
-        ];
-
-        // Obtener elementos del DOM
-        const searchInput = document.getElementById("search-input");
-        const searchResults = document.getElementById("search-results");
-
-        // Agregar eventos para la búsqueda
-        searchInput.addEventListener("input", () => {
-            let query = searchInput.value.toLowerCase();
-            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-            if (query.length > 0 && filtered.length > 0) {
-                searchResults.innerHTML = filtered.map(s =>
-                    `<div class="result-item" onclick="window.location.href='${s.link}'">
-                        <img src="${s.image}" alt="${s.name}">
-                        <span>${s.name}</span>
-                    </div>`
-                ).join("");
-                searchResults.style.display = "block";
-            } else {
-                searchResults.style.display = "none";
-            }
-        });
-
-        // Cerrar resultados si el clic es fuera del buscador
-        document.addEventListener("click", (e) => {
-            if (!e.target.closest('.search-container')) {
-                searchResults.style.display = "none";
-            }
-        });
+        // Función para abrir y cerrar el menú en dispositivos móviles
+        function toggleMenu() {
+            const mobileMenu = document.getElementById("mobile-menu");
+            mobileMenu.classList.toggle("open");
+        }
     </script>
 
 </body>
