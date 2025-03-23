@@ -1,393 +1,186 @@
-<header class="header">
-    <div id="menu-toggle" class="menu-icon">☰</div>
-    <div class="title">KYB</div>
-    <div class="search-container">
-        <div id="search-icon" class="search-icon">🔍</div>
-        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
-    </div>
-</header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB</title>
 
-<!-- Menú lateral -->
-<div id="menu" class="menu">
-    <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Categorías</a></li>
-        <li><a href="#">Mi Lista</a></li>
-    </ul>
-</div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
 
-<!-- Popup de búsqueda -->
-<div id="search-popup" class="search-popup">
-    <div class="search-box">
-        <input type="text" id="search-input" placeholder="Buscar series...">
-        <button class="close-btn" id="close-search">X</button>
-    </div>
-    <div id="search-results" class="results"></div>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const menuToggle = document.getElementById("menu-toggle");
-        const menu = document.getElementById("menu");
-
-        const searchIcon = document.getElementById("search-icon");
-        const searchPopup = document.getElementById("search-popup");
-        const closeSearch = document.getElementById("close-search");
-        const searchInput = document.getElementById("search-input");
-        const searchResults = document.getElementById("search-results");
-
-        // Toggle del menú con animación suave
-        menuToggle.addEventListener("click", () => {
-            menu.classList.toggle("active");
-        });
-
-        // Abrir buscador
-        searchIcon.addEventListener("click", () => {
-            searchPopup.style.display = "flex";
-            searchInput.focus();
-        });
-
-        // Cerrar buscador
-        closeSearch.addEventListener("click", () => {
-            searchPopup.style.display = "none";
-            searchInput.value = "";
-            searchResults.style.display = "none";
-        });
-
-        // Series en el buscador
-        const series = [
-            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
-            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-        ];
-
-        searchInput.addEventListener("input", () => {
-            let query = searchInput.value.toLowerCase();
-            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-            if (query.length > 0 && filtered.length > 0) {
-                searchResults.innerHTML = filtered.map(s =>
-                    `<div class="result-item" onclick="window.location.href='${s.link}'">
-                        <img src="${s.image}" alt="${s.name}">
-                        <span>${s.name}</span>
-                    </div>`
-                ).join("");
-                searchResults.style.display = "block";
-            } else {
-                searchResults.style.display = "none";
-            }
-        });
-
-        // Cerrar menú al hacer clic fuera
-        window.addEventListener('click', function(event) {
-            if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
-                menu.classList.remove('active');
-            }
-        });
-    });
-</script>
-
-<style>
-    /* Estilos Generales */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #111;
-        color: white;
-    }
-
-    /* Header */
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background: #026670;
-    }
-
-    .menu-icon {
-        font-size: 24px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
-
-    .title {
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    /* Contenedor de búsqueda */
-    .search-container {
-        display: flex;
-        align-items: center;
-    }
-
-    /* Estilo de la lupa y la imagen de perfil */
-    .search-icon {
-        font-size: 20px;
-        cursor: pointer;
-        margin-right: 15px;
-    }
-
-    .profile-img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%; /* Redonda */
-        border: 2px solid white;
-    }
-
-    /* Menú lateral */
-    .menu {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        background: #004d40;
-        padding: 10px;
-        border-radius: 5px;
-        width: 200px;
-        transition: transform 0.3s ease;
-        transform: translateX(-100%);
-    }
-
-    .menu.active {
-        display: block;
-        transform: translateX(0);
-    }
-
-    .menu ul {
-        padding: 0;
-        list-style: none;
-    }
-
-    .menu ul li {
-        padding: 10px 0;
-    }
-
-    .menu ul li a {
-        text-decoration: none;
-        color: white;
-    }
-
-    /* Buscador */
-    .search-popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 8000;
-    }
-
-    .search-box {
-        background: white;
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        width: 350px;
-        position: relative;
-    }
-
-    .search-box input {
-        flex: 1;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
-        outline: none;
-    }
-
-    .close-btn {
-        font-size: 16px;
-        background: transparent;
-        color: #000;
-        border: none;
-        cursor: pointer;
-        padding: 0 10px;
-    }
-
-    .results {
-        background: white;
-        color: black;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-        width: 350px;
-        max-height: 200px;
-        overflow-y: auto;
-        display: none;
-    }
-
-    .result-item {
-        display: flex;
-        align-items: center;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-        cursor: pointer;
-    }
-
-    .result-item img {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-        border-radius: 5px;
-    }
-
-    .result-item:hover {
-        background: #f0f0f0;
-    }
-
-    /* Responsivo */
-    @media screen and (max-width: 768px) {
-        .header {
-            padding: 10px 15px;
-            flex-direction: column;
-            text-align: center;
+    <style>
+        /* General */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
-        .menu-icon {
-            font-size: 30px;
+        /* Menú superior */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
         }
 
-        .search-container {
-            justify-content: center;
-            margin-top: 10px;
+        .navbar img {
+            height: 40px;
+            width: auto;
         }
 
-        .search-icon {
+        .navbar .search-container {
+            position: relative;
+        }
+
+        .navbar .search-container input {
+            padding: 5px 30px 5px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+
+        .navbar .search-container input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .navbar .search-container button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #fff;
             font-size: 18px;
-            margin-right: 10px;
+            cursor: pointer;
         }
 
-        .profile-img {
-            width: 25px;
-            height: 25px;
+        .navbar .profile-img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            cursor: pointer;
         }
-    }
-</style>
 
+        /* Carrusel */
+        .slider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
 
-<main>
-    <!-- Carrusel centrado -->
-    <section class="slider" style="margin-top: 100px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; z-index: 10;">
-        <div class="slide" style="max-width: 350px; width: 100%; margin: 0 auto;">
-            <a href="begins_youth.html">
-                <img src="Sliders_Arriba_YS.png" alt="Serie 1" class="slider-image">
-                <div class="info">
-                    <h2>Nombre de la Serie 1</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 45 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                </div>
-            </a>
-        </div>
-        <div class="slide" style="max-width: 350px; width: 100%; margin: 0 auto;">
-            <a href="thamepo.html">
-                <img src="Sliders_Arriba_BY.png" alt="Serie 2" class="slider-image">
-                <div class="info">
-                    <h2>Nombre de la Serie 2</h2>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 50 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                </div>
-            </a>
-        </div>
-        <div class="slide" style="max-width: 350px; width: 100%; margin: 0 auto;">
-            <a href="yoursky.html">
-                <img src="Sliders_Arriba_TP.png" alt="Serie 3" class="slider-image">
-                <div class="info">
-                    <h2>Nombre de la Serie 3</h2>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 50 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
-                </div>
-            </a>
-        </div>
-    </section>
-</main>
+        .slider-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-<!-- Agrega los scripts al final de tu archivo -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $('.slider').slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false, // Flechas desactivadas
-            dots: true, // Puntos activados
-            autoplay: true, // Reproducción automática
-            autoplaySpeed: 7000, // Cambiar cada 7 segundos
-        });
-    });
-</script>
-
-<style>
-    /* Estilos generales */
-    .slider {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        width: 100%;
-        max-width: 350px;
-        margin: 0 auto;
-    }
-
-    .slider-image {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    /* Información de la imagen */
-    .info {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    .info h2 {
-        margin: 0;
-        font-size: 18px;
-    }
-
-    .info p {
-        margin: 5px 0;
-    }
-
-    .rating, .subtitles, .duration, .synopsis {
-        font-size: 14px;
-    }
-
-    /* Responsividad para dispositivos móviles */
-    @media (max-width: 768px) {
         .info {
-            font-size: 12px;
-            bottom: 5px;
-            left: 5px;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            font-size: 16px;
         }
 
         .info h2 {
-            font-size: 14px;
+            margin: 0;
+            font-size: 18px;
         }
 
-        .info p {
-            font-size: 12px;
+        @media (max-width: 768px) {
+            .slider {
+                max-width: 90%;
+            }
+
+            .info {
+                font-size: 12px;
+                bottom: 5px;
+                left: 5px;
+            }
+
+            .info h2 {
+                font-size: 14px;
+            }
         }
-    }
-</style>
+    </style>
+</head>
+<body>
+
+    <!-- Menú superior -->
+    <header class="navbar">
+        <div class="menu-toggle" id="menu-toggle">
+            <span class="menu-icon">&#9776;</span>
+        </div>
+        <img src="logo.png" alt="Logo de KYB" />
+        
+        <div class="search-container">
+            <input type="text" placeholder="Buscar...">
+            <button type="submit">&#128269;</button>
+        </div>
+
+        <img src="perfil.jpg" alt="Foto de perfil" class="profile-img">
+    </header>
+
+    <main>
+        <!-- Carrusel -->
+        <section class="slider">
+            <div class="slide">
+                <a href="begins_youth.html">
+                    <img src="Sliders_Arriba_YS.png" alt="Serie 1" class="slider-image">
+                    <div class="info">
+                        <h2>Begins Youth</h2>
+                        <p>⭐⭐⭐⭐✰</p>
+                        <p>Subtítulos: ESP, ING</p>
+                    </div>
+                </a>
+            </div>
+            <div class="slide">
+                <a href="thamepo.html">
+                    <img src="Sliders_Arriba_BY.png" alt="Serie 2" class="slider-image">
+                    <div class="info">
+                        <h2>Thamepo</h2>
+                        <p>⭐⭐⭐⭐⭐</p>
+                        <p>Subtítulos: ESP</p>
+                    </div>
+                </a>
+            </div>
+            <div class="slide">
+                <a href="yoursky.html">
+                    <img src="Sliders_Arriba_YS.png" alt="Serie 3" class="slider-image">
+                    <div class="info">
+                        <h2>Your Sky</h2>
+                        <p>⭐⭐⭐⭐</p>
+                        <p>Subtítulos: ESP</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Inicia el carrusel
+            $('.slider').slick({
+                autoplay: true,
+                autoplaySpeed: 7000,
+                dots: true,
+                arrows: false
+            });
+        });
+    </script>
+</body>
+</html>
