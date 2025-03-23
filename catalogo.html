@@ -273,6 +273,48 @@
 </style>
 
 
+<main>
+    <!-- Carrusel centrado -->
+    <section class="slider" style="margin-top: 100px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; z-index: 10;">
+        <div class="slide" style="max-width: 350px; width: 100%; margin: 0 auto;">
+            <a href="begins_youth.html">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 1" class="slider-image">
+                <div class="info">
+                    <h2>Nombre de la Serie 1</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                </div>
+            </a>
+        </div>
+        <div class="slide" style="max-width: 350px; width: 100%; margin: 0 auto;">
+            <a href="thamepo.html">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 2" class="slider-image">
+                <div class="info">
+                    <h2>Nombre de la Serie 2</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                </div>
+            </a>
+        </div>
+        <div class="slide" style="max-width: 350px; width: 100%; margin: 0 auto;">
+            <a href="yoursky.html">
+                <img src="Sliders_Arriba_TP.png" alt="Serie 3" class="slider-image">
+                <div class="info">
+                    <h2>Nombre de la Serie 3</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
+                </div>
+            </a>
+        </div>
+    </section>
+</main>
+
 <!-- Agrega los scripts al final de tu archivo -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
@@ -280,14 +322,72 @@
     $(document).ready(function(){
         $('.slider').slick({
             infinite: true,
-            slidesToShow: 1,  // Mostrar 1 imagen a la vez
+            slidesToShow: 1,
             slidesToScroll: 1,
-            autoplay: true, // Activar el autoplay
+            arrows: false, // Flechas desactivadas
+            dots: true, // Puntos activados
+            autoplay: true, // Reproducción automática
             autoplaySpeed: 7000, // Cambiar cada 7 segundos
-            dots: true, // Puntos de navegación
-            arrows: true, // Flechas de navegación
-            centerMode: true,
-            focusOnSelect: true,
         });
     });
 </script>
+
+<style>
+    /* Estilos generales */
+    .slider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .slider-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Información de la imagen */
+    .info {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .info h2 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .info p {
+        margin: 5px 0;
+    }
+
+    .rating, .subtitles, .duration, .synopsis {
+        font-size: 14px;
+    }
+
+    /* Responsividad para dispositivos móviles */
+    @media (max-width: 768px) {
+        .info {
+            font-size: 12px;
+            bottom: 5px;
+            left: 5px;
+        }
+
+        .info h2 {
+            font-size: 14px;
+        }
+
+        .info p {
+            font-size: 12px;
+        }
+    }
+</style>
