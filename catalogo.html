@@ -1,186 +1,193 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB</title>
+<header class="header">
+    <div id="menu-toggle" class="menu-icon">☰</div>
+    <div class="title">KYB</div>
+    <div class="search-container">
+        <div id="search-icon" class="search-icon">🔍</div>
+        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+    </div>
+</header>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+<!-- Menú lateral -->
+<div id="menu" class="menu">
+    <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Categorías</a></li>
+        <li><a href="#">Mi Lista</a></li>
+    </ul>
+</div>
 
-    <style>
-        /* General */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+<!-- Popup de búsqueda -->
+<div id="search-popup" class="search-popup">
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar series...">
+        <button class="close-btn" id="close-search">X</button>
+    </div>
+    <div id="search-results" class="results"></div>
+</div>
 
-        /* Menú superior */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-        }
+<main>
+    <!-- Carrusel centrado -->
+    <section class="slider" style="margin-top: 100px; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; z-index: 10;">
+        <div class="slide" style="width: 500px;">
+            <a href="begins_youth.html">
+                <img src="Sliders_Arriba_YS.png" alt="Serie 1" style="width: 100%; height: auto;">
+                <div class="info">
+                    <h2>Nombre de la Serie 1</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </a>
+        </div>
+        <div class="slide" style="width: 500px;">
+            <a href="thamepo.html">
+                <img src="Sliders_Arriba_BY.png" alt="Serie 2" style="width: 100%; height: auto;">
+                <div class="info">
+                    <h2>Nombre de la Serie 2</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </a>
+        </div>
+        <div class="slide" style="width: 500px;">
+            <a href="yoursky.html">
+                <img src="Sliders_Arriba_TP.png" alt="Serie 3" style="width: 100%; height: auto;">
+                <div class="info">
+                    <h2>Nombre de la Serie 3</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </a>
+        </div>
+    </section>
+</main>
 
-        .navbar img {
-            height: 40px;
-            width: auto;
-        }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.slider').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false, // Flechas desactivadas
+            dots: true, // Puntos activados
+            autoplay: true, // Reproducción automática
+            autoplaySpeed: 7000, // Cambiar cada 7 segundos
+        });
+    });
+</script>
 
-        .navbar .search-container {
-            position: relative;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #111;
+        color: white;
+    }
 
-        .navbar .search-container input {
-            padding: 5px 30px 5px 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-        }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background: #026670;
+    }
 
-        .navbar .search-container input:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
+    .menu-icon {
+        font-size: 24px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
 
-        .navbar .search-container button {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: transparent;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-        }
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-        .navbar .profile-img {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            cursor: pointer;
-        }
+    .search-container {
+        display: flex;
+        align-items: center;
+    }
 
-        /* Carrusel */
-        .slider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+    .search-icon {
+        font-size: 20px;
+        cursor: pointer;
+        margin-right: 15px;
+    }
 
-        .slider-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+    .profile-img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
 
+    /* Carrusel */
+    .slider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        z-index: 10;
+    }
+
+    .slide img {
+        width: 100%;
+        height: auto;
+    }
+
+    .info {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+    .info h2 {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .info p {
+        margin: 5px 0;
+    }
+
+    .watch-now {
+        background: #026670;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .watch-now:hover {
+        background: #004d40;
+    }
+
+    /* Responsivo */
+    @media screen and (max-width: 768px) {
         .info {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px;
-            font-size: 16px;
+            font-size: 12px;
+            padding: 5px;
         }
 
         .info h2 {
-            margin: 0;
-            font-size: 18px;
+            font-size: 14px;
         }
-
-        @media (max-width: 768px) {
-            .slider {
-                max-width: 90%;
-            }
-
-            .info {
-                font-size: 12px;
-                bottom: 5px;
-                left: 5px;
-            }
-
-            .info h2 {
-                font-size: 14px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Menú superior -->
-    <header class="navbar">
-        <div class="menu-toggle" id="menu-toggle">
-            <span class="menu-icon">&#9776;</span>
-        </div>
-        <img src="logo.png" alt="Logo de KYB" />
-        
-        <div class="search-container">
-            <input type="text" placeholder="Buscar...">
-            <button type="submit">&#128269;</button>
-        </div>
-
-        <img src="perfil.jpg" alt="Foto de perfil" class="profile-img">
-    </header>
-
-    <main>
-        <!-- Carrusel -->
-        <section class="slider">
-            <div class="slide">
-                <a href="begins_youth.html">
-                    <img src="Sliders_Arriba_YS.png" alt="Serie 1" class="slider-image">
-                    <div class="info">
-                        <h2>Begins Youth</h2>
-                        <p>⭐⭐⭐⭐✰</p>
-                        <p>Subtítulos: ESP, ING</p>
-                    </div>
-                </a>
-            </div>
-            <div class="slide">
-                <a href="thamepo.html">
-                    <img src="Sliders_Arriba_BY.png" alt="Serie 2" class="slider-image">
-                    <div class="info">
-                        <h2>Thamepo</h2>
-                        <p>⭐⭐⭐⭐⭐</p>
-                        <p>Subtítulos: ESP</p>
-                    </div>
-                </a>
-            </div>
-            <div class="slide">
-                <a href="yoursky.html">
-                    <img src="Sliders_Arriba_YS.png" alt="Serie 3" class="slider-image">
-                    <div class="info">
-                        <h2>Your Sky</h2>
-                        <p>⭐⭐⭐⭐</p>
-                        <p>Subtítulos: ESP</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            // Inicia el carrusel
-            $('.slider').slick({
-                autoplay: true,
-                autoplaySpeed: 7000,
-                dots: true,
-                arrows: false
-            });
-        });
-    </script>
-</body>
-</html>
+    }
+</style>
