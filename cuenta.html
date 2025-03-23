@@ -35,8 +35,8 @@
         }
 
         .foto-perfil {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             object-fit: cover;
             border-radius: 50%;
             margin-bottom: 20px;
@@ -152,6 +152,21 @@
         .change-photo-btn:hover {
             background-color: #f40612;
         }
+
+        @media (max-width: 768px) {
+            .perfil-container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .foto-perfil {
+                width: 120px;
+                height: 120px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -196,11 +211,11 @@
         <div class="popup-content">
             <h3>Elige tu Foto de Perfil</h3>
             <div class="perfiles">
-                <img src="perfil1.jpg" alt="Perfil 1" onclick="cambiarFoto('perfil1.jpg')">
-                <img src="perfil2.jpg" alt="Perfil 2" onclick="cambiarFoto('perfil2.jpg')">
-                <img src="perfil3.jpg" alt="Perfil 3" onclick="cambiarFoto('perfil3.jpg')">
-                <img src="perfil4.jpg" alt="Perfil 4" onclick="cambiarFoto('perfil4.jpg')">
-                <img src="perfil5.jpg" alt="Perfil 5" onclick="cambiarFoto('perfil5.jpg')">
+                <img src="perfil1.jpg" alt="Perfil 1" onclick="cambiarFoto('Kong_Kongpob_Jirojmontri.jpg')">
+                <img src="perfil2.jpg" alt="Perfil 2" onclick="cambiarFoto('Patji_Jirachart_Buspavanich.jpg')">
+                <img src="perfil3.jpg" alt="Perfil 3" onclick="cambiarFoto('Por_Suppakarn_Jirachotikul.jpg')">
+                <img src="perfil4.jpg" alt="Perfil 4" onclick="cambiarFoto('Kim_Yoon_woo.jpg')">
+                <img src="perfil5.jpg" alt="Perfil 5" onclick="cambiarFoto('Jung_woo_jin.jpg')">
             </div>
             <button class="close-popup" onclick="cerrarPopup()">Cerrar</button>
         </div>
