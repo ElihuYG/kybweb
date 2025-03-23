@@ -1,113 +1,137 @@
-/* General */
+/* Estilos Generales */
 body {
-    background-color: #000;
-    color: white;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-}
-
-/* Menú inferior */
-.menu-inferior {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-}
-.menu-inferior a {
+    background: #111;
     color: white;
-    text-decoration: none;
-    font-size: 18px;
 }
 
-/* Slider principal */
-.slider {
-    margin-top: 100px;
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    overflow: hidden;
-}
-.slide-container {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-.slide {
-    min-width: 100%;
-    display: none;
-    position: relative;
-}
-.slide.active {
-    display: block;
-}
-.slide img {
-    width: 100%;
-    display: block;
-}
-
-/* Flechas */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-}
-.prev { left: 10px; }
-.next { right: 10px; }
-
-/* Puntos indicadores */
-.dots-container {
-    text-align: center;
-    margin-top: 10px;
-}
-.dot {
-    height: 10px;
-    width: 10px;
-    background-color: gray;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 5px;
-    cursor: pointer;
-}
-.dot.active {
-    background-color: white;
-}
-
-/* Categorías */
-.category {
-    margin: 20px;
-}
-.category-header {
+/* Menú Superior */
+.menu {
+    background-color: #026670;
+    padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #50C878;
-    padding-bottom: 5px;
+    position: relative;
 }
-.category-header h2 {
+
+.logo {
+    font-size: 24px;
+    cursor: pointer;
     color: #50C878;
 }
-.view-more {
-    color: #50C878;
-    text-decoration: none;
-    font-size: 16px;
-}
-.category-content {
+
+.menu-items {
     display: flex;
-    overflow-x: auto;
-    padding: 10px 0;
+    align-items: center;
+    gap: 20px;
 }
-.category-content img {
-    width: 120px;
-    margin-right: 10px;
-    border-radius: 5px;
+
+.search-icon {
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
+    -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
+    cursor: pointer;
+}
+
+.profile-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Menú de Navegación Móvil */
+.hamburger {
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #004d40;
+    width: 100%;
+    padding: 10px;
+    gap: 15px;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.mobile-menu a:hover {
+    color: #50C878;
+}
+
+/* Estilos para el Catálogo */
+.catalogo {
+    padding: 20px;
+}
+
+.catalogo h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.catalogo-items {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.catalogo-item {
+    text-align: center;
+}
+
+.catalogo-item img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Estilos Responsivos */
+@media screen and (max-width: 768px) {
+    .menu-items {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .menu-items.mobile-active {
+        display: flex;
+        gap: 20px;
+    }
+
+    .menu ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .catalogo-items {
+        flex-direction: column;
+        align-items: center;
+    }
 }
