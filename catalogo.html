@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Superior</title>
+    <title>KYB</title>
     <style>
-        /* Estilos generales */
+        /* Estilos Generales */
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #111;
+            background: #111;
             color: white;
         }
 
-        /* Menú superior */
+        /* Menú Superior */
         .menu {
-            background-color: #111;
+            background-color: #026670;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
@@ -24,22 +24,21 @@
             position: relative;
         }
 
-        /* Logo KYB */
         .logo {
             font-size: 24px;
-            font-weight: bold;
+            cursor: pointer;
             color: #50C878; /* Verde esmeralda */
         }
 
-        /* Contenedor para los elementos (lupa y perfil) */
         .menu-items {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
-        /* Estilo para el icono de lupa */
+        /* Lupa */
         .search-icon {
+            font-size: 20px;
             width: 25px;
             height: 25px;
             background-color: white;
@@ -48,195 +47,99 @@
             cursor: pointer;
         }
 
-        /* Estilo para la imagen de perfil */
+        /* Imagen de Perfil */
         .profile-img {
             width: 35px;
             height: 35px;
             border-radius: 50%;
+            border: 2px solid white;
             object-fit: cover;
             cursor: pointer;
         }
 
-        /* Menú desplegable */
+        /* Menú de Navegación Móvil */
+        .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            display: none;
+        }
+
         .mobile-menu {
             display: none;
             position: absolute;
             top: 60px;
             left: 0;
+            background: #004d40;
             width: 100%;
-            background-color: #333;
-            flex-direction: column;
-            gap: 15px;
             padding: 10px;
-            border-radius: 5px;
+            gap: 15px;
+            flex-direction: column;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
         }
 
         .mobile-menu a {
             color: white;
-            font-size: 20px;
             text-decoration: none;
+            font-size: 20px;
         }
 
         .mobile-menu a:hover {
             color: #50C878;
         }
 
-        /* Estilos para dispositivos móviles */
+        /* Estilos Responsivos */
         @media screen and (max-width: 768px) {
             .menu-items {
                 display: none;
             }
 
             .hamburger {
-                display: flex;
+                display: block;
             }
 
-            .mobile-menu.open {
+            .menu-items.mobile-active {
                 display: flex;
+                gap: 20px;
             }
-        }
 
-        /* Popup de búsqueda */
-        .search-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .search-box {
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            width: 350px;
-            position: relative;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .results {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 350px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .result-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .result-item:hover {
-            background: #f0f0f0;
+            .menu ul {
+                list-style: none;
+                padding: 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Menú superior -->
-    <div class="menu">
-        <!-- Logo -->
+    <!-- Menú Superior -->
+    <header class="menu">
         <div class="logo">KYB</div>
-
-        <!-- Contenedor para la lupa y la foto de perfil -->
         <div class="menu-items">
-            <!-- Lupa -->
-            <div class="search-icon" id="search-icon" onclick="toggleSearch()"></div>
-
-            <!-- Foto de perfil -->
-            <img src="https://via.placeholder.com/35" alt="Foto de perfil" class="profile-img" onclick="toggleProfileMenu()">
+            <div class="search-icon"></div>
+            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
         </div>
-    </div>
+        <div class="hamburger" id="hamburger-icon">☰</div>
+    </header>
 
-    <!-- Menú de perfil (si es necesario) -->
-    <div class="mobile-menu" id="profile-menu">
-        <a href="#perfil">Ver Perfil</a>
-        <a href="#configuracion">Configuración</a>
-        <a href="#cerrar-sesion">Cerrar sesión</a>
-    </div>
-
-    <!-- Popup de búsqueda -->
-    <div id="search-popup" class="search-popup">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar series...">
-            <button class="close-btn" id="close-search">X</button>
-        </div>
-        <div id="search-results" class="results"></div>
+    <!-- Menú Lateral Móvil -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#">Inicio</a>
+        <a href="#">Categorías</a>
+        <a href="#">Mi Lista</a>
     </div>
 
     <script>
-        // Función para mostrar/ocultar el menú de perfil
-        function toggleProfileMenu() {
-            const profileMenu = document.getElementById("profile-menu");
-            profileMenu.classList.toggle("open");
-        }
-
-        // Función para mostrar/ocultar el buscador
-        function toggleSearch() {
-            const searchPopup = document.getElementById("search-popup");
-            searchPopup.style.display = "flex";
-            document.getElementById("search-input").focus();
-        }
-
-        // Función para cerrar el popup de búsqueda
-        document.getElementById("close-search").addEventListener("click", () => {
-            document.getElementById("search-popup").style.display = "none";
-            document.getElementById("search-input").value = "";
-            document.getElementById("search-results").style.display = "none";
-        });
-
-        // Función para mostrar los resultados de búsqueda
-        const series = [
-            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
-            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-        ];
-
-        document.getElementById("search-input").addEventListener("input", () => {
-            let query = document.getElementById("search-input").value.toLowerCase();
-            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-            if (query.length > 0 && filtered.length > 0) {
-                document.getElementById("search-results").innerHTML = filtered.map(s =>
-                    `<div class="result-item" onclick="window.location.href='${s.link}'">
-                        <img src="${s.image}" alt="${s.name}">
-                        <span>${s.name}</span>
-                    </div>`
-                ).join("");
-                document.getElementById("search-results").style.display = "block";
-            } else {
-                document.getElementById("search-results").style.display = "none";
-            }
+        // Función para mostrar/ocultar el menú lateral
+        const hamburger = document.getElementById('hamburger-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
         });
     </script>
 
