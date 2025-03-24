@@ -2,20 +2,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212;
-    color: white;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1f1f1f;
     padding: 10px 20px;
-}
-
-.navbar h1 {
-    margin: 0;
+    color: white;
 }
 
 .right-icons {
@@ -25,87 +19,49 @@ body {
 
 .icon {
     font-size: 20px;
-    color: white;
     margin-left: 15px;
     cursor: pointer;
+    color: white;
 }
 
 .menu-dropdown {
     display: none;
-    background-color: #1f1f1f;
-    padding: 10px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
 }
 
 .menu-dropdown ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    text-align: center;
 }
 
 .menu-dropdown ul li {
-    padding: 5px 0;
-}
-
-.menu-dropdown ul li a {
-    color: white;
-    text-decoration: none;
+    padding: 10px;
 }
 
 .hidden {
     display: none;
 }
 
-#search-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #1f1f1f;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    width: 300px;
-}
-
 .search-box {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    padding: 10px;
 }
 
-#search-input {
-    flex-grow: 1;
+.search-box input {
+    width: 80%;
     padding: 5px;
-    border: none;
-    border-radius: 3px;
-    outline: none;
 }
 
 .close-icon {
     cursor: pointer;
     font-size: 18px;
-    color: white;
     margin-left: 10px;
-}
-
-#search-results {
-    margin-top: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: #1a1a1a;
-    border-radius: 5px;
-}
-
-.search-item {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    border-bottom: 1px solid #333;
-    cursor: pointer;
-}
-
-.search-item img {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    margin-right: 10px;
 }
