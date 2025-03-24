@@ -21,6 +21,7 @@
             align-items: center;
             padding: 15px;
             background: #026670;
+            position: relative;
         }
 
         /* Logo */
@@ -51,6 +52,10 @@
         }
 
         /* Menú hamburguesa */
+        .menu-container {
+            position: relative;
+        }
+
         .menu-icon {
             font-size: 30px;
             cursor: pointer;
@@ -60,11 +65,13 @@
         .mobile-menu {
             display: none;
             position: absolute;
-            top: 60px;
-            right: 10px;
+            top: 45px; /* Justo debajo del botón */
+            left: 0;
             background: #333;
             padding: 10px;
             border-radius: 5px;
+            min-width: 150px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         .mobile-menu.open {
@@ -80,10 +87,11 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            padding: 5px 10px;
         }
 
         .mobile-menu a:hover {
-            color: #50C878;
+            background: #50C878;
         }
 
         /* Popup de búsqueda */
@@ -164,20 +172,20 @@
 
     <!-- Header -->
     <header class="header">
-        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div class="menu-container">
+            <div id="menu-toggle" class="menu-icon">☰</div>
+            <div id="mobile-menu" class="mobile-menu">
+                <a href="#" id="menu-search-icon">🔍 Buscar</a>
+                <a href="#">Mi Cuenta</a>
+                <a href="#">Configuración</a>
+            </div>
+        </div>
         <div class="title">KYB</div>
         <div class="search-container">
             <div id="search-icon" class="search-icon">🔍</div>
             <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
         </div>
     </header>
-
-    <!-- Menú hamburguesa -->
-    <div id="mobile-menu" class="mobile-menu">
-        <a href="#" id="menu-search-icon">🔍 Buscar</a>
-        <a href="#">Mi Cuenta</a>
-        <a href="#">Configuración</a>
-    </div>
 
     <!-- Popup de búsqueda -->
     <div id="search-popup" class="search-popup">
@@ -202,6 +210,13 @@
             // Abrir/Cerrar menú hamburguesa
             menuToggle.addEventListener("click", () => {
                 mobileMenu.classList.toggle("open");
+            });
+
+            // Cerrar el menú si se hace clic fuera
+            document.addEventListener("click", (e) => {
+                if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove("open");
+                }
             });
 
             // Abrir popup de búsqueda desde el icono principal o desde el menú
