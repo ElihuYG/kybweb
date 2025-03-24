@@ -7,51 +7,43 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById("search-input");
     const searchResults = document.getElementById("search-results");
 
-    // Lista de series de ejemplo (puedes reemplazar con tu base de datos)
     const series = [
         { name: "Begins Youth", img: "posters_begins_youth.png", link: "beginsyouth.html" },
-        { name: "Thamepo", img: "posters_thamepo.png", link: "thamepo.html" },
-        { name: "Yoursky", img: "posters_yoursky.png", link: "yoursky.html" }
+        { name: "Thamepo", img: "poster_thamepo.png", link: "thamepo.html" },
+        { name: "Yoursky", img: "poster_yoursky.png", link: "yoursky.html" }
     ];
 
-    // Evento para abrir/cerrar el menú hamburguesa
     menuBtn.addEventListener("click", function () {
         menu.classList.toggle("hidden");
     });
 
-    // Evento para abrir la ventana emergente del buscador
     searchBtn.addEventListener("click", function () {
         searchPopup.classList.remove("hidden");
+        searchInput.focus();
     });
 
-    // Evento para cerrar la ventana emergente del buscador
     closeSearch.addEventListener("click", function () {
         searchPopup.classList.add("hidden");
-        searchInput.value = ""; // Limpiar el input
-        searchResults.innerHTML = ""; // Limpiar resultados
+        searchInput.value = "";
+        searchResults.innerHTML = "";
     });
 
-    // Búsqueda en vivo
     searchInput.addEventListener("input", function () {
         const query = searchInput.value.toLowerCase();
         searchResults.innerHTML = "";
 
-        if (query === "") return;
+        if (query) {
+            const filteredSeries = series.filter(series => series.name.toLowerCase().includes(query));
 
-        const filteredSeries = series.filter(s => s.name.toLowerCase().includes(query));
-
-        filteredSeries.forEach(s => {
-            const item = document.createElement("div");
-            item.classList.add("search-result-item");
-            item.innerHTML = `
-                <img src="${s.img}" alt="${s.name}">
-                <span>${s.name}</span>
-            `;
-            item.addEventListener("click", function () {
-                window.location.href = s.link;
+            filteredSeries.forEach(series => {
+                const div = document.createElement("div");
+                div.classList.add("search-item");
+                div.innerHTML = `<img src="${series.img}" alt="${series.name}"><span>${series.name}</span>`;
+                div.addEventListener("click", function () {
+                    window.location.href = series.link;
+                });
+                searchResults.appendChild(div);
             });
-
-            searchResults.appendChild(item);
-        });
+        }
     });
 });
