@@ -6,6 +6,7 @@
     <title>KYB</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -13,7 +14,7 @@
             <button id="menu-btn">☰</button>
             <h1>KYB</h1>
             <div class="right-icons">
-<span id="search-btn" class="icon">🔍</span>
+                <i id="search-btn" class="fas fa-search icon"></i>
                 <img src="profile-icon.png" class="icon" alt="Perfil" onclick="location.href='cuenta.html'">
             </div>
         </div>
@@ -29,10 +30,9 @@
     <div id="search-popup" class="hidden">
         <div class="search-box">
             <input type="text" id="search-input" placeholder="Buscar...">
-            <span id="close-search">✖</span>
+            <span id="close-search" class="close-icon">✖</span>
             <div id="search-results"></div>
         </div>
     </div>
 </body>
 </html>
-
