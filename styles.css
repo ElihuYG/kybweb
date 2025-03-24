@@ -1,32 +1,20 @@
+/* Estilos generales */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #121212;
+    color: white;
 }
 
+/* Barra de navegación */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #50C878;
+    background-color: #50C878; /* Verde esmeralda */
     padding: 10px 20px;
-}
-
-.navbar h1 {
-    margin: 0;
-    color: white;
-}
-
-.right-icons {
-    display: flex;
-    align-items: center;
-}
-
-.right-icons i, .profile {
-    cursor: pointer;
-    font-size: 20px;
-    margin-left: 15px;
+    position: relative;
 }
 
 .profile {
@@ -35,62 +23,82 @@ body {
     border-radius: 50%;
 }
 
+/* Menú desplegable */
 .menu-dropdown {
     display: none;
-    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
     background-color: #50C878;
-    padding: 10px;
+    width: 100%;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .menu-dropdown ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .menu-dropdown ul li {
-    padding: 8px 0;
+    padding: 10px 20px;
 }
 
-.submenu {
-    display: none;
+.menu-dropdown ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
 }
 
+.menu-dropdown ul li:hover {
+    background-color: #3aa65a;
+}
+
+/* Buscador */
 .search-box {
-    background: white;
-    padding: 10px;
+    display: none;
     position: absolute;
     top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
+    right: 10px;
+    background: white;
+    padding: 10px;
     border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
 }
 
 .search-box input {
-    width: 80%;
     padding: 5px;
+    width: 200px;
 }
 
-.close-icon {
+.search-box button {
+    padding: 5px 10px;
+    background: #50C878;
+    border: none;
+    color: white;
     cursor: pointer;
-    font-size: 18px;
-    color: red;
 }
 
-#search-results {
-    margin-top: 10px;
+.hidden {
+    display: none;
 }
 
-.result-item {
+/* Catálogo */
+.grid {
     display: flex;
-    align-items: center;
-    padding: 5px;
-    cursor: pointer;
+    gap: 10px;
 }
 
-.result-img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+.item img {
+    width: 150px;
+    border-radius: 5px;
+}
+
+.carousel {
+    text-align: center;
+}
+
+.carousel-item img {
+    width: 300px;
+    border-radius: 5px;
 }
