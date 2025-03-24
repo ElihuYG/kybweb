@@ -10,15 +10,15 @@
 </head>
 <body>
     <header>
-        <div class="navbar" style="background-color: #50C878;">
+        <div class="navbar">
             <button id="menu-btn">☰</button>
             <h1>KYB</h1>
             <div class="right-icons">
-                <i id="search-btn" class="fas fa-search icon"></i>
-                <img src="profile-icon.png" class="icon" alt="Perfil" onclick="location.href='cuenta.html'">
+                <i id="search-btn" class="fas fa-search"></i>
+                <img src="profile-icon.png" class="profile" alt="Perfil" onclick="location.href='cuenta.html'">
             </div>
         </div>
-        <nav id="menu" class="menu-dropdown hidden" style="background-color: #50C878;">
+        <nav id="menu" class="menu-dropdown hidden">
             <ul>
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Series</a></li>
@@ -33,11 +33,11 @@
         </nav>
     </header>
 
-    <div id="search-popup" class="hidden" style="background-color: #50C878;">
+    <div id="search-popup" class="hidden">
         <div class="search-box">
             <input type="text" id="search-input" placeholder="Buscar...">
             <span id="close-search" class="close-icon">✖</span>
-            <div id="search-results" class="results-list"></div>
+            <div id="search-results"></div>
         </div>
     </div>
 </body>
