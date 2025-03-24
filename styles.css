@@ -18,50 +18,78 @@ body {
 }
 
 .icon {
-    font-size: 20px;
-    margin-left: 15px;
     cursor: pointer;
+    margin-left: 15px;
+    font-size: 1.2em;
     color: white;
 }
 
 .menu-dropdown {
-    display: none;
     position: absolute;
     top: 50px;
     left: 0;
     width: 100%;
-    padding: 10px 0;
+    display: none;
+    padding: 10px;
 }
 
 .menu-dropdown ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    text-align: center;
 }
 
 .menu-dropdown ul li {
     padding: 10px;
+    border-bottom: 1px solid white;
 }
 
-.hidden {
+.submenu {
     display: none;
+    padding-left: 20px;
 }
 
 .search-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 10px;
 }
 
-.search-box input {
-    width: 80%;
+#search-input {
     padding: 5px;
+    font-size: 1em;
+    width: 90%;
+    margin-bottom: 10px;
 }
 
 .close-icon {
     cursor: pointer;
-    font-size: 18px;
-    margin-left: 10px;
+    font-size: 1.2em;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.results-list {
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    padding: 5px;
+}
+
+.results-list div {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.results-list div img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.hidden {
+    display: none;
 }
