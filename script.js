@@ -1,69 +1,72 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Menú desplegable
-    const menuBtn = document.getElementById("menu-btn");
-    const menu = document.getElementById("menu");
+// --- Menú hamburguesa ---
+const menuIcon = document.getElementById("menu-icon");
+const mobileMenu = document.getElementById("mobile-menu");
 
-    menuBtn.addEventListener("click", function () {
-        menu.classList.toggle("hidden");
-    });
+// Alternar menú hamburguesa
+menuIcon.addEventListener("click", () => {
+    mobileMenu.classList.toggle("open");
+});
 
-    document.addEventListener("click", function (event) {
-        if (!menu.contains(event.target) && event.target !== menuBtn) {
-            menu.classList.add("hidden");
-        }
-    });
+// Cerrar menú si se hace clic fuera de él
+document.addEventListener("click", (event) => {
+    if (!menuIcon.contains(event.target) && !mobileMenu.contains(event.target)) {
+        mobileMenu.classList.remove("open");
+    }
+});
 
-    // Buscador
-    const searchBtn = document.getElementById("search-btn");
-    const searchBox = document.createElement("div");
-    searchBox.classList.add("search-box", "hidden");
-    searchBox.innerHTML = `
-        <input type="text" id="search-input" placeholder="Buscar...">
-        <button id="close-search">✖</button>
-        <div id="search-results"></div>
-    `;
-    document.body.appendChild(searchBox);
+// --- Popup de búsqueda ---
+const searchIcon = document.getElementById("search-icon");
+const searchPopup = document.getElementById("search-popup");
+const closeSearch = document.getElementById("close-search");
 
-    searchBtn.addEventListener("click", function () {
-        searchBox.classList.toggle("hidden");
-        document.getElementById("search-input").focus();
-    });
+// Abrir popup de búsqueda
+searchIcon.addEventListener("click", () => {
+    searchPopup.style.display = "flex";
+});
 
-    document.getElementById("close-search").addEventListener("click", function () {
-        searchBox.classList.add("hidden");
-    });
+// Cerrar popup de búsqueda
+closeSearch.addEventListener("click", () => {
+    searchPopup.style.display = "none";
+});
 
-    document.getElementById("search-input").addEventListener("input", function () {
-        const query = this.value.toLowerCase();
-        const resultsDiv = document.getElementById("search-results");
-        resultsDiv.innerHTML = "";
+// --- Buscar y mostrar sugerencias ---
+const searchInput = document.getElementById("search-input");
+const resultsContainer = document.getElementById("results");
 
-        if (query) {
-            const series = [
-                { title: "Begins Youth", url: "beginsyouth.html", img: "posters_begins_youth.png" },
-                { title: "Thamepo", url: "thamepo.html", img: "posters_thamepo.png" },
-                { title: "Yoursky", url: "yoursky.html", img: "posters_yoursky.png" }
-            ];
+// Simulación de datos de búsqueda
+const data = [
+    { title: "Begins Youth", img: "posters_begins_youth.png" },
+    { title: "Thamepo", img: "thamepo_poster.png" },
+    { title: "Yoursky", img: "yoursky_poster.png" }
+];
 
-            const filtered = series.filter(s => s.title.toLowerCase().includes(query));
+// Función de búsqueda
+searchInput.addEventListener("input", () => {
+    const searchText = searchInput.value.toLowerCase();
+    resultsContainer.innerHTML = "";
 
-            filtered.forEach(s => {
-                const item = document.createElement("div");
-                item.innerHTML = `
-                    <img src="${s.img}" alt="${s.title}" style="width: 50px; border-radius: 5px; margin-right: 10px;">
-                    <a href="${s.url}" style="color: black; text-decoration: none;">${s.title}</a>
-                `;
-                item.style.display = "flex";
-                item.style.alignItems = "center";
-                item.style.padding = "5px";
-                item.style.cursor = "pointer";
+    if (searchText.length > 0) {
+        const filtered = data.filter(item => item.title.toLowerCase().includes(searchText));
 
-                item.addEventListener("click", function () {
-                    window.location.href = s.url;
-                });
-
-                resultsDiv.appendChild(item);
+        if (filtered.length > 0) {
+            resultsContainer.style.display = "block";
+            filtered.forEach(item => {
+                const div = document.createElement("div");
+                div.classList.add("result-item");
+                div.innerHTML = `<img src="${item.img}" alt="${item.title}"><span>${item.title}</span>`;
+                resultsContainer.appendChild(div);
             });
+        } else {
+            resultsContainer.style.display = "none";
         }
-    });
+    } else {
+        resultsContainer.style.display = "none";
+    }
+});
+
+// Cerrar sugerencias al hacer clic fuera
+document.addEventListener("click", (event) => {
+    if (!searchInput.contains(event.target) && !resultsContainer.contains(event.target)) {
+        resultsContainer.style.display = "none";
+    }
 });
