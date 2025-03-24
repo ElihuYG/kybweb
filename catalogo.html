@@ -1,337 +1,197 @@
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB</title>
-    <style>
-        /* Estilos generales */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #111;
-            color: white;
-        }
-
-        /* Menú superior */
-        .menu {
-            background-color: #111;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Logo KYB */
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #50C878; /* Verde esmeralda */
-        }
-
-        /* Contenedor para los elementos (lupa y perfil) */
-        .menu-items {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        /* Estilo para el icono de lupa */
-        .search-icon {
-            width: 25px;
-            height: 25px;
-            background-color: white;
-            mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
-            -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
-            cursor: pointer;
-        }
-
-        /* Estilo para la imagen de perfil */
-        .profile-img {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            object-fit: cover;
-            cursor: pointer;
-        }
-
-        /* Menú desplegable */
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            background-color: #333;
-            flex-direction: column;
-            gap: 15px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .mobile-menu a {
-            color: white;
-            font-size: 20px;
-            text-decoration: none;
-        }
-
-        .mobile-menu a:hover {
-            color: #50C878;
-        }
-
-        /* Estilos para dispositivos móviles */
-        @media screen and (max-width: 768px) {
-            .menu-items {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .mobile-menu.open {
-                display: flex;
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
+    <header>
+        <div class="navbar">
+            <button id="menu-btn">☰</button>
+            <h1>KYB</h1>
+            <div class="right-icons">
+                <img src="search-icon.png" id="search-btn" class="icon" alt="Buscar">
+                <img src="profile-icon.png" class="icon" alt="Perfil" onclick="location.href='cuenta.html'">
+            </div>
+        </div>
+        <nav id="menu" class="menu-dropdown hidden">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Series</a></li>
+                <li><a href="#">Películas</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Menú superior -->
-    <div class="menu">
-        <!-- Logo -->
-        <div class="logo">KYB</div>
-
-        <!-- Contenedor para la lupa y la foto de perfil -->
-        <div class="menu-items">
-            <!-- Lupa -->
-            <div class="search-icon" id="search-icon" onclick="toggleSearch()"></div>
-
-            <!-- Foto de perfil -->
-            <img src="https://via.placeholder.com/35" alt="Foto de perfil" class="profile-img" onclick="toggleProfileMenu()">
+    <div id="search-popup" class="hidden">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <span id="close-search">✖</span>
+            <div id="search-results"></div>
         </div>
     </div>
-
-    <!-- Menú de perfil (si es necesario) -->
-    <div class="mobile-menu" id="profile-menu">
-        <a href="#perfil">Ver Perfil</a>
-        <a href="#configuracion">Configuración</a>
-        <a href="#cerrar-sesion">Cerrar sesión</a>
-    </div>
-
-    <script>
-        // Función para mostrar/ocultar el menú de perfil
-        function toggleProfileMenu() {
-            const profileMenu = document.getElementById("profile-menu");
-            profileMenu.classList.toggle("open");
-        }
-
-        // Función para mostrar/ocultar el buscador
-        function toggleSearch() {
-            alert('Buscador activado');
-        }
-    </script>
-
 </body>
-</html> <header class="header">
-    <div id="menu-toggle" class="menu-icon">☰</div>
-    <div class="title">KYB</div>
-    <div class="search-container">
-        <div id="search-icon" class="search-icon">🔍</div>
-        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
-    </div>
-</header>
+</html>
 
-<!-- Menú lateral -->
-<div id="menu" class="menu">
-    <ul>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Categorías</a></li>
-        <li><a href="#">Mi Lista</a></li>
-        <li><button id="close-menu" class="close-btn">Cerrar</button></li>
-    </ul>
-</div>
+document.addEventListener("DOMContentLoaded", function () {
+    // Menú desplegable
+    const menuBtn = document.getElementById("menu-btn");
+    const menu = document.getElementById("menu");
 
-<!-- Popup de búsqueda -->
-<div id="search-popup" class="search-popup">
-    <div class="search-box">
-        <input type="text" id="search-input" placeholder="Buscar series...">
-        <button class="close-btn" id="close-search">X</button>
-    </div>
-    <div id="search-results" class="results"></div>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const menuToggle = document.getElementById("menu-toggle");
-        const menu = document.getElementById("menu");
-        const closeMenu = document.getElementById("close-menu");
-
-        const searchIcon = document.getElementById("search-icon");
-        const searchPopup = document.getElementById("search-popup");
-        const closeSearch = document.getElementById("close-search");
-        const searchInput = document.getElementById("search-input");
-        const searchResults = document.getElementById("search-results");
-
-        // Abrir menú con un solo clic
-        menuToggle.addEventListener("click", () => {
-            menu.classList.add("active");
-        });
-
-        // Botón dentro del menú para cerrarlo
-        closeMenu.addEventListener("click", () => {
-            menu.classList.remove("active");
-        });
-
-        // Abrir buscador
-        searchIcon.addEventListener("click", () => {
-            searchPopup.style.display = "flex";
-            searchInput.focus();
-        });
-
-        // Cerrar buscador
-        closeSearch.addEventListener("click", () => {
-            searchPopup.style.display = "none";
-            searchInput.value = "";
-            searchResults.style.display = "none";
-        });
-
-        // Series en el buscador
-        const series = [
-            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
-            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-        ];
-
-        searchInput.addEventListener("input", () => {
-            let query = searchInput.value.toLowerCase();
-            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-            if (query.length > 0 && filtered.length > 0) {
-                searchResults.innerHTML = filtered.map(s =>
-                    `<div class="result-item" onclick="window.location.href='${s.link}'">
-                        <img src="${s.image}" alt="${s.name}">
-                        <span>${s.name}</span>
-                    </div>`
-                ).join("");
-                searchResults.style.display = "block";
-            } else {
-                searchResults.style.display = "none";
-            }
-        });
+    menuBtn.addEventListener("click", function () {
+        menu.classList.toggle("hidden");
     });
-</script>
 
-<style>
-    /* Estilos Generales */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #111;
-        color: white;
-    }
+    // Buscador emergente
+    const searchBtn = document.getElementById("search-btn");
+    const searchPopup = document.getElementById("search-popup");
+    const closeSearch = document.getElementById("close-search");
+    const searchInput = document.getElementById("search-input");
+    const searchResults = document.getElementById("search-results");
 
-    /* Header */
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-        background: #026670;
-    }
+    searchBtn.addEventListener("click", function () {
+        searchPopup.classList.remove("hidden");
+        searchInput.focus();
+    });
 
-    /* Menú */
-    .menu {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        background: #004d40;
-        padding: 10px;
-        border-radius: 5px;
-    }
+    closeSearch.addEventListener("click", function () {
+        searchPopup.classList.add("hidden");
+        searchInput.value = "";
+        searchResults.innerHTML = "";
+    });
 
-    .menu.active {
-        display: block;
-    }
+    // Simulación de datos de series
+    const series = [
+        { title: "Begins Youth", image: "posters_begins_youth.png", link: "beginsyouth.html" },
+        { title: "Thamepo", image: "thamepo_poster.png", link: "thamepo.html" },
+        { title: "Yoursky", image: "yoursky_poster.png", link: "yoursky.html" }
+    ];
 
-    .close-btn {
-        background: red;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        cursor: pointer;
-        border-radius: 5px;
-        width: 100%;
-        text-align: left;
-    }
+    // Búsqueda en vivo
+    searchInput.addEventListener("input", function () {
+        const query = searchInput.value.toLowerCase();
+        searchResults.innerHTML = "";
 
-    /* Buscador */
-    .search-popup {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 9999;
-    }
+        if (query.trim() !== "") {
+            const filteredSeries = series.filter(s => s.title.toLowerCase().includes(query));
+            filteredSeries.forEach(s => {
+                const div = document.createElement("div");
+                div.classList.add("search-result-item");
+                div.innerHTML = `
+                    <img src="${s.image}" alt="${s.title}">
+                    <span>${s.title}</span>
+                `;
+                div.addEventListener("click", () => {
+                    window.location.href = s.link;
+                });
+                searchResults.appendChild(div);
+            });
+        }
+    });
+});
 
-    .search-box {
-        background: white;
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        width: 350px;
-        position: relative;
-    }
+.hidden {
+    display: none;
+}
 
-    .search-box input {
-        flex: 1;
-        border: none;
-        padding: 10px;
-        font-size: 16px;
-        outline: none;
-    }
+/* Estilo del menú superior */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    padding: 10px 20px;
+    color: white;
+}
 
-    .results {
-        background: white;
-        color: black;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-        width: 350px;
-        max-height: 200px;
-        overflow-y: auto;
-        display: none;
-    }
+.right-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-    .result-item {
-        display: flex;
-        align-items: center;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-        cursor: pointer;
-    }
+.icon {
+    width: 30px;
+    cursor: pointer;
+}
 
-    .result-item img {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-        border-radius: 5px;
-    }
+/* Menú desplegable */
+.menu-dropdown {
+    background: #333;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+}
 
-    .result-item:hover {
-        background: #f0f0f0;
-    }
-</style>
- 
+.menu-dropdown ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.menu-dropdown ul li {
+    padding: 10px;
+}
+
+.menu-dropdown ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Estilos de la ventana emergente de búsqueda */
+#search-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    position: relative;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#close-search {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#search-results {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.search-result-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
