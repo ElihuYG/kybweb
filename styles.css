@@ -2,13 +2,19 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f0f0f0;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #50C878;
     padding: 10px 20px;
+}
+
+.navbar h1 {
+    margin: 0;
     color: white;
 }
 
@@ -17,79 +23,74 @@ body {
     align-items: center;
 }
 
-.icon {
+.right-icons i, .profile {
     cursor: pointer;
+    font-size: 20px;
     margin-left: 15px;
-    font-size: 1.2em;
-    color: white;
+}
+
+.profile {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
 }
 
 .menu-dropdown {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100%;
     display: none;
+    flex-direction: column;
+    background-color: #50C878;
     padding: 10px;
 }
 
 .menu-dropdown ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 .menu-dropdown ul li {
-    padding: 10px;
-    border-bottom: 1px solid white;
+    padding: 8px 0;
 }
 
 .submenu {
     display: none;
-    padding-left: 20px;
 }
 
 .search-box {
-    display: flex;
-    flex-direction: column;
+    background: white;
     padding: 10px;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
 }
 
-#search-input {
+.search-box input {
+    width: 80%;
     padding: 5px;
-    font-size: 1em;
-    width: 90%;
-    margin-bottom: 10px;
 }
 
 .close-icon {
     cursor: pointer;
-    font-size: 1.2em;
-    position: absolute;
-    right: 10px;
-    top: 10px;
+    font-size: 18px;
+    color: red;
 }
 
-.results-list {
-    max-height: 150px;
-    overflow-y: auto;
-    background: white;
-    padding: 5px;
+#search-results {
+    margin-top: 10px;
 }
 
-.results-list div {
-    padding: 5px;
+.result-item {
     display: flex;
     align-items: center;
+    padding: 5px;
     cursor: pointer;
 }
 
-.results-list div img {
+.result-img {
     width: 40px;
     height: 40px;
     margin-right: 10px;
-}
-
-.hidden {
-    display: none;
 }
