@@ -22,7 +22,13 @@
             <ul>
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Series</a></li>
-                <li><a href="#">Películas</a></li>
+                <li class="submenu-container">
+                    <a href="#" id="more-btn">Más ▼</a>
+                    <ul class="submenu hidden">
+                        <li><a href="#">Películas</a></li>
+                        <li><a href="#">Documentales</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -31,7 +37,7 @@
         <div class="search-box">
             <input type="text" id="search-input" placeholder="Buscar...">
             <span id="close-search" class="close-icon">✖</span>
-            <div id="search-results"></div>
+            <div id="search-results" class="results-list"></div>
         </div>
     </div>
 </body>
