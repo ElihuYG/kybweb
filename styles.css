@@ -1,137 +1,102 @@
-/* Estilos Generales */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #111;
-    color: white;
+.hidden {
+    display: none;
 }
 
-/* Menú Superior */
-.menu {
-    background-color: #026670;
-    padding: 15px 30px;
+/* Estilo del menú superior */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #222;
+    padding: 10px 20px;
+    color: white;
+}
+
+.right-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    width: 30px;
+    cursor: pointer;
+}
+
+/* Menú desplegable */
+.menu-dropdown {
+    background: #333;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+}
+
+.menu-dropdown ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.menu-dropdown ul li {
+    padding: 10px;
+}
+
+.menu-dropdown ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Estilos de la ventana emergente de búsqueda */
+#search-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
     position: relative;
 }
 
-.logo {
-    font-size: 24px;
-    cursor: pointer;
-    color: #50C878;
-}
-
-.menu-items {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.search-icon {
-    font-size: 20px;
-    width: 25px;
-    height: 25px;
-    background-color: white;
-    mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
-    -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
-    cursor: pointer;
-}
-
-.profile-img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    border: 2px solid white;
-    object-fit: cover;
-    cursor: pointer;
-}
-
-/* Menú de Navegación Móvil */
-.hamburger {
-    font-size: 30px;
-    cursor: pointer;
-    display: none;
-}
-
-.mobile-menu {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background: #004d40;
+#search-input {
     width: 100%;
     padding: 10px;
-    gap: 15px;
-    flex-direction: column;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    font-size: 16px;
 }
 
-.mobile-menu.active {
-    transform: translateX(0);
-}
-
-.mobile-menu a {
-    color: white;
-    text-decoration: none;
+#close-search {
+    position: absolute;
+    top: 5px;
+    right: 10px;
     font-size: 20px;
+    cursor: pointer;
 }
 
-.mobile-menu a:hover {
-    color: #50C878;
+#search-results {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-/* Estilos para el Catálogo */
-.catalogo {
-    padding: 20px;
-}
-
-.catalogo h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.catalogo-items {
+.search-result-item {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
 }
 
-.catalogo-item {
-    text-align: center;
-}
-
-.catalogo-item img {
-    width: 200px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* Estilos Responsivos */
-@media screen and (max-width: 768px) {
-    .menu-items {
-        display: none;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-    .menu-items.mobile-active {
-        display: flex;
-        gap: 20px;
-    }
-
-    .menu ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    .catalogo-items {
-        flex-direction: column;
-        align-items: center;
-    }
+.search-result-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
 }
