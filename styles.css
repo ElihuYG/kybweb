@@ -1,104 +1,215 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
+/* --- Configuración General --- */
+* {
     margin: 0;
     padding: 0;
-    background-color: #121212;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #111;
     color: white;
 }
 
-/* Barra de navegación */
-.navbar {
+/* --- Encabezado (Header) --- */
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #50C878; /* Verde esmeralda */
-    padding: 10px 20px;
+    padding: 15px;
+    background: #026670; /* Verde esmeralda */
     position: relative;
 }
 
-.profile {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
+/* Logo */
+.title {
+    font-size: 24px;
+    font-weight: bold;
 }
 
-/* Menú desplegable */
-.menu-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #50C878;
-    width: 100%;
-    padding: 10px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* --- Contenedor del menú y perfil --- */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.menu-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu-dropdown ul li {
-    padding: 10px 20px;
-}
-
-.menu-dropdown ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-}
-
-.menu-dropdown ul li:hover {
-    background-color: #3aa65a;
-}
-
-/* Buscador */
-.search-box {
-    display: none;
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    background: white;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.search-box input {
-    padding: 5px;
-    width: 200px;
-}
-
-.search-box button {
-    padding: 5px 10px;
-    background: #50C878;
-    border: none;
-    color: white;
+/* Icono de búsqueda */
+.search-icon {
+    font-size: 20px;
     cursor: pointer;
 }
 
-.hidden {
-    display: none;
+/* Imagen de perfil */
+.profile-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-/* Catálogo */
-.grid {
+/* --- Menú hamburguesa --- */
+.menu-container {
+    position: relative;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Menú desplegable */
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 45px; /* Justo debajo del botón */
+    left: 0;
+    background: #333;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu.open {
     display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
-.item img {
-    width: 150px;
+.mobile-menu a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+}
+
+.mobile-menu a:hover {
+    background: #50C878;
+}
+
+/* --- Popup de búsqueda --- */
+.search-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.search-box {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: 350px;
+    position: relative;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.close-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
     border-radius: 5px;
 }
 
-.carousel {
+/* --- Resultados de búsqueda --- */
+.results {
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 350px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.result-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.result-item:hover {
+    background: #f0f0f0;
+}
+
+/* --- Botones generales --- */
+button {
+    background: #50C878;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #3ea862;
+}
+
+/* --- Enlaces generales --- */
+a {
+    color: #50C878;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Footer --- */
+.footer {
+    background: #026670;
+    padding: 10px;
     text-align: center;
+    font-size: 14px;
 }
 
-.carousel-item img {
-    width: 300px;
-    border-radius: 5px;
+/* --- Ajuste responsivo --- */
+@media (max-width: 768px) {
+    .search-box {
+        width: 280px;
+    }
+
+    .results {
+        width: 280px;
+    }
+
+    .profile-img {
+        width: 30px;
+        height: 30px;
+    }
 }
