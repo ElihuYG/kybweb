@@ -1,77 +1,337 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Catálogo</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>KYB</title>
+    <style>
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+        }
+
+        /* Menú superior */
+        .menu {
+            background-color: #111;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Logo KYB */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #50C878; /* Verde esmeralda */
+        }
+
+        /* Contenedor para los elementos (lupa y perfil) */
+        .menu-items {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Estilo para el icono de lupa */
+        .search-icon {
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
+            -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Search-icon.svg/1024px-Search-icon.svg.png') no-repeat center center;
+            cursor: pointer;
+        }
+
+        /* Estilo para la imagen de perfil */
+        .profile-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Menú desplegable */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            flex-direction: column;
+            gap: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .mobile-menu a {
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .mobile-menu a:hover {
+            color: #50C878;
+        }
+
+        /* Estilos para dispositivos móviles */
+        @media screen and (max-width: 768px) {
+            .menu-items {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu.open {
+                display: flex;
+            }
+        }
+
+    </style>
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <button id="menu-btn">☰</button>
-            <h1>KYB</h1>
-            <div class="right-icons">
-                <i id="search-btn" class="fas fa-search"></i>
-                <img src="profile-icon.png" class="profile" alt="Perfil" onclick="location.href='cuenta.html'">
-            </div>
+
+    <!-- Menú superior -->
+    <div class="menu">
+        <!-- Logo -->
+        <div class="logo">KYB</div>
+
+        <!-- Contenedor para la lupa y la foto de perfil -->
+        <div class="menu-items">
+            <!-- Lupa -->
+            <div class="search-icon" id="search-icon" onclick="toggleSearch()"></div>
+
+            <!-- Foto de perfil -->
+            <img src="https://via.placeholder.com/35" alt="Foto de perfil" class="profile-img" onclick="toggleProfileMenu()">
         </div>
-        <nav id="menu" class="menu-dropdown hidden">
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Series</a></li>
-                <li><a href="#">Más</a>
-                    <ul class="submenu hidden">
-                        <li><a href="#">Películas</a></li>
-                        <li><a href="#">Documentales</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="carousel">
-            <div class="carousel-item">
-                <img src="posters_begins_youth.png" alt="Begins Youth">
-                <div class="carousel-info">
-                    <h2>Begins Youth</h2>
-                    <button onclick="location.href='begins_youth.html'">Ver ahora</button>
-                </div>
-            </div>
-        </section>
-        
-        <section class="catalog">
-            <h2>Series Populares</h2>
-            <div class="grid">
-                <div class="item" onclick="location.href='begins_youth.html'">
-                    <img src="posters_begins_youth.png" alt="Begins Youth">
-                </div>
-                <div class="item" onclick="location.href='thamepo.html'">
-                    <img src="posters_thamepo.png" alt="Thamepo">
-                </div>
-                <div class="item" onclick="location.href='yoursky.html'">
-                    <img src="posters_yoursky.png" alt="Yoursky">
-                </div>
-            </div>
-        </section>
-    </main>
-    
+    </div>
+
+    <!-- Menú de perfil (si es necesario) -->
+    <div class="mobile-menu" id="profile-menu">
+        <a href="#perfil">Ver Perfil</a>
+        <a href="#configuracion">Configuración</a>
+        <a href="#cerrar-sesion">Cerrar sesión</a>
+    </div>
+
     <script>
-        document.getElementById("menu-btn").addEventListener("click", () => {
-            let menu = document.getElementById("menu");
-            menu.classList.toggle("hidden");
+        // Función para mostrar/ocultar el menú de perfil
+        function toggleProfileMenu() {
+            const profileMenu = document.getElementById("profile-menu");
+            profileMenu.classList.toggle("open");
+        }
+
+        // Función para mostrar/ocultar el buscador
+        function toggleSearch() {
+            alert('Buscador activado');
+        }
+    </script>
+
+</body>
+</html> <header class="header">
+    <div id="menu-toggle" class="menu-icon">☰</div>
+    <div class="title">KYB</div>
+    <div class="search-container">
+        <div id="search-icon" class="search-icon">🔍</div>
+        <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+    </div>
+</header>
+
+<!-- Menú lateral -->
+<div id="menu" class="menu">
+    <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Categorías</a></li>
+        <li><a href="#">Mi Lista</a></li>
+        <li><button id="close-menu" class="close-btn">Cerrar</button></li>
+    </ul>
+</div>
+
+<!-- Popup de búsqueda -->
+<div id="search-popup" class="search-popup">
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar series...">
+        <button class="close-btn" id="close-search">X</button>
+    </div>
+    <div id="search-results" class="results"></div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("menu");
+        const closeMenu = document.getElementById("close-menu");
+
+        const searchIcon = document.getElementById("search-icon");
+        const searchPopup = document.getElementById("search-popup");
+        const closeSearch = document.getElementById("close-search");
+        const searchInput = document.getElementById("search-input");
+        const searchResults = document.getElementById("search-results");
+
+        // Abrir menú con un solo clic
+        menuToggle.addEventListener("click", () => {
+            menu.classList.add("active");
         });
 
-        document.addEventListener("click", (event) => {
-            let menu = document.getElementById("menu");
-            let button = document.getElementById("menu-btn");
-            if (!menu.contains(event.target) && event.target !== button) {
-                menu.classList.add("hidden");
+        // Botón dentro del menú para cerrarlo
+        closeMenu.addEventListener("click", () => {
+            menu.classList.remove("active");
+        });
+
+        // Abrir buscador
+        searchIcon.addEventListener("click", () => {
+            searchPopup.style.display = "flex";
+            searchInput.focus();
+        });
+
+        // Cerrar buscador
+        closeSearch.addEventListener("click", () => {
+            searchPopup.style.display = "none";
+            searchInput.value = "";
+            searchResults.style.display = "none";
+        });
+
+        // Series en el buscador
+        const series = [
+            { name: "Begins Youth", image: "posters_begins_youth.png", link: "begins_youth.html" },
+            { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+            { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+        ];
+
+        searchInput.addEventListener("input", () => {
+            let query = searchInput.value.toLowerCase();
+            let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+
+            if (query.length > 0 && filtered.length > 0) {
+                searchResults.innerHTML = filtered.map(s =>
+                    `<div class="result-item" onclick="window.location.href='${s.link}'">
+                        <img src="${s.image}" alt="${s.name}">
+                        <span>${s.name}</span>
+                    </div>`
+                ).join("");
+                searchResults.style.display = "block";
+            } else {
+                searchResults.style.display = "none";
             }
         });
-    </script>
-</body>
-</html>
+    });
+</script>
+
+<style>
+    /* Estilos Generales */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #111;
+        color: white;
+    }
+
+    /* Header */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: #026670;
+    }
+
+    /* Menú */
+    .menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background: #004d40;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .menu.active {
+        display: block;
+    }
+
+    .close-btn {
+        background: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        text-align: left;
+    }
+
+    /* Buscador */
+    .search-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+    }
+
+    .search-box {
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        width: 350px;
+        position: relative;
+    }
+
+    .search-box input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .results {
+        background: white;
+        color: black;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        width: 350px;
+        max-height: 200px;
+        overflow-y: auto;
+        display: none;
+    }
+
+    .result-item {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    .result-item img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border-radius: 5px;
+    }
+
+    .result-item:hover {
+        background: #f0f0f0;
+    }
+</style>
+ 
