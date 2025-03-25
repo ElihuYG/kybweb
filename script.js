@@ -70,3 +70,46 @@ document.addEventListener("click", (event) => {
         resultsContainer.style.display = "none";
     }
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const carrusel = document.querySelector(".carrusel");
+    const items = document.querySelectorAll(".carrusel-item");
+    let index = 0;
+    const total = items.length;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function cambiarSlide(nuevoIndex) {
+        index = (nuevoIndex + total) % total;
+        carrusel.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    // Flechas (solo en PC)
+    if (window.innerWidth > 768) {
+        document.querySelector(".flecha-derecha").addEventListener("click", () => {
+            cambiarSlide(index + 1);
+        });
+
+        document.querySelector(".flecha-izquierda").addEventListener("click", () => {
+            cambiarSlide(index - 1);
+        });
+    }
+
+    // Swipe en celular
+    carrusel.addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    carrusel.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        if (touchStartX - touchEndX > 50) {
+            cambiarSlide(index + 1); // Deslizar a la izquierda
+        } else if (touchEndX - touchStartX > 50) {
+            cambiarSlide(index - 1); // Deslizar a la derecha
+        }
+    });
+
+    // Cambio automático cada 7s
+    setInterval(() => {
+        cambiarSlide(index + 1);
+    }, 7000);
+});
