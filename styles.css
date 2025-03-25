@@ -215,11 +215,13 @@ a:hover {
 }
 /* Contenedor del carrusel */
 .carrusel-container {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     max-width: 900px; /* Ajusta si necesitas */
     height: 500px; /* En PC */
-    margin: 100px auto 0;
     overflow: hidden;
 }
 
@@ -240,7 +242,7 @@ a:hover {
 .carrusel img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Que la imagen se ajuste sin deformarse */
+    object-fit: cover;
     border-radius: 10px;
 }
 
@@ -269,6 +271,10 @@ a:hover {
 /* Responsivo: en celulares cambia */
 @media (max-width: 768px) {
     .carrusel-container {
+        position: relative; /* Ya no es absoluto en móviles */
+        top: auto;
+        left: auto;
+        transform: none;
         height: auto; /* Se ajusta solo */
     }
 
