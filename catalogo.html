@@ -271,6 +271,7 @@
             color: white;
         }
 
+        /* Carrusel */
         .slider {
             display: flex;
             justify-content: center;
@@ -280,6 +281,7 @@
             height: 500px; /* Altura del slider */
             overflow: hidden;
             margin-top: 100px; /* Desplazar el carrusel 100px hacia abajo */
+            z-index: -1; /* Carrusel al fondo */
         }
 
         .slides-container {
@@ -304,18 +306,18 @@
         .info {
             position: absolute;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
+            left: 10px; /* Poner la descripción en la esquina inferior izquierda */
+            transform: translateX(0);
+            text-align: left; /* Alinear el texto a la izquierda */
             color: white;
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
-            width: 60%;
+            width: auto;
         }
 
         .info h2 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .watch-now {
@@ -358,13 +360,14 @@
             }
 
             .info {
-                font-size: 1rem; /* Reducir tamaño de texto en móviles */
-                padding: 10px;
-                width: 90%;
+                font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
+                padding: 5px;
+                left: 5px; /* Mantener en la esquina izquierda */
+                width: 70%; /* Ajustar el ancho para dispositivos móviles */
             }
 
             .info h2 {
-                font-size: 1.2rem; /* Reducir tamaño del título en móviles */
+                font-size: 1rem; /* Reducir tamaño del título en móviles */
             }
 
             .watch-now {
@@ -380,11 +383,11 @@
             }
 
             .info {
-                font-size: 0.9rem; /* Reducir aún más en pantallas muy pequeñas */
+                font-size: 0.7rem; /* Reducir aún más en pantallas muy pequeñas */
             }
 
             .info h2 {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             .watch-now {
@@ -397,10 +400,6 @@
 <body>
     <!-- Carrusel -->
     <section class="slider">
-        <!-- Flecha izquierda -->
-        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-
-        <!-- Contenedor de slides -->
         <div class="slides-container">
             <div class="slide">
                 <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
@@ -436,30 +435,31 @@
                 </div>
             </div>
         </div>
-
-        <!-- Flecha derecha -->
-        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        <!-- Flechas -->
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
     </section>
 
     <script>
-        let currentIndex = 0;
         const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        let currentSlide = 0;
 
-        // Mover al siguiente o anterior slide
-        function moveSlide(direction) {
-            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-            updateSliderPosition();
+        function goToSlide(index) {
+            if (index >= slides.length) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = slides.length - 1;
+            } else {
+                currentSlide = index;
+            }
+            document.querySelector('.slides-container').style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
-        // Actualizar la posición del carrusel
-        function updateSliderPosition() {
-            const offset = -currentIndex * 100; // Desplazamiento
-            document.querySelector('.slides-container').style.transform = `translateX(${offset}%)`;
-        }
+        prevButton.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextButton.addEventListener('click', () => goToSlide(currentSlide + 1));
 
-        // Iniciar el carrusel automáticamente cada 7 segundos
-        setInterval(() => {
-            moveSlide(1); // Mover al siguiente slide
-        }, 7000);
+        // Cambiar automáticamente cada 7 segundos
+        setInterval(() => goToSlide(currentSlide + 1), 7000);
     </script>
