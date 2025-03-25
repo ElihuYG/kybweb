@@ -1,63 +1,90 @@
-// Carrusel automático: cambia cada 7 segundos
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slider .slide');
-const totalSlides = slides.length;
+document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const searchIcon = document.getElementById("search-icon");
+    const menuSearchIcon = document.getElementById("menu-search-icon");
+    const searchPopup = document.getElementById("search-popup");
+    const closeSearch = document.getElementById("close-search");
+    const searchInput = document.getElementById("search-input");
+    const searchResults = document.getElementById("search-results");
 
-function showSlide(index) {
-    // Ocultar todos los slides
-    slides.forEach(slide => {
-        slide.style.opacity = 0;
+    // Abrir/Cerrar menú hamburguesa
+    menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("open");
     });
-    // Mostrar el slide actual
-    slides[index].style.opacity = 1;
-}
 
-// Función para avanzar al siguiente slide
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    showSlide(currentSlide);
-}
+    // Cerrar el menú si se hace clic fuera
+    document.addEventListener("click", (e) => {
+        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove("open");
+        }
+    });
 
-// Iniciar el carrusel
-setInterval(nextSlide, 7000); // Cambiar cada 7 segundos
+    // Abrir popup de búsqueda desde el icono principal o desde el menú
+    function openSearch() {
+        searchPopup.style.display = "flex";
+        searchInput.focus();
+    }
 
-// Mostrar el primer slide al inicio
-showSlide(currentSlide);
+    searchIcon.addEventListener("click", openSearch);
+    menuSearchIcon.addEventListener("click", openSearch);
 
-// Carrusel manual (en móvil, el usuario puede deslizar)
-const slider = document.querySelector('.slider');
-let isMouseDown = false;
-let startX;
-let scrollLeft;
+    // Cerrar popup de búsqueda
+    closeSearch.addEventListener("click", () => {
+        searchPopup.style.display = "none";
+        searchInput.value = "";
+        searchResults.style.display = "none";
+    });
 
-slider.addEventListener('mousedown', (e) => {
-    isMouseDown = true;
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-});
+    // Funcionalidad de búsqueda
+    const series = [
+        { name: "Begins Youth", image: "posters_begins_youth.png", link: "beginsyouth.html" },
+        { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+        { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+    ];
 
-slider.addEventListener('mouseleave', () => {
-    isMouseDown = false;
-});
+    searchInput.addEventListener("input", () => {
+        let query = searchInput.value.toLowerCase();
+        let filtered = series.filter(s => s.name.toLowerCase().includes(query));
 
-slider.addEventListener('mouseup', () => {
-    isMouseDown = false;
-});
+        if (query.length > 0 && filtered.length > 0) {
+            searchResults.innerHTML = filtered.map(s =>
+                `<div class="result-item" onclick="window.location.href='${s.link}'">
+                    <img src="${s.image}" alt="${s.name}">
+                    <span>${s.name}</span>
+                </div>`
+            ).join("");
+            searchResults.style.display = "block";
+        } else {
+            searchResults.style.display = "none";
+        }
+    });
 
-slider.addEventListener('mousemove', (e) => {
-    if (!isMouseDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 3; // Cuánto se mueve el slider
-    slider.scrollLeft = scrollLeft - walk;
-});
+    // Carrusel automático
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slider .slide');
+    const totalSlides = slides.length;
 
-// Funcionalidad para el botón "Ver Ahora"
-const watchButtons = document.querySelectorAll('.watch-now');
-watchButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        alert("¡Redirigiendo a la página de la serie!");
-        // Aquí puedes poner la lógica para redirigir al HTML de la serie correspondiente
-        window.location.href = "#"; // Sustituir "#" por la URL del HTML de la serie
+    function showSlide(index) {
+        slides.forEach(slide => {
+            slide.style.transform = `translateX(-${index * 100}%)`;
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 5000); // Cambiar cada 5 segundos
+
+    // Botón "Ver Ahora"
+    const watchButtons = document.querySelectorAll('.watch-now');
+    watchButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            alert("¡Redirigiendo a la página de la serie!");
+            // Aquí puedes poner la lógica para redirigir a la página de la serie
+            window.location.href = "#"; // Sustituir "#" por la URL del HTML de la serie
+        });
     });
 });
