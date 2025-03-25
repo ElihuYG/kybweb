@@ -271,30 +271,33 @@
             color: white;
         }
 
-        /* Carrusel */
         .slider {
             display: flex;
-            overflow: hidden;
-            justify-content: center; /* Centrar el carrusel */
+            justify-content: center;
             align-items: center;
             position: relative;
             width: 100%;
-            margin-top: 100px; /* Desplazar el carrusel hacia abajo */
-            margin-bottom: 100px; /* Margen de 100px en la parte inferior */
-            z-index: -1; /* Enviar al fondo */
+            height: 500px; /* Altura del slider */
+            overflow: hidden;
+            margin-top: 100px; /* Desplazar el carrusel 100px hacia abajo */
+        }
+
+        .slides-container {
+            display: flex;
+            transition: transform 0.5s ease;
         }
 
         .slide {
             min-width: 100%;
-            transition: transform 0.5s ease;
+            height: 100%;
             display: flex;
-            justify-content: center; /* Centrar contenido dentro de cada slide */
+            justify-content: center;
             position: relative;
         }
 
         .slide img {
-            width: 80%;
-            height: auto;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
@@ -305,20 +308,14 @@
             transform: translateX(-50%);
             text-align: center;
             color: white;
-            font-size: 1.2rem; /* Ajustar tamaño del texto en pantallas grandes */
-            background-color: rgba(0, 0, 0, 0.2); /* Fondo negro con opacidad */
+            background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
-            width: 60%;
             border-radius: 10px;
+            width: 60%;
         }
 
         .info h2 {
-            font-size: 1.5rem; /* Tamaño del título */
-            margin-bottom: 10px;
-        }
-
-        .info p {
-            margin: 5px 0;
+            font-size: 1.5rem;
         }
 
         .watch-now {
@@ -332,10 +329,32 @@
             border-radius: 5px;
         }
 
+        /* Flechas */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
         /* Media Queries para dispositivos móviles */
         @media (max-width: 768px) {
             .slider {
-                height: 200px; /* Altura para dispositivos móviles */
+                height: 300px; /* Altura para dispositivos móviles */
             }
 
             .info {
@@ -373,113 +392,74 @@
                 font-size: 0.7rem;
             }
         }
-
-        /* Estilo para el carrusel en PC */
-        @media (min-width: 769px) {
-            .slider {
-                height: 500px; /* Altura para pantallas grandes */
-            }
-        }
-
-        /* Botones de navegación */
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
-        }
     </style>
 </head>
 <body>
-
     <!-- Carrusel -->
     <section class="slider">
-        <div class="slide">
-            <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
-            <div class="info">
-                <h2>Begins Youth</h2>
-                <p class="rating">⭐⭐⭐⭐✰</p>
-                <p class="subtitles">Subtítulos: ESP, ING</p>
-                <p class="duration">Duración: 45 min/ep</p>
-                <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                <button class="watch-now">Ver Ahora</button>
+        <!-- Flecha izquierda -->
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+
+        <!-- Contenedor de slides -->
+        <div class="slides-container">
+            <div class="slide">
+                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
+                <div class="info">
+                    <h2>Begins Youth</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
-        </div>
-        <div class="slide">
-            <img src="Sliders_Arriba_YS.png" alt="yoursky.html">
-            <div class="info">
-                <h2>Your Sky</h2>
-                <p class="rating">⭐⭐⭐⭐⭐</p>
-                <p class="subtitles">Subtítulos: ESP</p>
-                <p class="duration">Duración: 50 min/ep</p>
-                <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                <button class="watch-now">Ver Ahora</button>
+            <div class="slide">
+                <img src="Sliders_Arriba_YS.png" alt="yoursky.html">
+                <div class="info">
+                    <h2>Your Sky</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
-        </div>
-        <div class="slide">
-            <img src="Sliders_Arriba_TP.png" alt="thamepo.html">
-            <div class="info">
-                <h2>Thame & PO</h2>
-                <p class="rating">⭐⭐⭐⭐⭐</p>
-                <p class="subtitles">Subtítulos: ESP</p>
-                <p class="duration">Duración: 60 min/ep</p>
-                <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
-                <button class="watch-now">Ver Ahora</button>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="thamepo.html">
+                <div class="info">
+                    <h2>Thame & PO</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 60 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
             </div>
         </div>
 
-        <!-- Botones de navegación -->
-        <button class="prev" id="prevBtn">◀</button>
-        <button class="next" id="nextBtn">▶</button>
+        <!-- Flecha derecha -->
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </section>
 
     <script>
-        // Funciones para mover el carrusel
         let currentIndex = 0;
-        const slides = document.querySelectorAll('.slider .slide');
+        const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        const carousel = document.querySelector('.slider');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
 
-        // Función para mostrar el siguiente slide
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateCarouselPosition();
+        // Mover al siguiente o anterior slide
+        function moveSlide(direction) {
+            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+            updateSliderPosition();
         }
 
-        // Función para mostrar el slide anterior
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateCarouselPosition();
+        // Actualizar la posición del carrusel
+        function updateSliderPosition() {
+            const offset = -currentIndex * 100; // Desplazamiento
+            document.querySelector('.slides-container').style.transform = `translateX(${offset}%)`;
         }
 
-        // Función para actualizar la posición del carrusel
-        function updateCarouselPosition() {
-            const offset = -currentIndex * 100;  // Desplazar el carrusel
-            carousel.style.transform = `translateX(${offset}%)`;
-        }
-
-        // Cambiar automáticamente cada 7 segundos
-        setInterval(nextSlide, 7000);
-
-        // Agregar eventos a los botones
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-
-        // Inicializar el primer slide
-        updateCarouselPosition();
+        // Iniciar el carrusel automáticamente cada 7 segundos
+        setInterval(() => {
+            moveSlide(1); // Mover al siguiente slide
+        }, 7000);
     </script>
