@@ -311,13 +311,18 @@
             text-align: left; /* Alinear el texto a la izquierda */
             color: white;
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
+            padding: 15px;
             border-radius: 10px;
-            width: auto;
+            width: 80%; /* Ajustar el ancho para PC */
         }
 
         .info h2 {
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* Título más grande en PC */
+            margin-bottom: 10px;
+        }
+
+        .info p {
+            margin: 5px 0;
         }
 
         .watch-now {
@@ -329,28 +334,7 @@
             border: none;
             cursor: pointer;
             border-radius: 5px;
-        }
-
-        /* Flechas */
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
+            margin-top: 10px;
         }
 
         /* Media Queries para dispositivos móviles */
@@ -361,9 +345,9 @@
 
             .info {
                 font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
-                padding: 5px;
+                padding: 10px;
                 left: 5px; /* Mantener en la esquina izquierda */
-                width: 70%; /* Ajustar el ancho para dispositivos móviles */
+                width: 90%; /* Ajustar el ancho para móviles */
             }
 
             .info h2 {
@@ -435,15 +419,10 @@
                 </div>
             </div>
         </div>
-        <!-- Flechas -->
-        <button class="prev">❮</button>
-        <button class="next">❯</button>
     </section>
 
     <script>
         const slides = document.querySelectorAll('.slide');
-        const prevButton = document.querySelector('.prev');
-        const nextButton = document.querySelector('.next');
         let currentSlide = 0;
 
         function goToSlide(index) {
@@ -456,9 +435,6 @@
             }
             document.querySelector('.slides-container').style.transform = `translateX(-${currentSlide * 100}%)`;
         }
-
-        prevButton.addEventListener('click', () => goToSlide(currentSlide - 1));
-        nextButton.addEventListener('click', () => goToSlide(currentSlide + 1));
 
         // Cambiar automáticamente cada 7 segundos
         setInterval(() => goToSlide(currentSlide + 1), 7000);
