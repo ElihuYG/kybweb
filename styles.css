@@ -1,202 +1,77 @@
-/* Resetear todo para evitar márgenes y padding por defecto */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Configuración general del body */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column; /* Organiza todo de arriba hacia abajo */
-    height: 100%;
-    color: #333;
-}
-
-/* Menú superior */
-header {
-    background-color: #333;
-    color: white;
-    padding: 15px 30px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-}
-
-header a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 18px;
-}
-
-header a:hover {
-    color: #00b300;
-}
-
-/* Carrusel */
-.slider {
-    width: 100%;
-    height: 500px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px; /* Separar del menú superior */
-    margin-bottom: 50px; /* Separar del contenido posterior */
-}
-
-/* Cada slide del carrusel */
-.slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-/* Imagen dentro de cada slide */
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Información dentro del carrusel */
-.info {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 300px;
-    font-size: 14px;
-}
-
-.info h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.info p {
-    margin-bottom: 5px;
-}
-
-.watch-now {
-    background-color: #00b300;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.watch-now:hover {
-    background-color: #009900;
-}
-
-/* Sección de contenido */
-section {
-    padding: 20px;
-    margin: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    margin-bottom: 20px;
-}
-
-/* Contenido dentro de las secciones (por ejemplo, listas, párrafos) */
-p {
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-ul {
-    list-style-type: none;
-    margin-left: 20px;
-}
-
-li {
-    margin-bottom: 10px;
-}
-
-/* Estilo para los botones en el contenido */
-button {
-    background-color: #00b300;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #009900;
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 50px;
-}
-
-/* Responsividad */
+/* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
-    /* Menú superior responsive */
-    header {
-        font-size: 16px;
-        padding: 10px;
+    /* Header */
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    /* Carrusel responsive */
+    .menu-container {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .search-icon, .profile-img {
+        margin-left: 15px;
+    }
+
+    /* Menú hamburguesa */
+    .mobile-menu {
+        top: 40px; /* Ajuste de posición en móviles */
+    }
+
+    /* Ajuste de los sliders */
     .slider {
-        height: 300px;
+        display: flex;
+        overflow-x: scroll;
+        gap: 10px;
     }
 
+    .slide {
+        flex: 0 0 auto; /* Esto mantiene los slides en fila */
+        width: 90%; /* Ajustar el tamaño de los slides */
+    }
+
+    .slide img {
+        width: 100%; /* Ajustar la imagen al tamaño del slide */
+        height: auto; /* Mantener la proporción */
+    }
+
+    /* Estilos para los botones y texto en los sliders */
     .info {
+        font-size: 14px; /* Reducir tamaño de fuente para pantallas pequeñas */
+    }
+
+    .rating, .subtitles, .duration, .synopsis {
         font-size: 12px;
-        max-width: 250px;
-        padding: 10px;
+    }
+}
+
+/* Para pantallas extremadamente pequeñas (móviles más pequeños) */
+@media (max-width: 480px) {
+    .search-box input {
+        width: 250px;
     }
 
-    .watch-now {
-        font-size: 12px;
-        padding: 8px 16px;
+    .search-results {
+        width: 250px;
     }
 
-    /* Sección de contenido (más compacta en móvil) */
-    section {
-        padding: 10px;
-        margin: 10px;
+    .slider {
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* Títulos más pequeños */
-    h2 {
-        font-size: 18px;
-    }
-
-    /* Párrafos más pequeños */
-    p {
-        font-size: 14px;
+    .slide {
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
