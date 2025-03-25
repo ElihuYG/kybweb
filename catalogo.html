@@ -277,8 +277,8 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            width: 80%;
-            height: 80px; /* Altura del slider */
+            width: 100%;
+            height: 100px; /* Altura del slider */
             overflow: hidden;
             margin-top: 30px; /* Desplazar el carrusel 100px hacia abajo */
             z-index: -1; /* Carrusel al fondo */
@@ -303,17 +303,18 @@
             object-fit: cover;
         }
 
-        .info {
-            position: absolute;
-            bottom: 20px;
-            left: 10px; /* Poner la descripción en la esquina inferior izquierda */
-            transform: translateX(0);
-            text-align: left; /* Alinear el texto a la izquierda */
-            color: white;
-            background-color: rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            width: 30%; /* Ajustar el ancho para PC */
+       .info {
+    position: absolute;
+    bottom: 20px;
+    left: 10px; /* Poner la descripción en la esquina inferior izquierda */
+    transform: translateX(0);
+    text-align: left; /* Alinear el texto a la izquierda */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.0); /* Fondo oscuro con opacidad */
+    padding: 15px;
+    border-radius: 10px;
+    width: 80%; /* Ajusta el ancho al 80% de la imagen para PC */
+}
         }
 
         .info h2 {
