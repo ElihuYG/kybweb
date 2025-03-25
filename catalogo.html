@@ -305,20 +305,20 @@
 
     .info {
         position: absolute;
-        bottom: 20px;
+        bottom: 30px; /* Aumentar el margen inferior para darle más espacio */
         left: 10px; /* Poner la descripción en la esquina inferior izquierda */
-        transform: translateX(0);
-        text-align: left; /* Alinear el texto a la izquierda */
+        text-align: left;
         color: white;
-        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
-        padding: 15px;
+        background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro con opacidad ajustada */
+        padding: 20px; /* Aumentar el padding para mayor espacio */
         border-radius: 10px;
         width: 80%; /* Ajusta el ancho al 80% de la imagen */
+        box-sizing: border-box;
     }
 
     .info h2 {
-        font-size: 1.9rem; /* Título más grande en PC */
-        margin-bottom: 20px;
+        font-size: 2rem; /* Título más grande en PC */
+        margin-bottom: 10px;
     }
 
     .info p {
@@ -327,14 +327,14 @@
 
     .watch-now {
         background-color: #50C878;
-        padding: 10px 20px;
+        padding: 12px 20px; /* Ajustar el tamaño del botón */
         color: white;
         text-transform: uppercase;
-        font-size: 0.9rem;
+        font-size: 1rem;
         border: none;
         cursor: pointer;
         border-radius: 5px;
-        margin-top: 10px;
+        margin-top: 15px;
     }
 
     /* Media Queries para dispositivos móviles */
@@ -351,7 +351,7 @@
         }
 
         .info h2 {
-            font-size: 1rem; /* Reducir tamaño del título en móviles */
+            font-size: 1.2rem; /* Reducir tamaño del título en móviles */
         }
 
         .watch-now {
@@ -371,7 +371,7 @@
         }
 
         .info h2 {
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .watch-now {
@@ -380,6 +380,7 @@
         }
     }
 </style>
+
 </head>
 <body>
     <!-- Carrusel -->
