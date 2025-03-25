@@ -363,6 +363,124 @@
     }
 </style>
 
+<style>
+    /* Estilos generales */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #111;
+        color: white;
+    }
+
+    .slider {
+        display: flex;
+        overflow: hidden;
+        justify-content: center; /* Centrar el carrusel */
+        align-items: center;
+        position: relative;
+        width: 100%;
+        margin-bottom: 100px; /* Margen de 100px en la parte inferior */
+    }
+
+    .slide {
+        min-width: 100%;
+        transition: transform 0.5s ease;
+        display: flex;
+        justify-content: center; /* Centrar contenido dentro de cada slide */
+        position: relative;
+    }
+
+    .slide img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .info {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        color: white;
+        font-size: 1.2rem; /* Ajustar tamaño del texto en pantallas grandes */
+        background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con opacidad */
+        padding: 20px;
+        width: 80%;
+        border-radius: 10px;
+    }
+
+    .info h2 {
+        font-size: 1.5rem; /* Tamaño del título */
+        margin-bottom: 10px;
+    }
+
+    .info p {
+        margin: 5px 0;
+    }
+
+    .watch-now {
+        background-color: #50C878;
+        padding: 10px 20px;
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    /* Media Queries para dispositivos móviles */
+    @media (max-width: 768px) {
+        .slider {
+            height: 200px; /* Altura para dispositivos móviles */
+        }
+
+        .info {
+            font-size: 1rem; /* Reducir tamaño de texto en móviles */
+            padding: 10px;
+            width: 90%;
+        }
+
+        .info h2 {
+            font-size: 1.2rem; /* Reducir tamaño del título en móviles */
+        }
+
+        .watch-now {
+            padding: 8px 15px; /* Reducir tamaño del botón en móviles */
+            font-size: 0.8rem;
+        }
+    }
+
+    /* Para los pequeños dispositivos */
+    @media (max-width: 480px) {
+        .slider {
+            height: 200px; /* Altura en pantallas más pequeñas */
+        }
+
+        .info {
+            font-size: 0.9rem; /* Reducir aún más en pantallas muy pequeñas */
+        }
+
+        .info h2 {
+            font-size: 1rem;
+        }
+
+        .watch-now {
+            padding: 6px 12px;
+            font-size: 0.7rem;
+        }
+    }
+
+    /* Estilo para el carrusel en PC */
+    @media (min-width: 769px) {
+        .slider {
+            height: 500px; /* Altura para pantallas grandes */
+        }
+    }
+</style>
+
 <!-- Carrusel -->
 <section class="slider">
     <div class="slide">
@@ -399,6 +517,3 @@
         </div>
     </div>
 </section>
-
-</body>
-</html>
