@@ -237,6 +237,7 @@ a:hover {
 .carrusel-item {
     width: 100%;
     flex: 0 0 100%;
+    position: relative;
 }
 
 /* Imágenes */
@@ -247,22 +248,42 @@ a:hover {
     cursor: pointer;
 }
 
-/* Flechas */
-.flecha {
+/* Información dentro de la imagen */
+.slider-info {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    padding: 10px;
-    cursor: pointer;
-    border: none;
-    font-size: 20px;
-    z-index: 10;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 80%;
 }
 
-.flecha-izquierda { left: 10px; }
-.flecha-derecha { right: 10px; }
+.slider-info h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.slider-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.slider-info button {
+    background-color: #00b300;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.slider-info button:hover {
+    background-color: #009900;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -273,5 +294,10 @@ a:hover {
         transform: none;
         height: auto;
     }
+
     .flecha { display: none; } /* Sin flechas en móviles */
+    
+    .slider-info {
+        max-width: 90%;
+    }
 }
