@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad - KYB</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .politica-container {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        h3 {
+            cursor: pointer;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        h3:hover {
+            background: #0056b3;
+        }
+        .content {
+            display: none;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white;
+            background: #28a745;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        a:hover {
+            background: #218838;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <div class="politica-container">
@@ -12,47 +71,48 @@
         <p><strong>Última actualización:</strong> 04 de marzo del 2025</p>
 
         <h3>1. Introducción</h3>
-        <p>En KYB, valoramos tu privacidad y estamos comprometidos a proteger tu información personal. Esta política explica qué datos recopilamos, cómo los usamos y qué derechos tienes sobre ellos.</p>
+        <div class="content">
+            <p>En KYB, valoramos tu privacidad y estamos comprometidos a proteger tu información personal...</p>
+        </div>
 
         <h3>2. Datos que recopilamos</h3>
-        <p>Podemos recopilar la siguiente información cuando usas nuestra plataforma:</p>
-        <ul>
-            <li><strong>Información de cuenta:</strong> Nombre de usuario y correo electrónico.</li>
-            <li><strong>Datos de uso:</strong> Historial de visualización, preferencias y actividad dentro de la app.</li>
-            <li><strong>Datos técnicos:</strong> Tipo de dispositivo, sistema operativo y dirección IP.</li>
-        </ul>
+        <div class="content">
+            <ul>
+                <li><strong>Información de cuenta:</strong> Nombre de usuario y correo electrónico.</li>
+                <li><strong>Datos de uso:</strong> Historial de visualización, preferencias y actividad dentro de la app.</li>
+                <li><strong>Datos técnicos:</strong> Tipo de dispositivo, sistema operativo y dirección IP.</li>
+            </ul>
+        </div>
 
         <h3>3. Cómo usamos tu información</h3>
-        <p>Usamos tu información para:</p>
-        <ul>
-            <li>Proporcionarte acceso a nuestra plataforma y contenido.</li>
-            <li>Personalizar tu experiencia y recomendaciones.</li>
-            <li>Mejorar la seguridad y prevenir fraudes.</li>
-            <li>Ofrecer soporte técnico y atención al cliente.</li>
-        </ul>
+        <div class="content">
+            <ul>
+                <li>Proporcionarte acceso a nuestra plataforma y contenido.</li>
+                <li>Personalizar tu experiencia y recomendaciones.</li>
+                <li>Mejorar la seguridad y prevenir fraudes.</li>
+                <li>Ofrecer soporte técnico y atención al cliente.</li>
+            </ul>
+        </div>
 
-        <h3>4. Con quién compartimos tu información</h3>
-        <p>No vendemos ni compartimos tu información personal con terceros, salvo en los siguientes casos:</p>
-        <ul>
-            <li>Cuando sea necesario para cumplir con la ley.</li>
-            <li>Si es requerido para garantizar la seguridad de nuestra plataforma.</li>
-        </ul>
+        <h3>4. Seguridad de los datos</h3>
+        <div class="content">
+            <p>Implementamos medidas de seguridad para proteger tu información...</p>
+        </div>
 
-        <h3>5. Seguridad de los datos</h3>
-        <p>Implementamos medidas de seguridad para proteger tu información. Sin embargo, recuerda que ninguna plataforma en línea es completamente segura.</p>
-
-        <h3>6. Tus derechos</h3>
-        <p>Tienes derecho a:</p>
-        <ul>
-            <li>Acceder, corregir o eliminar tu información.</li>
-            <li>Retirar tu consentimiento para el uso de tus datos.</li>
-            <li>Solicitar la eliminación de tu cuenta en cualquier momento.</li>
-        </ul>
-
-        <h3>7. Contacto</h3>
-        <p>Si tienes dudas sobre esta política, contáctanos en: <strong>supportkyb@gmail.com</strong></p>
+        <h3>5. Contacto</h3>
+        <div class="content">
+            <p>Si tienes dudas sobre esta política, contáctanos en: <strong>supportkyb@gmail.com</strong></p>
+        </div>
 
         <a href="cuenta.html">Volver a Cuenta</a>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $("h3").click(function(){
+                $(this).next(".content").slideToggle();
+            });
+        });
+    </script>
 </body>
 </html>
