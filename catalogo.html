@@ -271,6 +271,7 @@
         color: white;
     }
 
+/* Carrusel */
 .slider {
     display: flex;
     justify-content: center;
@@ -296,10 +297,11 @@
     position: relative; /* Importante para permitir el posicionamiento absoluto dentro */
 }
 
-/* Imagen */
+/* Imagen - Se ajusta al 100% del contenedor */
 .slider img {
     width: 100%; /* Hacer que la imagen ocupe todo el contenedor */
-    height: auto; /* Mantener la proporción de la imagen */
+    height: 100%; /* Asegura que las imágenes ocupen toda la altura del contenedor */
+    object-fit: cover; /* Mantiene la proporción sin distorsión */
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s;
@@ -317,11 +319,13 @@
     border-radius: 10px;
     width: 80%; /* Ancho ajustado al 80% de la imagen */
     box-sizing: border-box;
+    max-height: 30%; /* Limita la altura de la descripción */
+    overflow: hidden; /* Evita que la descripción sobresalga */
     transition: all 0.3s ease; /* Suaviza los cambios */
 }
 
 .info h2 {
-    font-size: 2rem; /* Título más grande en PC */
+    font-size: 1.5rem; /* Título más pequeño para que no sobresalga */
     margin-bottom: 10px;
 }
 
@@ -352,6 +356,7 @@
         padding: 10px;
         left: 5px; /* Mantener en la esquina izquierda */
         width: 90%; /* Ajustar el ancho para móviles */
+        max-height: 35%; /* Ajustar la altura de la descripción */
     }
 
     .info h2 {
