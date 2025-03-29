@@ -111,3 +111,21 @@
     margin: 0;
     font-size: 14px;
 }
+/* Imagen - Efecto de agrandamiento al hacer clic */
+.slider img:hover {
+    transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el cursor */
+    cursor: pointer;
+}
+
+/* Imagen agrandada en modo fullscreen */
+.slider img.fullscreen {
+    transform: scale(2); /* Escala de 2x el tamaño */
+    transition: transform 0.3s ease-in-out;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%) scale(2);
+    z-index: 100;
+    max-width: 100%;
+    max-height: 90%;
+}
