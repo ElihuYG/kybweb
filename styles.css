@@ -75,3 +75,39 @@
         margin-bottom: 10px;
     }
 }
+
+/* Estilos de los resultados de búsqueda */
+#search-results {
+    position: absolute;
+    background: black;
+    width: 200px; /* Ajusta según el tamaño de tu diseño */
+    border-radius: 5px;
+    padding: 10px;
+    display: none;
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.search-item:last-child {
+    border-bottom: none;
+}
+
+.search-item img {
+    width: 40px; /* Tamaño de la miniatura */
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.search-item p {
+    margin: 0;
+    font-size: 14px;
+}
