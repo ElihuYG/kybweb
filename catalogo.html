@@ -297,24 +297,26 @@
         position: relative;
     }
 
-    .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+.slider img {
+    width: 100%; /* Hacer que la imagen ocupe todo el contenedor */
+    height: auto; /* Mantener la proporción de la imagen */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
 
-    .info {
+    /* Para la descripción de la imagen */
+.info {
     position: absolute;
-    bottom: 30px; /* Aumentar el margen inferior para darle más espacio */
-    left: 10px; /* Mantener la descripción en la esquina inferior izquierda */
+    bottom: 10px; /* Alineación en la parte inferior */
+    left: 10px; /* Alineación en la parte izquierda */
     text-align: left;
     color: white;
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo oscuro con opacidad ajustada */
-    padding: 20px; /* Aumentar el padding para mayor espacio */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con más opacidad */
+    padding: 15px;
     border-radius: 10px;
-    width: 80%; /* Ajusta el ancho al 80% de la imagen */
+    width: 80%; /* Ancho ajustado */
     box-sizing: border-box;
-    transition: all 0.3s ease; /* Transición para movimientos suaves */
+    transition: all 0.3s ease; /* Suaviza los cambios */
 }
 
 .info h2 {
@@ -380,8 +382,7 @@
         font-size: 0.7rem;
     }
 }
-</style>
-
+    
 </head>
 <body>
     <!-- Carrusel -->
