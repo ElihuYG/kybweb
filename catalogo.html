@@ -440,5 +440,122 @@
         // Cambiar automáticamente cada 7 segundos
         setInterval(() => goToSlide(currentSlide + 1), 7000);
     </script>
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .section {
+            margin: 20px;
+        }
+
+        h2 {
+            margin-left: 20px;
+        }
+
+        .slider-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
+
+        .slider {
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider img {
+            width: 200px;
+            height: 120px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .slider img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hacer imágenes más pequeñas en celulares */
+        @media (max-width: 768px) {
+            .slider img {
+                width: 150px;
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sección Recientes -->
+    <div class="section">
+        <h2>Recientes</h2>
+        <div class="slider-container">
+            <div class="slider">
+                <img src="poster1.png" alt="Serie 1" onclick="addView('Serie 1')">
+                <img src="poster2.png" alt="Serie 2" onclick="addView('Serie 2')">
+                <img src="poster3.png" alt="Serie 3" onclick="addView('Serie 3')">
+                <img src="poster4.png" alt="Serie 4" onclick="addView('Serie 4')">
+                <img src="poster5.png" alt="Serie 5" onclick="addView('Serie 5')">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Episodios Nuevos -->
+    <div class="section">
+        <h2>Episodios Nuevos</h2>
+        <div class="slider-container">
+            <div class="slider">
+                <img src="episodio1.png" alt="Episodio 1" onclick="addView('Episodio 1')">
+                <img src="episodio2.png" alt="Episodio 2" onclick="addView('Episodio 2')">
+                <img src="episodio3.png" alt="Episodio 3" onclick="addView('Episodio 3')">
+                <img src="episodio4.png" alt="Episodio 4" onclick="addView('Episodio 4')">
+                <img src="episodio5.png" alt="Episodio 5" onclick="addView('Episodio 5')">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección Top 5 -->
+    <div class="section">
+        <h2>Top 5</h2>
+        <div class="slider-container">
+            <div class="slider" id="top5">
+                <!-- Aquí se agregan dinámicamente las imágenes del Top 5 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addView(name) {
+            let views = JSON.parse(localStorage.getItem('views')) || {};
+            views[name] = (views[name] || 0) + 1;
+            localStorage.setItem('views', JSON.stringify(views));
+            updateTop5();
+        }
+
+        function updateTop5() {
+            let views = JSON.parse(localStorage.getItem('views')) || {};
+            let sortedSeries = Object.entries(views).sort((a, b) => b[1] - a[1]).slice(0, 5);
+            
+            let top5Container = document.getElementById('top5');
+            top5Container.innerHTML = "";
+
+            sortedSeries.forEach(([name]) => {
+                let img = document.createElement('img');
+                img.src = name.toLowerCase().replace(/\s+/g, '') + ".png"; 
+                img.alt = name;
+                img.onclick = () => addView(name);
+                top5Container.appendChild(img);
+            });
+        }
+
+        updateTop5();
+    </script>
+    
 </body>
 </html>
