@@ -294,14 +294,14 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    position: relative; /* Importante para permitir el posicionamiento absoluto dentro */
+    position: relative;
 }
 
-/* Imagen - Se ajusta al 100% del contenedor */
+/* Imagen - Hacer que la imagen ocupe todo el contenedor */
 .slider img {
-    width: 100%; /* Hacer que la imagen ocupe todo el contenedor */
-    height: 100%; /* Asegura que las imágenes ocupen toda la altura del contenedor */
-    object-fit: cover; /* Mantiene la proporción sin distorsión */
+    width: 100%; /* Imagen cubriendo todo el contenedor */
+    height: 100%; /* Mantener la proporción y ajustar a la altura del contenedor */
+    object-fit: cover; /* Asegura que la imagen se recorte bien */
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s;
@@ -315,34 +315,37 @@
     text-align: left;
     color: white;
     background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
     width: 80%; /* Ancho ajustado al 80% de la imagen */
     box-sizing: border-box;
-    max-height: 30%; /* Limita la altura de la descripción */
+    max-height: 25%; /* Limita la altura de la descripción */
     overflow: hidden; /* Evita que la descripción sobresalga */
     transition: all 0.3s ease; /* Suaviza los cambios */
 }
 
+/* Título más pequeño y visible */
 .info h2 {
-    font-size: 1.5rem; /* Título más pequeño para que no sobresalga */
-    margin-bottom: 10px;
+    font-size: 1.2rem; /* Título más pequeño en PC */
+    margin-bottom: 5px;
 }
 
+/* Descripción */
 .info p {
+    font-size: 0.9rem; /* Reducir tamaño de texto */
     margin: 5px 0;
 }
 
 .watch-now {
     background-color: #50C878;
-    padding: 12px 20px; /* Ajustar el tamaño del botón */
+    padding: 10px 20px; /* Ajustar el tamaño del botón */
     color: white;
     text-transform: uppercase;
-    font-size: 1rem;
+    font-size: 0.9rem;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 /* Media Queries para dispositivos móviles */
@@ -353,14 +356,14 @@
 
     .info {
         font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
-        padding: 10px;
+        padding: 8px;
         left: 5px; /* Mantener en la esquina izquierda */
         width: 90%; /* Ajustar el ancho para móviles */
         max-height: 35%; /* Ajustar la altura de la descripción */
     }
 
     .info h2 {
-        font-size: 1.2rem; /* Reducir tamaño del título en móviles */
+        font-size: 1.1rem; /* Reducir tamaño del título en móviles */
     }
 
     .watch-now {
