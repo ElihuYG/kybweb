@@ -309,7 +309,7 @@
         left: 10px; /* Poner la descripción en la esquina inferior izquierda */
         text-align: left;
         color: white;
-        background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro con opacidad ajustada */
+        background-color: rgba(0, 0, 0, 0.1); /* Fondo oscuro con opacidad ajustada */
         padding: 20px; /* Aumentar el padding para mayor espacio */
         border-radius: 10px;
         width: 80%; /* Ajusta el ancho al 80% de la imagen */
@@ -469,25 +469,26 @@
             gap: 10px;
         }
 
-        .slider img {
-            width: 200px;
-            height: 120px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
+       .slider img {
+    width: 300px; /* Ajusta el tamaño de la imagen aquí */
+    height: 200px; /* Ajusta la altura de la imagen */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
 
-        .slider img:hover {
-            transform: scale(1.1);
-        }
+.slider img:hover {
+    transform: scale(1.1); /* Agranda la imagen al hacer hover */
+}
 
-        /* Hacer imágenes más pequeñas en celulares */
-        @media (max-width: 768px) {
-            .slider img {
-                width: 150px;
-                height: 90px;
-            }
-        }
+/* Ajuste para pantallas más pequeñas como celulares */
+@media (max-width: 768px) {
+    .slider img {
+        width: 250px;  /* Haciendo la imagen más grande en móviles */
+        height: 150px; /* Ajustando la altura */
+    }
+}
+
     </style>
 </head>
 <body>
