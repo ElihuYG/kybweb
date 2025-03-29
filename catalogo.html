@@ -304,81 +304,82 @@
     }
 
     .info {
-        position: absolute;
-        bottom: 30px; /* Aumentar el margen inferior para darle más espacio */
-        left: 10px; /* Poner la descripción en la esquina inferior izquierda */
-        text-align: left;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.1); /* Fondo oscuro con opacidad ajustada */
-        padding: 20px; /* Aumentar el padding para mayor espacio */
-        border-radius: 10px;
-        width: 80%; /* Ajusta el ancho al 80% de la imagen */
-        box-sizing: border-box;
+    position: absolute;
+    bottom: 30px; /* Aumentar el margen inferior para darle más espacio */
+    left: 10px; /* Mantener la descripción en la esquina inferior izquierda */
+    text-align: left;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo oscuro con opacidad ajustada */
+    padding: 20px; /* Aumentar el padding para mayor espacio */
+    border-radius: 10px;
+    width: 80%; /* Ajusta el ancho al 80% de la imagen */
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Transición para movimientos suaves */
+}
+
+.info h2 {
+    font-size: 2rem; /* Título más grande en PC */
+    margin-bottom: 10px;
+}
+
+.info p {
+    margin: 5px 0;
+}
+
+.watch-now {
+    background-color: #50C878;
+    padding: 12px 20px; /* Ajustar el tamaño del botón */
+    color: white;
+    text-transform: uppercase;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .slider {
+        height: 300px; /* Altura para dispositivos móviles */
+    }
+
+    .info {
+        font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
+        padding: 10px;
+        left: 5px; /* Mantener en la esquina izquierda */
+        width: 90%; /* Ajustar el ancho para móviles */
     }
 
     .info h2 {
-        font-size: 2rem; /* Título más grande en PC */
-        margin-bottom: 10px;
-    }
-
-    .info p {
-        margin: 5px 0;
+        font-size: 1.2rem; /* Reducir tamaño del título en móviles */
     }
 
     .watch-now {
-        background-color: #50C878;
-        padding: 12px 20px; /* Ajustar el tamaño del botón */
-        color: white;
-        text-transform: uppercase;
+        padding: 8px 15px; /* Reducir tamaño del botón en móviles */
+        font-size: 0.8rem;
+    }
+}
+
+/* Para los pequeños dispositivos */
+@media (max-width: 480px) {
+    .slider {
+        height: 200px; /* Altura en pantallas más pequeñas */
+    }
+
+    .info {
+        font-size: 0.7rem; /* Reducir aún más en pantallas muy pequeñas */
+    }
+
+    .info h2 {
         font-size: 1rem;
-        border: none;
-        cursor: pointer;
-        border-radius: 5px;
-        margin-top: 15px;
     }
 
-    /* Media Queries para dispositivos móviles */
-    @media (max-width: 768px) {
-        .slider {
-            height: 300px; /* Altura para dispositivos móviles */
-        }
-
-        .info {
-            font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
-            padding: 10px;
-            left: 5px; /* Mantener en la esquina izquierda */
-            width: 90%; /* Ajustar el ancho para móviles */
-        }
-
-        .info h2 {
-            font-size: 1.2rem; /* Reducir tamaño del título en móviles */
-        }
-
-        .watch-now {
-            padding: 8px 15px; /* Reducir tamaño del botón en móviles */
-            font-size: 0.8rem;
-        }
+    .watch-now {
+        padding: 6px 12px;
+        font-size: 0.7rem;
     }
-
-    /* Para los pequeños dispositivos */
-    @media (max-width: 480px) {
-        .slider {
-            height: 200px; /* Altura en pantallas más pequeñas */
-        }
-
-        .info {
-            font-size: 0.7rem; /* Reducir aún más en pantallas muy pequeñas */
-        }
-
-        .info h2 {
-            font-size: 1rem;
-        }
-
-        .watch-now {
-            padding: 6px 12px;
-            font-size: 0.7rem;
-        }
-    }
+}
 </style>
 
 </head>
