@@ -281,7 +281,7 @@
     height: 500px; /* Altura del slider en PC */
     overflow: hidden;
     margin-top: 30px;
-    z-index: -1;
+    z-index: 1; /* Asegura que las imágenes estén por encima de otros elementos */
 }
 
 .slides-container {
@@ -297,14 +297,14 @@
     position: relative;
 }
 
-/* Imagen - Hacer que la imagen ocupe todo el contenedor */
+/* Imagen */
 .slider img {
-    width: 100%; /* Imagen cubriendo todo el contenedor */
-    height: 100%; /* Mantener la proporción y ajustar a la altura del contenedor */
-    object-fit: cover; /* Asegura que la imagen se recorte bien */
+    width: 100%; /* Hacer que la imagen ocupe todo el contenedor */
+    height: 100%; /* Ajustar la altura para cubrir el contenedor */
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
 }
 
 /* Descripción dentro de la imagen */
