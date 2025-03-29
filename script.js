@@ -88,3 +88,45 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// Obtener el contenedor donde se mostrarán los resultados
+const searchResults = document.getElementById("search-results");
+
+// Series en el buscador
+const series = [
+    { name: "Begins Youth", image: "posters_begins_youth.png", link: "beginsyouth.html" },
+    { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+    { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+];
+
+// Función para mostrar resultados
+function searchSeries(query) {
+    searchResults.innerHTML = ""; // Limpiar resultados anteriores
+
+    series.forEach(serie => {
+        if (serie.name.toLowerCase().includes(query.toLowerCase())) {
+            const resultItem = document.createElement("a");
+            resultItem.href = serie.link;
+            resultItem.classList.add("search-item");
+
+            // Agregar la imagen
+            const img = document.createElement("img");
+            img.src = serie.image;
+            img.alt = serie.name;
+
+            // Agregar el nombre de la serie
+            const title = document.createElement("p");
+            title.textContent = serie.name;
+
+            // Insertar en el buscador
+            resultItem.appendChild(img);
+            resultItem.appendChild(title);
+            searchResults.appendChild(resultItem);
+        }
+    });
+}
+
+// Escuchar el input de búsqueda
+document.getElementById("search-input").addEventListener("input", function () {
+    searchSeries(this.value);
+});
