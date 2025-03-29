@@ -271,50 +271,51 @@
         color: white;
     }
 
-    /* Carrusel */
-    .slider {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        width: 100%;
-        height: 500px; /* Altura del slider en PC */
-        overflow: hidden;
-        margin-top: 30px;
-        z-index: -1;
-    }
+.slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 500px; /* Altura del slider en PC */
+    overflow: hidden;
+    margin-top: 30px;
+    z-index: -1;
+}
 
-    .slides-container {
-        display: flex;
-        transition: transform 0.5s ease;
-    }
+.slides-container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
 
-    .slide {
-        min-width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        position: relative;
-    }
+.slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative; /* Importante para permitir el posicionamiento absoluto dentro */
+}
 
+/* Imagen */
 .slider img {
     width: 100%; /* Hacer que la imagen ocupe todo el contenedor */
     height: auto; /* Mantener la proporción de la imagen */
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s;
+}
 
-    /* Para la descripción de la imagen */
+/* Descripción dentro de la imagen */
 .info {
-    position: absolute;
+    position: absolute; /* Esto coloca la descripción dentro de la imagen */
     bottom: 10px; /* Alineación en la parte inferior */
     left: 10px; /* Alineación en la parte izquierda */
     text-align: left;
     color: white;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con más opacidad */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
     padding: 15px;
     border-radius: 10px;
-    width: 80%; /* Ancho ajustado */
+    width: 80%; /* Ancho ajustado al 80% de la imagen */
     box-sizing: border-box;
     transition: all 0.3s ease; /* Suaviza los cambios */
 }
