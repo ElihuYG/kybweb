@@ -1,131 +1,282 @@
-/* Estilos para pantallas pequeñas */
-@media (max-width: 768px) {
-    /* Header */
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .menu-container {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-    }
-
-    .search-container {
-        display: flex;
-        justify-content: flex-start;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .search-icon, .profile-img {
-        margin-left: 15px;
-    }
-
-    /* Menú hamburguesa */
-    .mobile-menu {
-        top: 40px; /* Ajuste de posición en móviles */
-    }
-
-    /* Ajuste de los sliders */
-    .slider {
-        display: flex;
-        overflow-x: scroll;
-        gap: 10px;
-    }
-
-    .slide {
-        flex: 0 0 auto; /* Esto mantiene los slides en fila */
-        width: 90%; /* Ajustar el tamaño de los slides */
-    }
-
-    .slide img {
-        width: 100%; /* Ajustar la imagen al tamaño del slide */
-        height: auto; /* Mantener la proporción */
-    }
-
-    /* Estilos para los botones y texto en los sliders */
-    .info {
-        font-size: 14px; /* Reducir tamaño de fuente para pantallas pequeñas */
-    }
-
-    .rating, .subtitles, .duration, .synopsis {
-        font-size: 12px;
-    }
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
 }
 
-/* Para pantallas extremadamente pequeñas (móviles más pequeños) */
-@media (max-width: 480px) {
-    .search-box input {
-        width: 250px;
-    }
-
-    .search-results {
-        width: 250px;
-    }
-
-    .slider {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .slide {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #026670;
+    position: relative;
 }
 
-/* Estilos de los resultados de búsqueda */
-#search-results {
-    position: absolute;
-    background: black;
-    width: 200px; /* Ajusta según el tamaño de tu diseño */
-    border-radius: 5px;
-    padding: 10px;
-    display: none;
+/* Logo */
+.title {
+    font-size: 24px;
+    font-weight: bold;
 }
 
-.search-item {
+/* Contenedor del menú y perfil */
+.search-container {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: white;
-    padding: 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    gap: 15px;
 }
 
-.search-item:last-child {
-    border-bottom: none;
-}
-
-.search-item img {
-    width: 40px; /* Tamaño de la miniatura */
-    height: 40px;
-    border-radius: 5px;
-    margin-right: 10px;
-    object-fit: cover;
-}
-
-.search-item p {
-    margin: 0;
-    font-size: 14px;
-}
-/* Imagen - Efecto de agrandamiento al hacer clic */
-.slider img:hover {
-    transform: scale(1.1); /* Aumenta el tamaño de la imagen al pasar el cursor */
+/* Icono de búsqueda */
+.search-icon {
+    font-size: 20px;
     cursor: pointer;
 }
 
-/* Imagen agrandada en modo fullscreen */
-.slider img.fullscreen {
-    transform: scale(2); /* Escala de 2x el tamaño */
-    transition: transform 0.3s ease-in-out;
+/* Imagen de perfil */
+.profile-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Menú hamburguesa */
+.menu-container {
+    position: relative;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Menú desplegable */
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 45px; /* Justo debajo del botón */
+    left: 0;
+    background: #333;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu.open {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mobile-menu a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+}
+
+.mobile-menu a:hover {
+    background: #50C878;
+}
+
+/* Popup de búsqueda */
+.search-popup {
+    display: none;
     position: fixed;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%) scale(2);
-    z-index: 100;
-    max-width: 100%;
-    max-height: 90%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+.search-box {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: 350px;
+    position: relative;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.close-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.results {
+    background: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 350px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.result-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.result-item:hover {
+    background: #f0f0f0;
+}
+
+/* Carrusel */
+.slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 500px; /* Altura del slider en PC */
+    overflow: hidden;
+    margin-top: 30px;
+    z-index: -1;
+}
+
+.slides-container {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+/* Imagen - Hacer que la imagen ocupe todo el contenedor */
+.slider img {
+    width: 100%; /* Imagen cubriendo todo el contenedor */
+    height: 100%; /* Mantener la proporción y ajustar a la altura del contenedor */
+    object-fit: cover; /* Asegura que la imagen se recorte bien */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* Descripción dentro de la imagen */
+.info {
+    position: absolute; /* Esto coloca la descripción dentro de la imagen */
+    bottom: 10px; /* Alineación en la parte inferior */
+    left: 10px; /* Alineación en la parte izquierda */
+    text-align: left;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo oscuro con opacidad */
+    padding: 10px;
+    border-radius: 10px;
+    width: 80%; /* Ancho ajustado al 80% de la imagen */
+    box-sizing: border-box;
+    max-height: 25%; /* Limita la altura de la descripción */
+    overflow: hidden; /* Evita que la descripción sobresalga */
+    transition: all 0.3s ease; /* Suaviza los cambios */
+}
+
+/* Título más pequeño y visible */
+.info h2 {
+    font-size: 1.2rem; /* Título más pequeño en PC */
+    margin-bottom: 5px;
+}
+
+/* Descripción */
+.info p {
+    font-size: 0.9rem; /* Reducir tamaño de texto */
+    margin: 5px 0;
+}
+
+.watch-now {
+    background-color: #50C878;
+    padding: 10px 20px; /* Ajustar el tamaño del botón */
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .slider {
+        height: 300px; /* Altura para dispositivos móviles */
+    }
+
+    .info {
+        font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
+        padding: 8px;
+        left: 5px; /* Mantener en la esquina izquierda */
+        width: 90%; /* Ajustar el ancho para móviles */
+        max-height: 35%; /* Ajustar la altura de la descripción */
+    }
+
+    .info h2 {
+        font-size: 1.1rem; /* Reducir tamaño del título en móviles */
+    }
+
+    .watch-now {
+        padding: 8px 15px; /* Reducir tamaño del botón en móviles */
+        font-size: 0.8rem;
+    }
+}
+
+/* Para los pequeños dispositivos */
+@media (max-width: 480px) {
+    .slider {
+        height: 200px; /* Altura en pantallas más pequeñas */
+    }
+
+    .info {
+        font-size: 0.7rem; /* Reducir aún más en pantallas muy pequeñas */
+    }
+
+    .info h2 {
+        font-size: 1rem;
+    }
+
+    .watch-now {
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
 }
