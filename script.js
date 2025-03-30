@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showSlide(currentSlide);
     }
 
-    setInterval(nextSlide, 5000); // Cambiar cada 5 segundos
+    setInterval(nextSlide, 7000); // Cambiar cada 7 segundos
 
     // Botón "Ver Ahora"
     const watchButtons = document.querySelectorAll('.watch-now');
