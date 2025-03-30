@@ -96,79 +96,6 @@
             background: #50C878;
         }
 
-        /* Popup de búsqueda */
-        .search-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .search-box {
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            width: 350px;
-            position: relative;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .close-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .results {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 350px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .result-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .result-item:hover {
-            background: #f0f0f0;
-        }
-
         /* Carrusel */
         .slider {
             position: relative;
@@ -200,6 +127,7 @@
             background: rgba(0, 0, 0, 0.5);
             padding: 10px;
             border-radius: 5px;
+            max-width: 80%;
         }
 
         .rating {
@@ -274,6 +202,23 @@
                 padding: 8px;
                 font-size: 14px;
             }
+
+            /* Hacemos que la información en el carrusel se vea más pequeña */
+            .info {
+                bottom: 5px;
+                left: 5px;
+                font-size: 12px;
+                padding: 5px;
+            }
+
+            .rating, .subtitles, .duration, .synopsis {
+                font-size: 10px;
+            }
+
+            .watch-now {
+                padding: 5px;
+                font-size: 12px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -333,14 +278,33 @@
         </div>
     </header>
 
-    <!-- Popup de búsqueda -->
-    <div id="search-popup" class="search-popup">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar series...">
-            <button class="close-btn" id="close-search">X</button>
+    <!-- Carrusel -->
+    <section class="slider">
+        <div class="slides-container">
+            <div class="slide">
+                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
+                <div class="info">
+                    <h2>Begins Youth</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_TH.png" alt="Thamepo">
+                <div class="info">
+                    <h2>Thamepo</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 40 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
         </div>
-        <div id="search-results" class="results"></div>
-    </div>
+    </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -406,34 +370,6 @@
             });
         });
     </script>
-
-    <!-- Carrusel -->
-    <section class="slider">
-        <div class="slides-container">
-            <div class="slide">
-                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
-                <div class="info">
-                    <h2>Begins Youth</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 45 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_TH.png" alt="Thamepo">
-                <div class="info">
-                    <h2>Thamepo</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 40 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-        </div>
-    </section>
 
 </body>
 </html>
