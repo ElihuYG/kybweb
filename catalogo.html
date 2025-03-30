@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         /* Estilos generales */
         body {
@@ -167,6 +166,132 @@
         .result-item:hover {
             background: #f0f0f0;
         }
+
+        /* Carrusel */
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: 20px 0;
+        }
+
+        .slides-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .rating {
+            font-size: 14px;
+        }
+
+        .subtitles, .duration, .synopsis {
+            font-size: 12px;
+        }
+
+        .watch-now {
+            background: #50C878;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .watch-now:hover {
+            background: #02774e;
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .title {
+                font-size: 20px;
+            }
+
+            .search-container {
+                gap: 10px;
+            }
+
+            .search-icon {
+                font-size: 18px;
+            }
+
+            .profile-img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .mobile-menu {
+                position: absolute;
+                top: 50px;
+                left: 10px;
+                min-width: 200px;
+            }
+
+            .slider {
+                margin: 10px 0;
+            }
+
+            .slide img {
+                width: 100%;
+                height: auto;
+            }
+
+            .info {
+                bottom: 10px;
+                left: 10px;
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            .watch-now {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-box {
+                width: 90%;
+            }
+
+            .search-popup {
+                padding: 10px;
+            }
+
+            .result-item {
+                padding: 5px;
+                font-size: 14px;
+            }
+
+            .watch-now {
+                width: 100%;
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -313,12 +438,14 @@
             } else {
                 currentSlide = index;
             }
-            document.querySelector('.slides-container').style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            const newTransformValue = `-${currentSlide * 100}%`;
+            document.querySelector('.slides-container').style.transform = `translateX(${newTransformValue})`;
         }
 
-        // Cambiar automáticamente cada 7 segundos
-        setInterval(() => goToSlide(currentSlide + 1), 7000);
+        setInterval(() => {
+            goToSlide(currentSlide + 1);
+        }, 5000); // Cambiar cada 5 segundos
     </script>
-
 </body>
 </html>
