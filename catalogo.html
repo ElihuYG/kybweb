@@ -1,181 +1,333 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Inicio</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
-    <script>
-        $(document).ready(function(){
-            $('.slider').slick({
-                infinite: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                dots: true,
-            });
-
-            $(".favorite-icon").click(function() {
-                $(this).toggleClass("favorited");
-            });
-
-            $("#search-icon").click(function() {
-                $("#search-bar").toggle().focus();
-                $("#suggestions").toggle();
-            });
-
-            $("#menu-toggle").click(function() {
-                $("#menu").toggle();
-            });
-
-            $("#submenu-toggle").click(function() {
-                $("#submenu").toggle();
-                $("#submenu-toggle i").toggleClass("rotated");
-            });
-
-            $("#search-bar").on("input", function() {
-                let query = $(this).val().toLowerCase();
-                let suggestions = []; // Se llenará dinámicamente
-                let filtered = suggestions.filter(s => s.toLowerCase().includes(query));
-                $("#suggestions").html(filtered.map(s => `<div class='suggestion'>${s}</div>`).join(""));
-            });
-        });
-    </script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYB</title>
     <style>
+        /* Estilos generales */
         body {
-            background: black;
-            color: white;
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
         }
+
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            background: #026670;
             position: relative;
-            z-index: 10;
         }
-        .menu-icon, .search-icon, .profile-img {
-            cursor: pointer;
-        }
-        .menu-icon {
+
+        /* Logo */
+        .title {
             font-size: 24px;
+            font-weight: bold;
         }
+
+        /* Contenedor del menú y perfil */
         .search-container {
             display: flex;
             align-items: center;
-            position: relative;
+            gap: 15px;
         }
-        .search-bar {
-            display: none;
-            background: white;
-            color: black;
-            border: none;
-            padding: 5px;
-            margin-left: 10px;
+
+        /* Icono de búsqueda */
+        .search-icon {
+            font-size: 20px;
+            cursor: pointer;
         }
-        .suggestions {
-            position: absolute;
-            top: 100%;
-            background: white;
-            color: black;
-            width: 100%;
-            display: none;
-            z-index: 5;
-        }
-        .suggestion {
-            padding: 5px;
-            border-bottom: 1px solid #ddd;
-        }
+
+        /* Imagen de perfil */
         .profile-img {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            margin-left: 10px;
+            cursor: pointer;
         }
-        .menu {
+
+        /* Menú hamburguesa */
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Menú desplegable */
+        .mobile-menu {
             display: none;
-            background: black;
+            position: absolute;
+            top: 45px; /* Justo debajo del botón */
+            left: 0;
+            background: #333;
             padding: 10px;
-            position: absolute;
-            left: 10px;
-            top: 50px;
-            z-index: 15;
+            border-radius: 5px;
+            min-width: 150px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
-        .submenu {
-            display: none;
-            padding-left: 20px;
+
+        .mobile-menu.open {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
-        .slider {
-            width: 90%;
-            margin: auto;
-            position: relative;
-        }
-        .slider img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            display: block;
-            position: relative;
-        }
-        .info {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 90%;
+
+        .mobile-menu a {
             color: white;
+            font-size: 18px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+        }
+
+        .mobile-menu a:hover {
+            background: #50C878;
+        }
+
+        /* Popup de búsqueda */
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .search-box {
+            background: white;
             padding: 10px;
-            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            position: relative;
         }
-        .slick-dots {
-            bottom: -30px;
-            z-index: 5;
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
         }
-        .arrow {
-            transition: transform 0.3s ease-in-out;
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
         }
-        .rotated {
-            transform: rotate(180deg);
+
+        .results {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 350px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
         }
     </style>
 </head>
 <body>
+
+    <!-- Header -->
     <header class="header">
-        <div id="menu-toggle" class="menu-icon">☰</div>
+        <div class="menu-container">
+            <div id="menu-toggle" class="menu-icon">☰</div>
+            <div id="mobile-menu" class="mobile-menu">
+                <a href="#" id="menu-search-icon">🔍 Buscar</a>
+                <a href="#">Mi Cuenta</a>
+                <a href="#">Configuración</a>
+            </div>
+        </div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <img src="profile.jpg" alt="Perfil" class="profile-img">
             <div id="search-icon" class="search-icon">🔍</div>
-            <input id="search-bar" class="search-bar" type="text" placeholder="Buscar...">
-            <div id="suggestions" class="suggestions"></div>
+            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
         </div>
     </header>
-    
-    <div id="menu" class="menu">
-        <ul>
-            <li>Inicio</li>
-            <li>Favoritos</li>
-            <li id="submenu-toggle">Más <i class="arrow">▼</i></li>
-            <ul id="submenu" class="submenu">
-                <li>Recomendador</li>
-                <li>Próximamente</li>
-                <li>Ayuda</li>
-            </ul>
-        </ul>
+
+    <!-- Popup de búsqueda -->
+    <div id="search-popup" class="search-popup">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Buscar series...">
+            <button class="close-btn" id="close-search">X</button>
+        </div>
+        <div id="search-results" class="results"></div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const searchIcon = document.getElementById("search-icon");
+            const menuSearchIcon = document.getElementById("menu-search-icon");
+            const searchPopup = document.getElementById("search-popup");
+            const closeSearch = document.getElementById("close-search");
+            const searchInput = document.getElementById("search-input");
+            const searchResults = document.getElementById("search-results");
+
+            // Abrir/Cerrar menú hamburguesa
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.toggle("open");
+            });
+
+            // Cerrar el menú si se hace clic fuera
+            document.addEventListener("click", (e) => {
+                if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove("open");
+                }
+            });
+
+            // Abrir popup de búsqueda desde el icono principal o desde el menú
+            function openSearch() {
+                searchPopup.style.display = "flex";
+                searchInput.focus();
+            }
+
+            searchIcon.addEventListener("click", openSearch);
+            menuSearchIcon.addEventListener("click", openSearch);
+
+            // Cerrar popup de búsqueda
+            closeSearch.addEventListener("click", () => {
+                searchPopup.style.display = "none";
+                searchInput.value = "";
+                searchResults.style.display = "none";
+            });
+
+            // Series en el buscador
+            const series = [
+                { name: "Begins Youth", image: "posters_begins_youth.png", link: "beginsyouth.html" },
+                { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
+                { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
+            ];
+
+            searchInput.addEventListener("input", () => {
+                let query = searchInput.value.toLowerCase();
+                let filtered = series.filter(s => s.name.toLowerCase().includes(query));
+
+                if (query.length > 0 && filtered.length > 0) {
+                    searchResults.innerHTML = filtered.map(s =>
+                        <div class="result-item" onclick="window.location.href='${s.link}'">
+                            <img src="${s.image}" alt="${s.name}">
+                            <span>${s.name}</span>
+                        </div>
+                    ).join("");
+                    searchResults.style.display = "block";
+                } else {
+                    searchResults.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #111;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .section {
+        margin: 20px;
+    }
+
+    h2 {
+        margin-left: 20px;
+    }
+
+    .slider-container {
+        overflow: hidden; /* Asegura que las imágenes no se desborden */
+        padding: 10px 0;
+    }
+
+    .slider {
+        display: flex;
+        gap: 10px;
+        transition: transform 0.5s ease;
+    }
+
+    .slider img {
+        width: 100%; /* Hace que la imagen ocupe el 100% del ancho disponible */
+        height: auto; /* Mantiene la proporción de la imagen */
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .slider img:hover {
+        transform: scale(1.1); /* Agranda la imagen al hacer hover */
+    }
+
+    /* Ajuste para pantallas más pequeñas como celulares */
+    @media (max-width: 768px) {
+        .slider img {
+            width: 100%; /* Las imágenes ocuparán todo el contenedor en móviles */
+            height: auto; /* Mantendrá la proporción */
+        }
+    }
+
+    /* Para pantallas más pequeñas */
+    @media (max-width: 480px) {
+        .slider img {
+            width: 100%; /* Las imágenes ocuparán todo el contenedor en móviles */
+            height: auto; /* Mantiene la proporción */
+        }
+    }
+</style>
     
-    <main>
-        <section class="slider">
+</head>
+<body>
+    <!-- Carrusel -->
+    <section class="slider">
+        <div class="slides-container">
             <div class="slide">
-                <img src="serie1.jpg" alt="Serie 1">
+                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
                 <div class="info">
-                    <h2>Nombre de la Serie 1</h2>
+                    <h2>Begins Youth</h2>
                     <p class="rating">⭐⭐⭐⭐✰</p>
                     <p class="subtitles">Subtítulos: ESP, ING</p>
                     <p class="duration">Duración: 45 min/ep</p>
@@ -184,9 +336,9 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="serie2.jpg" alt="Serie 2">
+                <img src="Sliders_Arriba_YS.png" alt="yoursky.html">
                 <div class="info">
-                    <h2>Nombre de la Serie 2</h2>
+                    <h2>Your Sky</h2>
                     <p class="rating">⭐⭐⭐⭐⭐</p>
                     <p class="subtitles">Subtítulos: ESP</p>
                     <p class="duration">Duración: 50 min/ep</p>
@@ -194,7 +346,40 @@
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="thamepo.html">
+                <div class="info">
+                    <h2>Thame & PO</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 60 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function goToSlide(index) {
+            if (index >= slides.length) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = slides.length - 1;
+            } else {
+                currentSlide = index;
+            }
+            document.querySelector('.slides-container').style.transform = translateX(-${currentSlide * 100}%);
+        }
+
+        // Cambiar automáticamente cada 7 segundos
+        setInterval(() => goToSlide(currentSlide + 1), 7000);
+    </script>
+
+
+</head>
 </body>
 </html>
