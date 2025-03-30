@@ -456,26 +456,78 @@
 
 </head>
 <body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #111;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
 
-    <!-- Sección Recientes -->
-    <div class="section">
-        <h2>Recientes</h2>
-        <div class="slider-container">
-            <div class="slider">
-                <img src="
-poster_begins_youth.png" alt="Serie 1" onclick="addView('Serie 1')">
-                <img src="
-poster_begins_youth.png" alt="Serie 2" onclick="addView('Serie 2')">
-                <img src="
-poster_begins_youth.png" alt="Serie 3" onclick="addView('Serie 3')">
-                <img src="
-poster_begins_youth.png" alt="Serie 4" onclick="addView('Serie 4')">
-                <img src="
-poster_begins_youth.png" alt="Serie 5" onclick="addView('Serie 5')">
-            </div>
+    .section {
+        margin: 20px;
+    }
+
+    h2 {
+        margin-left: 20px;
+    }
+
+    .slider-container {
+        overflow-x: auto; /* Permite el deslizamiento horizontal */
+        white-space: nowrap; /* Asegura que las imágenes se alineen en línea */
+        padding: 10px 0;
+        width: 100%; /* Asegura que el carrusel ocupe todo el ancho disponible */
+    }
+
+    .slider {
+        display: flex;
+        gap: 10px;
+        /* No se cambia el tamaño aquí, solo la alineación */
+    }
+
+    .slider img {
+        width: 150px; /* Tamaño pequeño de las imágenes */
+        height: 200px; /* Ajustar la altura de las imágenes */
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .slider img:hover {
+        transform: scale(1.1); /* Efecto de agrandar la imagen al pasar el mouse */
+    }
+
+    /* Ajuste para pantallas más pequeñas */
+    @media (max-width: 768px) {
+        .slider img {
+            width: 120px; /* Imágenes más pequeñas en pantallas medianas */
+            height: 160px;
+        }
+    }
+
+    /* Ajuste para pantallas más pequeñas */
+    @media (max-width: 480px) {
+        .slider img {
+            width: 100px; /* Imágenes aún más pequeñas en pantallas pequeñas */
+            height: 130px;
+        }
+    }
+</style>
+
+<!-- Sección Recientes -->
+<div class="section">
+    <h2>Recientes</h2>
+    <div class="slider-container">
+        <div class="slider">
+            <img src="poster_begins_youth.png" alt="Serie 1" onclick="addView('Serie 1')">
+            <img src="poster_begins_youth.png" alt="Serie 2" onclick="addView('Serie 2')">
+            <img src="poster_begins_youth.png" alt="Serie 3" onclick="addView('Serie 3')">
+            <img src="poster_begins_youth.png" alt="Serie 4" onclick="addView('Serie 4')">
+            <img src="poster_begins_youth.png" alt="Serie 5" onclick="addView('Serie 5')">
         </div>
     </div>
-
+</div>
     <!-- Sección Episodios Nuevos -->
     <div class="section">
         <h2>Episodios Nuevos</h2>
