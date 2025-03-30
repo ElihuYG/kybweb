@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         /* Estilos generales */
         body {
@@ -249,10 +249,10 @@
 
                 if (query.length > 0 && filtered.length > 0) {
                     searchResults.innerHTML = filtered.map(s =>
-                        <div class="result-item" onclick="window.location.href='${s.link}'">
+                        `<div class="result-item" onclick="window.location.href='${s.link}'">
                             <img src="${s.image}" alt="${s.name}">
                             <span>${s.name}</span>
-                        </div>
+                        </div>`
                     ).join("");
                     searchResults.style.display = "block";
                 } else {
@@ -262,65 +262,6 @@
         });
     </script>
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #111;
-        color: white;
-        margin: 0;
-        padding: 0;
-    }
-
-    .section {
-        margin: 20px;
-    }
-
-    h2 {
-        margin-left: 20px;
-    }
-
-    .slider-container {
-        overflow: hidden; /* Asegura que las imágenes no se desborden */
-        padding: 10px 0;
-    }
-
-    .slider {
-        display: flex;
-        gap: 10px;
-        transition: transform 0.5s ease;
-    }
-
-    .slider img {
-        width: 100%; /* Hace que la imagen ocupe el 100% del ancho disponible */
-        height: auto; /* Mantiene la proporción de la imagen */
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform 0.3s;
-    }
-
-    .slider img:hover {
-        transform: scale(1.1); /* Agranda la imagen al hacer hover */
-    }
-
-    /* Ajuste para pantallas más pequeñas como celulares */
-    @media (max-width: 768px) {
-        .slider img {
-            width: 100%; /* Las imágenes ocuparán todo el contenedor en móviles */
-            height: auto; /* Mantendrá la proporción */
-        }
-    }
-
-    /* Para pantallas más pequeñas */
-    @media (max-width: 480px) {
-        .slider img {
-            width: 100%; /* Las imágenes ocuparán todo el contenedor en móviles */
-            height: auto; /* Mantiene la proporción */
-        }
-    }
-</style>
-    
-</head>
-<body>
     <!-- Carrusel -->
     <section class="slider">
         <div class="slides-container">
@@ -372,14 +313,12 @@
             } else {
                 currentSlide = index;
             }
-            document.querySelector('.slides-container').style.transform = translateX(-${currentSlide * 100}%);
+            document.querySelector('.slides-container').style.transform = `translateX(-${currentSlide * 100}%)`;
         }
 
         // Cambiar automáticamente cada 7 segundos
         setInterval(() => goToSlide(currentSlide + 1), 7000);
     </script>
 
-
-</head>
 </body>
 </html>
