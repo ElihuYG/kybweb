@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KYB</title>
     <style>
         /* Estilos generales */
@@ -13,6 +12,7 @@
             font-family: Arial, sans-serif;
             background-color: #111;
             color: white;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -25,26 +25,22 @@
             position: relative;
         }
 
-        /* Logo */
         .title {
             font-size: 24px;
             font-weight: bold;
         }
 
-        /* Contenedor del menú y perfil */
         .search-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        /* Icono de búsqueda */
         .search-icon {
             font-size: 20px;
             cursor: pointer;
         }
 
-        /* Imagen de perfil */
         .profile-img {
             width: 35px;
             height: 35px;
@@ -52,7 +48,6 @@
             cursor: pointer;
         }
 
-        /* Menú hamburguesa */
         .menu-container {
             position: relative;
         }
@@ -62,11 +57,10 @@
             cursor: pointer;
         }
 
-        /* Menú desplegable */
         .mobile-menu {
             display: none;
             position: absolute;
-            top: 45px; /* Justo debajo del botón */
+            top: 45px;
             left: 0;
             background: #333;
             padding: 10px;
@@ -167,291 +161,177 @@
         .result-item:hover {
             background: #f0f0f0;
         }
+
+        /* Carrusel */
+        .section {
+            position: relative;
+            height: 400px;
+            margin-top: 50px;
+        }
+
+        .slider-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            width: 300%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .info {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+            width: 90%;
+        }
+
+        .info h2 {
+            margin: 0;
+        }
+
+        .info p {
+            margin: 5px 0;
+        }
+
+        .watch-now {
+            background: #50C878;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .watch-now:hover {
+            background: #45a56d;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header con Lupita y Menú -->
     <header class="header">
-        <div class="menu-container">
-            <div id="menu-toggle" class="menu-icon">☰</div>
-            <div id="mobile-menu" class="mobile-menu">
-                <a href="#" id="menu-search-icon">🔍 Buscar</a>
-                <a href="#">Mi Cuenta</a>
-                <a href="#">Configuración</a>
-            </div>
-        </div>
         <div class="title">KYB</div>
         <div class="search-container">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+            <span class="search-icon">&#128269;</span> <!-- Lupita -->
+            <div class="menu-container">
+                <span class="menu-icon">&#9776;</span> <!-- Menú hamburguesa -->
+                <div class="mobile-menu" id="mobile-menu">
+                    <a href="#">Inicio</a>
+                    <a href="#">Series</a>
+                    <a href="#">Películas</a>
+                    <a href="#">Mi Cuenta</a>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- Popup de búsqueda -->
-    <div id="search-popup" class="search-popup">
+    <div class="search-popup" id="search-popup">
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar series...">
-            <button class="close-btn" id="close-search">X</button>
+            <input type="text" id="search-input" placeholder="Buscar serie...">
+            <button class="close-btn" id="close-search">Cerrar</button>
         </div>
-        <div id="search-results" class="results"></div>
+        <div class="results" id="search-results">
+            <!-- Sugerencias aquí -->
+        </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const menuToggle = document.getElementById("menu-toggle");
-            const mobileMenu = document.getElementById("mobile-menu");
-            const searchIcon = document.getElementById("search-icon");
-            const menuSearchIcon = document.getElementById("menu-search-icon");
-            const searchPopup = document.getElementById("search-popup");
-            const closeSearch = document.getElementById("close-search");
-            const searchInput = document.getElementById("search-input");
-            const searchResults = document.getElementById("search-results");
-
-            // Abrir/Cerrar menú hamburguesa
-            menuToggle.addEventListener("click", () => {
-                mobileMenu.classList.toggle("open");
-            });
-
-            // Cerrar el menú si se hace clic fuera
-            document.addEventListener("click", (e) => {
-                if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-                    mobileMenu.classList.remove("open");
-                }
-            });
-
-            // Abrir popup de búsqueda desde el icono principal o desde el menú
-            function openSearch() {
-                searchPopup.style.display = "flex";
-                searchInput.focus();
-            }
-
-            searchIcon.addEventListener("click", openSearch);
-            menuSearchIcon.addEventListener("click", openSearch);
-
-            // Cerrar popup de búsqueda
-            closeSearch.addEventListener("click", () => {
-                searchPopup.style.display = "none";
-                searchInput.value = "";
-                searchResults.style.display = "none";
-            });
-
-            // Series en el buscador
-            const series = [
-                { name: "Begins Youth", image: "posters_begins_youth.png", link: "beginsyouth.html" },
-                { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-                { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-            ];
-
-            searchInput.addEventListener("input", () => {
-                let query = searchInput.value.toLowerCase();
-                let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-                if (query.length > 0 && filtered.length > 0) {
-                    searchResults.innerHTML = filtered.map(s =>
-                        <div class="result-item" onclick="window.location.href='${s.link}'">
-                            <img src="${s.image}" alt="${s.name}">
-                            <span>${s.name}</span>
-                        </div>
-                    ).join("");
-                    searchResults.style.display = "block";
-                } else {
-                    searchResults.style.display = "none";
-                }
-            });
-        });
-    </script>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #111;
-        color: white;
-        margin: 0;
-        padding: 0;
-    }
-
-    .section {
-        margin: 20px;
-    }
-
-    h2 {
-        margin-left: 20px;
-    }
-
-    .slider-container {
-        overflow: hidden; /* Asegura que las imágenes no se desborden */
-        padding: 10px 0;
-    }
-
-    .slider {
-        display: flex;
-        gap: 10px;
-        transition: transform 0.5s ease;
-    }
-
-    .slider img {
-        width: 100%; /* Hace que la imagen ocupe el 100% del ancho disponible */
-        height: auto; /* Mantiene la proporción de la imagen */
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform 0.3s;
-    }
-
-    .slider img:hover {
-        transform: scale(1.1); /* Agranda la imagen al hacer hover */
-    }
-
-    /* Ajuste para pantallas más pequeñas como celulares */
-    @media (max-width: 768px) {
-        .slider img {
-            width: 100%; /* Las imágenes ocuparán todo el contenedor en móviles */
-            height: auto; /* Mantendrá la proporción */
-        }
-    }
-
-    /* Para pantallas más pequeñas */
-    @media (max-width: 480px) {
-        .slider img {
-            width: 100%; /* Las imágenes ocuparán todo el contenedor en móviles */
-            height: auto; /* Mantiene la proporción */
-        }
-    }
-</style>
-    
-</head>
-<body>
-    <!-- Carrusel -->
-    <section class="slider">
-        <div class="slides-container">
-            <div class="slide">
-                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
-                <div class="info">
-                    <h2>Begins Youth</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
-                    <p class="subtitles">Subtítulos: ESP, ING</p>
-                    <p class="duration">Duración: 45 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
-                    <button class="watch-now">Ver Ahora</button>
+    <!-- Carrusel con imágenes -->
+    <section class="section">
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <div class="slide">
+                    <img src="Sliders_Arriba_BY.png" alt="Begins Youth">
+                    <div class="info">
+                        <h2>Begins Youth</h2>
+                        <p class="rating">⭐⭐⭐⭐✰</p>
+                        <p class="subtitles">Subtítulos: ESP, ING</p>
+                        <p class="duration">Duración: 45 min/ep</p>
+                        <p class="synopsis">Esta es una breve sinopsis de la serie...</p>
+                        <button class="watch-now">Ver Ahora</button>
+                    </div>
                 </div>
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_YS.png" alt="yoursky.html">
-                <div class="info">
-                    <h2>Your Sky</h2>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 50 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
-                    <button class="watch-now">Ver Ahora</button>
+                <div class="slide">
+                    <img src="Sliders_Arriba_YS.png" alt="Yoursky">
+                    <div class="info">
+                        <h2>Your Sky</h2>
+                        <p class="rating">⭐⭐⭐⭐⭐</p>
+                        <p class="subtitles">Subtítulos: ESP</p>
+                        <p class="duration">Duración: 50 min/ep</p>
+                        <p class="synopsis">Esta es una breve sinopsis de la serie...</p>
+                        <button class="watch-now">Ver Ahora</button>
+                    </div>
                 </div>
-            </div>
-            <div class="slide">
-                <img src="Sliders_Arriba_TP.png" alt="thamepo.html">
-                <div class="info">
-                    <h2>Thame & PO</h2>
-                    <p class="rating">⭐⭐⭐⭐⭐</p>
-                    <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 60 min/ep</p>
-                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
-                    <button class="watch-now">Ver Ahora</button>
+                <div class="slide">
+                    <img src="Sliders_Arriba_TP.png" alt="Thame & PO">
+                    <div class="info">
+                        <h2>Thame & PO</h2>
+                        <p class="rating">⭐⭐⭐⭐⭐</p>
+                        <p class="subtitles">Subtítulos: ESP, ING</p>
+                        <p class="duration">Duración: 40 min/ep</p>
+                        <p class="synopsis">Esta es una breve sinopsis de la serie...</p>
+                        <button class="watch-now">Ver Ahora</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <script>
-        const slides = document.querySelectorAll('.slide');
-        let currentSlide = 0;
+        // Funcionalidad del menú hamburguesa
+        const menuToggle = document.querySelector(".menu-icon");
+        const mobileMenu = document.getElementById("mobile-menu");
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("open");
+        });
 
-        function goToSlide(index) {
-            if (index >= slides.length) {
-                currentSlide = 0;
-            } else if (index < 0) {
-                currentSlide = slides.length - 1;
-            } else {
-                currentSlide = index;
+        // Funcionalidad de la lupita de búsqueda
+        const searchIcon = document.querySelector(".search-icon");
+        const searchPopup = document.getElementById("search-popup");
+        const closeSearch = document.getElementById("close-search");
+
+        searchIcon.addEventListener("click", () => {
+            searchPopup.style.display = "flex";
+        });
+
+        closeSearch.addEventListener("click", () => {
+            searchPopup.style.display = "none";
+        });
+
+        // Cambio automático del carrusel cada 7 segundos
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+        const slider = document.getElementById("slider");
+
+        function changeSlide() {
+            currentIndex++;
+            if (currentIndex >= slides.length) {
+                currentIndex = 0;
             }
-            document.querySelector('.slides-container').style.transform = translateX(-${currentSlide * 100}%);
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
 
-        // Cambiar automáticamente cada 7 segundos
-        setInterval(() => goToSlide(currentSlide + 1), 7000);
+        setInterval(changeSlide, 7000); // Cambia cada 7 segundos
     </script>
 
-<section class="recientes">
-    <h2>Recientes</h2>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide">
-                <img src="poster_begins_youth.png" alt="beginsyouth.html">
-                <div class="info">
-                    <h3>Serie Reciente 1</h3>
-                    <p>Duración: 45 min</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="poster_begins_youth.png" alt="yoursky.html">
-                <div class="info">
-                    <h3>Serie Reciente 2</h3>
-                    <p>Duración: 50 min</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</section>
-<section class="nuevos-episodios">
-    <h2>Nuevos Episodios</h2>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide">
-                <img src="new_episode_1.jpg" alt="Nuevo Episodio 1">
-                <div class="info">
-                    <h3>Episodio 1</h3>
-                    <p>Duración: 48 min</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="new_episode_2.jpg" alt="Nuevo Episodio 2">
-                <div class="info">
-                    <h3>Episodio 2</h3>
-                    <p>Duración: 52 min</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <section class="top-5">
-    <h2>Top 5</h2>
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide">
-                <img src="top5_image_1.jpg" alt="Top 5 1">
-                <div class="info">
-                    <h3>Top 5 Serie 1</h3>
-                    <p>Duración: 55 min</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="top5_image_2.jpg" alt="Top 5 2">
-                <div class="info">
-                    <h3>Top 5 Serie 2</h3>
-                    <p>Duración: 60 min</p>
-                    <button class="watch-now">Ver Ahora</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-</head>
 </body>
-    
 </html>
