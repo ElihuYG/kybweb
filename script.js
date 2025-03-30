@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+mira este era mi js antes document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById("menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
     const searchIcon = document.getElementById("search-icon");
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showSlide(currentSlide);
     }
 
-    setInterval(nextSlide, 7000); // Cambiar cada 7 segundos
+    setInterval(nextSlide, 5000); // Cambiar cada 5 segundos
 
     // Botón "Ver Ahora"
     const watchButtons = document.querySelectorAll('.watch-now');
