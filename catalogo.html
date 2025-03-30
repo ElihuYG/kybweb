@@ -12,8 +12,6 @@
             font-family: Arial, sans-serif;
             background-color: #111;
             color: white;
-            position: relative;
-            box-sizing: border-box;
         }
 
         /* Header */
@@ -24,15 +22,14 @@
             padding: 15px;
             background: #026670;
             position: relative;
-            z-index: 10;
-            flex-wrap: wrap;
         }
 
         /* Logo */
         .title {
             font-size: 24px;
             font-weight: bold;
-            margin-right: 20px;
+            flex: 1;
+            text-align: center;
         }
 
         /* Contenedor del menú y perfil */
@@ -70,7 +67,7 @@
         .mobile-menu {
             display: none;
             position: absolute;
-            top: 45px;
+            top: 45px; /* Justo debajo del botón */
             left: 0;
             background: #333;
             padding: 10px;
@@ -99,21 +96,94 @@
             background: #50C878;
         }
 
-        /* Carrusel */
+        /* Popup de búsqueda */
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            position: relative;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .results {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 350px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
+        }
+
+        /* Estilos para el carrusel */
         .slider {
             position: relative;
-            max-width: 100%;
-            margin: 20px 0;
-            overflow: hidden; /* Evita que se muestren las imágenes fuera del contenedor */
+            width: 100%;
+            overflow: hidden;
         }
 
         .slides-container {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.5s ease;
         }
 
         .slide {
             min-width: 100%;
+            box-sizing: border-box;
             position: relative;
         }
 
@@ -124,53 +194,39 @@
 
         .info {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            top: 10px;
+            left: 10px;
             color: white;
             background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
+            padding: 15px;
             border-radius: 5px;
-            max-width: 80%;
+            width: calc(100% - 30px);
         }
 
-        .rating {
-            font-size: 14px;
-        }
-
-        .subtitles, .duration, .synopsis {
-            font-size: 12px;
-        }
-
-        .watch-now {
-            background: #50C878;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .watch-now:hover {
-            background: #02774e;
-        }
-
-        /* Media Queries para responsividad */
-        @media (max-width: 1024px) {
+        /* Responsive */
+        @media (max-width: 768px) {
             .header {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
             .title {
-                font-size: 22px;
+                text-align: center;
+                margin: 10px 0;
             }
 
             .search-container {
-                gap: 10px;
+                margin-left: auto;
             }
 
-            .search-icon {
-                font-size: 18px;
+            .menu-container {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-icon {
+                font-size: 25px;
             }
 
             .profile-img {
@@ -178,146 +234,8 @@
                 height: 30px;
             }
 
-            .mobile-menu {
-                position: absolute;
-                top: 50px;
-                left: 10px;
-                min-width: 200px;
-            }
-
-            .slider {
-                margin: 10px 0;
-            }
-
-            .info {
-                bottom: 10px;
-                left: 10px;
-                font-size: 14px;
-                padding: 5px;
-            }
-
-            .watch-now {
-                padding: 8px;
-                font-size: 14px;
-            }
-
-            /* Ajuste para las imágenes del carrusel en móvil */
-            .info {
-                font-size: 12px;
-                padding: 5px;
-                bottom: 5px;
-                left: 5px;
-            }
-
-            .rating, .subtitles, .duration, .synopsis {
-                font-size: 10px;
-            }
-
-            .watch-now {
-                padding: 5px;
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .search-container {
-                flex-direction: column;
-            }
-
-            .menu-container {
-                width: 100%;
-                text-align: right;
-            }
-
-            .title {
-                font-size: 18px;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
-            .slider {
-                margin: 10px;
-            }
-
-            .slide img {
-                width: 100%;
-                height: auto;
-            }
-
-            .info {
-                bottom: 5px;
-                left: 5px;
-                font-size: 10px;
-                padding: 5px;
-            }
-
-            .watch-now {
-                padding: 8px;
-                font-size: 12px;
-            }
-
-            /* Menú */
-            .mobile-menu {
-                position: absolute;
-                top: 50px;
-                left: 0;
-                min-width: 100%;
-            }
-
-            .mobile-menu.open {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .mobile-menu a {
-                padding: 10px;
-                font-size: 16px;
-            }
-
             .search-icon {
                 font-size: 18px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .search-container {
-                gap: 10px;
-            }
-
-            .profile-img {
-                width: 25px;
-                height: 25px;
-            }
-
-            .slider {
-                margin: 0 5px;
-            }
-
-            .slide img {
-                width: 100%;
-                height: auto;
-            }
-
-            .info {
-                bottom: 5px;
-                left: 5px;
-                font-size: 8px;
-                padding: 5px;
-            }
-
-            .watch-now {
-                padding: 5px;
-                font-size: 10px;
-            }
-
-            .rating, .subtitles, .duration, .synopsis {
-                font-size: 8px;
-            }
-
-            .mobile-menu a {
-                font-size: 14px;
-                padding: 10px;
             }
         }
     </style>
@@ -356,13 +274,24 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="Sliders_Arriba_TH.png" alt="Thamepo">
+                <img src="Sliders_Arriba_YS.png" alt="yoursky.html">
                 <div class="info">
-                    <h2>Thamepo</h2>
-                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <h2>Your Sky</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
                     <p class="subtitles">Subtítulos: ESP</p>
-                    <p class="duration">Duración: 40 min/ep</p>
+                    <p class="duration">Duración: 50 min/ep</p>
                     <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="thamepo.html">
+                <div class="info">
+                    <h2>Thame & PO</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 60 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
                     <button class="watch-now">Ver Ahora</button>
                 </div>
             </div>
@@ -387,22 +316,25 @@
                 }
             });
 
-            // Carrusel de imágenes (slider)
-            let currentSlide = 0;
+            // Carrusel automático
             const slides = document.querySelectorAll('.slide');
-            const totalSlides = slides.length;
+            let currentSlide = 0;
 
-            function showSlide(index) {
+            function goToSlide(index) {
+                if (index >= slides.length) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = slides.length - 1;
+                } else {
+                    currentSlide = index;
+                }
                 const slidesContainer = document.querySelector('.slides-container');
-                slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+                slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showSlide(currentSlide);
-            }
-
-            setInterval(nextSlide, 4000); // Cambia la imagen cada 4 segundos
+            setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 4000);
         });
     </script>
 
