@@ -1,4 +1,4 @@
-/* Reset de márgenes y paddings */
+antes que yo meta el nuevo codigo mira el anterior ok /* Reset de márgenes y paddings */
 * {
     margin: 0;
     padding: 0;
@@ -17,9 +17,10 @@ body {
     --emerald-green: #50C878;
 }
 
-/* Sección Recientes, Nuevos Episodios, Top 5 */
+/* Sección Recientes */
 .recientes, .nuevos-episodios, .top-5 {
     padding: 20px;
+    background-color: white;
     margin: 20px 0;
     border-radius: 10px;
 }
@@ -37,8 +38,6 @@ h2 {
     overflow-x: auto;
     gap: 10px;
     padding-bottom: 10px;
-    scroll-behavior: smooth;
-    justify-content: center;
 }
 
 .slider {
@@ -49,15 +48,13 @@ h2 {
 /* Slide individual */
 .slide {
     position: relative;
-    width: 100%;
-    max-width: 400px; /* Tamaño de la imagen para dispositivos grandes */
-    height: 250px; /* Altura de las imágenes */
+    width: 200px; /* Tamaño pequeño de las imágenes */
+    height: 300px; /* Altura de las imágenes */
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
 }
 
-/* Imagen dentro del slide */
 .slide img {
     width: 100%;
     height: 100%;
@@ -132,26 +129,4 @@ h2 {
 /* Añadir un poco de espacio entre las secciones */
 section {
     margin-bottom: 40px;
-}
-
-/* Eliminación de fondo blanco en las secciones */
-.recientes, .nuevos-episodios, .top-5 {
-    background-color: transparent;
-}
-
-/* Carrusel automático con JS */
-@keyframes slider-animation {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-100%); }
-    50% { transform: translateX(-200%); }
-    75% { transform: translateX(-300%); }
-    100% { transform: translateX(0); }
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-    .slide {
-        width: 150px;
-        height: 220px;
-    }
 }
