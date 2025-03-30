@@ -1,366 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB</title>
+    <title>Begins Youth</title>
     <style>
-        /* Estilos generales */
         body {
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #111;
-            color: white;
         }
-
-        /* Header */
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: #026670;
             position: relative;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), 
+                        url('Sliders_Arriba_BY.png') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
         }
-
-        /* Logo */
         .title {
-            font-size: 24px;
+            font-size: 2rem;
             font-weight: bold;
         }
-
-        /* Contenedor del menú y perfil */
-        .search-container {
+        .rating {
+            font-size: 1.2rem;
+            color: gold;
+        }
+        .description {
+            margin-top: 10px;
+            font-size: 1rem;
+            max-width: 800px;
+        }
+        .audio-subtitles, .content-warning, .genres {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        .section {
+            margin: 20px;
+        }
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .grid {
             display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* Icono de búsqueda */
-        .search-icon {
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* Imagen de perfil */
-        .profile-img {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        /* Menú hamburguesa */
-        .menu-container {
-            position: relative;
-        }
-
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-        }
-
-        /* Menú desplegable */
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 45px; /* Justo debajo del botón */
-            left: 0;
-            background: #333;
-            padding: 10px;
-            border-radius: 5px;
-            min-width: 150px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .mobile-menu.open {
-            display: flex;
-            flex-direction: column;
+            overflow-x: auto;
             gap: 10px;
         }
-
-        .mobile-menu a {
-            color: white;
-            font-size: 18px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 10px;
-        }
-
-        .mobile-menu a:hover {
-            background: #50C878;
-        }
-
-        /* Popup de búsqueda */
-        .search-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .search-box {
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            width: 350px;
-            position: relative;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .close-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
+        .grid img {
+            width: 150px;
+            height: 220px;
+            object-fit: cover;
             border-radius: 5px;
-        }
-
-        .results {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 350px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .result-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .result-item:hover {
-            background: #f0f0f0;
-        }
-
-        /* Carrusel */
-        .slider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            width: 100%;
-            height: 500px; /* Altura del slider en PC */
-            overflow: hidden;
-            margin-top: 30px;
-            z-index: 1; /* Asegura que las imágenes estén por encima de otros elementos */
-        }
-
-        .slides-container {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .slide {
-            min-width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Imagen */
-        .slider img {
-            width: 100%; /* Hacer que la imagen ocupe todo el contenedor */
-            height: 100%; /* Ajustar la altura para cubrir el contenedor */
-            object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        /* Descripción dentro de la imagen */
-        .info {
-            position: absolute; /* Esto coloca la descripción dentro de la imagen */
-            bottom: 10px; /* Alineación en la parte inferior */
-            left: 10px; /* Alineación en la parte izquierda */
-            text-align: left;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
-            padding: 10px;
-            border-radius: 10px;
-            width: 80%; /* Ancho ajustado al 80% de la imagen */
-            box-sizing: border-box;
-            max-height: 25%; /* Limita la altura de la descripción */
-            overflow: hidden; /* Evita que la descripción sobresalga */
-            transition: all 0.3s ease; /* Suaviza los cambios */
-        }
-
-        /* Título más pequeño y visible */
-        .info h2 {
-            font-size: 1.2rem; /* Título más pequeño en PC */
-            margin-bottom: 5px;
-        }
-
-        /* Descripción */
-        .info p {
-            font-size: 0.9rem; /* Reducir tamaño de texto */
-            margin: 5px 0;
-        }
-
-        .watch-now {
-            background-color: #50C878;
-            padding: 10px 20px; /* Ajustar el tamaño del botón */
-            color: white;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        /* Media Queries para dispositivos móviles */
-        @media (max-width: 768px) {
-            .slider {
-                height: 300px; /* Altura para dispositivos móviles */
-            }
-
-            .info {
-                font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
-                padding: 8px;
-                left: 5px; /* Mantener en la esquina izquierda */
-                width: 90%; /* Ajustar el ancho para móviles */
-                max-height: 35%; /* Ajustar la altura de la descripción */
-            }
-
-            .info h2 {
-                font-size: 1.1rem; /* Reducir tamaño del título en móviles */
-            }
-
-            .watch-now {
-                padding: 8px 15px; /* Reducir tamaño del botón en móviles */
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Para los pequeños dispositivos */
-        @media (max-width: 480px) {
-            .slider {
-                height: 200px; /* Altura en pantallas más pequeñas */
-            }
-
-            .info {
-                font-size: 0.7rem; /* Reducir aún más en pantallas muy pequeñas */
-            }
-
-            .info h2 {
-                font-size: 1rem;
-            }
-
-            .watch-now {
-                padding: 6px 12px;
-                font-size: 0.7rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="menu-container">
-            <div id="menu-toggle" class="menu-icon">☰</div>
-            <div id="mobile-menu" class="mobile-menu">
-                <a href="#" id="menu-search-icon">🔍 Buscar</a>
-                <a href="#">Mi Cuenta</a>
-                <a href="#">Configuración</a>
-            </div>
+
+    <div class="header">
+        <div class="title">Solo Leveling</div>
+        <div class="rating">⭐ 4.9 (711.1k)</div>
+        <div class="description">
+            Lo que no te mata te hace más fuerte, pero en el caso de Sung Jinwoo, lo que lo mató lo hizo más fuerte. 
+            Después de ser brutalmente asesinado por monstruos en una mazmorra de alto rango, Jinwoo regresó con el Sistema, 
+            un programa que solo él puede ver y que eleva su nivel en todos los sentidos. Ahora, está decidido a descubrir 
+            los secretos detrás de sus poderes y la mazmorra que los engendró.
         </div>
-        <div class="title">KYB</div>
-        <div class="search-container">
-            <div id="search-icon" class="search-icon">🔍</div>
-            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+        <div class="audio-subtitles">
+            <strong>Audio:</strong> Japanese, Español (Latino), English, Deutsch, Français, Italiano, Português, हिंदी, 한국어 <br>
+            <strong>Subtítulos:</strong> Español, English, Deutsch, Français, Português, 中文, Русский, العربية, ไทย
         </div>
-    </header>
-
-    <!-- Carrusel -->
-    <section class="slider">
-        <div class="slides-container">
-            <div class="slide">
-                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
-                <div class="info">
-                    <h2>Begins Youth</h2>
-                    <p>Una historia épica de juventud y desafíos.</p>
-                    <button class="watch-now">Ver ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="Thamepo.png" alt="Thamepo">
-                <div class="info">
-                    <h2>Thamepo</h2>
-                    <p>Un viaje inesperado hacia lo desconocido.</p>
-                    <button class="watch-now">Ver ahora</button>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="Yoursky.png" alt="Yoursky">
-                <div class="info">
-                    <h2>Yoursky</h2>
-                    <p>Amistad y amor en tiempos inciertos.</p>
-                    <button class="watch-now">Ver ahora</button>
-                </div>
-            </div>
+        <div class="content-warning">
+            ⚠️ <strong>Aviso:</strong> Sangre/Gore, Violencia
         </div>
-    </section>
+        <div class="genres">
+            <strong>Géneros:</strong> Acción, Fantasía, Aventura
+        </div>
+    </div>
 
-    <script>
-        const menuToggle = document.getElementById("menu-toggle");
-        const mobileMenu = document.getElementById("mobile-menu");
+    <div class="section">
+        <h2>Música destacada</h2>
+        <div class="grid">
+            <img src="
+Sliders_Arriba_BY.png" alt="Música 1">
+            <img src="
+Sliders_Arriba_TP.png" alt="Música 2">
+            <img src="
+Sliders_Arriba_YS.png" alt="Música 3">
+            <img src="musica4.jpg" alt="Música 4">
+        </div>
+    </div>
 
-        menuToggle.addEventListener("click", () => {
-            mobileMenu.classList.toggle("open");
-        });
+    <div class="section">
+        <h2>Más contenido similar</h2>
+        <div class="grid">
+            <img src="
+poster_begins_youth.png" alt="Anime 1">
+            <img src="
+poster_begins_youth.png" alt="Anime 2">
+            <img src="
+poster_begins_youth.png" alt="Anime 3">
+            <img src="
+poster_begins_youth.png" alt="Anime 4">
+        </div>
+    </div>
 
-        // Lógica para agrandar la imagen al hacer clic
-        const images = document.querySelectorAll('.slider img');
-        images.forEach(image => {
-            image.addEventListener('click', () => {
-                image.style.transform = 'scale(1.5)';
-            });
-        });
-
-        // Búsqueda (aún sin funcionalidad)
-        const searchIcon = document.getElementById("search-icon");
-        const searchPopup = document.getElementById("search-popup");
-
-        searchIcon.addEventListener("click", () => {
-            searchPopup.style.display = "flex";
-        });
-    </script>
 </body>
 </html>
