@@ -13,6 +13,7 @@
             background-color: #111;
             color: white;
             position: relative;
+            box-sizing: border-box;
         }
 
         /* Header */
@@ -24,12 +25,14 @@
             background: #026670;
             position: relative;
             z-index: 10;
+            flex-wrap: wrap;
         }
 
         /* Logo */
         .title {
             font-size: 24px;
             font-weight: bold;
+            margin-right: 20px;
         }
 
         /* Contenedor del menú y perfil */
@@ -67,7 +70,7 @@
         .mobile-menu {
             display: none;
             position: absolute;
-            top: 45px; /* Justo debajo del botón */
+            top: 45px;
             left: 0;
             background: #333;
             padding: 10px;
@@ -101,7 +104,7 @@
             position: relative;
             max-width: 100%;
             margin: 20px 0;
-            z-index: 1; /* Mover carrusel al fondo */
+            z-index: 1;
         }
 
         .slides-container {
@@ -152,14 +155,14 @@
         }
 
         /* Media Queries para responsividad */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .header {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
             .title {
-                font-size: 20px;
+                font-size: 22px;
             }
 
             .search-container {
@@ -186,11 +189,6 @@
                 margin: 10px 0;
             }
 
-            .slide img {
-                width: 100%;
-                height: auto;
-            }
-
             .info {
                 bottom: 10px;
                 left: 10px;
@@ -203,12 +201,12 @@
                 font-size: 14px;
             }
 
-            /* Hacemos que la información en el carrusel se vea más pequeña */
+            /* Ajuste para las imágenes del carrusel en móvil */
             .info {
-                bottom: 5px;
-                left: 5px;
                 font-size: 12px;
                 padding: 5px;
+                bottom: 5px;
+                left: 5px;
             }
 
             .rating, .subtitles, .duration, .synopsis {
@@ -221,40 +219,105 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .search-box {
-                width: 90%;
+        @media (max-width: 768px) {
+            .search-container {
+                flex-direction: column;
             }
 
-            .search-popup {
-                padding: 10px;
+            .menu-container {
+                width: 100%;
+                text-align: right;
             }
 
-            .result-item {
+            .title {
+                font-size: 18px;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .slider {
+                margin: 10px;
+            }
+
+            .slide img {
+                width: 100%;
+                height: auto;
+            }
+
+            .info {
+                bottom: 5px;
+                left: 5px;
+                font-size: 10px;
                 padding: 5px;
-                font-size: 14px;
             }
 
             .watch-now {
-                width: 100%;
                 padding: 8px;
+                font-size: 12px;
             }
 
-            /* Ajuste para las imágenes del carrusel en celular */
+            /* Menú */
+            .mobile-menu {
+                position: absolute;
+                top: 50px;
+                left: 0;
+                min-width: 100%;
+            }
+
+            .mobile-menu.open {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .mobile-menu a {
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            .search-icon {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-container {
+                gap: 10px;
+            }
+
+            .profile-img {
+                width: 25px;
+                height: 25px;
+            }
+
+            .slider {
+                margin: 0 5px;
+            }
+
+            .slide img {
+                width: 100%;
+                height: auto;
+            }
+
             .info {
-                font-size: 10px;
-                padding: 5px;
                 bottom: 5px;
                 left: 5px;
+                font-size: 8px;
+                padding: 5px;
+            }
+
+            .watch-now {
+                padding: 5px;
+                font-size: 10px;
             }
 
             .rating, .subtitles, .duration, .synopsis {
-                font-size: 10px;
+                font-size: 8px;
             }
 
-            .watch-now {
-                padding: 5px;
-                font-size: 12px;
+            .mobile-menu a {
+                font-size: 14px;
+                padding: 10px;
             }
         }
     </style>
@@ -266,7 +329,7 @@
         <div class="menu-container">
             <div id="menu-toggle" class="menu-icon">☰</div>
             <div id="mobile-menu" class="mobile-menu">
-                <a href="#" id="menu-search-icon">🔍 Buscar</a>
+                <a href="#">🔍 Buscar</a>
                 <a href="#">Mi Cuenta</a>
                 <a href="#">Configuración</a>
             </div>
@@ -311,11 +374,6 @@
             const menuToggle = document.getElementById("menu-toggle");
             const mobileMenu = document.getElementById("mobile-menu");
             const searchIcon = document.getElementById("search-icon");
-            const menuSearchIcon = document.getElementById("menu-search-icon");
-            const searchPopup = document.getElementById("search-popup");
-            const closeSearch = document.getElementById("close-search");
-            const searchInput = document.getElementById("search-input");
-            const searchResults = document.getElementById("search-results");
 
             // Abrir/Cerrar menú hamburguesa
             menuToggle.addEventListener("click", () => {
@@ -326,46 +384,6 @@
             document.addEventListener("click", (e) => {
                 if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
                     mobileMenu.classList.remove("open");
-                }
-            });
-
-            // Abrir popup de búsqueda desde el icono principal o desde el menú
-            function openSearch() {
-                searchPopup.style.display = "flex";
-                searchInput.focus();
-            }
-
-            searchIcon.addEventListener("click", openSearch);
-            menuSearchIcon.addEventListener("click", openSearch);
-
-            // Cerrar popup de búsqueda
-            closeSearch.addEventListener("click", () => {
-                searchPopup.style.display = "none";
-                searchInput.value = "";
-                searchResults.style.display = "none";
-            });
-
-            // Series en el buscador
-            const series = [
-                { name: "Begins Youth", image: "posters_begins_youth.png", link: "beginsyouth.html" },
-                { name: "Thamepo", image: "thamepo.png", link: "thamepo.html" },
-                { name: "Yoursky", image: "yoursky.png", link: "yoursky.html" }
-            ];
-
-            searchInput.addEventListener("input", () => {
-                let query = searchInput.value.toLowerCase();
-                let filtered = series.filter(s => s.name.toLowerCase().includes(query));
-
-                if (query.length > 0 && filtered.length > 0) {
-                    searchResults.innerHTML = filtered.map(s =>
-                        `<div class="result-item" onclick="window.location.href='${s.link}'">
-                            <img src="${s.image}" alt="${s.name}">
-                            <span>${s.name}</span>
-                        </div>`
-                    ).join("");
-                    searchResults.style.display = "block";
-                } else {
-                    searchResults.style.display = "none";
                 }
             });
         });
