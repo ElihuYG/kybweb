@@ -1,282 +1,140 @@
-/* Estilos generales */
-body {
+/* Reset de márgenes y paddings */
+* {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #111;
-    color: white;
+    box-sizing: border-box;
 }
 
-/* Header */
-.header {
+/* Estilo general de la página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Color principal: verde esmeralda */
+:root {
+    --emerald-green: #50C878;
+}
+
+/* Sección Recientes, Nuevos Episodios, Top 5 */
+.recientes, .nuevos-episodios, .top-5 {
+    padding: 20px;
+    background-color: white;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--emerald-green);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Slider container */
+.slider-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #026670;
-    position: relative;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
 }
 
-/* Logo */
-.title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Contenedor del menú y perfil */
-.search-container {
+.slider {
     display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-/* Icono de búsqueda */
-.search-icon {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Imagen de perfil */
-.profile-img {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-/* Menú hamburguesa */
-.menu-container {
-    position: relative;
-}
-
-.menu-icon {
-    font-size: 30px;
-    cursor: pointer;
-}
-
-/* Menú desplegable */
-.mobile-menu {
-    display: none;
-    position: absolute;
-    top: 45px; /* Justo debajo del botón */
-    left: 0;
-    background: #333;
-    padding: 10px;
-    border-radius: 5px;
-    min-width: 150px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.mobile-menu.open {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
-.mobile-menu a {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 10px;
+/* Slide individual */
+.slide {
+    position: relative;
+    width: 200px; /* Tamaño pequeño de las imágenes */
+    height: 300px; /* Altura de las imágenes */
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
 }
 
-.mobile-menu a:hover {
-    background: #50C878;
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-/* Popup de búsqueda */
-.search-popup {
-    display: none;
-    position: fixed;
-    top: 0;
+/* Información dentro de la imagen */
+.info {
+    position: absolute;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 9999;
-}
-
-.search-box {
-    background: white;
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    width: 350px;
-    position: relative;
-}
-
-.search-box input {
-    flex: 1;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    outline: none;
-}
-
-.close-btn {
-    background: red;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro para mejorar la visibilidad */
     color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.results {
-    background: white;
-    color: black;
     padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 350px;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
 }
 
-.result-item {
-    display: flex;
-    align-items: center;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-}
-
-.result-item img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-
-.result-item:hover {
-    background: #f0f0f0;
-}
-
-/* Carrusel */
-.slider {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    height: 500px; /* Altura del slider en PC */
-    overflow: hidden;
-    margin-top: 30px;
-    z-index: -1;
-}
-
-.slides-container {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.slide {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-
-/* Imagen - Hacer que la imagen ocupe todo el contenedor */
-.slider img {
-    width: 100%; /* Imagen cubriendo todo el contenedor */
-    height: 100%; /* Mantener la proporción y ajustar a la altura del contenedor */
-    object-fit: cover; /* Asegura que la imagen se recorte bien */
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-/* Descripción dentro de la imagen */
-.info {
-    position: absolute; /* Esto coloca la descripción dentro de la imagen */
-    bottom: 10px; /* Alineación en la parte inferior */
-    left: 10px; /* Alineación en la parte izquierda */
-    text-align: left;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo oscuro con opacidad */
-    padding: 10px;
-    border-radius: 10px;
-    width: 80%; /* Ancho ajustado al 80% de la imagen */
-    box-sizing: border-box;
-    max-height: 25%; /* Limita la altura de la descripción */
-    overflow: hidden; /* Evita que la descripción sobresalga */
-    transition: all 0.3s ease; /* Suaviza los cambios */
-}
-
-/* Título más pequeño y visible */
-.info h2 {
-    font-size: 1.2rem; /* Título más pequeño en PC */
+.info h3 {
+    font-size: 1rem;
     margin-bottom: 5px;
 }
 
-/* Descripción */
 .info p {
-    font-size: 0.9rem; /* Reducir tamaño de texto */
-    margin: 5px 0;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
 }
 
 .watch-now {
-    background-color: #50C878;
-    padding: 10px 20px; /* Ajustar el tamaño del botón */
-    color: white;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+    background-color: var(--emerald-green);
     border: none;
+    color: white;
+    padding: 8px 15px;
+    font-size: 0.9rem;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 10px;
 }
 
-/* Media Queries para dispositivos móviles */
+.watch-now:hover {
+    background-color: darkgreen;
+}
+
+/* Estilo para hacer que el slider sea desplazable */
+.slider-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.slider-container::-webkit-scrollbar-thumb {
+    background: var(--emerald-green);
+    border-radius: 4px;
+}
+
+.slider-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Efecto hover en el slide */
+.slide:hover {
+    transform: scale(1.05);
+}
+
+/* Ajuste de tamaño para pantallas pequeñas */
 @media (max-width: 768px) {
-    .slider {
-        height: 300px; /* Altura para dispositivos móviles */
-    }
-
-    .info {
-        font-size: 0.8rem; /* Reducir tamaño de texto en móviles */
-        padding: 8px;
-        left: 5px; /* Mantener en la esquina izquierda */
-        width: 90%; /* Ajustar el ancho para móviles */
-        max-height: 35%; /* Ajustar la altura de la descripción */
-    }
-
-    .info h2 {
-        font-size: 1.1rem; /* Reducir tamaño del título en móviles */
-    }
-
-    .watch-now {
-        padding: 8px 15px; /* Reducir tamaño del botón en móviles */
-        font-size: 0.8rem;
+    .slide {
+        width: 150px;
+        height: 220px;
     }
 }
 
-/* Para los pequeños dispositivos */
-@media (max-width: 480px) {
-    .slider {
-        height: 200px; /* Altura en pantallas más pequeñas */
-    }
-
-    .info {
-        font-size: 0.7rem; /* Reducir aún más en pantallas muy pequeñas */
-    }
-
-    .info h2 {
-        font-size: 1rem;
-    }
-
-    .watch-now {
-        padding: 6px 12px;
-        font-size: 0.7rem;
-    }
+/* Añadir un poco de espacio entre las secciones */
+section {
+    margin-bottom: 40px;
 }
+
+/* Scroll adicional para las secciones */
+.slider-container {
+    padding-bottom: 20px;
+    overflow-x: auto;
+}
+
