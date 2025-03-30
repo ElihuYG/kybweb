@@ -279,7 +279,7 @@
     align-items: center;
     position: relative;
     width: 100%;
-    height: 500px; /* Altura del slider en PC */
+    min-height: 500px; /* Cambié de height a min-height */
     overflow: hidden;
     margin-top: 30px;
     z-index: 1; /* Asegura que las imágenes estén por encima de otros elementos */
@@ -291,7 +291,7 @@
 }
 
 .slide {
-    min-width: 100%;
+    width: 100%; /* Asegura que cada slide ocupe todo el contenedor */
     height: 100%;
     display: flex;
     justify-content: center;
@@ -302,7 +302,7 @@
 .slider img {
     width: 100%; /* Hacer que la imagen ocupe todo el contenedor */
     height: 100%; /* Ajustar la altura para cubrir el contenedor */
-    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+    object-fit: contain; /* Cambié de cover a contain para que no recorte las imágenes */
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -320,8 +320,7 @@
     border-radius: 10px;
     width: 80%; /* Ancho ajustado al 80% de la imagen */
     box-sizing: border-box;
-    max-height: 25%; /* Limita la altura de la descripción */
-    overflow: hidden; /* Evita que la descripción sobresalga */
+    /* max-height: 25%; Eliminar o aumentar el límite de altura */
     transition: all 0.3s ease; /* Suaviza los cambios */
 }
 
