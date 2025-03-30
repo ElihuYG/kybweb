@@ -387,11 +387,11 @@
 <style>
     /* Estilos específicos para la sección Recientes */
     .section {
-        margin: 20px;
+        margin: 0; /* Eliminar margen extra */
     }
 
     h2 {
-        margin-left: 20px;
+        margin: 10px 20px; /* Reducir margen entre el título y las imágenes */
     }
 
     .slider-container {
@@ -399,12 +399,13 @@
         white-space: nowrap; /* Asegura que las imágenes se alineen en línea */
         padding: 10px 0;
         width: 100%; /* Asegura que el carrusel ocupe todo el ancho disponible */
+        display: flex;
+        gap: 10px; /* Espacio entre las imágenes */
     }
 
     .slider {
         display: flex;
         gap: 10px;
-        /* No se cambia el tamaño aquí, solo la alineación */
     }
 
     /* Solo para las imágenes de la sección Recientes */
@@ -447,6 +448,7 @@
             <img src="poster_begins_youth.png" alt="Serie 3" onclick="addView('Serie 3')">
             <img src="poster_begins_youth.png" alt="Serie 4" onclick="addView('Serie 4')">
             <img src="poster_begins_youth.png" alt="Serie 5" onclick="addView('Serie 5')">
+            <img src="poster_begins_youth.png" alt="Serie 6" onclick="addView('Serie 6')">
         </div>
     </div>
 </div>
