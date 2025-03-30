@@ -1,168 +1,72 @@
-/* Estilos básicos de la página */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+// Función para abrir y cerrar el menú de hamburguesa
+const menuToggle = document.querySelector('.menu-toggle');
+const menu = document.querySelector('.menu');
 
-body {
-    background-color: #111; /* Fondo oscuro */
-    color: #fff; /* Texto blanco */
-    line-height: 1.6;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-/* Estilo para el encabezado */
-header {
-    background-color: #222; /* Fondo oscuro para el encabezado */
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-header .logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-header .menu {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    background-color: #333; /* Fondo oscuro para el menú */
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-header .menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-header .menu ul li {
-    padding: 10px;
-    text-align: center;
-}
-
-header .menu ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-header .menu-toggle {
-    font-size: 30px;
-    cursor: pointer;
-    color: #fff; /* Icono de hamburguesa blanco */
-}
-
-/* Estilos para el banner */
-.banner {
-    background-color: #444; /* Fondo oscuro para el banner */
-    color: #fff;
-    text-align: center;
-    padding: 80px 20px;
-}
-
-.banner h1 {
-    font-size: 50px;
-    margin-bottom: 20px;
-}
-
-.banner p {
-    font-size: 20px;
-}
-
-/* Estilos de los botones */
-button {
-    background-color: #28a745; /* Color verde */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #218838; /* Color verde más oscuro al hacer hover */
-}
-
-/* Estilos de los formularios */
-input, select, textarea {
-    background-color: #333;
-    border: 1px solid #444;
-    color: #fff;
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    font-size: 16px;
-}
-
-input[type="submit"] {
-    width: auto;
-    background-color: #007bff;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-/* Pie de página */
-footer {
-    background-color: #222;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-}
-
-footer p {
-    font-size: 14px;
-}
-
-/* Estilo para la sección de contenido principal */
-main {
-    padding: 40px 20px;
-}
-
-/* Estilos para una mejor visualización en dispositivos pequeños */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
+menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('open');
+    // Cambiar el icono del menú de hamburguesa si es necesario
+    if (menu.classList.contains('open')) {
+        menuToggle.innerHTML = '&times;'; // Cambiar a 'X' para cerrar
+    } else {
+        menuToggle.innerHTML = '&#9776;'; // Volver al icono de hamburguesa
     }
+});
 
-    header .logo {
-        margin-bottom: 10px;
+// Función para cerrar el menú al hacer clic fuera de él
+document.addEventListener('click', (event) => {
+    if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+        menu.classList.remove('open');
+        menuToggle.innerHTML = '&#9776;'; // Volver al icono de hamburguesa
     }
+});
 
-    header .menu-toggle {
-        font-size: 35px;
+// Función para mostrar el contenido en un "banner" con animación de entrada
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.querySelector('.banner');
+    if (banner) {
+        banner.classList.add('fade-in');
     }
+});
 
-    .banner h1 {
-        font-size: 36px;
+// Agregar una clase CSS para la animación (puedes personalizarla en el CSS)
+const style = document.createElement('style');
+style.innerHTML = `
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 1.5s forwards;
     }
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+`;
+document.head.appendChild(style);
 
-    .banner p {
-        font-size: 18px;
-    }
+// Función para manejar el botón de "Siguiente episodio" (solo un ejemplo)
+const nextEpisodeButton = document.querySelector('.next-episode');
 
-    .menu {
-        position: relative;
-        top: auto;
-        right: auto;
-    }
+if (nextEpisodeButton) {
+    nextEpisodeButton.addEventListener('click', () => {
+        alert('Reproduciendo el siguiente episodio...');
+        // Aquí se puede agregar la lógica para cargar el siguiente episodio
+    });
+}
 
-    .menu ul {
-        text-align: left;
-    }
+// Función para manejar el botón "Skip Intro" (si tienes un reproductor)
+const skipIntroButton = document.querySelector('.skip-intro');
+if (skipIntroButton) {
+    skipIntroButton.addEventListener('click', () => {
+        console.log('Saltando la introducción...');
+        // Aquí puedes añadir la lógica para saltar la introducción del video
+    });
+}
+
+// Función para manejar el botón "Skip Outro" (si tienes un reproductor)
+const skipOutroButton = document.querySelector('.skip-outro');
+if (skipOutroButton) {
+    skipOutroButton.addEventListener('click', () => {
+        console.log('Saltando los créditos...');
+        // Aquí puedes añadir la lógica para saltar los créditos del video
+    });
 }
