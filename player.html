@@ -12,6 +12,40 @@
             margin: 0;
             padding: 0;
         }
+
+        /* Menú superior */
+        .top-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .top-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .menu-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .profile-pic {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Cabecera con imagen de fondo */
         .header {
             position: relative;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), 
@@ -21,37 +55,46 @@
             flex-direction: column;
             justify-content: flex-end;
             padding: 20px;
+            margin-top: 50px; /* Espacio para el menú superior */
         }
+
         .title {
             font-size: 2rem;
             font-weight: bold;
         }
+
         .rating {
             font-size: 1.2rem;
             color: gold;
         }
+
         .description {
             margin-top: 10px;
             font-size: 1rem;
             max-width: 800px;
         }
+
         .audio-subtitles, .content-warning, .genres {
             margin-top: 10px;
             font-size: 0.9rem;
             color: #bbb;
         }
+
         .section {
             margin: 20px;
         }
+
         .section h2 {
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
+
         .grid {
             display: flex;
             overflow-x: auto;
             gap: 10px;
         }
+
         .grid img {
             width: 150px;
             height: 220px;
@@ -62,6 +105,16 @@
 </head>
 <body>
 
+    <!-- Menú superior -->
+    <div class="top-menu">
+        <a href="catalogo.html">✖</a>
+        <div class="menu-title">KYB</div>
+        <a href="cuenta.html">
+            <img src="perfil.jpg" alt="Perfil" class="profile-pic">
+        </a>
+    </div>
+
+    <!-- Cabecera de la serie -->
     <div class="header">
         <div class="title">Solo Leveling</div>
         <div class="rating">⭐ 4.9 (711.1k)</div>
@@ -86,12 +139,9 @@
     <div class="section">
         <h2>Música destacada</h2>
         <div class="grid">
-            <img src="
-Sliders_Arriba_BY.png" alt="Música 1">
-            <img src="
-Sliders_Arriba_TP.png" alt="Música 2">
-            <img src="
-Sliders_Arriba_YS.png" alt="Música 3">
+            <img src="Sliders_Arriba_BY.png" alt="Música 1">
+            <img src="Sliders_Arriba_TP.png" alt="Música 2">
+            <img src="Sliders_Arriba_YS.png" alt="Música 3">
             <img src="musica4.jpg" alt="Música 4">
         </div>
     </div>
@@ -99,14 +149,10 @@ Sliders_Arriba_YS.png" alt="Música 3">
     <div class="section">
         <h2>Más contenido similar</h2>
         <div class="grid">
-            <img src="
-poster_begins_youth.png" alt="Anime 1">
-            <img src="
-poster_begins_youth.png" alt="Anime 2">
-            <img src="
-poster_begins_youth.png" alt="Anime 3">
-            <img src="
-poster_begins_youth.png" alt="Anime 4">
+            <img src="poster_begins_youth.png" alt="Anime 1">
+            <img src="poster_begins_youth.png" alt="Anime 2">
+            <img src="poster_begins_youth.png" alt="Anime 3">
+            <img src="poster_begins_youth.png" alt="Anime 4">
         </div>
     </div>
 
