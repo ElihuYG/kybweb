@@ -385,30 +385,31 @@
 
 
 <style>
-    /* Estilos específicos para la sección Recientes */
+    /* Estilos generales */
     .section {
         margin: 0; /* Eliminar margen extra */
     }
 
     h2 {
         margin: 10px 20px; /* Reducir margen entre el título y las imágenes */
+        font-size: 1.5rem; /* Ajustar tamaño del título */
     }
 
+    /* Contenedor del slider, para permitir desplazamiento */
     .slider-container {
         overflow-x: auto; /* Permite el deslizamiento horizontal */
         white-space: nowrap; /* Asegura que las imágenes se alineen en línea */
         padding: 10px 0;
         width: 100%; /* Asegura que el carrusel ocupe todo el ancho disponible */
+    }
+
+    /* Slider con imágenes en fila */
+    .slider {
         display: flex;
         gap: 10px; /* Espacio entre las imágenes */
     }
 
-    .slider {
-        display: flex;
-        gap: 10px;
-    }
-
-    /* Solo para las imágenes de la sección Recientes */
+    /* Imagen del slider */
     .section .slider img {
         width: 150px; /* Tamaño pequeño de las imágenes */
         height: 200px; /* Ajustar la altura de las imágenes */
@@ -417,7 +418,7 @@
         transition: transform 0.3s;
     }
 
-    /* Efecto hover para las imágenes de la sección Recientes */
+    /* Efecto hover para las imágenes */
     .section .slider img:hover {
         transform: scale(1.1); /* Efecto de agrandar la imagen al pasar el mouse */
     }
