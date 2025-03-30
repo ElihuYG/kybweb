@@ -390,18 +390,17 @@
         margin: 0; /* Eliminar margen extra */
     }
 
-    h2 {
-        margin: 10px 20px; /* Reducir margen entre el título y las imágenes */
-        font-size: 1.5rem; /* Ajustar tamaño del título */
-    }
+.section h2 {
+    margin: 10px 0;  /* Ajusta el margen superior e inferior */
+}
 
     /* Contenedor del slider, para permitir desplazamiento */
-    .slider-container {
-        overflow-x: auto; /* Permite el deslizamiento horizontal */
-        white-space: nowrap; /* Asegura que las imágenes se alineen en línea */
-        padding: 10px 0;
-        width: 100%; /* Asegura que el carrusel ocupe todo el ancho disponible */
-    }
+.slider-container {
+    overflow-x: auto;  /* Permite el desplazamiento horizontal */
+    display: flex;
+    -webkit-overflow-scrolling: touch;  /* Mejora el desplazamiento en dispositivos táctiles */
+}
+
 
     /* Slider con imágenes en fila */
     .slider {
