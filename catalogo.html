@@ -3,334 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB</title>
+    <title>KYB - Inicio</title>
     <style>
-        /* Estilos generales */
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            background-color: #111;
-            color: white;
-            overflow-x: hidden;
         }
 
-        /* Header */
-        .header {
+        body {
+            background: #111;
+            color: white;
+            padding-top: 60px; /* Espacio para el menú superior */
+        }
+
+        /* Menú Superior */
+        .top-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: #026670;
-            position: relative;
+            padding: 10px 15px;
+            z-index: 1000;
         }
 
-        .title {
-            font-size: 24px;
+        .menu-button {
+            font-size: 22px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+
+        .logo {
+            font-size: 20px;
             font-weight: bold;
         }
 
-        .search-container {
+        .menu-icons {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .search-icon {
-            font-size: 20px;
+        .menu-icons img {
+            width: 24px;
+            height: 24px;
             cursor: pointer;
         }
 
-        .profile-img {
-            width: 35px;
-            height: 35px;
+        .profile-pic {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
         }
 
-        .menu-container {
-            position: relative;
-        }
-
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 45px;
-            left: 0;
-            background: #333;
-            padding: 10px;
-            border-radius: 5px;
-            min-width: 150px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .mobile-menu.open {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .mobile-menu a {
-            color: white;
-            font-size: 18px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 10px;
-        }
-
-        .mobile-menu a:hover {
-            background: #50C878;
-        }
-
-        /* Popup de búsqueda */
-        .search-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .search-box {
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            width: 350px;
-            position: relative;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .close-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .results {
-            background: white;
-            color: black;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            width: 350px;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .result-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        .result-item img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 5px;
-        }
-
-        .result-item:hover {
-            background: #f0f0f0;
-        }
-
-        /* Carrusel */
-        .section {
-            position: relative;
-            height: 400px;
-            margin-top: 50px;
-        }
-
+        /* Estilos del carrusel */
         .slider-container {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            height: 100%;
-            display: flex;
+            max-width: 500px;
+            margin: 80px auto 20px;
             overflow: hidden;
         }
 
-        .slider {
-            display: flex;
-            width: 300%;
-            transition: transform 1s ease-in-out;
-        }
-
-        .slider img {
+        .slide {
+            display: none;
+            position: relative;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide img {
+            width: 100%;
             border-radius: 10px;
         }
 
-        .info {
+        .slide .info {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.6);
+            bottom: 0;
+            width: 100%;
             padding: 10px;
-            border-radius: 10px;
-            color: white;
-            width: 90%;
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .info h2 {
             margin: 0;
+            font-size: 18px;
+            color: white;
+            display: inline;
+        }
+
+        .info .view-more {
+            color: #50C878;
+            margin-left: 10px;
+            text-decoration: none;
         }
 
         .info p {
             margin: 5px 0;
+            font-size: 14px;
         }
 
         .watch-now {
             background: #50C878;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 8px 12px;
             cursor: pointer;
             border-radius: 5px;
+            margin-top: 5px;
         }
 
-        .watch-now:hover {
-            background: #45a56d;
+        /* Flechas de navegación */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+            border-radius: 50%;
         }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
     </style>
 </head>
 <body>
 
-    <!-- Header con Lupita y Menú -->
-    <header class="header">
-        <div class="title">KYB</div>
-        <div class="search-container">
-            <span class="search-icon">&#128269;</span> <!-- Lupita -->
-            <div class="menu-container">
-                <span class="menu-icon">&#9776;</span> <!-- Menú hamburguesa -->
-                <div class="mobile-menu" id="mobile-menu">
-                    <a href="#">Inicio</a>
-                    <a href="#">Series</a>
-                    <a href="#">Películas</a>
-                    <a href="#">Mi Cuenta</a>
-                </div>
+    <!-- Menú Superior -->
+    <nav class="top-menu">
+        <button class="menu-button">☰</button>
+        <div class="logo">KYB</div>
+        <div class="menu-icons">
+            <img src="iconos/search.svg" alt="Buscar" onclick="searchFunction()">
+            <img src="iconos/profile.jpg" alt="Perfil" class="profile-pic">
+        </div>
+    </nav>
+
+    <!-- Carrusel -->
+    <section class="slider-container">
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <div class="slide active">
+            <img src="Sliders_Arriba_BY.png" alt="Serie 1">
+            <div class="info">
+                <h2>Nombre de la Serie 1</h2>
+                <a href="#" class="view-more">Ver Más</a>
+                <p class="rating">⭐⭐⭐⭐✰</p>
+                <p class="subtitles">Subtítulos: ESP, ING</p>
+                <p class="duration">Duración: 45 min/ep</p>
+                <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                <button class="watch-now">Ver Ahora</button>
             </div>
         </div>
-    </header>
-
-    <!-- Popup de búsqueda -->
-    <div class="search-popup" id="search-popup">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Buscar serie...">
-            <button class="close-btn" id="close-search">Cerrar</button>
-        </div>
-        <div class="results" id="search-results">
-            <!-- Sugerencias aquí -->
-        </div>
-    </div>
-
-    <!-- Carrusel con imágenes -->
-    <section class="section">
-        <div class="slider-container">
-            <div class="slider" id="slider">
-                <div class="slide">
-                    <img src="Sliders_Arriba_BY.png" alt="Begins Youth">
-                    <div class="info">
-                        <h2>Begins Youth</h2>
-                        <p class="rating">⭐⭐⭐⭐✰</p>
-                        <p class="subtitles">Subtítulos: ESP, ING</p>
-                        <p class="duration">Duración: 45 min/ep</p>
-                        <p class="synopsis">Esta es una breve sinopsis de la serie...</p>
-                        <button class="watch-now">Ver Ahora</button>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="Sliders_Arriba_YS.png" alt="Yoursky">
-                    <div class="info">
-                        <h2>Your Sky</h2>
-                        <p class="rating">⭐⭐⭐⭐⭐</p>
-                        <p class="subtitles">Subtítulos: ESP</p>
-                        <p class="duration">Duración: 50 min/ep</p>
-                        <p class="synopsis">Esta es una breve sinopsis de la serie...</p>
-                        <button class="watch-now">Ver Ahora</button>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="Sliders_Arriba_TP.png" alt="Thame & PO">
-                    <div class="info">
-                        <h2>Thame & PO</h2>
-                        <p class="rating">⭐⭐⭐⭐⭐</p>
-                        <p class="subtitles">Subtítulos: ESP, ING</p>
-                        <p class="duration">Duración: 40 min/ep</p>
-                        <p class="synopsis">Esta es una breve sinopsis de la serie...</p>
-                        <button class="watch-now">Ver Ahora</button>
-                    </div>
-                </div>
+        <div class="slide">
+            <img src="Sliders_Arriba_YS.png" alt="Serie 2">
+            <div class="info">
+                <h2>Nombre de la Serie 2</h2>
+                <a href="#" class="view-more">Ver Más</a>
+                <p class="rating">⭐⭐⭐⭐⭐</p>
+                <p class="subtitles">Subtítulos: ESP, ING, FR</p>
+                <p class="duration">Duración: 50 min/ep</p>
+                <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                <button class="watch-now">Ver Ahora</button>
             </div>
         </div>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </section>
 
     <script>
-        // Funcionalidad del menú hamburguesa
-        const menuToggle = document.querySelector(".menu-icon");
-        const mobileMenu = document.getElementById("mobile-menu");
-        menuToggle.addEventListener("click", () => {
-            mobileMenu.classList.toggle("open");
-        });
+        let slideIndex = 0;
 
-        // Funcionalidad de la lupita de búsqueda
-        const searchIcon = document.querySelector(".search-icon");
-        const searchPopup = document.getElementById("search-popup");
-        const closeSearch = document.getElementById("close-search");
-
-        searchIcon.addEventListener("click", () => {
-            searchPopup.style.display = "flex";
-        });
-
-        closeSearch.addEventListener("click", () => {
-            searchPopup.style.display = "none";
-        });
-
-        // Cambio automático del carrusel cada 7 segundos
-        let currentIndex = 0;
-        const slides = document.querySelectorAll(".slide");
-        const slider = document.getElementById("slider");
-
-        function changeSlide() {
-            currentIndex++;
-            if (currentIndex >= slides.length) {
-                currentIndex = 0;
-            }
-            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        function moveSlide(n) {
+            let slides = document.querySelectorAll(".slide");
+            slides[slideIndex].classList.remove("active");
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides[slideIndex].classList.add("active");
         }
 
-        setInterval(changeSlide, 7000); // Cambia cada 7 segundos
+        function searchFunction() {
+            let query = prompt("¿Qué deseas buscar?");
+            if (query) {
+                alert("Buscando: " + query);
+                // Aquí puedes redirigir a la página de resultados
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            setInterval(() => moveSlide(1), 4000); // Cambia de slide cada 4 segundos
+        });
     </script>
 
 </body>
