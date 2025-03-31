@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Interactivos - Taxonomía</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .exercise {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ejercicios Interactivos sobre Taxonomía</h1>
+
+    <div class="exercise">
+        <h2>1. Clasifica el siguiente organismo:</h2>
+        <p><strong>Panthera leo</strong></p>
+        <label class="options">
+            <input type="radio" name="q1" value="a"> a) Felis<br>
+            <input type="radio" name="q1" value="b"> b) Panthera<br>
+            <input type="radio" name="q1" value="c"> c) Homo<br>
+            <input type="radio" name="q1" value="d"> d) Zea<br>
+        </label>
+    </div>
+
+    <div class="exercise">
+        <h2>2. Completa el espacio en blanco: El nombre científico del perro es __________.</h2>
+        <input type="text" id="q2">
+    </div>
+
+    <div class="exercise">
+        <h2>3. ¿A qué reino pertenece un organismo que realiza fotosíntesis y tiene células eucariotas?</h2>
+        <label class="options">
+            <input type="radio" name="q3" value="a"> a) Monera<br>
+            <input type="radio" name="q3" value="b"> b) Protista<br>
+            <input type="radio" name="q3" value="c"> c) Plantae<br>
+            <input type="radio" name="q3" value="d"> d) Fungi<br>
+        </label>
+    </div>
+
+    <div class="exercise">
+        <h2>4. Verdadero o Falso: La taxonomía utiliza solo las semejanzas físicas para clasificar a los organismos.</h2>
+        <label class="options">
+            <input type="radio" name="q4" value="true"> Verdadero<br>
+            <input type="radio" name="q4" value="false"> Falso<br>
+        </label>
+    </div>
+
+    <div>
+        <button class="btn" onclick="checkAnswers()">Verificar Respuestas</button>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        function checkAnswers() {
+            let result = "";
+            let score = 0;
+
+            // Pregunta 1
+            let q1 = document.querySelector('input[name="q1"]:checked');
+            if (q1 && q1.value === "b") {
+                score++;
+                result += "Pregunta 1: Correcta!<br>";
+            } else {
+                result += "Pregunta 1: Incorrecta.<br>";
+            }
+
+            // Pregunta 2
+            let q2 = document.getElementById('q2').value.trim();
+            if (q2.toLowerCase() === "canis familiaris") {
+                score++;
+                result += "Pregunta 2: Correcta!<br>";
+            } else {
+                result += "Pregunta 2: Incorrecta.<br>";
+            }
+
+            // Pregunta 3
+            let q3 = document.querySelector('input[name="q3"]:checked');
+            if (q3 && q3.value === "c") {
+                score++;
+                result += "Pregunta 3: Correcta!<br>";
+            } else {
+                result += "Pregunta 3: Incorrecta.<br>";
+            }
+
+            // Pregunta 4
+            let q4 = document.querySelector('input[name="q4"]:checked');
+            if (q4 && q4.value === "false") {
+                score++;
+                result += "Pregunta 4: Correcta!<br>";
+            } else {
+                result += "Pregunta 4: Incorrecta.<br>";
+            }
+
+            // Mostrar resultado
+            result += "<br><strong>Tu puntaje: " + score + " de 4</strong>";
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+
+</body>
+</html>
