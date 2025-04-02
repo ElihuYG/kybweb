@@ -3,146 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor KYB</title>
-    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet">
+    <title>Reproductor de Video - KYB</title>
     <style>
-        /* Contenedor del video y los botones */
-        .video-container {
-            position: relative;
-            width: 640px;
-            margin: auto;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
         }
-
-        /* Botones de Skip */
-        .skip-button {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.7);
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .subtitle-btn, .audio-btn {
+            background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 8px 12px;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
             cursor: pointer;
-            font-size: 14px;
             border-radius: 5px;
-            display: none;
-            z-index: 1000;
         }
-
-        #skip-intro { bottom: 50px; right: 20px; }
-        #skip-outro { bottom: 20px; right: 20px; }
-        #next-episode { bottom: 20px; right: 20px; }
-
-        /* "Contiene" */
-        .video-overlay {
-            position: absolute;
-            top: -50px; /* Inicia fuera de la pantalla */
-            left: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            z-index: 1001;
-            color: white;
-            opacity: 0;
-            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out, text-shadow 0.8s ease-in-out;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0);
-        }
-
-        /* Animaciones del "Contiene" */
-        .video-overlay.show {
-            opacity: 1;
-            transform: translateY(60px);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 1);
-        }
-
-        .video-overlay.hide {
-            opacity: 0;
-            transform: translateY(-50px);
-            text-shadow: 0 0 30px rgba(255, 255, 255, 1);
-        }
-
-        /* Asegurar que todo se muestre en pantalla completa */
-        .video-container:fullscreen .skip-button,
-        .video-container:-webkit-full-screen .skip-button {
-            display: block !important;
-        }
-
-        .video-container:fullscreen .video-overlay,
-        .video-container:-webkit-full-screen .video-overlay {
-            display: block !important;
+        .subtitle-btn:hover, .audio-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="video-container" id="video-container">
-        <div class="video-overlay" id="video-overlay"> Contiene: Violencia, Lenguaje fuerte </div>
-        <video id="my-video" class="video-js" controls preload="auto" width="640" height="360" data-setup="{}">
-            <source src="https://archive.org/download/prueba_20250318/y2mate.com%20-%20TWICE%20Prerelease%20english%20track%20MOONLIGHT%20SUNRISE%20MV_v720P.mp4" type="video/mp4">
-        </video>
-        <button class="skip-button" id="skip-intro">Saltar Intro</button>
-        <button class="skip-button" id="skip-outro">Saltar Créditos</button>
-        <button class="skip-button" id="next-episode">Siguiente Episodio</button>
+
+<div class="container">
+    <h1>Reproductor de Video - KYB</h1>
+
+    <video id="videoPlayer" controls>
+        <source src="https://link.storjshare.io/s/jxwa5qzensrktgv3756pl4z7yfja/kyb/Thamepo/videoplayback%20%281%29.mp4?wrap=1" type="video/mp4">
+        Tu navegador no soporta el formato de video.
+    </video>
+
+    <div class="controls">
+        <button class="subtitle-btn" onclick="toggleSubtitles()">Subtítulos</button>
+        <button class="audio-btn" onclick="changeAudio()">Audio</button>
     </div>
-    
-    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
-    <script>
-        var player = videojs('my-video');
-        var introStart = 10;
-        var introEnd = 30;
-        var outroStart;
-        var overlay = document.getElementById('video-overlay');
-        var videoContainer = document.getElementById('video-container');
+</div>
 
-        player.on('loadedmetadata', function() {
-            outroStart = player.duration() - 20;
-        });
+<script>
+    let video = document.getElementById('videoPlayer');
+    let subtitlesEnabled = false;
 
-        player.on('play', function() {
-            setTimeout(function() {
-                overlay.style.display = 'block';
-                overlay.classList.add('show');
-                setTimeout(function() {
-                    overlay.classList.add('hide');
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                    }, 800);
-                }, 5000);
-            }, 2000);
-        });
+    // Función para alternar los subtítulos
+    function toggleSubtitles() {
+        let track = video.textTracks[0]; // Asume que solo hay una pista de subtítulos
+        if (subtitlesEnabled) {
+            track.mode = 'disabled'; // Deshabilitar subtítulos
+            subtitlesEnabled = false;
+        } else {
+            track.mode = 'showing'; // Mostrar subtítulos
+            subtitlesEnabled = true;
+        }
+    }
 
-        player.on('timeupdate', function() {
-            var currentTime = player.currentTime();
-            var skipIntroBtn = document.getElementById('skip-intro');
-            var skipOutroBtn = document.getElementById('skip-outro');
-            var nextEpisodeBtn = document.getElementById('next-episode');
+    // Cambiar entre diferentes pistas de audio (esto dependería de que tu video tenga múltiples pistas de audio)
+    function changeAudio() {
+        alert("Cambiar audio aún no implementado");
+    }
+</script>
 
-            skipIntroBtn.style.display = (currentTime >= introStart && currentTime <= introEnd) ? 'block' : 'none';
-            if (outroStart && currentTime >= outroStart) {
-                skipOutroBtn.style.display = 'block';
-            } else {
-                skipOutroBtn.style.display = 'none';
-            }
-        });
-
-        document.getElementById('skip-intro').addEventListener('click', function() {
-            player.currentTime(introEnd);
-        });
-
-        document.getElementById('skip-outro').addEventListener('click', function() {
-            player.currentTime(player.duration() - 1);
-            document.getElementById('skip-outro').style.display = 'none';
-            document.getElementById('next-episode').style.display = 'block';
-        });
-
-        document.getElementById('next-episode').addEventListener('click', function() {
-            window.location.href = 'URL_DEL_SIGUIENTE_EPISODIO';
-        });
-
-        /* Manejar pantalla completa */
-        player.on('fullscreenchange', function() {
-            if (player.isFullscreen()) {
-                videoContainer.classList.add('fullscreen-mode');
-            } else {
-                videoContainer.classList.remove('fullscreen-mode');
-            }
-        });
-    </script>
 </body>
 </html>
