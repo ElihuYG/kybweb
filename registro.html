@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <style>
-        /* styles.css */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f7f7f7;
@@ -100,7 +99,6 @@
             text-decoration: underline;
         }
 
-        /* Animación para la entrada del formulario */
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -133,7 +131,7 @@
                 <label for="confirmar-password">Confirmar Contraseña</label>
                 <input type="password" id="confirmar-password" name="confirmar-password" required>
             </div>
-            <button type="submit">Registrarse</button>
+            <button type="submit" id="registro-btn">Registrarse</button>
         </form>
         <p id="mensaje" class="mensaje"></p>
         <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
@@ -141,7 +139,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js"></script>
     <script>
-        // URL y clave de Supabase
         const supabaseUrl = 'https://nyfbxwxldkvixcfagunr.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZmJ4d3hsZGt2aXhjZmFndW5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1NTc5NzQsImV4cCI6MjA1OTEzMzk3NH0.Iix1UB-ySLlNH_60StEvk2BYQvYIp-ahc2F8lsHRgBI';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
@@ -149,9 +146,14 @@
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("registro-form");
             const mensaje = document.getElementById("mensaje");
+            const registroBtn = document.getElementById("registro-btn");
 
             form.addEventListener("submit", async function (event) {
-                event.preventDefault(); // Evita que la página se recargue
+                event.preventDefault();
+
+                // Desactivar el botón para prevenir múltiples envíos
+                registroBtn.disabled = true;
+                registroBtn.textContent = "Registrando...";
 
                 const nombre = document.getElementById("nombre").value.trim();
                 const email = document.getElementById("email").value.trim();
@@ -160,11 +162,15 @@
 
                 if (!nombre || !email || !password || !confirmarPassword) {
                     mostrarMensaje("Todos los campos son obligatorios", "error");
+                    registroBtn.disabled = false;
+                    registroBtn.textContent = "Registrarse";
                     return;
                 }
 
                 if (password !== confirmarPassword) {
                     mostrarMensaje("Las contraseñas no coinciden", "error");
+                    registroBtn.disabled = false;
+                    registroBtn.textContent = "Registrarse";
                     return;
                 }
 
@@ -176,6 +182,8 @@
 
                 if (error) {
                     mostrarMensaje(error.message, "error");
+                    registroBtn.disabled = false;
+                    registroBtn.textContent = "Registrarse";
                     return;
                 }
 
@@ -186,10 +194,11 @@
 
                 if (insertError) {
                     mostrarMensaje(insertError.message, "error");
+                    registroBtn.disabled = false;
+                    registroBtn.textContent = "Registrarse";
                     return;
                 }
 
-                // Simulación de éxito
                 mostrarMensaje("Registro exitoso. Redirigiendo...", "exito");
 
                 setTimeout(() => {
