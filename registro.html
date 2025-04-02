@@ -4,8 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.19.0/dist/supabase.js"></script>
+    <style>
+        /* styles.css */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .contenedor {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .mensaje {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .mensaje.show {
+            opacity: 1;
+        }
+
+        .mensaje.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .mensaje.exito {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animación para la entrada del formulario */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="contenedor">
@@ -34,68 +140,42 @@
     </div>
 
     <script>
-        // Configura tu URL de Supabase y tu clave pública
-        const supabaseUrl = 'https://nyfbxwxldkvixcfagunr.supabase.co'; // Usamos tu URL de Supabase
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZmJ4d3hsZGt2aXhjZmFndW5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1NTc5NzQsImV4cCI6MjA1OTEzMzk3NH0.Iix1UB-ySLlNH_60StEvk2BYQvYIp-ahc2F8lsHRgBI'; // Usamos tu clave pública de Supabase
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("registro-form");
+        const mensaje = document.getElementById("mensaje");
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("registro-form");
-            const mensaje = document.getElementById("mensaje");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita que la página se recargue
 
-            form.addEventListener("submit", async function (event) {
-                event.preventDefault(); // Evita que la página se recargue
+            const nombre = document.getElementById("nombre").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmarPassword = document.getElementById("confirmar-password").value.trim();
 
-                const nombre = document.getElementById("nombre").value.trim();
-                const email = document.getElementById("email").value.trim();
-                const password = document.getElementById("password").value.trim();
-                const confirmarPassword = document.getElementById("confirmar-password").value.trim();
-
-                if (!nombre || !email || !password || !confirmarPassword) {
-                    mostrarMensaje("Todos los campos son obligatorios", "error");
-                    return;
-                }
-
-                if (password !== confirmarPassword) {
-                    mostrarMensaje("Las contraseñas no coinciden", "error");
-                    return;
-                }
-
-                // Usando Supabase para registrar al usuario
-                const { user, error } = await supabase.auth.signUp({
-                    email: email,
-                    password: password,
-                });
-
-                if (error) {
-                    mostrarMensaje(error.message, "error");
-                } else {
-                    // Aquí puedes agregar el nombre del usuario a la base de datos si es necesario
-                    // por ejemplo, para guardar el nombre en una tabla 'usuarios'
-
-                    const { data, error: insertError } = await supabase
-                        .from('usuarios')
-                        .insert([
-                            { id: user.id, nombre: nombre, email: email }
-                        ]);
-
-                    if (insertError) {
-                        mostrarMensaje("Error al guardar nombre en base de datos", "error");
-                    } else {
-                        mostrarMensaje("Registro exitoso. Redirigiendo...", "exito");
-                        setTimeout(() => {
-                            window.location.href = "login.html"; // Redirige al login
-                        }, 2000);
-                    }
-                }
-            });
-
-            function mostrarMensaje(texto, tipo) {
-                mensaje.textContent = texto;
-                mensaje.className = `mensaje ${tipo} show`;
-                setTimeout(() => mensaje.classList.remove("show"), 3000);
+            if (!nombre || !email || !password || !confirmarPassword) {
+                mostrarMensaje("Todos los campos son obligatorios", "error");
+                return;
             }
+
+            if (password !== confirmarPassword) {
+                mostrarMensaje("Las contraseñas no coinciden", "error");
+                return;
+            }
+
+            // Simulación de éxito
+            mostrarMensaje("Registro exitoso. Redirigiendo...", "exito");
+
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirige al login
+            }, 2000);
         });
+
+        function mostrarMensaje(texto, tipo) {
+            mensaje.textContent = texto;
+            mensaje.className = `mensaje ${tipo} show`;
+            setTimeout(() => mensaje.classList.remove("show"), 3000);
+        }
+    });
     </script>
 </body>
 </html>
