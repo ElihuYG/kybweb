@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.19.0/dist/supabase.js"></script>
 </head>
 <body>
     <div class="contenedor">
@@ -33,42 +34,68 @@
     </div>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("registro-form");
-        const mensaje = document.getElementById("mensaje");
+        // Configura tu URL de Supabase y tu clave pública
+        const supabaseUrl = 'https://nyfbxwxldkvixcfagunr.supabase.co'; // Usamos tu URL de Supabase
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZmJ4d3hsZGt2aXhjZmFndW5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1NTc5NzQsImV4cCI6MjA1OTEzMzk3NH0.Iix1UB-ySLlNH_60StEvk2BYQvYIp-ahc2F8lsHRgBI'; // Usamos tu clave pública de Supabase
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        form.addEventListener("submit", function (event) {
-            event.preventDefault(); // Evita que la página se recargue
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("registro-form");
+            const mensaje = document.getElementById("mensaje");
 
-            const nombre = document.getElementById("nombre").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
-            const confirmarPassword = document.getElementById("confirmar-password").value.trim();
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault(); // Evita que la página se recargue
 
-            if (!nombre || !email || !password || !confirmarPassword) {
-                mostrarMensaje("Todos los campos son obligatorios", "error");
-                return;
+                const nombre = document.getElementById("nombre").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+                const confirmarPassword = document.getElementById("confirmar-password").value.trim();
+
+                if (!nombre || !email || !password || !confirmarPassword) {
+                    mostrarMensaje("Todos los campos son obligatorios", "error");
+                    return;
+                }
+
+                if (password !== confirmarPassword) {
+                    mostrarMensaje("Las contraseñas no coinciden", "error");
+                    return;
+                }
+
+                // Usando Supabase para registrar al usuario
+                const { user, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password,
+                });
+
+                if (error) {
+                    mostrarMensaje(error.message, "error");
+                } else {
+                    // Aquí puedes agregar el nombre del usuario a la base de datos si es necesario
+                    // por ejemplo, para guardar el nombre en una tabla 'usuarios'
+
+                    const { data, error: insertError } = await supabase
+                        .from('usuarios')
+                        .insert([
+                            { id: user.id, nombre: nombre, email: email }
+                        ]);
+
+                    if (insertError) {
+                        mostrarMensaje("Error al guardar nombre en base de datos", "error");
+                    } else {
+                        mostrarMensaje("Registro exitoso. Redirigiendo...", "exito");
+                        setTimeout(() => {
+                            window.location.href = "login.html"; // Redirige al login
+                        }, 2000);
+                    }
+                }
+            });
+
+            function mostrarMensaje(texto, tipo) {
+                mensaje.textContent = texto;
+                mensaje.className = `mensaje ${tipo} show`;
+                setTimeout(() => mensaje.classList.remove("show"), 3000);
             }
-
-            if (password !== confirmarPassword) {
-                mostrarMensaje("Las contraseñas no coinciden", "error");
-                return;
-            }
-
-            // Simulación de éxito
-            mostrarMensaje("Registro exitoso. Redirigiendo...", "exito");
-
-            setTimeout(() => {
-                window.location.href = "login.html"; // Redirige al login
-            }, 2000);
         });
-
-        function mostrarMensaje(texto, tipo) {
-            mensaje.textContent = texto;
-            mensaje.className = `mensaje ${tipo} show`;
-            setTimeout(() => mensaje.classList.remove("show"), 3000);
-        }
-    });
     </script>
 </body>
 </html>
