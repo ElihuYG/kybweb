@@ -6,34 +6,39 @@
     <title>Reproductor Personalizado</title>
     <style>
         body {
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #000;
+            margin: 0;
         }
         .player-container {
             position: relative;
-            width: 640px;
-            height: 360px;
-            background: #000;
+            width: 80%;
+            max-width: 800px;
         }
         iframe {
             width: 100%;
-            height: 100%;
+            height: 450px;
+            border: none;
         }
         .controls {
             position: absolute;
             bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            width: 100%;
             display: flex;
-            gap: 10px;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
         }
         button {
-            background: rgba(255, 255, 255, 0.8);
+            background: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px;
             cursor: pointer;
             font-size: 16px;
             border-radius: 5px;
@@ -41,26 +46,45 @@
     </style>
 </head>
 <body>
+
     <div class="player-container">
-        <iframe id="videoFrame" src="https://www.youtube-nocookie.com/embed/qUcbFnx4B1E?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="video" src="https://www.youtube-nocookie.com/embed/qUcbFnx4B1E?autoplay=1&controls=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media"></iframe>
+        
         <div class="controls">
-            <button onclick="playVideo()">▶️ Play</button>
-            <button onclick="pauseVideo()">⏸️ Pause</button>
+            <button onclick="playPause()">▶️/⏸️</button>
+            <button onclick="setVolume(0.5)">🔊 Volumen 50%</button>
+            <button onclick="fullscreen()">⛶ Pantalla Completa</button>
         </div>
     </div>
 
     <script>
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('videoFrame');
+        let video = document.getElementById("video");
+
+        function playPause() {
+            let src = video.src;
+            if (src.includes("autoplay=1")) {
+                video.src = src.replace("autoplay=1", "autoplay=0");
+            } else {
+                video.src = src.replace("autoplay=0", "autoplay=1");
+            }
         }
-        function playVideo() {
-            if (player) player.playVideo();
+
+        function setVolume(level) {
+            alert("YouTube no permite controlar el volumen directamente desde iframe.");
         }
-        function pauseVideo() {
-            if (player) player.pauseVideo();
+
+        function fullscreen() {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.mozRequestFullScreen) {
+                video.mozRequestFullScreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
         }
     </script>
-    <script src="https://www.youtube.com/iframe_api"></script>
+
 </body>
 </html>
