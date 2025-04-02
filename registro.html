@@ -139,10 +139,12 @@
         <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.0.0/dist/supabase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.0.0/dist/umd/supabase.min.js"></script>
     <script>
-        // Inicializa tu Supabase (reemplaza con tus credenciales)
-        const supabase = Supabase.createClient('https://nyfbxwxldkvixcfagunr.supabase.co', 'your-anon-key');
+        // URL y clave de Supabase
+        const supabaseUrl = 'https://nyfbxwxldkvixcfagunr.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im55ZmJ4d3hsZGt2aXhjZmFndW5yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1NTc5NzQsImV4cCI6MjA1OTEzMzk3NH0.Iix1UB-ySLlNH_60StEvk2BYQvYIp-ahc2F8lsHRgBI';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("registro-form");
@@ -166,41 +168,33 @@
                     return;
                 }
 
-                try {
-                    // Registra el usuario en Supabase
-                    const { user, error } = await supabase.auth.signUp({
-                        email: email,
-                        password: password,
-                    });
+                // Crear usuario en Supabase
+                const { user, error } = await supabase.auth.signUp({
+                    email: email,
+                    password: password
+                });
 
-                    if (error) {
-                        mostrarMensaje(error.message, "error");
-                        return;
-                    }
-
-                    // Guarda el nombre en la tabla de usuarios (en la base de datos)
-                    const { data, error: dbError } = await supabase
-                        .from('usuarios')
-                        .insert([
-                            { id: user.id, nombre: nombre, email: email, password: password }
-                        ]);
-
-                    if (dbError) {
-                        mostrarMensaje("Error al guardar el usuario en la base de datos", "error");
-                        return;
-                    }
-
-                    // Si todo es exitoso
-                    mostrarMensaje("Registro exitoso. Redirigiendo...", "exito");
-
-                    setTimeout(() => {
-                        window.location.href = "login.html"; // Redirige al login
-                    }, 2000);
-
-                } catch (err) {
-                    console.error(err);
-                    mostrarMensaje("Hubo un error al registrar el usuario", "error");
+                if (error) {
+                    mostrarMensaje(error.message, "error");
+                    return;
                 }
+
+                // Insertar el nombre del usuario en la base de datos
+                const { data, error: insertError } = await supabase
+                    .from('usuarios')
+                    .insert([{ nombre: nombre, email: email, user_id: user.id }]);
+
+                if (insertError) {
+                    mostrarMensaje(insertError.message, "error");
+                    return;
+                }
+
+                // Simulación de éxito
+                mostrarMensaje("Registro exitoso. Redirigiendo...", "exito");
+
+                setTimeout(() => {
+                    window.location.href = "login.html"; // Redirige al login
+                }, 2000);
             });
 
             function mostrarMensaje(texto, tipo) {
