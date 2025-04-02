@@ -3,82 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor de Video - KYB</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            text-align: center;
-        }
-        video {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
-            border: 2px solid #4CAF50;
-            border-radius: 10px;
-        }
-        .controls {
-            margin-top: 20px;
-        }
-        .subtitle-btn, .audio-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .subtitle-btn:hover, .audio-btn:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <title>Reproductor de Video</title>
+    <!-- Incluir el archivo CSS de Video.js -->
+    <link href="https://vjs.zencdn.net/8.22.0/video-js.css" rel="stylesheet" />
 </head>
 <body>
+    <h1>Reproductor de Video</h1>
 
-<div class="container">
-    <h1>Reproductor de Video - KYB</h1>
-
-    <video id="videoPlayer" controls>
-        <source src="https://link.storjshare.io/s/jxwa5qzensrktgv3756pl4z7yfja/kyb/Thamepo/videoplayback%20%281%29.mp4?wrap=1" type="video/mp4">
-        Tu navegador no soporta el formato de video.
+    <!-- Reproductor Video.js -->
+    <video
+        id="my-video"
+        class="video-js vjs-default-skin"
+        controls
+        preload="auto"
+        width="640"
+        height="360"
+        poster="poster_del_video.jpg"  <!-- Si tienes una imagen del video, la agregas aquí -->
+        data-setup="{}"
+    >
+        <!-- Reemplaza con la URL de tu video en Storj -->
+        <source src="https://link.storjshare.io/s/jxwa5qzensrktgv3756pl4z7yfja/kyb/Thamepo/videoplayback%20%281%29.mp4?wrap=1" type="video/mp4" />
+        <p class="vjs-no-js">
+            Para ver este video, habilita JavaScript, y considera actualizar tu navegador.
+        </p>
     </video>
 
-    <div class="controls">
-        <button class="subtitle-btn" onclick="toggleSubtitles()">Subtítulos</button>
-        <button class="audio-btn" onclick="changeAudio()">Audio</button>
-    </div>
-</div>
-
-<script>
-    let video = document.getElementById('videoPlayer');
-    let subtitlesEnabled = false;
-
-    // Función para alternar los subtítulos
-    function toggleSubtitles() {
-        let track = video.textTracks[0]; // Asume que solo hay una pista de subtítulos
-        if (subtitlesEnabled) {
-            track.mode = 'disabled'; // Deshabilitar subtítulos
-            subtitlesEnabled = false;
-        } else {
-            track.mode = 'showing'; // Mostrar subtítulos
-            subtitlesEnabled = true;
-        }
-    }
-
-    // Cambiar entre diferentes pistas de audio (esto dependería de que tu video tenga múltiples pistas de audio)
-    function changeAudio() {
-        alert("Cambiar audio aún no implementado");
-    }
-</script>
-
+    <!-- Incluir el script de Video.js -->
+    <script src="https://vjs.zencdn.net/8.22.0/video.min.js"></script>
 </body>
 </html>
