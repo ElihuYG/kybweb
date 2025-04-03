@@ -3,87 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor Personalizado</title>
+    <title>KYB</title>
     <style>
+        /* Estilos generales */
         body {
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
         }
-        .player-container {
-            position: relative;
-            width: 80%;
-            max-width: 800px;
-        }
-        iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-        }
-        .controls {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 100%;
+
+        /* Header */
+        .header {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
+            padding: 15px;
+            background: #026670;
+            position: relative;
         }
-        button {
-            background: white;
-            border: none;
-            padding: 10px;
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            flex: 1;
+            text-align: center;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-icon {
+            font-size: 20px;
             cursor: pointer;
-            font-size: 16px;
+        }
+
+        .profile-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .menu-container {
+            position: relative;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 45px;
+            left: 0;
+            background: #333;
+            padding: 10px;
             border-radius: 5px;
+            min-width: 150px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu.open {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mobile-menu a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+        }
+
+        .mobile-menu a:hover {
+            background: #50C878;
+        }
+
+        /* Carrusel */
+        .slider {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .slides-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+        }
+
+        .info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            width: calc(100% - 30px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            /* Header ajustado para móviles */
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .title {
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .search-container {
+                margin-left: auto;
+            }
+
+            .menu-container {
+                margin-left: auto;
+            }
+
+            /* Ajustes para el carrusel en móviles */
+            .slider {
+                width: 100%;
+            }
+
+            .slide img {
+                object-fit: cover;
+                height: 250px;  /* Reducir la altura de las imágenes */
+            }
+
+            .info {
+                font-size: 14px;
+                padding: 10px;
+                bottom: 10px;
+                left: 10px;
+            }
+
+            .watch-now {
+                font-size: 14px;
+            }
+
+            /* Menú hamburguesa más pequeño en móviles */
+            .menu-icon {
+                font-size: 25px;
+            }
+
+            .profile-img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .search-icon {
+                font-size: 18px;
+            }
+        }
+
+        /* Responsive para pantallas más grandes (TV o pantallas grandes) */
+        @media (min-width: 1080px) {
+            .slider {
+                width: 100%;
+                height: 500px;
+            }
+
+            .slide img {
+                object-fit: cover;
+                height: 100%;
+            }
+
+            .info {
+                font-size: 22px;
+                padding: 20px;
+            }
+
+            .watch-now {
+                font-size: 18px;
+            }
+
+            .menu-icon {
+                font-size: 35px;
+            }
+
+            .profile-img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .search-icon {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="player-container">
-        <iframe id="video" src="https://www.youtube-nocookie.com/embed/qUcbFnx4B1E?autoplay=1&controls=0&modestbranding=1&rel=0" allow="autoplay; encrypted-media"></iframe>
-        
-        <div class="controls">
-            <button onclick="playPause()">▶️/⏸️</button>
-            <button onclick="setVolume(0.5)">🔊 Volumen 50%</button>
-            <button onclick="fullscreen()">⛶ Pantalla Completa</button>
+    <!-- Header -->
+    <header class="header">
+        <div class="menu-container">
+            <div id="menu-toggle" class="menu-icon">☰</div>
+            <div id="mobile-menu" class="mobile-menu">
+                <a href="#">🔍 Buscar</a>
+                <a href="#">Mi Cuenta</a>
+                <a href="#">Configuración</a>
+            </div>
         </div>
-    </div>
+        <div class="title">KYB</div>
+        <div class="search-container">
+            <div id="search-icon" class="search-icon">🔍</div>
+            <a href="cuenta.html"><img src="In_Inthira.jpg" alt="Perfil" class="profile-img"></a>
+        </div>
+    </header>
+
+    <!-- Carrusel -->
+    <section class="slider">
+        <div class="slides-container">
+            <div class="slide">
+                <img src="Sliders_Arriba_BY.png" alt="Beginsyouth.html">
+                <div class="info">
+                    <h2>Begins Youth</h2>
+                    <p class="rating">⭐⭐⭐⭐✰</p>
+                    <p class="subtitles">Subtítulos: ESP, ING</p>
+                    <p class="duration">Duración: 45 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 1...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_YS.png" alt="yoursky.html">
+                <div class="info">
+                    <h2>Your Sky</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 50 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 2...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Sliders_Arriba_TP.png" alt="thamepo.html">
+                <div class="info">
+                    <h2>Thame & PO</h2>
+                    <p class="rating">⭐⭐⭐⭐⭐</p>
+                    <p class="subtitles">Subtítulos: ESP</p>
+                    <p class="duration">Duración: 60 min/ep</p>
+                    <p class="synopsis">Esta es una breve sinopsis de la serie 3...</p>
+                    <button class="watch-now">Ver Ahora</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        let video = document.getElementById("video");
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const searchIcon = document.getElementById("search-icon");
 
-        function playPause() {
-            let src = video.src;
-            if (src.includes("autoplay=1")) {
-                video.src = src.replace("autoplay=1", "autoplay=0");
-            } else {
-                video.src = src.replace("autoplay=0", "autoplay=1");
+            // Abrir/Cerrar menú hamburguesa
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.toggle("open");
+            });
+
+            // Cerrar el menú si se hace clic fuera
+            document.addEventListener("click", (e) => {
+                if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove("open");
+                }
+            });
+
+            // Carrusel automático
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            function goToSlide(index) {
+                if (index >= slides.length) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = slides.length - 1;
+                } else {
+                    currentSlide = index;
+                }
+                const slidesContainer = document.querySelector('.slides-container');
+                slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
-        }
 
-        function setVolume(level) {
-            alert("YouTube no permite controlar el volumen directamente desde iframe.");
-        }
-
-        function fullscreen() {
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.mozRequestFullScreen) {
-                video.mozRequestFullScreen();
-            } else if (video.webkitRequestFullscreen) {
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) {
-                video.msRequestFullscreen();
-            }
-        }
+            setInterval(() => {
+                goToSlide(currentSlide + 1);
+            }, 4000);
+        });
     </script>
 
 </body>
