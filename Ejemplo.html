@@ -24,6 +24,7 @@
             position: relative;
         }
 
+        /* Logo */
         .title {
             font-size: 24px;
             font-weight: bold;
@@ -31,17 +32,20 @@
             text-align: center;
         }
 
+        /* Contenedor del menú y perfil */
         .search-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
+        /* Icono de búsqueda */
         .search-icon {
             font-size: 20px;
             cursor: pointer;
         }
 
+        /* Imagen de perfil */
         .profile-img {
             width: 35px;
             height: 35px;
@@ -49,6 +53,7 @@
             cursor: pointer;
         }
 
+        /* Menú hamburguesa */
         .menu-container {
             position: relative;
         }
@@ -58,10 +63,11 @@
             cursor: pointer;
         }
 
+        /* Menú desplegable */
         .mobile-menu {
             display: none;
             position: absolute;
-            top: 45px;
+            top: 45px; /* Justo debajo del botón */
             left: 0;
             background: #333;
             padding: 10px;
@@ -90,11 +96,85 @@
             background: #50C878;
         }
 
-        /* Carrusel */
+        /* Popup de búsqueda */
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .search-box {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            position: relative;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .results {
+            background: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            width: 350px;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .result-item img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .result-item:hover {
+            background: #f0f0f0;
+        }
+
+        /* Estilos para el carrusel */
         .slider {
             position: relative;
             width: 100%;
             overflow: hidden;
+            z-index: 0; /* Mover el carrusel al fondo */
         }
 
         .slides-container {
@@ -126,7 +206,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            /* Header ajustado para móviles */
             .header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -144,29 +223,9 @@
             .menu-container {
                 margin-left: auto;
             }
+        }
 
-            /* Ajustes para el carrusel en móviles */
-            .slider {
-                width: 100%;
-            }
-
-            .slide img {
-                object-fit: cover;
-                height: 250px;  /* Reducir la altura de las imágenes */
-            }
-
-            .info {
-                font-size: 14px;
-                padding: 10px;
-                bottom: 10px;
-                left: 10px;
-            }
-
-            .watch-now {
-                font-size: 14px;
-            }
-
-            /* Menú hamburguesa más pequeño en móviles */
+        @media (max-width: 480px) {
             .menu-icon {
                 font-size: 25px;
             }
@@ -178,41 +237,6 @@
 
             .search-icon {
                 font-size: 18px;
-            }
-        }
-
-        /* Responsive para pantallas más grandes (TV o pantallas grandes) */
-        @media (min-width: 1080px) {
-            .slider {
-                width: 100%;
-                height: 500px;
-            }
-
-            .slide img {
-                object-fit: cover;
-                height: 100%;
-            }
-
-            .info {
-                font-size: 22px;
-                padding: 20px;
-            }
-
-            .watch-now {
-                font-size: 18px;
-            }
-
-            .menu-icon {
-                font-size: 35px;
-            }
-
-            .profile-img {
-                width: 50px;
-                height: 50px;
-            }
-
-            .search-icon {
-                font-size: 30px;
             }
         }
     </style>
@@ -291,6 +315,24 @@
                 if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
                     mobileMenu.classList.remove("open");
                 }
+            });
+
+            // Popup de búsqueda
+            searchIcon.addEventListener("click", () => {
+                const searchPopup = document.createElement("div");
+                searchPopup.classList.add("search-popup");
+                searchPopup.innerHTML = `
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <button class="close-btn">X</button>
+                    </div>
+                `;
+                document.body.appendChild(searchPopup);
+
+                // Cerrar popup
+                searchPopup.querySelector(".close-btn").addEventListener("click", () => {
+                    document.body.removeChild(searchPopup);
+                });
             });
 
             // Carrusel automático
