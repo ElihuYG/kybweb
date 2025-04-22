@@ -49,6 +49,131 @@
     </form>
   </section>
 
+  /* Estilos básicos para la estructura */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #141414;
+  color: #fff;
+}
+
+h1, h2 {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Sección de bienvenida */
+.hero {
+  background-image: url('fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #e50914;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #f40612;
+}
+
+/* Sección de contenido destacado */
+.featured {
+  padding: 20px;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.carousel img {
+  width: 300px;
+  margin-right: 15px;
+  border-radius: 10px;
+}
+
+/* Sección de categorías */
+.categories {
+  padding: 20px;
+}
+
+.category-list {
+  display: flex;
+  gap: 15px;
+}
+
+.category {
+  background-color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.category:hover {
+  background-color: #e50914;
+}
+
+/* Sección de registro */
+.registro {
+  background-color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+.registro input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+}
+
+.registro button {
+  padding: 10px 20px;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.registro button:hover {
+  background-color: #f40612;
+}
+
+/* Pie de página */
+footer {
+  background-color: #141414;
+  text-align: center;
+  padding: 10px;
+}
+
+  
   <footer>
     <p>&copy; 2025 Netflix Clone. Todos los derechos reservados.</p>
   </footer>
