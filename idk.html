@@ -4,21 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reproductor KYB</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.3/dist/plyr.css" />
   <style>
-    /* Personalización visual */
     #player {
       margin: 0 auto;
-      max-width: 100%;
-    }
-    .plyr__controls .plyr__control {
-      font-size: 14px;
-    }
-    .plyr__controls {
-      background: rgba(0, 0, 0, 0.7);
-    }
-    .plyr__controls .plyr__control:hover {
-      background: rgba(0, 0, 0, 0.9);
+      width: 80%;
+      max-width: 900px;
+      display: block;
     }
     .title {
       position: absolute;
@@ -32,34 +23,9 @@
 </head>
 <body>
   <div class="title">KYB</div>
-  <video id="player" controls crossorigin playsinline>
+  <video id="player" controls crossorigin>
     <source src="http://dl.iroteambots.ir:8080/32547/Telegram+View+prueba9f.mp4?hash=9fbd66" type="video/mp4" />
-    <!-- Puedes agregar más formatos aquí si lo deseas -->
+    Tu navegador no soporta el formato de video.
   </video>
-
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.3/dist/plyr.js"></script>
-  <script>
-    const player = new Plyr('#player', {
-      controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
-      settings: ['quality', 'speed'],
-      quality: {
-        default: 720,  // Aquí puedes poner la calidad por defecto
-        options: [360, 720, 1080], // Opciones de calidad
-      },
-      captions: { active: true, language: 'es' },
-    });
-
-    // Skip intro button (salta los primeros 20 segundos)
-    player.on('ready', () => {
-      setTimeout(() => {
-        player.currentTime = 20; // Empieza a los 20 segundos
-      }, 1000);
-    });
-
-    // Skip intro (cuando se da click en el botón)
-    document.querySelector('.plyr__control--rewind').addEventListener('click', () => {
-      player.currentTime = 10; // Salta al minuto 10
-    });
-  </script>
 </body>
 </html>
