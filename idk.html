@@ -2,75 +2,85 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>KYB Player</title>
+  <title>KYB YouTube Player</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
   <style>
     body {
       margin: 0;
       background-color: #000;
+      color: white;
     }
-    .container {
-      position: relative;
-      max-width: 900px;
-      margin: auto;
-      padding-top: 50px;
-    }
-    #kyb-logo {
+
+    #kyb-label {
       position: absolute;
       top: 10px;
       left: 10px;
       z-index: 10;
-      color: #00ffae;
-      font-size: 24px;
-      font-family: sans-serif;
+      font-size: 20px;
       font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 5px 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 4px 10px;
       border-radius: 8px;
+      color: #00ffae;
     }
-    #skip-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 10;
+
+    .plyr__controls__item--skip {
       background-color: #00ffae;
-      color: #000;
-      padding: 8px 12px;
-      font-weight: bold;
-      border: none;
+      color: black;
+      padding: 6px 12px;
       border-radius: 6px;
+      font-weight: bold;
       cursor: pointer;
+      margin-left: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div id="kyb-logo">KYB</div>
-    <button id="skip-button">Skip Intro</button>
-    <video id="player" playsinline controls data-poster="">
-      <source src="https://cdn.plyr.io/static/blank.mp4" type="video/mp4" size="720" />
-      <track kind="subtitles" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt" default />
-    </video>
+<div id="kyb-label">KYB</div>
+
+<div class="container">
+  <div class="plyr__video-embed" id="player">
+    <iframe
+      src="https://www.youtube.com/embed/1ZYbU82GVz4?origin=https://example.com"
+      allowfullscreen
+      allowtransparency
+      allow="autoplay"
+    ></iframe>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
-  <script>
-    const player = new Plyr('#player', {
-      settings: ['quality', 'captions'],
-      quality: {
-        default: 720,
-        options: [1080, 720, 480],
-      }
-    });
+<script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+<script>
+  const player = new Plyr('#player', {
+    controls: [
+      'play-large', // Botón grande de play
+      'play',
+      'progress',
+      'current-time',
+      'mute',
+      'volume',
+      'settings',
+      'fullscreen'
+    ],
+    settings: ['quality'],
+    youtube: {
+      noCookie: true,
+      modestbranding: 1
+    }
+  });
 
-    // Botón para saltar intro
-    document.getElementById('skip-button').addEventListener('click', () => {
-      if (player.currentTime >= 20) {
-        player.currentTime = 600; // minuto 10
-      }
-    });
-  </script>
+  // Agregar botón "Skip Intro" dentro del reproductor
+  player.elements.controls.insertAdjacentHTML(
+    'beforeend',
+    `<button class="plyr__controls__item plyr__controls__item--skip" id="skipIntro">Skip Intro</button>`
+  );
+
+  // Cuando se presiona el botón, saltar al minuto 10 si ya pasó 20 segundos
+  document.getElementById('skipIntro').addEventListener('click', () => {
+    player.currentTime >= 20 ? player.currentTime = 600 : null;
+  });
+</script>
 
 </body>
 </html>
