@@ -131,8 +131,8 @@
       const savedClave = localStorage.getItem('kyb_clave');
 
       if (correo === savedCorreo && clave === savedClave) {
-        // Si los datos son correctos, redirigir a la app
-        window.location.href = 'app.html'; // Cambia esta URL a la página de tu app
+        // Si los datos son correctos, redirigir al catálogo
+        window.location.href = 'catalogo.html'; // Redirige a catalogo.html
       } else {
         // Si el correo o la contraseña son incorrectos, mostrar mensaje de error
         errorMessage.style.display = 'block';
