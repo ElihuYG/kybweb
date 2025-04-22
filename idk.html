@@ -2,27 +2,74 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Reproductor KYB</title>
-  <!-- Enlace al CSS de Plyr desde el CDN -->
+  <title>KYB Player</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+    }
+    .container {
+      position: relative;
+      max-width: 900px;
+      margin: auto;
+      padding-top: 50px;
+    }
+    #kyb-logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      color: #00ffae;
+      font-size: 24px;
+      font-family: sans-serif;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+    #skip-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      background-color: #00ffae;
+      color: #000;
+      padding: 8px 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Reproductor de YouTube integrado con Plyr -->
-  <div class="plyr__video-embed" id="player">
-    <iframe
-      src="https://www.youtube.com/embed/1ZYbU82GVz4?origin=https://example.com"
-      allowfullscreen
-      allowtransparency
-      allow="autoplay"
-    ></iframe>
+  <div class="container">
+    <div id="kyb-logo">KYB</div>
+    <button id="skip-button">Skip Intro</button>
+    <video id="player" playsinline controls data-poster="">
+      <source src="https://cdn.plyr.io/static/blank.mp4" type="video/mp4" size="720" />
+      <track kind="subtitles" label="Español" srclang="es" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.es.vtt" default />
+    </video>
   </div>
 
-  <!-- Enlace al JS de Plyr desde el CDN -->
   <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
   <script>
-    // Inicializar el reproductor
-    const player = new Plyr('#player');
+    const player = new Plyr('#player', {
+      settings: ['quality', 'captions'],
+      quality: {
+        default: 720,
+        options: [1080, 720, 480],
+      }
+    });
+
+    // Botón para saltar intro
+    document.getElementById('skip-button').addEventListener('click', () => {
+      if (player.currentTime >= 20) {
+        player.currentTime = 600; // minuto 10
+      }
+    });
   </script>
 
 </body>
