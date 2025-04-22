@@ -205,32 +205,112 @@
     </div>
   </section>
 
-  <section class="section">
-    <h2>Solo en KYB</h2>
-    <div class="card-row">
-      <div class="hover-card">
-        <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
-        <div class="hover-info">
-          <h3>Love for Love Shake</h3>
-          <p>Una comedia romántica sobre sabores, emociones y un batido que lo cambia todo.</p>
-        </div>
-      </div>
-      <div class="hover-card">
-        <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
-        <div class="hover-info">
-          <h3>Time The Series</h3>
-          <p>Un viaje a través del tiempo donde cada momento cuenta.</p>
-        </div>
-      </div>
-      <div class="hover-card">
-        <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
-        <div class="hover-info">
-          <h3>Cautivar un Rey</h3>
-          <p>Un drama histórico lleno de pasión, traición y coronas.</p>
-        </div>
+<section class="section">
+  <h2>Solo en KYB</h2>
+  <div class="card-row">
+    <div class="hover-card">
+      <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
+      <div class="info-card">
+        <h3>Love for Love Shake</h3>
+        <p>Una comedia romántica sobre sabores, emociones y un batido que lo cambia todo.</p>
+        <button class="play-btn">▶ Reproducir</button>
+        <button class="list-btn">+ Mi lista</button>
       </div>
     </div>
-  </section>
+
+    <div class="hover-card">
+      <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
+      <div class="info-card">
+        <h3>Time The Series</h3>
+        <p>Un viaje a través del tiempo donde cada momento cuenta.</p>
+        <button class="play-btn">▶ Reproducir</button>
+        <button class="list-btn">+ Mi lista</button>
+      </div>
+    </div>
+
+    <div class="hover-card">
+      <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
+      <div class="info-card">
+        <h3>Cautivar un Rey</h3>
+        <p>Un drama histórico lleno de pasión, traición y coronas.</p>
+        <button class="play-btn">▶ Reproducir</button>
+        <button class="list-btn">+ Mi lista</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hover-card {
+    position: relative;
+    display: flex;
+    transition: all 0.3s ease;
+  }
+
+  .info-card {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #1c1c1c;
+    color: white;
+    border-radius: 10px;
+    margin-left: 1rem;
+    width: 200px;
+    height: 300px;
+  }
+
+  .hover-card:hover .info-card {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  .hover-card:hover .card {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+
+  .info-card h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .info-card p {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-card button {
+    margin-top: 0.3rem;
+    padding: 0.4rem 0.6rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .play-btn {
+    background-color: white;
+    color: black;
+  }
+
+  .list-btn {
+    background-color: #333;
+    color: white;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+
 
   <section class="section">
     <h2>Top 4 de series hoy</h2>
