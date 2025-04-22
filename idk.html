@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reproductor KYB</title>
+  <title>Reproductor KYB - Continuar donde lo dejaste</title>
   <style>
     #player {
       margin: 0 auto;
@@ -24,8 +24,28 @@
 <body>
   <div class="title">KYB</div>
   <video id="player" controls crossorigin>
-    <source src="http://dl.iroteambots.ir:8080/32547/Telegram+View+prueba9f.mp4?hash=9fbd66" type="video/mp4" />
+    <source src="http://dl.iroteambots.ir:8080/32550/EP.+01+HDUC.mp4?hash=30ee25" type="video/mp4" />
     Tu navegador no soporta el formato de video.
   </video>
+
+  <script>
+    const videoPlayer = document.getElementById('player');
+
+    // Cargar la última posición del video desde localStorage (si existe)
+    const lastTime = localStorage.getItem('videoTime');
+    if (lastTime) {
+      videoPlayer.currentTime = lastTime;
+    }
+
+    // Guardar la posición cada vez que el video se pausa o cambia
+    videoPlayer.addEventListener('timeupdate', () => {
+      localStorage.setItem('videoTime', videoPlayer.currentTime);
+    });
+
+    // Cuando se cierre la pestaña o se recargue, se guarda la última posición
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('videoTime', videoPlayer.currentTime);
+    });
+  </script>
 </body>
 </html>
