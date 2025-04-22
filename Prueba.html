@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KYB - Catálogo</title>
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
   <style>
     :root {
       --verde-kyb: #009879;
@@ -47,6 +48,10 @@
       font-size: 1.3rem;
       margin-left: 1rem;
       cursor: pointer;
+    }
+
+    .nav-icons i {
+      font-size: 1.5rem;
     }
 
     .hero {
@@ -108,51 +113,51 @@
     }
 
     .card {
-      min-width: 200px;
+      position: relative;
+      width: 200px;
       height: 300px;
-      background-color: #222;
       border-radius: 10px;
       overflow: hidden;
-      position: relative;
-      cursor: pointer;
+      background: #222;
     }
 
     .card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
-    }
-
-    .card:hover .info-card {
-      opacity: 1;
-      transform: translateX(210px);
     }
 
     .info-card {
       position: absolute;
       top: 0;
-      left: 0;
-      height: 300px;
+      left: 100%;
       width: 200px;
-      background-color: #1e1e1e;
+      height: 100%;
+      background: rgba(30, 30, 30, 0.95);
+      color: white;
       padding: 1rem;
       opacity: 0;
-      transition: 0.3s;
-      z-index: 2;
+      pointer-events: none;
+      transition: left 0.3s ease, opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .card:hover .info-card {
+      left: 100%;
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .info-card h3 {
-      font-size: 1rem;
       margin-bottom: 0.5rem;
     }
 
     .info-card p {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: #ccc;
     }
 
-    .top10-row {
+    .top10-row, .extra-row {
       display: flex;
       gap: 1rem;
       overflow-x: auto;
@@ -178,21 +183,19 @@
       color: var(--verde-kyb);
     }
 
-    /* Scroll oculto */
     .card-row::-webkit-scrollbar,
-    .top10-row::-webkit-scrollbar {
+    .top10-row::-webkit-scrollbar,
+    .extra-row::-webkit-scrollbar {
       display: none;
     }
-
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">KYB</div>
     <div class="nav-icons">
-      <button title="Descargas">⬇️</button>
-      <button title="Buscar">🔍</button>
+      <button title="Descargas"><i class="fas fa-download"></i></button>
+      <button title="Buscar"><i class="fas fa-search"></i></button>
     </div>
   </header>
 
@@ -215,7 +218,6 @@
           <p>Una historia de venganza y redención donde el destino da una segunda oportunidad.</p>
         </div>
       </div>
-
       <div class="card">
         <img src="Posters KYB time the series.png" alt="Serie 2"/>
         <div class="info-card">
@@ -223,19 +225,11 @@
           <p>El tiempo lo cambia todo, pero el amor verdadero lo resiste todo.</p>
         </div>
       </div>
-
-      <div class="card">
-        <img src="Posters KYB cautivar un rey.png" alt="Serie 3"/>
-        <div class="info-card">
-          <h3>Cautivar un Rey</h3>
-          <p>Un romance histórico entre un rey y una joven de espíritu libre.</p>
-        </div>
-      </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Top 4 en KYB</h2>
+    <h2>Top 4 de KYB</h2>
     <div class="top10-row">
       <div class="top10-item">
         <span>1</span>
@@ -245,9 +239,29 @@
         <span>2</span>
         <img src="Posters KYB love for love shake.png" alt="Top 2" />
       </div>
-      <div class="top10-item">
-        <span>3</span>
-        <img src="Posters KYB different princess.png" alt="Top 3" />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Recién agregados</h2>
+    <div class="extra-row">
+      <div class="card">
+        <img src="Posters KYB yours to claim.png" alt="Extra 1"/>
+      </div>
+      <div class="card">
+        <img src="Posters KYB different princess.png" alt="Extra 2"/>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Dramas recomendados</h2>
+    <div class="extra-row">
+      <div class="card">
+        <img src="Posters KYB thamepo.png" alt="Extra 3"/>
+      </div>
+      <div class="card">
+        <img src="Posters KYB cautious.jpg" alt="Extra 4"/>
       </div>
     </div>
   </section>
@@ -260,15 +274,12 @@
 
       let lista = JSON.parse(localStorage.getItem("miLista")) || [];
       if (btn.classList.contains("added")) {
-        if (!lista.includes(id)) {
-          lista.push(id);
-        }
+        if (!lista.includes(id)) lista.push(id);
       } else {
         lista = lista.filter(item => item !== id);
       }
       localStorage.setItem("miLista", JSON.stringify(lista));
     }
   </script>
-
 </body>
 </html>
