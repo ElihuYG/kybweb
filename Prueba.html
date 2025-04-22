@@ -37,23 +37,19 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .nav-btns {
+    .icon-btns {
       display: flex;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
-    .nav-btns button {
-      background: #333;
-      border: none;
-      padding: 0.5rem 1rem;
-      color: white;
-      border-radius: 5px;
-      transition: 0.3s;
+    .icon-btns span {
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.2s;
     }
 
-    .nav-btns button:hover {
-      background: #00b386;
-      color: black;
+    .icon-btns span:hover {
+      transform: scale(1.2);
     }
 
     .hero {
@@ -111,11 +107,10 @@
     .card {
       min-width: 140px;
       height: 200px;
-      background: gray;
       background-size: cover;
       background-position: center;
       border-radius: 10px;
-      overflow: hidden;
+      position: relative;
       flex-shrink: 0;
       transition: transform 0.3s ease;
     }
@@ -124,18 +119,61 @@
       transform: scale(1.05);
     }
 
+    .top-card {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .top-number {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #00b386;
+      flex-shrink: 0;
+    }
+
+    /* Estilo de tarjeta flotante tipo Netflix */
+    .hover-card {
+      position: relative;
+    }
+
+    .hover-info {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 150px;
+      background: rgba(0,0,0,0.9);
+      padding: 1rem;
+      width: 200px;
+      border-radius: 10px;
+      z-index: 10;
+    }
+
+    .hover-card:hover .hover-info {
+      display: block;
+    }
+
+    .hover-info h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .hover-info p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
     @media(min-width: 800px) {
       .hero {
         height: 60vh;
       }
 
-      .card-row {
-        flex-wrap: wrap;
-      }
-
       .card {
         min-width: 200px;
         height: 300px;
+      }
+
+      .hover-info {
+        left: 220px;
       }
     }
   </style>
@@ -143,28 +181,23 @@
 <body>
   <header>
     <div class="logo">KYB</div>
-    <div class="nav-btns">
-      <button>Series</button>
-      <button>Películas</button>
-      <button>Categorías</button>
-    </div>
-    <div>
-      <button>Descargas</button>
-      <button>Búsqueda</button>
+    <div class="icon-btns">
+      <span title="Buscar">🔍</span>
+      <span title="Descargar">⬇️</span>
     </div>
   </header>
 
   <section class="hero">
     <div class="info">
-      <h1>Hasta que el cielo nos reúna</h1>
-      <p>TOP 10 - N.º 9 en TV hoy</p>
+      <h1>Thame & Po: Latidos del corazón</h1>
+      <p>TOP 4 - N.º 2 en TV hoy</p>
       <button class="play-btn">Reproducir</button>
       <button class="list-btn">+ Mi lista</button>
     </div>
   </section>
 
   <section class="section">
-    <h2>Continuar viendo contenido de Chris</h2>
+    <h2>Continuar viendo</h2>
     <div class="card-row">
       <div class="card" style="background-image: url('Posters KYB marry my husband.png');"></div>
       <div class="card" style="background-image: url('Posters KYB doctor slump.png');"></div>
@@ -175,19 +208,49 @@
   <section class="section">
     <h2>Solo en KYB</h2>
     <div class="card-row">
-      <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
-      <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
-      <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
+      <div class="hover-card">
+        <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
+        <div class="hover-info">
+          <h3>Love for Love Shake</h3>
+          <p>Una comedia romántica sobre sabores, emociones y un batido que lo cambia todo.</p>
+        </div>
+      </div>
+      <div class="hover-card">
+        <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
+        <div class="hover-info">
+          <h3>Time The Series</h3>
+          <p>Un viaje a través del tiempo donde cada momento cuenta.</p>
+        </div>
+      </div>
+      <div class="hover-card">
+        <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
+        <div class="hover-info">
+          <h3>Cautivar un Rey</h3>
+          <p>Un drama histórico lleno de pasión, traición y coronas.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Top 10 películas en Panamá hoy</h2>
+    <h2>Top 4 de series hoy</h2>
     <div class="card-row">
-      <div class="card" style="background-image: url('Posters KYB doctor slump.png');"></div>
-      <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
-      <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
-      <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
+      <div class="top-card">
+        <div class="top-number">1</div>
+        <div class="card" style="background-image: url('Posters KYB doctor slump.png');"></div>
+      </div>
+      <div class="top-card">
+        <div class="top-number">2</div>
+        <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
+      </div>
+      <div class="top-card">
+        <div class="top-number">3</div>
+        <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
+      </div>
+      <div class="top-card">
+        <div class="top-number">4</div>
+        <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
+      </div>
     </div>
   </section>
 </body>
