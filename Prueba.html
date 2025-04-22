@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KYB</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KYB - Catálogo</title>
   <style>
+    :root {
+      --verde-kyb: #009879;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
@@ -22,38 +25,31 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem;
+      padding: 1rem 2rem;
       background-color: #141414;
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 1000;
     }
 
     .logo {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: bold;
-      background: linear-gradient(45deg, #00b386, #00e6ac);
+      background: linear-gradient(90deg, var(--verde-kyb), #00ffcc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .icon-btns {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .icon-btns span {
-      font-size: 1.5rem;
+    .nav-icons button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.3rem;
+      margin-left: 1rem;
       cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .icon-btns span:hover {
-      transform: scale(1.2);
     }
 
     .hero {
-      position: relative;
       background: url('Sliders_Arriba_TP.png') center/cover no-repeat;
       height: 70vh;
       display: flex;
@@ -78,6 +74,7 @@
       font-size: 1rem;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
     }
 
     .play-btn {
@@ -88,14 +85,20 @@
     .list-btn {
       background-color: rgba(109, 109, 110, 0.7);
       color: white;
+      transition: background 0.3s;
+    }
+
+    .list-btn.added {
+      background-color: var(--verde-kyb);
     }
 
     .section {
-      padding: 1rem;
+      padding: 2rem;
     }
 
     .section h2 {
       margin-bottom: 1rem;
+      font-size: 1.3rem;
     }
 
     .card-row {
@@ -105,233 +108,167 @@
     }
 
     .card {
-      min-width: 140px;
-      height: 200px;
-      background-size: cover;
-      background-position: center;
+      min-width: 200px;
+      height: 300px;
+      background-color: #222;
       border-radius: 10px;
+      overflow: hidden;
       position: relative;
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .top-card {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .top-number {
-      font-size: 4rem;
-      font-weight: bold;
-      color: #00b386;
-      flex-shrink: 0;
-    }
-
-    /* Estilo de tarjeta flotante tipo Netflix */
-    .hover-card {
-      position: relative;
-    }
-
-    .hover-info {
-      display: none;
-      position: absolute;
-      top: 0;
-      left: 150px;
-      background: rgba(0,0,0,0.9);
-      padding: 1rem;
-      width: 200px;
-      border-radius: 10px;
-      z-index: 10;
-    }
-
-    .hover-card:hover .hover-info {
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
-    .hover-info h3 {
+    .card:hover .info-card {
+      opacity: 1;
+      transform: translateX(210px);
+    }
+
+    .info-card {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 300px;
+      width: 200px;
+      background-color: #1e1e1e;
+      padding: 1rem;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 2;
+    }
+
+    .info-card h3 {
+      font-size: 1rem;
       margin-bottom: 0.5rem;
     }
 
-    .hover-info p {
-      font-size: 0.9rem;
+    .info-card p {
+      font-size: 0.8rem;
       color: #ccc;
     }
 
-    @media(min-width: 800px) {
-      .hero {
-        height: 60vh;
-      }
-
-      .card {
-        min-width: 200px;
-        height: 300px;
-      }
-
-      .hover-info {
-        left: 220px;
-      }
+    .top10-row {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
     }
+
+    .top10-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 200px;
+    }
+
+    .top10-item img {
+      width: 140px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .top10-item span {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--verde-kyb);
+    }
+
+    /* Scroll oculto */
+    .card-row::-webkit-scrollbar,
+    .top10-row::-webkit-scrollbar {
+      display: none;
+    }
+
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">KYB</div>
-    <div class="icon-btns">
-      <span title="Buscar">🔍</span>
-      <span title="Descargar">⬇️</span>
+    <div class="nav-icons">
+      <button title="Descargas">⬇️</button>
+      <button title="Buscar">🔍</button>
     </div>
   </header>
 
   <section class="hero">
     <div class="info">
-      <h1>Thame & Po: Latidos del corazón</h1>
+      <h1>Thame & PO: Latidos del corazón</h1>
       <p>TOP 4 - N.º 2 en TV hoy</p>
       <button class="play-btn">Reproducir</button>
-      <button class="list-btn">+ Mi lista</button>
+      <button class="list-btn" onclick="agregarLista('hasta')">+ Mi lista</button>
     </div>
   </section>
 
   <section class="section">
-    <h2>Continuar viendo</h2>
+    <h2>Solo en KYB</h2>
     <div class="card-row">
-      <div class="card" style="background-image: url('Posters KYB marry my husband.png');"></div>
-      <div class="card" style="background-image: url('Posters KYB doctor slump.png');"></div>
-      <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
+      <div class="card">
+        <img src="Posters KYB marry my husband.png" alt="Serie 1"/>
+        <div class="info-card">
+          <h3>Marry My Husband</h3>
+          <p>Una historia de venganza y redención donde el destino da una segunda oportunidad.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="Posters KYB time the series.png" alt="Serie 2"/>
+        <div class="info-card">
+          <h3>Time The Series</h3>
+          <p>El tiempo lo cambia todo, pero el amor verdadero lo resiste todo.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="Posters KYB cautivar un rey.png" alt="Serie 3"/>
+        <div class="info-card">
+          <h3>Cautivar un Rey</h3>
+          <p>Un romance histórico entre un rey y una joven de espíritu libre.</p>
+        </div>
+      </div>
     </div>
   </section>
-
-<section class="section">
-  <h2>Solo en KYB</h2>
-  <div class="card-row">
-    <div class="hover-card">
-      <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
-      <div class="info-card">
-        <h3>Love for Love Shake</h3>
-        <p>Una comedia romántica sobre sabores, emociones y un batido que lo cambia todo.</p>
-        <button class="play-btn">▶ Reproducir</button>
-        <button class="list-btn">+ Mi lista</button>
-      </div>
-    </div>
-
-    <div class="hover-card">
-      <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
-      <div class="info-card">
-        <h3>Time The Series</h3>
-        <p>Un viaje a través del tiempo donde cada momento cuenta.</p>
-        <button class="play-btn">▶ Reproducir</button>
-        <button class="list-btn">+ Mi lista</button>
-      </div>
-    </div>
-
-    <div class="hover-card">
-      <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
-      <div class="info-card">
-        <h3>Cautivar un Rey</h3>
-        <p>Un drama histórico lleno de pasión, traición y coronas.</p>
-        <button class="play-btn">▶ Reproducir</button>
-        <button class="list-btn">+ Mi lista</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-  .hover-card {
-    position: relative;
-    display: flex;
-    transition: all 0.3s ease;
-  }
-
-  .info-card {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1rem;
-    background-color: #1c1c1c;
-    color: white;
-    border-radius: 10px;
-    margin-left: 1rem;
-    width: 200px;
-    height: 300px;
-  }
-
-  .hover-card:hover .info-card {
-    display: flex;
-    animation: fadeIn 0.3s ease forwards;
-  }
-
-  .hover-card:hover .card {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-
-  .info-card h3 {
-    margin-bottom: 0.5rem;
-  }
-
-  .info-card p {
-    font-size: 0.9rem;
-    color: #ccc;
-    margin-bottom: 0.5rem;
-  }
-
-  .info-card button {
-    margin-top: 0.3rem;
-    padding: 0.4rem 0.6rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  .play-btn {
-    background-color: white;
-    color: black;
-  }
-
-  .list-btn {
-    background-color: #333;
-    color: white;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateX(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-</style>
-
 
   <section class="section">
-    <h2>Top 4 de series hoy</h2>
-    <div class="card-row">
-      <div class="top-card">
-        <div class="top-number">1</div>
-        <div class="card" style="background-image: url('Posters KYB doctor slump.png');"></div>
+    <h2>Top 4 en KYB</h2>
+    <div class="top10-row">
+      <div class="top10-item">
+        <span>1</span>
+        <img src="Posters KYB doctor slump.png" alt="Top 1" />
       </div>
-      <div class="top-card">
-        <div class="top-number">2</div>
-        <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
+      <div class="top10-item">
+        <span>2</span>
+        <img src="Posters KYB love for love shake.png" alt="Top 2" />
       </div>
-      <div class="top-card">
-        <div class="top-number">3</div>
-        <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
-      </div>
-      <div class="top-card">
-        <div class="top-number">4</div>
-        <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
+      <div class="top10-item">
+        <span>3</span>
+        <img src="Posters KYB different princess.png" alt="Top 3" />
       </div>
     </div>
   </section>
+
+  <script>
+    function agregarLista(id) {
+      const btn = event.target;
+      btn.classList.toggle("added");
+      btn.textContent = btn.classList.contains("added") ? "✓ Añadido" : "+ Mi lista";
+
+      let lista = JSON.parse(localStorage.getItem("miLista")) || [];
+      if (btn.classList.contains("added")) {
+        if (!lista.includes(id)) {
+          lista.push(id);
+        }
+      } else {
+        lista = lista.filter(item => item !== id);
+      }
+      localStorage.setItem("miLista", JSON.stringify(lista));
+    }
+  </script>
+
 </body>
 </html>
