@@ -3,179 +3,192 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Netflix Clone</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>KYB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background-color: #141414;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background-color: #141414;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #00b386, #00e6ac);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-btns {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-btns button {
+      background: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .nav-btns button:hover {
+      background: #00b386;
+      color: black;
+    }
+
+    .hero {
+      position: relative;
+      background: url('Sliders_Arriba_TP.png') center/cover no-repeat;
+      height: 70vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+    }
+
+    .hero .info {
+      background: rgba(0,0,0,0.5);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero button {
+      margin-top: 1rem;
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .play-btn {
+      background-color: white;
+      color: black;
+    }
+
+    .list-btn {
+      background-color: rgba(109, 109, 110, 0.7);
+      color: white;
+    }
+
+    .section {
+      padding: 1rem;
+    }
+
+    .section h2 {
+      margin-bottom: 1rem;
+    }
+
+    .card-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+    }
+
+    .card {
+      min-width: 140px;
+      height: 200px;
+      background: gray;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    @media(min-width: 800px) {
+      .hero {
+        height: 60vh;
+      }
+
+      .card-row {
+        flex-wrap: wrap;
+      }
+
+      .card {
+        min-width: 200px;
+        height: 300px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Sección de bienvenida -->
-  <header class="hero">
-    <div class="overlay">
-      <h1>Bienvenido a Netflix</h1>
-      <p>Disfruta de películas y series ilimitadas.</p>
-      <a href="#registro" class="btn">Únete ahora</a>
+  <header>
+    <div class="logo">KYB</div>
+    <div class="nav-btns">
+      <button>Series</button>
+      <button>Películas</button>
+      <button>Categorías</button>
+    </div>
+    <div>
+      <button>Descargas</button>
+      <button>Búsqueda</button>
     </div>
   </header>
 
-  <!-- Sección de contenido destacado -->
-  <section class="featured">
-    <h2>Contenido destacado</h2>
-    <div class="carousel">
-      <!-- Aquí puedes agregar imágenes o videos destacados -->
-      <img src="imagen1.jpg" alt="Contenido 1">
-      <img src="imagen2.jpg" alt="Contenido 2">
-      <img src="imagen3.jpg" alt="Contenido 3">
+  <section class="hero">
+    <div class="info">
+      <h1>Hasta que el cielo nos reúna</h1>
+      <p>TOP 10 - N.º 9 en TV hoy</p>
+      <button class="play-btn">Reproducir</button>
+      <button class="list-btn">+ Mi lista</button>
     </div>
   </section>
 
-  <!-- Sección de categorías -->
-  <section class="categories">
-    <h2>Categorías</h2>
-    <div class="category-list">
-      <!-- Lista de categorías -->
-      <div class="category">Acción</div>
-      <div class="category">Comedia</div>
-      <div class="category">Drama</div>
-      <!-- Agrega más categorías según sea necesario -->
+  <section class="section">
+    <h2>Continuar viendo contenido de Chris</h2>
+    <div class="card-row">
+      <div class="card" style="background-image: url('Posters KYB marry my husband.png');"></div>
+      <div class="card" style="background-image: url('Posters KYB doctor slump.png');"></div>
+      <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
     </div>
   </section>
 
-  <!-- Sección de registro -->
-  <section id="registro" class="registro">
-    <h2>Únete a Netflix</h2>
-    <form action="#" method="POST">
-      <input type="email" placeholder="Correo electrónico" required>
-      <input type="password" placeholder="Contraseña" required>
-      <button type="submit" class="btn">Registrarse</button>
-    </form>
+  <section class="section">
+    <h2>Solo en KYB</h2>
+    <div class="card-row">
+      <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
+      <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
+      <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
+    </div>
   </section>
 
-  /* Estilos básicos para la estructura */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #141414;
-  color: #fff;
-}
-
-h1, h2 {
-  font-family: 'Roboto', sans-serif;
-}
-
-/* Sección de bienvenida */
-.hero {
-  background-image: url('fondo.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.overlay {
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.btn {
-  background-color: #e50914;
-  color: #fff;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.btn:hover {
-  background-color: #f40612;
-}
-
-/* Sección de contenido destacado */
-.featured {
-  padding: 20px;
-}
-
-.carousel {
-  display: flex;
-  overflow-x: scroll;
-}
-
-.carousel img {
-  width: 300px;
-  margin-right: 15px;
-  border-radius: 10px;
-}
-
-/* Sección de categorías */
-.categories {
-  padding: 20px;
-}
-
-.category-list {
-  display: flex;
-  gap: 15px;
-}
-
-.category {
-  background-color: #333;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.category:hover {
-  background-color: #e50914;
-}
-
-/* Sección de registro */
-.registro {
-  background-color: #333;
-  padding: 20px;
-  text-align: center;
-}
-
-.registro input {
-  width: 80%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  border: none;
-}
-
-.registro button {
-  padding: 10px 20px;
-  background-color: #e50914;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.registro button:hover {
-  background-color: #f40612;
-}
-
-/* Pie de página */
-footer {
-  background-color: #141414;
-  text-align: center;
-  padding: 10px;
-}
-
-  
-  <footer>
-    <p>&copy; 2025 Netflix Clone. Todos los derechos reservados.</p>
-  </footer>
+  <section class="section">
+    <h2>Top 10 películas en Panamá hoy</h2>
+    <div class="card-row">
+      <div class="card" style="background-image: url('Posters KYB doctor slump.png');"></div>
+      <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
+      <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
+      <div class="card" style="background-image: url('Posters KYB time the series.png');"></div>
+    </div>
+  </section>
 </body>
 </html>
