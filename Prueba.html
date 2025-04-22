@@ -2,143 +2,55 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Iniciar sesión - KYB</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f0f0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    /* Fondo con texto KYB gigante y opaco */
-    body::before {
-      content: "KYB";
-      position: absolute;
-      font-size: 250px;
-      font-weight: bold;
-      color: #4CAF50;
-      opacity: 0.06;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      background-color: #fff;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    h2 {
-      margin-bottom: 25px;
-      color: #333;
-    }
-
-    .error-message {
-      display: none;
-      background-color: #f8d7da;
-      color: #721c24;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      font-weight: bold;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: 2px solid #ccc;
-      font-size: 16px;
-      transition: all 0.3s ease;
-    }
-
-    input:focus:valid {
-      border-color: #4CAF50;
-      box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
-    }
-
-    input:focus:invalid {
-      border-color: #e74c3c;
-      box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
-    }
-
-    button {
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #43a047;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Sección de bienvenida -->
+  <header class="hero">
+    <div class="overlay">
+      <h1>Bienvenido a Netflix</h1>
+      <p>Disfruta de películas y series ilimitadas.</p>
+      <a href="#registro" class="btn">Únete ahora</a>
+    </div>
+  </header>
 
-  <div class="container">
-    <h2>Iniciar sesión - KYB</h2>
-    <div id="error-message" class="error-message">⚠️ Error en el correo o la contraseña</div>
-    <form id="loginForm">
-      <input type="email" id="correo" placeholder="Correo electrónico" required>
-      <input type="password" id="clave" placeholder="Contraseña" required minlength="4">
-      <button type="submit">Iniciar sesión</button>
+  <!-- Sección de contenido destacado -->
+  <section class="featured">
+    <h2>Contenido destacado</h2>
+    <div class="carousel">
+      <!-- Aquí puedes agregar imágenes o videos destacados -->
+      <img src="imagen1.jpg" alt="Contenido 1">
+      <img src="imagen2.jpg" alt="Contenido 2">
+      <img src="imagen3.jpg" alt="Contenido 3">
+    </div>
+  </section>
+
+  <!-- Sección de categorías -->
+  <section class="categories">
+    <h2>Categorías</h2>
+    <div class="category-list">
+      <!-- Lista de categorías -->
+      <div class="category">Acción</div>
+      <div class="category">Comedia</div>
+      <div class="category">Drama</div>
+      <!-- Agrega más categorías según sea necesario -->
+    </div>
+  </section>
+
+  <!-- Sección de registro -->
+  <section id="registro" class="registro">
+    <h2>Únete a Netflix</h2>
+    <form action="#" method="POST">
+      <input type="email" placeholder="Correo electrónico" required>
+      <input type="password" placeholder="Contraseña" required>
+      <button type="submit" class="btn">Registrarse</button>
     </form>
-  </div>
+  </section>
 
-  <script>
-    const form = document.getElementById('loginForm');
-    const errorMessage = document.getElementById('error-message');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const correo = document.getElementById('correo').value.trim();
-      const clave = document.getElementById('clave').value.trim();
-
-      // Obtener datos guardados
-      const savedCorreo = localStorage.getItem('kyb_correo');
-      const savedClave = localStorage.getItem('kyb_clave');
-
-      if (correo === savedCorreo && clave === savedClave) {
-        // Si los datos son correctos, redirigir al catálogo
-        window.location.href = 'catalogo.html'; // Redirige a catalogo.html
-      } else {
-        // Si el correo o la contraseña son incorrectos, mostrar mensaje de error
-        errorMessage.style.display = 'block';
-      }
-    });
-  </script>
-
+  <footer>
+    <p>&copy; 2025 Netflix Clone. Todos los derechos reservados.</p>
+  </footer>
 </body>
 </html>
