@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reproductor KYB</title>
+  <!-- Enlace al CSS de Plyr desde el CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
+</head>
+<body>
+
+  <!-- Reproductor de YouTube integrado con Plyr -->
+  <div class="plyr__video-embed" id="player">
+    <iframe
+      src="https://www.youtube.com/embed/1ZYbU82GVz4?origin=https://example.com"
+      allowfullscreen
+      allowtransparency
+      allow="autoplay"
+    ></iframe>
+  </div>
+
+  <!-- Enlace al JS de Plyr desde el CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
+  <script>
+    // Inicializar el reproductor
+    const player = new Plyr('#player');
+  </script>
+
+</body>
+</html>
