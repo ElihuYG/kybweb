@@ -1,86 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>KYB YouTube Player</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproductor KYB</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.3/dist/plyr.css" />
   <style>
-    body {
-      margin: 0;
-      background-color: #000;
-      color: white;
+    /* Personalización visual */
+    #player {
+      margin: 0 auto;
+      max-width: 100%;
     }
-
-    #kyb-label {
+    .plyr__controls .plyr__control {
+      font-size: 14px;
+    }
+    .plyr__controls {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .plyr__controls .plyr__control:hover {
+      background: rgba(0, 0, 0, 0.9);
+    }
+    .title {
       position: absolute;
-      top: 10px;
-      left: 10px;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      color: white;
       z-index: 10;
-      font-size: 20px;
-      font-weight: bold;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 4px 10px;
-      border-radius: 8px;
-      color: #00ffae;
-    }
-
-    .plyr__controls__item--skip {
-      background-color: #00ffae;
-      color: black;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-left: 10px;
     }
   </style>
 </head>
 <body>
+  <div class="title">KYB</div>
+  <video id="player" controls crossorigin playsinline>
+    <source src="http://dl.iroteambots.ir:8080/32547/Telegram+View+prueba9f.mp4?hash=9fbd66" type="video/mp4" />
+    <!-- Puedes agregar más formatos aquí si lo deseas -->
+  </video>
 
-<div id="kyb-label">KYB</div>
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.3/dist/plyr.js"></script>
+  <script>
+    const player = new Plyr('#player', {
+      controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
+      settings: ['quality', 'speed'],
+      quality: {
+        default: 720,  // Aquí puedes poner la calidad por defecto
+        options: [360, 720, 1080], // Opciones de calidad
+      },
+      captions: { active: true, language: 'es' },
+    });
 
-<div class="container">
-  <div class="plyr__video-embed" id="player">
-    <iframe
-      src="https://www.youtube.com/embed/1ZYbU82GVz4?origin=https://example.com"
-      allowfullscreen
-      allowtransparency
-      allow="autoplay"
-    ></iframe>
-  </div>
-</div>
+    // Skip intro button (salta los primeros 20 segundos)
+    player.on('ready', () => {
+      setTimeout(() => {
+        player.currentTime = 20; // Empieza a los 20 segundos
+      }, 1000);
+    });
 
-<script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.polyfilled.js"></script>
-<script>
-  const player = new Plyr('#player', {
-    controls: [
-      'play-large', // Botón grande de play
-      'play',
-      'progress',
-      'current-time',
-      'mute',
-      'volume',
-      'settings',
-      'fullscreen'
-    ],
-    settings: ['quality'],
-    youtube: {
-      noCookie: true,
-      modestbranding: 1
-    }
-  });
-
-  // Agregar botón "Skip Intro" dentro del reproductor
-  player.elements.controls.insertAdjacentHTML(
-    'beforeend',
-    `<button class="plyr__controls__item plyr__controls__item--skip" id="skipIntro">Skip Intro</button>`
-  );
-
-  // Cuando se presiona el botón, saltar al minuto 10 si ya pasó 20 segundos
-  document.getElementById('skipIntro').addEventListener('click', () => {
-    player.currentTime >= 20 ? player.currentTime = 600 : null;
-  });
-</script>
-
+    // Skip intro (cuando se da click en el botón)
+    document.querySelector('.plyr__control--rewind').addEventListener('click', () => {
+      player.currentTime = 10; // Salta al minuto 10
+    });
+  </script>
 </body>
 </html>
