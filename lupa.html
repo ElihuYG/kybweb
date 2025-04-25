@@ -5,21 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Buscar Series | KYB</title>
   <style>
-    /* FONDO ANIMADO CON "KYB" */
+    /* FONDO VERDE ESMERALDA */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #2a2a2a, #0f0f0f);
-      background-size: 400% 400%;
-      animation: gradientMove 10s ease infinite;
+      background: #50C878; /* Verde esmeralda */
       color: white;
       overflow-x: hidden;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     /* Texto "KYB" en fondo */
@@ -30,7 +22,7 @@
       left: 50%;
       font-size: 20rem;
       transform: translate(-50%, -50%);
-      color: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.1);
       font-weight: bold;
       z-index: 0;
       pointer-events: none;
@@ -61,12 +53,13 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
-    /* RESULTADOS */
+    /* RESULTADOS HORIZONTALES */
     #results {
       margin-top: 20px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap; /* Cambié a flex-wrap */
+      justify-content: center; /* Para centrar horizontalmente */
+      gap: 12px;
     }
 
     .result-item {
@@ -74,10 +67,9 @@
       align-items: center;
       gap: 12px;
       background-color: rgba(255, 255, 255, 0.1);
-      margin: 4px auto;
       padding: 10px;
       border-radius: 6px;
-      max-width: 350px;
+      max-width: 130px;
       color: white;
       transition: background 0.3s;
       cursor: pointer;
@@ -147,26 +139,39 @@
       const query = input.value.toLowerCase();
       resultsContainer.innerHTML = "";
 
+      // Filtra las series según la búsqueda
       const filtradas = series.filter(serie =>
         serie.nombre.toLowerCase().includes(query)
       );
 
-      filtradas.forEach(serie => {
-        const div = document.createElement("div");
-        div.className = "result-item";
+      // Si hay resultados, los muestra
+      if (filtradas.length > 0) {
+        filtradas.forEach(serie => {
+          const div = document.createElement("div");
+          div.className = "result-item";
 
-        const img = document.createElement("img");
-        img.src = `img/${serie.img}`;
-        img.alt = serie.nombre;
-        img.className = "poster-img";
+          const img = document.createElement("img");
+          img.src = serie.img; // Aquí es donde le pongo el src directo de la imagen
+          img.alt = serie.nombre;
+          img.className = "poster-img";
 
-        const texto = document.createElement("span");
-        texto.textContent = serie.nombre;
+          const texto = document.createElement("span");
+          texto.textContent = serie.nombre;
 
-        div.appendChild(img);
-        div.appendChild(texto);
-        resultsContainer.appendChild(div);
-      });
+          div.appendChild(img);
+          div.appendChild(texto);
+          resultsContainer.appendChild(div);
+        });
+      } else {
+        resultsContainer.style.display = "none"; // Si no hay resultados, ocultar los resultados
+      }
+    });
+
+    // Si el usuario limpia el campo, ocultar los resultados
+    input.addEventListener("blur", () => {
+      setTimeout(() => {
+        resultsContainer.style.display = "none";
+      }, 300);
     });
   </script>
 </body>
