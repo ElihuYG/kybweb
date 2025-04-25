@@ -5,13 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Buscar Series | KYB</title>
   <style>
-    /* FONDO VERDE ESMERALDA */
+    /* FONDO DEGRADADO MOVIENDOSE */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #50C878; /* Verde esmeralda */
+      background: linear-gradient(45deg, #50C878, #009688); /* Verde esmeralda y verde más oscuro */
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
       color: white;
       overflow-x: hidden;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* Texto "KYB" en fondo */
@@ -53,19 +61,36 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
+    /* BOTÓN DE SERIE ALEATORIA */
+    #randomButton {
+      padding: 15px;
+      margin-left: 10px;
+      font-size: 18px;
+      background-color: #50C878;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #randomButton:hover {
+      background-color: #009688;
+    }
+
     /* RESULTADOS HORIZONTALES */
     #results {
       margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap; /* Cambié a flex-wrap */
-      justify-content: center; /* Para centrar horizontalmente */
+      display: grid; /* Usamos grid para mejor control */
+      grid-template-columns: repeat(4, 1fr); /* 4 columnas */
       gap: 12px;
+      justify-items: center; /* Centrar los items dentro de las celdas */
     }
 
     .result-item {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
       background-color: rgba(255, 255, 255, 0.1);
       padding: 10px;
       border-radius: 6px;
@@ -73,6 +98,7 @@
       color: white;
       transition: background 0.3s;
       cursor: pointer;
+      text-align: center;
     }
 
     .result-item:hover {
@@ -80,8 +106,8 @@
     }
 
     .poster-img {
-      width: 90px;
-      height: 130px;
+      width: 100px;
+      height: 150px;
       object-fit: cover;
       border-radius: 6px;
     }
@@ -104,6 +130,7 @@
 
   <div id="searchContainer">
     <input type="text" id="searchInput" placeholder="Buscar serie..." autocomplete="off">
+    <button id="randomButton">Serie Aleatoria</button>
     <div id="results"></div>
   </div>
 
@@ -129,6 +156,7 @@
 
     const input = document.getElementById("searchInput");
     const resultsContainer = document.getElementById("results");
+    const randomButton = document.getElementById("randomButton");
     const searchBox = document.getElementById("searchContainer");
 
     input.addEventListener("focus", () => {
@@ -173,6 +201,13 @@
         resultsContainer.style.display = "none";
       }, 300);
     });
+
+    // Función para generar una serie aleatoria
+    randomButton.addEventListener("click", () => {
+      const randomSerie = series[Math.floor(Math.random() * series.length)];
+      alert(`Serie Aleatoria: ${randomSerie.nombre}`);
+    });
   </script>
+
 </body>
 </html>
