@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KYB - Tu Mundo de Series</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KYB - Streaming Pro</title>
   <link href="https://unpkg.com/lucide@latest" rel="stylesheet">
   <style>
     :root {
-      --emerald: #00c896;
-      --dark-bg: #141414;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
+      --bg: #0e0e0e;
+      --text: #fff;
+      --accent: #00c896;
+      --soft: #1a1a1a;
     }
 
     body {
-      background: var(--dark-bg);
-      color: white;
+      margin: 0;
+      background: var(--bg);
+      font-family: 'Segoe UI', sans-serif;
+      color: var(--text);
     }
 
     header {
@@ -28,79 +25,72 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
+      background: rgba(14, 14, 14, 0.95);
       position: sticky;
       top: 0;
-      background-color: rgba(20, 20, 20, 0.95);
-      z-index: 1000;
+      z-index: 999;
     }
 
     .logo {
       font-size: 1.8rem;
       font-weight: bold;
-      background: linear-gradient(to right, var(--emerald), #00ffae);
+      background: linear-gradient(90deg, var(--accent), #00ffd9);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .nav {
-      display: flex;
-      gap: 1.2rem;
-    }
-
     .nav a {
-      color: white;
+      color: var(--text);
+      margin-left: 1.5rem;
       text-decoration: none;
-      transition: color 0.3s;
+      font-size: 1.2rem;
     }
 
     .nav a:hover {
-      color: var(--emerald);
+      color: var(--accent);
     }
 
     .hero {
-      background: url('Sliders_Arriba_TP.png') no-repeat center center/cover;
-      height: 70vh;
+      background: url('https://i.imgur.com/ZZ8I9Pg.jpg') center/cover no-repeat;
+      height: 80vh;
       display: flex;
       align-items: flex-end;
       padding: 3rem;
+      position: relative;
     }
 
-    .hero .info {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 1rem 2rem;
-      border-radius: 10px;
-      max-width: 500px;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--bg), transparent 70%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      z-index: 1;
+      max-width: 600px;
     }
 
     .hero h1 {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .hero p {
-      margin-top: 0.5rem;
-    }
-
-    .hero .buttons {
-      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #ccc;
     }
 
     .hero button {
-      margin-right: 1rem;
-      padding: 0.6rem 1.2rem;
+      background: var(--accent);
       border: none;
-      border-radius: 5px;
+      color: var(--bg);
+      padding: 0.6rem 1.2rem;
       font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
-    }
-
-    .btn-play {
-      background: white;
-      color: black;
-    }
-
-    .btn-list {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
     }
 
     section {
@@ -108,8 +98,8 @@
     }
 
     section h2 {
-      margin-bottom: 1rem;
       font-size: 1.4rem;
+      margin-bottom: 1rem;
     }
 
     .card-row {
@@ -118,72 +108,72 @@
       gap: 1rem;
     }
 
-    .card-container {
-      position: relative;
-      flex-shrink: 0;
-      width: 200px;
-    }
-
     .card {
-      width: 100%;
-      height: 300px;
+      width: 180px;
+      height: 270px;
+      border-radius: 10px;
       background-size: cover;
       background-position: center;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      position: relative;
+      transition: transform 0.3s;
     }
 
     .card:hover {
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
 
-    .card-info {
+    .card::after {
+      content: attr(data-title);
       position: absolute;
       bottom: 0;
       background: rgba(0, 0, 0, 0.7);
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.4rem;
+      font-size: 0.9rem;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
-      font-size: 0.85rem;
     }
 
-    .top10 {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-    }
-
-    .top10 .card {
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-    }
-
-    .top10 .number {
+    .top10 .card::before {
+      content: attr(data-rank);
       position: absolute;
       top: 10px;
       left: 10px;
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--emerald);
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 0.3rem 0.6rem;
+      background: var(--accent);
+      color: #000;
+      padding: 0.2rem 0.5rem;
       border-radius: 5px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: var(--soft);
+      color: #aaa;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .socials {
+      margin-bottom: 1rem;
+    }
+
+    .socials a {
+      margin: 0 0.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.2rem;
     }
 
     @media (max-width: 600px) {
-      .hero {
-        height: 50vh;
-        padding: 1rem;
-      }
-
-      .hero .info {
-        padding: 1rem;
-      }
-
       .hero h1 {
         font-size: 1.5rem;
+      }
+
+      .card {
+        width: 140px;
+        height: 210px;
       }
     }
   </style>
@@ -199,58 +189,49 @@
   </header>
 
   <section class="hero">
-    <div class="info">
-      <h1>Hasta que el cielo nos reúna</h1>
-      <p>N.º 9 en TV hoy</p>
-      <div class="buttons">
-        <button class="btn-play">Reproducir</button>
-        <button class="btn-list">+ Mi lista</button>
-      </div>
+    <div class="hero-content">
+      <h1>Descubre lo mejor del entretenimiento</h1>
+      <p>Series exclusivas, dramas intensos, comedia y más. Solo en KYB.</p>
+      <button>Ver ahora</button>
     </div>
   </section>
 
   <section>
-    <h2>Continuar viendo</h2>
+    <h2>Recomendados para ti</h2>
     <div class="card-row">
-      <div class="card-container">
-        <div class="card" style="background-image: url('Posters KYB marry my husband.png');"></div>
-        <div class="card-info">Marry My Husband</div>
-      </div>
-      <div class="card-container">
-        <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
-        <div class="card-info">Love for Love Shake</div>
-      </div>
+      <div class="card" style="background-image: url('https://i.imgur.com/kUqzvGq.jpg')" data-title="La Chica de las Estrellas"></div>
+      <div class="card" style="background-image: url('https://i.imgur.com/5aTz8GR.jpg')" data-title="Secretos del Tiempo"></div>
+      <div class="card" style="background-image: url('https://i.imgur.com/Tq8pU1D.jpg')" data-title="Sombras del Pasado"></div>
     </div>
   </section>
 
   <section>
-    <h2>Solo en KYB</h2>
+    <h2>Populares</h2>
     <div class="card-row">
-      <div class="card-container">
-        <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
-        <div class="card-info">Cautivar un Rey</div>
-      </div>
-      <div class="card-container">
-        <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
-        <div class="card-info">Diferente Princesa</div>
-      </div>
+      <div class="card" style="background-image: url('https://i.imgur.com/gDoxRuT.jpg')" data-title="Pecados Reales"></div>
+      <div class="card" style="background-image: url('https://i.imgur.com/LmO8k6j.jpg')" data-title="Universo Alterno"></div>
+      <div class="card" style="background-image: url('https://i.imgur.com/N3j6nto.jpg')" data-title="Conexión Final"></div>
     </div>
   </section>
 
   <section>
     <h2>Top 10 en Panamá</h2>
-    <div class="top10">
-      <div class="card" style="background-image: url('Posters KYB marry my husband.png');">
-        <div class="number">1</div>
-      </div>
-      <div class="card" style="background-image: url('Posters KYB time the series.png');">
-        <div class="number">2</div>
-      </div>
-      <div class="card" style="background-image: url('Posters KYB doctor slump.png');">
-        <div class="number">3</div>
-      </div>
+    <div class="card-row top10">
+      <div class="card" style="background-image: url('https://i.imgur.com/XYlwTgJ.jpg')" data-title="Destino" data-rank="1"></div>
+      <div class="card" style="background-image: url('https://i.imgur.com/I3e8rc9.jpg')" data-title="El Último Suspiro" data-rank="2"></div>
+      <div class="card" style="background-image: url('https://i.imgur.com/hHTY3fG.jpg')" data-title="Más Allá" data-rank="3"></div>
     </div>
   </section>
+
+  <footer>
+    <div class="socials">
+      <a href="#"><i data-lucide="instagram"></i></a>
+      <a href="#"><i data-lucide="facebook"></i></a>
+      <a href="#"><i data-lucide="youtube"></i></a>
+    </div>
+    <p>© 2025 KYB Streaming. Todos los derechos reservados.</p>
+    <p>Creado con ❤️ por ChatGPT y Elihu.</p>
+  </footer>
 
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
