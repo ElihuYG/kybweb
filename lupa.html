@@ -3,163 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Buscar | KYB</title>
+  <title>Buscar Series | KYB</title>
   <style>
-    /* Fondo animado con "KYB" y degradado */
+    /* FONDO ANIMADO CON "KYB" */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(-45deg, #101820, #203040, #101820, #304050);
+      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #2a2a2a, #0f0f0f);
       background-size: 400% 400%;
-      animation: moverDegradado 10s ease infinite;
-      color: #fff;
-      position: relative;
-      min-height: 100vh;
-      padding-bottom: 80px; /* espacio para el footer */
+      animation: gradientMove 10s ease infinite;
+      color: white;
+      overflow-x: hidden;
     }
 
-    @keyframes moverDegradado {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* Marca de agua "KYB" gigante al fondo */
+    /* Texto "KYB" en fondo */
     body::before {
       content: "KYB";
-      position: absolute;
-      top: 30%;
+      position: fixed;
+      top: 50%;
       left: 50%;
+      font-size: 20rem;
       transform: translate(-50%, -50%);
-      font-size: 150px;
-      color: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.03);
+      font-weight: bold;
       z-index: 0;
       pointer-events: none;
     }
 
-    .container {
-      padding: 40px;
+    /* CONTENEDOR DE BUSQUEDA */
+    #searchContainer {
       position: relative;
+      top: 40vh;
+      text-align: center;
+      transition: top 0.6s ease;
       z-index: 1;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
+    #searchContainer.active {
+      top: 20px;
     }
 
-    input[type="text"] {
-      width: 100%;
-      max-width: 400px;
-      padding: 12px;
+    #searchInput {
+      padding: 15px;
+      width: 300px;
+      font-size: 18px;
       border-radius: 10px;
       border: none;
-      font-size: 16px;
       outline: none;
-      margin: auto;
-      display: block;
+      background: #fff;
+      color: #000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
-    .resultados {
-      margin-top: 30px;
+    /* RESULTADOS */
+    #results {
+      margin-top: 20px;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .serie {
-      background-color: rgba(255, 255, 255, 0.05);
-      padding: 10px;
-      border-radius: 12px;
-      text-align: center;
-      width: 160px;
-      transition: transform 0.3s;
-    }
-
-    .serie:hover {
-      transform: scale(1.05);
+    .result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       background-color: rgba(255, 255, 255, 0.1);
+      margin: 4px auto;
+      padding: 10px;
+      border-radius: 6px;
+      max-width: 350px;
+      color: white;
+      transition: background 0.3s;
+      cursor: pointer;
     }
 
-    .serie img {
-      width: 140px;
-      height: 200px;
-      border-radius: 8px;
+    .result-item:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .poster-img {
+      width: 90px;
+      height: 130px;
       object-fit: cover;
+      border-radius: 6px;
     }
 
-    .serie p {
-      margin-top: 10px;
-      font-size: 14px;
-    }
-
+    /* FOOTER */
     footer {
-      position: absolute;
+      position: fixed;
       bottom: 0;
-      left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      color: #ccc;
+      background: rgba(0,0,0,0.6);
+      color: #aaa;
       text-align: center;
-      padding: 15px 0;
+      padding: 10px 0;
       font-size: 14px;
-      backdrop-filter: blur(5px);
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Buscar Series</h1>
-    <input type="text" id="buscador" placeholder="Escribe el nombre en KYB...">
-    <div class="resultados" id="resultados"></div>
+
+  <div id="searchContainer">
+    <input type="text" id="searchInput" placeholder="Buscar serie..." autocomplete="off">
+    <div id="results"></div>
   </div>
 
   <footer>
-    © 2025 KYB. Todos los derechos reservados.
+    © 2025 KYB | Todos los derechos reservados.
   </footer>
 
   <script>
-    const data = [
-      { nombre: "Different Princess", imagen: "different_princess.jpg" },
-      { nombre: "Thamepo", imagen: "thamepo.jpg" },
-      { nombre: "Yoursky", imagen: "yoursky.jpg" },
-      { nombre: "The Heart Killer", imagen: "the_heart_killer.jpg" },
-      { nombre: "Doctor Slump", imagen: "doctor_slump.jpg" },
-      { nombre: "Love for Love Shake", imagen: "love_for_love_shake.jpg" },
-      { nombre: "Time The Series", imagen: "time_the_series.jpg" },
-      { nombre: "Cautivar a un Rey", imagen: "cautivar_a_un_rey.jpg" },
-      { nombre: "My Only 12%", imagen: "my_only_12.jpg" },
-      { nombre: "Begins Youth", imagen: "begins_youth.jpg" },
-      { nombre: "Sweet Home", imagen: "sweet_home.jpg" }
+    const series = [
+      { nombre: "Different Princees", img: "Posters KYB different princess.png" },
+      { nombre: "Thamepo", img: "Posters KYB thamepo.png" },
+      { nombre: "Yoursky", img: "Posters KYB yoursky.png" },
+      { nombre: "The Heart Killer", img: "Posters KYB the heart killer.png" },
+      { nombre: "Doctor Slump", img: "Posters KYB doctor slump.png" },
+      { nombre: "Love for Love Shake", img: "Posters KYB love for love shake.png" },
+      { nombre: "Time the Series", img: "Posters KYB time the series.png" },
+      { nombre: "Cautivar a un Rey", img: "Posters KYB cautivar un rey.png" },
+      { nombre: "My Only 12%", img: "Posters KYB my only 12.png" },
+      { nombre: "Begins Youth", img: "poster_begins_youth.png" },
+      { nombre: "Sweet Home", img: "Posters KYB sweet home.png" },
+      { nombre: "Marry My Husband", img: "Posters KYB marry my husband.png" }
     ];
 
-    const buscador = document.getElementById("buscador");
-    const resultados = document.getElementById("resultados");
+    const input = document.getElementById("searchInput");
+    const resultsContainer = document.getElementById("results");
+    const searchBox = document.getElementById("searchContainer");
 
-    buscador.addEventListener("input", () => {
-      const texto = buscador.value.toLowerCase();
-      resultados.innerHTML = "";
+    input.addEventListener("focus", () => {
+      searchBox.classList.add("active");
+    });
 
-      if (texto.length === 0) return;
+    input.addEventListener("input", () => {
+      const query = input.value.toLowerCase();
+      resultsContainer.innerHTML = "";
 
-      const filtradas = data.filter(serie =>
-        serie.nombre.toLowerCase().includes(texto)
+      const filtradas = series.filter(serie =>
+        serie.nombre.toLowerCase().includes(query)
       );
-
-      if (filtradas.length === 0) {
-        resultados.innerHTML = "<p>No se encontraron resultados.</p>";
-        return;
-      }
 
       filtradas.forEach(serie => {
         const div = document.createElement("div");
-        div.classList.add("serie");
-        div.innerHTML = `
-          <img src="${serie.imagen}" alt="${serie.nombre}">
-          <p>${serie.nombre}</p>
-        `;
-        resultados.appendChild(div);
+        div.className = "result-item";
+
+        const img = document.createElement("img");
+        img.src = `img/${serie.img}`;
+        img.alt = serie.nombre;
+        img.className = "poster-img";
+
+        const texto = document.createElement("span");
+        texto.textContent = serie.nombre;
+
+        div.appendChild(img);
+        div.appendChild(texto);
+        resultsContainer.appendChild(div);
       });
     });
   </script>
