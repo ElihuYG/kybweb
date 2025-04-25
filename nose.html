@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KYB - Tu Mundo de Series</title>
+  <link href="https://unpkg.com/lucide@latest" rel="stylesheet">
+  <style>
+    :root {
+      --emerald: #00c896;
+      --dark-bg: #141414;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      background-color: rgba(20, 20, 20, 0.95);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: linear-gradient(to right, var(--emerald), #00ffae);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: var(--emerald);
+    }
+
+    .hero {
+      background: url('Sliders_Arriba_TP.png') no-repeat center center/cover;
+      height: 70vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem;
+    }
+
+    .hero .info {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .hero p {
+      margin-top: 0.5rem;
+    }
+
+    .hero .buttons {
+      margin-top: 1rem;
+    }
+
+    .hero button {
+      margin-right: 1rem;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-play {
+      background: white;
+      color: black;
+    }
+
+    .btn-list {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    section {
+      padding: 2rem;
+    }
+
+    section h2 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .card-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+    }
+
+    .card-container {
+      position: relative;
+      flex-shrink: 0;
+      width: 200px;
+    }
+
+    .card {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.08);
+    }
+
+    .card-info {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      width: 100%;
+      padding: 0.5rem;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      font-size: 0.85rem;
+    }
+
+    .top10 {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+    }
+
+    .top10 .card {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .top10 .number {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--emerald);
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        height: 50vh;
+        padding: 1rem;
+      }
+
+      .hero .info {
+        padding: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">KYB</div>
+    <div class="nav">
+      <a href="lupa.html"><i data-lucide="search"></i></a>
+      <a href="cuenta.html"><i data-lucide="user"></i></a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="info">
+      <h1>Hasta que el cielo nos reúna</h1>
+      <p>N.º 9 en TV hoy</p>
+      <div class="buttons">
+        <button class="btn-play">Reproducir</button>
+        <button class="btn-list">+ Mi lista</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Continuar viendo</h2>
+    <div class="card-row">
+      <div class="card-container">
+        <div class="card" style="background-image: url('Posters KYB marry my husband.png');"></div>
+        <div class="card-info">Marry My Husband</div>
+      </div>
+      <div class="card-container">
+        <div class="card" style="background-image: url('Posters KYB love for love shake.png');"></div>
+        <div class="card-info">Love for Love Shake</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Solo en KYB</h2>
+    <div class="card-row">
+      <div class="card-container">
+        <div class="card" style="background-image: url('Posters KYB cautivar un rey.png');"></div>
+        <div class="card-info">Cautivar un Rey</div>
+      </div>
+      <div class="card-container">
+        <div class="card" style="background-image: url('Posters KYB different princess.png');"></div>
+        <div class="card-info">Diferente Princesa</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Top 10 en Panamá</h2>
+    <div class="top10">
+      <div class="card" style="background-image: url('Posters KYB marry my husband.png');">
+        <div class="number">1</div>
+      </div>
+      <div class="card" style="background-image: url('Posters KYB time the series.png');">
+        <div class="number">2</div>
+      </div>
+      <div class="card" style="background-image: url('Posters KYB doctor slump.png');">
+        <div class="number">3</div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
