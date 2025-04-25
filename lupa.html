@@ -135,13 +135,15 @@
       font-size: 3rem;
       color: #fff;
       display: none;
-      animation: magic 1.5s ease-out;
+      animation: magicMove 2s ease-out infinite;
     }
 
-    @keyframes magic {
-      0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    @keyframes magicMove {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      25% { transform: translate(-50%, -50%) rotate(30deg); }
+      50% { transform: translate(-50%, -50%) rotate(60deg); }
+      75% { transform: translate(-50%, -50%) rotate(90deg); }
+      100% { transform: translate(-50%, -50%) rotate(120deg); }
     }
 
     /* CENTRAR LA SERIE ALEATORIA EN EL CENTRO DE LA PÁGINA */
@@ -216,6 +218,7 @@
       );
 
       if (filtradas.length > 0) {
+        resultsContainer.style.display = "grid"; // Mostrar las series
         filtradas.forEach(serie => {
           const div = document.createElement("div");
           div.className = "result-item";
@@ -233,21 +236,27 @@
           resultsContainer.appendChild(div);
         });
       } else {
-        resultsContainer.style.display = "none";
+        resultsContainer.style.display = "none"; // Ocultar cuando no hay resultados
       }
     });
 
-    // Función para la serie aleatoria con animación
+    // Función para generar una serie aleatoria
     randomButton.addEventListener("click", () => {
-      magicAnimation.style.display = "block";
+      magicAnimation.style.display = "block"; // Mostrar varita
       setTimeout(() => {
-        magicAnimation.style.display = "none";
+        magicAnimation.style.display = "none"; // Ocultar varita después de 2 segundos
 
-        const randomSerieIndex = Math.floor(Math.random() * series.length);
-        const serieAleatoria = series[randomSerieIndex];
+        // Elegir una serie aleatoria
+        const serieAleatoria = series[Math.floor(Math.random() * series.length)];
+
         randomSerie.textContent = `Serie Aleatoria: ${serieAleatoria.nombre}`;
         randomSerie.style.display = "block";
-      }, 1500);
+
+        // Hacer que la serie desaparezca después de 3 segundos
+        setTimeout(() => {
+          randomSerie.style.display = "none";
+        }, 3000);
+      }, 2000); // Animación dura 2 segundos
     });
   </script>
 
