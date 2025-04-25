@@ -48,14 +48,6 @@
       outline: none;
     }
 
-    .search-box button {
-      background-color: #00ffcc;
-      color: black;
-      border: none;
-      padding: 12px 20px;
-      cursor: pointer;
-    }
-
     .results {
       max-width: 800px;
       margin: 0 auto;
@@ -120,7 +112,6 @@
 
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="Busca una serie o película...">
-    <button onclick="buscar()">Buscar</button>
   </div>
 
   <div class="results" id="results">
@@ -129,32 +120,29 @@
 
   <script>
     const data = [
-      {
-        titulo: "Begins Youth",
-        descripcion: "Un grupo de jóvenes lucha por sus sueños en un mundo competitivo.",
-        imagen: "posters_begins_youth.png",
-        link: "beginsyouth.html"
-      },
-      {
-        titulo: "Thamepo",
-        descripcion: "Una historia de ciencia ficción con giros inesperados.",
-        imagen: "thamepo.jpg",
-        link: "thamepo.html"
-      },
-      {
-        titulo: "Yoursky",
-        descripcion: "Dos almas se encuentran bajo el mismo cielo.",
-        imagen: "yoursky.jpg",
-        link: "yoursky.html"
-      }
+      { titulo: "Begins Youth", descripcion: "Juventud, sueños y amistad.", imagen: "posters_begins_youth.png", link: "beginsyouth.html" },
+      { titulo: "Different Princess", descripcion: "Una princesa diferente en un mundo moderno.", imagen: "different_princess.jpg", link: "different_princess.html" },
+      { titulo: "Thamepo", descripcion: "Ciencia ficción con drama.", imagen: "thamepo.jpg", link: "thamepo.html" },
+      { titulo: "Yoursky", descripcion: "Dos almas bajo el mismo cielo.", imagen: "yoursky.jpg", link: "yoursky.html" },
+      { titulo: "The Heart Killer", descripcion: "Un misterio que te romperá el corazón.", imagen: "the_heart_killer.jpg", link: "the_heart_killer.html" },
+      { titulo: "Doctor Slump", descripcion: "Comedia médica con enredos amorosos.", imagen: "doctor_slump.jpg", link: "doctor_slump.html" },
+      { titulo: "Love for Love Shake", descripcion: "Un romance dulce como un batido.", imagen: "love_for_love_shake.jpg", link: "love_for_love_shake.html" },
+      { titulo: "Time The Series", descripcion: "El tiempo no lo cura todo...", imagen: "time_the_series.jpg", link: "time_the_series.html" },
+      { titulo: "Cautivar a un Rey", descripcion: "Romance y poder en la corte real.", imagen: "cautivar_a_un_rey.jpg", link: "cautivar_a_un_rey.html" },
+      { titulo: "My Only 12%", descripcion: "¿Y si solo tuvieses un 12% de oportunidad?", imagen: "my_only_12_percent.jpg", link: "my_only_12_percent.html" },
+      { titulo: "Sweet Home", descripcion: "Horror, monstruos y supervivencia.", imagen: "sweet_home.jpg", link: "sweet_home.html" },
     ];
 
-    function buscar() {
-      const query = document.getElementById("searchInput").value.toLowerCase();
-      const contenedor = document.getElementById("results");
+    const input = document.getElementById("searchInput");
+    const contenedor = document.getElementById("results");
+
+    input.addEventListener("input", () => {
+      const query = input.value.toLowerCase();
       contenedor.innerHTML = "";
 
       const filtrados = data.filter(item => item.titulo.toLowerCase().includes(query));
+
+      if (query === "") return;
 
       if (filtrados.length === 0) {
         contenedor.innerHTML = "<p>No se encontraron resultados.</p>";
@@ -175,7 +163,7 @@
         `;
         contenedor.appendChild(div);
       });
-    }
+    });
   </script>
 </body>
 </html>
