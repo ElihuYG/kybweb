@@ -14,6 +14,7 @@
       animation: gradientAnimation 10s ease infinite;
       color: white;
       overflow-x: hidden;
+      height: 100vh; /* Full screen */
     }
 
     @keyframes gradientAnimation {
@@ -124,21 +125,65 @@
       font-size: 14px;
       z-index: 1;
     }
+
+    /* ANIMACIÓN DE LA VARITA MÁGICA */
+    .magic-animation {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: #fff;
+      display: none;
+      animation: magic 1.5s ease-out;
+    }
+
+    @keyframes magic {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    }
+
+    /* CENTRAR LA SERIE ALEATORIA EN EL CENTRO DE LA PÁGINA */
+    .random-serie {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: #fff;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      display: none;
+      z-index: 2;
+    }
+
   </style>
 </head>
 <body>
 
+  <!-- Contenedor de búsqueda -->
   <div id="searchContainer">
     <input type="text" id="searchInput" placeholder="Buscar serie..." autocomplete="off">
     <button id="randomButton">Serie Aleatoria</button>
     <div id="results"></div>
   </div>
 
+  <!-- Animación de la varita mágica -->
+  <div class="magic-animation">✨</div>
+
+  <!-- Serie aleatoria -->
+  <div class="random-serie" id="randomSerie"></div>
+
+  <!-- Footer -->
   <footer>
     © 2025 KYB | Todos los derechos reservados.
   </footer>
 
   <script>
+    // Lista de series
     const series = [
       { nombre: "Different Princees", img: "Posters KYB different princess.png" },
       { nombre: "Thamepo", img: "Posters KYB thamepo.png" },
@@ -154,32 +199,29 @@
       { nombre: "Marry My Husband", img: "Posters KYB marry my husband.png" }
     ];
 
+    // Obtener elementos de la página
     const input = document.getElementById("searchInput");
     const resultsContainer = document.getElementById("results");
     const randomButton = document.getElementById("randomButton");
-    const searchBox = document.getElementById("searchContainer");
+    const magicAnimation = document.querySelector(".magic-animation");
+    const randomSerie = document.getElementById("randomSerie");
 
-    input.addEventListener("focus", () => {
-      searchBox.classList.add("active");
-    });
-
+    // Función para buscar series
     input.addEventListener("input", () => {
       const query = input.value.toLowerCase();
       resultsContainer.innerHTML = "";
 
-      // Filtra las series según la búsqueda
       const filtradas = series.filter(serie =>
         serie.nombre.toLowerCase().includes(query)
       );
 
-      // Si hay resultados, los muestra
       if (filtradas.length > 0) {
         filtradas.forEach(serie => {
           const div = document.createElement("div");
           div.className = "result-item";
 
           const img = document.createElement("img");
-          img.src = serie.img; // Aquí es donde le pongo el src directo de la imagen
+          img.src = serie.img;
           img.alt = serie.nombre;
           img.className = "poster-img";
 
@@ -191,21 +233,21 @@
           resultsContainer.appendChild(div);
         });
       } else {
-        resultsContainer.style.display = "none"; // Si no hay resultados, ocultar los resultados
+        resultsContainer.style.display = "none";
       }
     });
 
-    // Si el usuario limpia el campo, ocultar los resultados
-    input.addEventListener("blur", () => {
-      setTimeout(() => {
-        resultsContainer.style.display = "none";
-      }, 300);
-    });
-
-    // Función para generar una serie aleatoria
+    // Función para la serie aleatoria con animación
     randomButton.addEventListener("click", () => {
-      const randomSerie = series[Math.floor(Math.random() * series.length)];
-      alert(`Serie Aleatoria: ${randomSerie.nombre}`);
+      magicAnimation.style.display = "block";
+      setTimeout(() => {
+        magicAnimation.style.display = "none";
+
+        const randomSerieIndex = Math.floor(Math.random() * series.length);
+        const serieAleatoria = series[randomSerieIndex];
+        randomSerie.textContent = `Serie Aleatoria: ${serieAleatoria.nombre}`;
+        randomSerie.style.display = "block";
+      }, 1500);
     });
   </script>
 
