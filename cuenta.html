@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cuenta | KYB</title>
+  <title>Mi Cuenta | KYB</title>
   <style>
     /* Fondo degradado animado */
     body {
       margin: 0;
       padding: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(-45deg, #006400, #00FF7F, #006400, #00FF7F);
       background-size: 400% 400%;
       animation: gradient 15s ease infinite;
       font-family: 'Poppins', sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: start;
     }
 
     @keyframes gradient {
@@ -27,9 +27,25 @@
     }
 
     h1 {
+      margin-top: 40px;
       color: white;
       font-size: 2.5rem;
       margin-bottom: 20px;
+    }
+
+    .foto-perfil {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: url('tu_foto_perfil.png') center/cover no-repeat;
+      border: 4px solid #00FF7F;
+      margin-bottom: 20px;
+      animation: aparecer 1s ease forwards;
+    }
+
+    @keyframes aparecer {
+      from {transform: scale(0); opacity: 0;}
+      to {transform: scale(1); opacity: 1;}
     }
 
     .perfil {
@@ -41,6 +57,12 @@
       color: white;
       width: 90%;
       max-width: 400px;
+      animation: deslizar 1s ease forwards;
+    }
+
+    @keyframes deslizar {
+      from {transform: translateY(50px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
     }
 
     .perfil p {
@@ -74,24 +96,123 @@
       font-size: 0.9rem;
     }
 
+    /* Modal para cerrar sesión */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: aparecerModal 0.5s ease forwards;
+      z-index: 10;
+    }
+
+    @keyframes aparecerModal {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      color: black;
+      animation: zoom 0.5s ease forwards;
+    }
+
+    @keyframes zoom {
+      from {transform: scale(0);}
+      to {transform: scale(1);}
+    }
+
+    .modal-content button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .confirmar {
+      background-color: #00a86b;
+      color: white;
+    }
+
+    .cancelar {
+      background-color: #aaa;
+      color: black;
+    }
   </style>
 </head>
 <body>
 
   <h1>Mi Cuenta KYB</h1>
 
-  <div class="perfil">
-    <p><strong>Usuario:</strong> kyb_user</p>
-    <p><strong>Email:</strong> usuario@kyb.com</p>
-    <p><strong>Suscripción:</strong> Gratuita</p>
+  <!-- Foto de Perfil -->
+  <div class="foto-perfil"></div>
 
-    <button>Editar Perfil</button>
-    <button>Cerrar Sesión</button>
+  <!-- Datos de Usuario -->
+  <div class="perfil">
+    <p><strong>Usuario:</strong> <span id="usuario">kyb_user</span></p>
+    <p><strong>Email:</strong> <span id="email">usuario@kyb.com</span></p>
+
+    <button onclick="editarPerfil()">Editar Perfil</button>
+    <button onclick="mostrarModal()">Cerrar Sesión</button>
+    <button onclick="politicaPrivacidad()">Política de Privacidad</button>
+  </div>
+
+  <!-- Modal Cerrar Sesión -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>¿Seguro que quieres cerrar sesión?</h2>
+      <button class="confirmar" onclick="cerrarSesion()">Sí, cerrar</button>
+      <button class="cancelar" onclick="cerrarModal()">Cancelar</button>
+    </div>
   </div>
 
   <footer>
     © 2025 KYB. Todos los derechos reservados.
   </footer>
+
+  <script>
+    // Para editar el perfil (de momento solo alerta)
+    function editarPerfil() {
+      alert('Función para editar perfil próximamente...');
+    }
+
+    // Mostrar modal
+    function mostrarModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    // Cerrar modal
+    function cerrarModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    // Cerrar sesión
+    function cerrarSesion() {
+      alert('Sesión cerrada.');
+      window.location.href = 'index.html'; // Redirige a inicio
+    }
+
+    // Política de privacidad
+    function politicaPrivacidad() {
+      alert('Política de privacidad disponible próximamente.');
+    }
+
+    // Simulación de traer usuario y email del LocalStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      let user = localStorage.getItem('usuario') || 'kyb_user';
+      let mail = localStorage.getItem('email') || 'usuario@kyb.com';
+      document.getElementById('usuario').textContent = user;
+      document.getElementById('email').textContent = mail;
+    });
+  </script>
 
 </body>
 </html>
