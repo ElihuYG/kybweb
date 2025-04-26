@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Begins Youth - KYB</title>
+  <title>Nos Vemos en Mi 19a Vida - KYB</title>
   <style>
     body {
       margin: 0;
@@ -126,22 +126,23 @@
 
 <div class="container">
   <div class="header">
-    <img src="posters_begins_youth.png" alt="Begins Youth">
+    <img src="posters_nos_vemos_en_mi_19a_vida.png" alt="Nos Vemos en Mi 19a Vida">
     <div class="info">
-      <h1>Begins Youth</h1>
+      <h1>Nos Vemos en Mi 19a Vida</h1>
       <div class="tags">
-        <div class="tag">Juvenil</div>
+        <div class="tag">Romance</div>
+        <div class="tag">Fantasía</div>
         <div class="tag">Corea del Sur</div>
-        <div class="tag">2024</div>
-        <div class="tag">8 episodios</div>
-        <div class="tag">Drama</div>
+        <div class="tag">2023</div>
+        <div class="tag">12 episodios</div>
       </div>
       <div class="buttons">
         <button class="btn" onclick="addToMyList()">Añadir a Mi Lista</button>
       </div>
       <p>
-        La historia sigue a siete chicos en su lucha contra el dolor y el crecimiento,
-        basándose en el universo ficticio de BTS. Juntos enfrentan dificultades y buscan la felicidad.
+        Ban Ji Eum ha tenido la habilidad especial de recordar sus vidas pasadas durante casi mil años. 
+        Después de que su vida número 18 se corta trágicamente, decide encontrar a las personas de su vida anterior 
+        en su vida número 19 y se reencuentra con un hombre que fue importante para ella.
       </p>
     </div>
   </div>
@@ -150,16 +151,16 @@
     <h2>Episodios</h2>
     <div class="episode-list">
       <div class="episode">
-        <img src="cap1_begins.png" alt="Episodio 1">
+        <img src="cap1_nosvemos.png" alt="Episodio 1">
         <h3>Episodio 1</h3>
-        <p>La historia comienza en una pequeña ciudad...</p>
+        <p>Ban Ji Eum empieza a reconectar con su pasado...</p>
       </div>
       <div class="episode">
-        <img src="cap2_begins.png" alt="Episodio 2">
+        <img src="cap2_nosvemos.png" alt="Episodio 2">
         <h3>Episodio 2</h3>
-        <p>Los chicos se enfrentan a sus primeras decisiones difíciles...</p>
+        <p>Los recuerdos traen viejas emociones a la superficie...</p>
       </div>
-      <!-- Puedes seguir agregando más episodios -->
+      <!-- Agrega más episodios si quieres -->
     </div>
   </div>
 </div>
@@ -167,9 +168,9 @@
 <script>
   function addToMyList() {
     const serie = {
-      id: 1,
-      title: "Begins Youth",
-      image: "posters_begins_youth.png"
+      id: 2,
+      title: "Nos Vemos en Mi 19a Vida",
+      image: "https://m.media-amazon.com/images/M/MV5BNTRmZjc5ODItMDMyZi00ZTk0LWIyYTItY2RjYWY5MzIyNDU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
     };
 
     let myList = JSON.parse(localStorage.getItem('myList')) || [];
