@@ -99,8 +99,8 @@
 
     .serie img {
       width: 100%;
+      height: 280px; /* Más alto para que sean verticales */
       border-radius: 10px;
-      height: 200px;
       object-fit: cover;
     }
 
@@ -147,7 +147,7 @@
   </div>
 
   <div class="results" id="resultsContainer">
-    <!-- Aquí aparecen las series -->
+    <!-- Series aparecerán aquí -->
   </div>
 </div>
 
@@ -216,8 +216,7 @@
     }, 3000);
   });
 
-  // Mostrar todas al inicio si quieres
-  mostrarResultados();
+  // No mostramos series al inicio
 </script>
 
 </body>
