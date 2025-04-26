@@ -3,98 +3,186 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KYB - Home</title>
+  <title>Begins Youth - KYB</title>
   <style>
     body {
-      background-color: #111;
-      color: white;
-      font-family: Arial, sans-serif;
       margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #0f0f0f;
+      color: white;
       padding: 20px;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
     }
-    .card {
-      background-color: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      transition: transform 0.3s;
+    .header {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      align-items: flex-start;
+      flex-wrap: wrap;
     }
-    .card:hover {
-      transform: scale(1.05);
+    .header img {
+      width: 400px;
+      border-radius: 15px;
     }
-    .card img {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
+    .info {
+      flex: 1;
     }
-    .card-content {
-      padding: 10px;
+    .info h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
     }
-    .add-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: rgba(0, 128, 0, 0.8);
+    .info p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+    .tags {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag {
+      background-color: #1c1c1c;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #00cc66;
+      color: white;
       border: none;
       border-radius: 5px;
-      padding: 5px 10px;
       cursor: pointer;
-      color: white;
       font-weight: bold;
-      display: none;
+      transition: background 0.3s;
     }
-    .card:hover .add-button {
-      display: block;
+    .btn:hover {
+      background-color: #00994d;
+    }
+    .episodes {
+      margin-top: 40px;
+    }
+    .episodes h2 {
+      margin-bottom: 20px;
+    }
+    .episode-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .episode {
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .episode:hover {
+      transform: scale(1.03);
+    }
+    .episode img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .episode h3 {
+      margin: 5px 0;
+      font-size: 1.2rem;
+    }
+    .episode p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    /* Estilos para móvil */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: center;
+      }
+      .header img {
+        width: 90%;
+      }
+      .info {
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Bienvenido a KYB</h1>
-  <div class="grid" id="seriesGrid">
-    <!-- Tarjetas de series/películas -->
+<div class="container">
+  <div class="header">
+    <img src="posters_begins_youth.png" alt="Begins Youth">
+    <div class="info">
+      <h1>Begins Youth</h1>
+      <div class="tags">
+        <div class="tag">Juvenil</div>
+        <div class="tag">Corea del Sur</div>
+        <div class="tag">2024</div>
+        <div class="tag">8 episodios</div>
+        <div class="tag">Drama</div>
+      </div>
+      <div class="buttons">
+        <button class="btn" onclick="addToMyList()">Añadir a Mi Lista</button>
+      </div>
+      <p>
+        La historia sigue a siete chicos en su lucha contra el dolor y el crecimiento,
+        basándose en el universo ficticio de BTS. Juntos enfrentan dificultades y buscan la felicidad.
+      </p>
+    </div>
   </div>
 
-  <script>
-    const series = [
-      { id: 1, title: "Begins Youth", image: "posters_begins_youth.png" },
-      { id: 2, title: "Thamepo", image: "posters_thamepo.png" },
-      { id: 3, title: "Yoursky", image: "posters_yoursky.png" }
-    ];
+  <div class="episodes">
+    <h2>Episodios</h2>
+    <div class="episode-list">
+      <div class="episode">
+        <img src="cap1_begins.png" alt="Episodio 1">
+        <h3>Episodio 1</h3>
+        <p>La historia comienza en una pequeña ciudad...</p>
+      </div>
+      <div class="episode">
+        <img src="cap2_begins.png" alt="Episodio 2">
+        <h3>Episodio 2</h3>
+        <p>Los chicos se enfrentan a sus primeras decisiones difíciles...</p>
+      </div>
+      <!-- Puedes seguir agregando más episodios -->
+    </div>
+  </div>
+</div>
 
-    const grid = document.getElementById('seriesGrid');
+<script>
+  function addToMyList() {
+    const serie = {
+      id: 1,
+      title: "Begins Youth",
+      image: "posters_begins_youth.png"
+    };
 
-    // Crear las cards dinámicamente
-    series.forEach(serie => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <img src="${serie.image}" alt="${serie.title}">
-        <div class="card-content">
-          <h3>${serie.title}</h3>
-        </div>
-        <button class="add-button" onclick="addToList(${serie.id})">Añadir a mi lista</button>
-      `;
-      grid.appendChild(card);
-    });
+    let myList = JSON.parse(localStorage.getItem('myList')) || [];
 
-    function addToList(id) {
-      let myList = JSON.parse(localStorage.getItem('myList')) || [];
-      const serie = series.find(s => s.id === id);
-      if (!myList.some(item => item.id === id)) {
-        myList.push(serie);
-        localStorage.setItem('myList', JSON.stringify(myList));
-        alert(`${serie.title} fue añadido a tu lista!`);
-      } else {
-        alert(`${serie.title} ya está en tu lista!`);
-      }
+    if (!myList.some(item => item.id === serie.id)) {
+      myList.push(serie);
+      localStorage.setItem('myList', JSON.stringify(myList));
+      alert("¡Añadido a tu lista!");
+    } else {
+      alert("Esta serie ya está en tu lista.");
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
