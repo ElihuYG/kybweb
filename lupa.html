@@ -1,264 +1,224 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Buscar Series | KYB</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buscar Series - KYB</title>
   <style>
-    /* FONDO DEGRADADO MOVIENDOSE */
+    /* Fondo degradado animado */
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(45deg, #50C878, #009688); /* Verde esmeralda y verde más oscuro */
+      font-family: Arial, sans-serif;
+      background: linear-gradient(-45deg, #00a86b, #007f5f, #00a86b, #007f5f);
       background-size: 400% 400%;
-      animation: gradientAnimation 10s ease infinite;
+      animation: moverFondo 15s ease infinite;
       color: white;
-      overflow-x: hidden;
-      height: 100vh; /* Full screen */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    @keyframes gradientAnimation {
+    @keyframes moverFondo {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Texto "KYB" en fondo */
-    body::before {
-      content: "KYB";
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      font-size: 20rem;
-      transform: translate(-50%, -50%);
-      color: rgba(255, 255, 255, 0.1);
-      font-weight: bold;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* CONTENEDOR DE BUSQUEDA */
-    #searchContainer {
-      position: relative;
-      top: 40vh;
-      text-align: center;
-      transition: top 0.6s ease;
-      z-index: 1;
-    }
-
-    #searchContainer.active {
-      top: 20px;
-    }
-
-    #searchInput {
-      padding: 15px;
-      width: 300px;
-      font-size: 18px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      background: #fff;
-      color: #000;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-
-    /* BOTÓN DE SERIE ALEATORIA */
-    #randomButton {
-      padding: 15px;
-      margin-left: 10px;
-      font-size: 18px;
-      background-color: #50C878;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    #randomButton:hover {
-      background-color: #009688;
-    }
-
-    /* RESULTADOS HORIZONTALES */
-    #results {
-      margin-top: 20px;
-      display: grid; /* Usamos grid para mejor control */
-      grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-      gap: 12px;
-      justify-items: center; /* Centrar los items dentro de las celdas */
-    }
-
-    .result-item {
+    /* Contenedor principal */
+    .container {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: rgba(255, 255, 255, 0.1);
+      padding: 40px 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
       padding: 10px;
-      border-radius: 6px;
-      max-width: 130px;
-      color: white;
-      transition: background 0.3s;
+      border: none;
+      border-radius: 20px;
+      width: 250px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #00a86b;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
       cursor: pointer;
-      text-align: center;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.3s;
     }
 
-    .result-item:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+    button:hover {
+      background-color: #00935e;
     }
 
-    .poster-img {
-      width: 100px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 6px;
+    .wand {
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(white, transparent);
+      border-radius: 50%;
+      animation: girarVarita 1s linear infinite;
     }
 
-    /* FOOTER */
-    footer {
-      position: fixed;
-      bottom: 0;
+    @keyframes girarVarita {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Resultados */
+    .results {
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       width: 100%;
-      background: rgba(0,0,0,0.6);
-      color: #aaa;
+      max-width: 1000px;
+    }
+
+    .serie {
       text-align: center;
-      padding: 10px 0;
-      font-size: 14px;
-      z-index: 1;
     }
 
-    /* ANIMACIÓN DE LA VARITA MÁGICA */
-    .magic-animation {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 3rem;
-      color: #fff;
-      display: none;
-      animation: magicMove 2s ease-out infinite;
-    }
-
-    @keyframes magicMove {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      25% { transform: translate(-50%, -50%) rotate(30deg); }
-      50% { transform: translate(-50%, -50%) rotate(60deg); }
-      75% { transform: translate(-50%, -50%) rotate(90deg); }
-      100% { transform: translate(-50%, -50%) rotate(120deg); }
-    }
-
-    /* CENTRAR LA SERIE ALEATORIA EN EL CENTRO DE LA PÁGINA */
-    .random-serie {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      color: #fff;
-      text-align: center;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 30px;
+    .serie img {
+      width: 100%;
       border-radius: 10px;
-      display: none;
-      z-index: 2;
+      height: 200px;
+      object-fit: cover;
     }
 
+    .random-popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #007f5f;
+      padding: 20px 30px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 22px;
+      animation: aparecerDesaparecer 3s forwards;
+    }
+
+    @keyframes aparecerDesaparecer {
+      0% { opacity: 0; transform: translate(-50%, -60%); }
+      10% { opacity: 1; transform: translate(-50%, -50%); }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, -40%); }
+    }
+
+    /* Footer */
+    footer {
+      background-color: #003d2e;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 14px;
+      color: white;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Contenedor de búsqueda -->
-  <div id="searchContainer">
-    <input type="text" id="searchInput" placeholder="Buscar serie..." autocomplete="off">
-    <button id="randomButton">Serie Aleatoria</button>
-    <div id="results"></div>
+<div class="container">
+  <h1>Buscar Series en KYB</h1>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar serie...">
+    <button id="randomButton">
+      <div class="wand"></div> Aleatorio
+    </button>
   </div>
 
-  <!-- Animación de la varita mágica -->
-  <div class="magic-animation">✨</div>
+  <div class="results" id="resultsContainer">
+    <!-- Aquí aparecen las series -->
+  </div>
+</div>
 
-  <!-- Serie aleatoria -->
-  <div class="random-serie" id="randomSerie"></div>
+<footer>
+  © 2025 KYB. Todos los derechos reservados.
+</footer>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 KYB | Todos los derechos reservados.
-  </footer>
+<script>
+  const series = [
+    { nombre: "Cautivar a un Rey", imagen: "Posters KYB cautivar un rey.png" },
+    { nombre: "Different Princess", imagen: "Posters KYB different princess.png" },
+    { nombre: "Doctor Slump", imagen: "Posters KYB doctor slump.png" },
+    { nombre: "Love for Love Shake", imagen: "Posters KYB love for love shake.png" },
+    { nombre: "Marry My Husband", imagen: "Posters KYB marry my husband.png" },
+    { nombre: "Time the Series", imagen: "Posters KYB time the series.png" },
+    { nombre: "Begins Youth", imagen: "poster_begins_youth.png" },
+    { nombre: "Yoursky", imagen: "Posters KYB yoursky.png" },
+    { nombre: "The Heart Killer", imagen: "Posters KYB the heart killer.png" },
+    { nombre: "Sweet Home", imagen: "Posters KYB sweet home.png" },
+    { nombre: "My Only 12%", imagen: "Posters KYB my only 12%.png" }
+  ];
 
-  <script>
-    // Lista de series
-    const series = [
-      { nombre: "Different Princees", img: "Posters KYB different princess.png" },
-      { nombre: "Thamepo", img: "Posters KYB thamepo.png" },
-      { nombre: "Yoursky", img: "Posters KYB yoursky.png" },
-      { nombre: "The Heart Killer", img: "Posters KYB the heart killer.png" },
-      { nombre: "Doctor Slump", img: "Posters KYB doctor slump.png" },
-      { nombre: "Love for Love Shake", img: "Posters KYB love for love shake.png" },
-      { nombre: "Time the Series", img: "Posters KYB time the series.png" },
-      { nombre: "Cautivar a un Rey", img: "Posters KYB cautivar un rey.png" },
-      { nombre: "My Only 12%", img: "Posters KYB my only 12.png" },
-      { nombre: "Begins Youth", img: "poster_begins_youth.png" },
-      { nombre: "Sweet Home", img: "Posters KYB sweet home.png" },
-      { nombre: "Marry My Husband", img: "Posters KYB marry my husband.png" }
-    ];
+  const searchInput = document.getElementById("searchInput");
+  const resultsContainer = document.getElementById("resultsContainer");
+  const randomButton = document.getElementById("randomButton");
 
-    // Obtener elementos de la página
-    const input = document.getElementById("searchInput");
-    const resultsContainer = document.getElementById("results");
-    const randomButton = document.getElementById("randomButton");
-    const magicAnimation = document.querySelector(".magic-animation");
-    const randomSerie = document.getElementById("randomSerie");
+  function mostrarResultados(filtro = "") {
+    resultsContainer.innerHTML = "";
+    const resultados = series.filter(serie =>
+      serie.nombre.toLowerCase().includes(filtro.toLowerCase())
+    );
 
-    // Función para buscar series
-    input.addEventListener("input", () => {
-      const query = input.value.toLowerCase();
-      resultsContainer.innerHTML = "";
+    if (resultados.length > 0) {
+      resultsContainer.style.display = "grid";
+      resultados.forEach(serie => {
+        const div = document.createElement("div");
+        div.classList.add("serie");
+        div.innerHTML = `<img src="${serie.imagen}" alt="${serie.nombre}"><p>${serie.nombre}</p>`;
+        resultsContainer.appendChild(div);
+      });
+    } else {
+      resultsContainer.style.display = "none";
+    }
+  }
 
-      const filtradas = series.filter(serie =>
-        serie.nombre.toLowerCase().includes(query)
-      );
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm === "") {
+      resultsContainer.style.display = "none";
+    } else {
+      mostrarResultados(searchTerm);
+    }
+  });
 
-      if (filtradas.length > 0) {
-        resultsContainer.style.display = "grid"; // Mostrar las series
-        filtradas.forEach(serie => {
-          const div = document.createElement("div");
-          div.className = "result-item";
+  randomButton.addEventListener("click", () => {
+    const randomSerie = series[Math.floor(Math.random() * series.length)];
+    
+    const popup = document.createElement("div");
+    popup.className = "random-popup";
+    popup.innerText = randomSerie.nombre;
+    
+    document.body.appendChild(popup);
 
-          const img = document.createElement("img");
-          img.src = serie.img;
-          img.alt = serie.nombre;
-          img.className = "poster-img";
+    setTimeout(() => {
+      popup.remove();
+    }, 3000);
+  });
 
-          const texto = document.createElement("span");
-          texto.textContent = serie.nombre;
-
-          div.appendChild(img);
-          div.appendChild(texto);
-          resultsContainer.appendChild(div);
-        });
-      } else {
-        resultsContainer.style.display = "none"; // Ocultar cuando no hay resultados
-      }
-    });
-
-    // Función para generar una serie aleatoria
-    randomButton.addEventListener("click", () => {
-      magicAnimation.style.display = "block"; // Mostrar varita
-      setTimeout(() => {
-        magicAnimation.style.display = "none"; // Ocultar varita después de 2 segundos
-
-        // Elegir una serie aleatoria
-        const serieAleatoria = series[Math.floor(Math.random() * series.length)];
-
-        randomSerie.textContent = `Serie Aleatoria: ${serieAleatoria.nombre}`;
-        randomSerie.style.display = "block";
-
-        // Hacer que la serie desaparezca después de 3 segundos
-        setTimeout(() => {
-          randomSerie.style.display = "none";
-        }, 3000);
-      }, 2000); // Animación dura 2 segundos
-    });
-  </script>
+  // Mostrar todas al inicio si quieres
+  mostrarResultados();
+</script>
 
 </body>
 </html>
