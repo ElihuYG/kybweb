@@ -65,9 +65,17 @@
       to {transform: translateY(0); opacity: 1;}
     }
 
-    .perfil p {
+    .perfil p, .perfil input {
       margin: 10px 0;
       font-size: 1.2rem;
+    }
+
+    .perfil input {
+      width: 80%;
+      padding: 8px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 5px;
     }
 
     .perfil button {
@@ -157,10 +165,13 @@
 
   <!-- Datos de Usuario -->
   <div class="perfil">
-    <p><strong>Usuario:</strong> <span id="usuario">kyb_user</span></p>
-    <p><strong>Email:</strong> <span id="email">usuario@kyb.com</span></p>
+    <p><strong>Usuario:</strong></p>
+    <input type="text" id="usuario" value="kyb_user" />
 
-    <button onclick="editarPerfil()">Editar Perfil</button>
+    <p><strong>Email:</strong></p>
+    <p id="email">usuario@kyb.com</p>
+
+    <button onclick="guardarNombre()">Guardar Nombre</button>
     <button onclick="mostrarModal()">Cerrar Sesión</button>
     <button onclick="politicaPrivacidad()">Política de Privacidad</button>
   </div>
@@ -179,9 +190,11 @@
   </footer>
 
   <script>
-    // Para editar el perfil (de momento solo alerta)
-    function editarPerfil() {
-      alert('Función para editar perfil próximamente...');
+    // Para guardar el nombre nuevo
+    function guardarNombre() {
+      let nuevoNombre = document.getElementById('usuario').value;
+      localStorage.setItem('usuario', nuevoNombre);
+      alert('Nombre actualizado ✅');
     }
 
     // Mostrar modal
@@ -202,14 +215,14 @@
 
     // Política de privacidad
     function politicaPrivacidad() {
-      alert('Política de privacidad disponible próximamente.');
+      window.location.href = 'politicadeprivacidad.html';
     }
 
-    // Simulación de traer usuario y email del LocalStorage
+    // Al cargar página, traer datos
     document.addEventListener('DOMContentLoaded', function() {
       let user = localStorage.getItem('usuario') || 'kyb_user';
       let mail = localStorage.getItem('email') || 'usuario@kyb.com';
-      document.getElementById('usuario').textContent = user;
+      document.getElementById('usuario').value = user;
       document.getElementById('email').textContent = mail;
     });
   </script>
