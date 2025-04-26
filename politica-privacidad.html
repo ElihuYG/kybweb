@@ -1,118 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - KYB</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .politica-container {
-            width: 80%;
-            max-width: 800px;
-            background: black;
-            padding: 20px;
-            margin: 50px auto;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            animation: fadeIn 1s ease-in-out;
-        }
-        h2 {
-            text-align: center;
-            color: #007bff;
-        }
-        h3 {
-            cursor: pointer;
-            padding: 10px;
-            background: #007bff;
-            color: black;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        h3:hover {
-            background: #0056b3;
-        }
-        .content {
-            display: none;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        a {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
-            color: black;
-            background: #28a745;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        a:hover {
-            background: #218838;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Política de Privacidad | KYB</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #006400, #00FF7F, #006400, #00FF7F);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      text-align: center;
+      color: white;
+      padding: 40px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .contenido {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 20px auto;
+      padding: 30px;
+      width: 90%;
+      max-width: 800px;
+      color: white;
+      font-size: 1.1rem;
+      animation: aparecer 1s ease forwards;
+    }
+
+    @keyframes aparecer {
+      from {transform: translateY(20px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+
+    .contenido h2 {
+      margin-top: 20px;
+      color: #00FF7F;
+    }
+
+    .contenido p {
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .volver {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .volver button {
+      background-color: #00a86b;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .volver button:hover {
+      background-color: #00995c;
+    }
+  </style>
 </head>
 <body>
-    <div class="politica-container">
-        <h2>Política de Privacidad</h2>
-        <p><strong>Última actualización:</strong> 04 de marzo del 2025</p>
 
-        <h3>1. Introducción</h3>
-        <div class="content">
-            <p>En KYB, valoramos tu privacidad y estamos comprometidos a proteger tu información personal...</p>
-        </div>
+  <header>
+    <h1>Política de Privacidad</h1>
+  </header>
 
-        <h3>2. Datos que recopilamos</h3>
-        <div class="content">
-            <ul>
-                <li><strong>Información de cuenta:</strong> Nombre de usuario y correo electrónico.</li>
-                <li><strong>Datos de uso:</strong> Historial de visualización, preferencias y actividad dentro de la app.</li>
-                <li><strong>Datos técnicos:</strong> Tipo de dispositivo, sistema operativo y dirección IP.</li>
-            </ul>
-        </div>
+  <div class="contenido">
+    <h2>Información que recopilamos</h2>
+    <p>En KYB respetamos tu privacidad. Solo recopilamos el nombre de usuario y correo electrónico que proporcionas al registrarte o usar nuestros servicios.</p>
 
-        <h3>3. Cómo usamos tu información</h3>
-        <div class="content">
-            <ul>
-                <li>Proporcionarte acceso a nuestra plataforma y contenido.</li>
-                <li>Personalizar tu experiencia y recomendaciones.</li>
-                <li>Mejorar la seguridad y prevenir fraudes.</li>
-                <li>Ofrecer soporte técnico y atención al cliente.</li>
-            </ul>
-        </div>
+    <h2>Uso de tu información</h2>
+    <p>La información que recopilamos es utilizada únicamente para personalizar tu experiencia dentro de la app y no será compartida con terceros.</p>
 
-        <h3>4. Seguridad de los datos</h3>
-        <div class="content">
-            <p>Implementamos medidas de seguridad para proteger tu información...</p>
-        </div>
+    <h2>Protección de datos</h2>
+    <p>Nos comprometemos a mantener segura tu información usando medidas de protección adecuadas.</p>
 
-        <h3>5. Contacto</h3>
-        <div class="content">
-            <p>Si tienes dudas sobre esta política, contáctanos en: <strong>supportkyb@gmail.com</strong></p>
-        </div>
+    <h2>Tus derechos</h2>
+    <p>Puedes solicitar en cualquier momento la actualización o eliminación de tus datos personales almacenados en KYB.</p>
 
-        <a href="cuenta.html">Volver a Cuenta</a>
+    <h2>Actualizaciones</h2>
+    <p>Esta política puede actualizarse. Te notificaremos de cualquier cambio importante en la misma sección de la app.</p>
+
+    <div class="volver">
+      <button onclick="volver()">Volver a Mi Cuenta</button>
     </div>
+  </div>
 
-    <script>
-        $(document).ready(function(){
-            $("h3").click(function(){
-                $(this).next(".content").slideToggle();
-            });
-        });
-    </script>
+  <footer>
+    © 2025 KYB. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    function volver() {
+      window.location.href = 'cuenta.html';
+    }
+  </script>
+
 </body>
 </html>
