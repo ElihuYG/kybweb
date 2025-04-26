@@ -15,6 +15,7 @@
       font-family: 'Poppins', sans-serif;
       display: flex;
       flex-direction: column;
+      color: #fff;
     }
 
     @keyframes gradient {
@@ -25,25 +26,32 @@
 
     header {
       text-align: center;
-      color: white;
       padding: 40px 20px 20px;
+      animation: fadeDown 1s ease forwards;
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       margin-bottom: 10px;
+      color: #ffffff;
+      text-shadow: 2px 2px 5px #00a86b;
+    }
+
+    @keyframes fadeDown {
+      from {transform: translateY(-50px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
     }
 
     .contenido {
       flex: 1;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       margin: 20px auto;
       padding: 30px;
       width: 90%;
-      max-width: 800px;
-      color: white;
+      max-width: 900px;
+      color: #e0ffe0;
       font-size: 1.1rem;
       animation: aparecer 1s ease forwards;
     }
@@ -56,11 +64,43 @@
     .contenido h2 {
       margin-top: 20px;
       color: #00FF7F;
+      font-size: 1.6rem;
     }
 
     .contenido p {
       margin-top: 10px;
       line-height: 1.6;
+    }
+
+    .botones {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .botones button {
+      background-color: #00a86b;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .botones button:hover {
+      background-color: #00cc88;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeUp {
+      from {transform: translateY(50px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
     }
 
     footer {
@@ -70,53 +110,40 @@
       text-align: center;
       font-size: 0.9rem;
     }
-
-    .volver {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .volver button {
-      background-color: #00a86b;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .volver button:hover {
-      background-color: #00995c;
-    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Política de Privacidad</h1>
+    <h1>Política de Privacidad de KYB</h1>
   </header>
 
   <div class="contenido">
-    <h2>Información que recopilamos</h2>
-    <p>En KYB respetamos tu privacidad. Solo recopilamos el nombre de usuario y correo electrónico que proporcionas al registrarte o usar nuestros servicios.</p>
+    <h2>¿Qué información recopilamos en KYB?</h2>
+    <p>En KYB valoramos tu privacidad. Solo solicitamos tu nombre de usuario y correo electrónico al momento de registrarte en nuestra plataforma.</p>
 
-    <h2>Uso de tu información</h2>
-    <p>La información que recopilamos es utilizada únicamente para personalizar tu experiencia dentro de la app y no será compartida con terceros.</p>
+    <h2>¿Cómo usamos tu información?</h2>
+    <p>Utilizamos tu información para personalizar tu experiencia en KYB, permitiéndote gestionar tu lista de series y recibir contenido adaptado a tus gustos.</p>
 
-    <h2>Protección de datos</h2>
-    <p>Nos comprometemos a mantener segura tu información usando medidas de protección adecuadas.</p>
+    <h2>¿Compartimos tu información?</h2>
+    <p>No, KYB nunca comparte tu información personal con terceros. Tu privacidad es nuestra prioridad.</p>
 
-    <h2>Tus derechos</h2>
-    <p>Puedes solicitar en cualquier momento la actualización o eliminación de tus datos personales almacenados en KYB.</p>
+    <h2>¿Cómo protegemos tus datos?</h2>
+    <p>Implementamos medidas de seguridad avanzadas para proteger tus datos. Tu información en KYB está resguardada en servidores seguros.</p>
 
-    <h2>Actualizaciones</h2>
-    <p>Esta política puede actualizarse. Te notificaremos de cualquier cambio importante en la misma sección de la app.</p>
+    <h2>¿Cuáles son tus derechos en KYB?</h2>
+    <p>En todo momento puedes solicitar la modificación o eliminación de tu cuenta y tus datos personales a través de las opciones de configuración de KYB.</p>
 
-    <div class="volver">
-      <button onclick="volver()">Volver a Mi Cuenta</button>
+    <h2>Actualizaciones de esta política</h2>
+    <p>KYB puede actualizar esta política. Te informaremos mediante avisos en nuestra plataforma para que estés al tanto de cualquier cambio.</p>
+
+    <h2>Contacto</h2>
+    <p>Si tienes alguna duda sobre esta política de privacidad de KYB, puedes contactarnos mediante el soporte en la app o correo electrónico.</p>
+
+    <div class="botones">
+      <button onclick="irMiCuenta()">Mi Cuenta</button>
+      <button onclick="irHome()">Home</button>
+      <button onclick="aprenderKYB()">Aprender a usar KYB</button>
     </div>
   </div>
 
@@ -125,8 +152,15 @@
   </footer>
 
   <script>
-    function volver() {
+    function irMiCuenta() {
       window.location.href = 'cuenta.html';
+    }
+    function irHome() {
+      window.location.href = 'catalogo.html';
+    }
+    function aprenderKYB() {
+      alert('Próximamente: ¡Un tutorial para dominar KYB como un pro! 🚀');
+      // Aquí después podemos dirigir a un tutorial.html si quieres
     }
   </script>
 
