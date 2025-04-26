@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aprende a Usar KYB</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #004d00, #00cc99, #004d00, #00cc99);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 10px;
+      animation: fadeDown 1s ease forwards;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 5px #00a86b;
+    }
+
+    .pasos {
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .paso {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: aparecer 1s ease forwards;
+    }
+
+    .paso:nth-child(1) { animation-delay: 0.5s; }
+    .paso:nth-child(2) { animation-delay: 1s; }
+    .paso:nth-child(3) { animation-delay: 1.5s; }
+    .paso:nth-child(4) { animation-delay: 2s; }
+
+    .paso h2 {
+      font-size: 1.8rem;
+      color: #00FF7F;
+    }
+
+    .paso p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #e0ffe0;
+    }
+
+    @keyframes aparecer {
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .botones {
+      margin: 30px 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .botones button {
+      background-color: #00a86b;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      color: white;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .botones button:hover {
+      background-color: #00cc88;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      margin-top: auto;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>¡Aprende a usar KYB!</h1>
+  </header>
+
+  <div class="pasos">
+    <div class="paso">
+      <h2>1. Crea tu cuenta</h2>
+      <p>Regístrate en KYB usando tu nombre de usuario y tu correo electrónico para guardar tu progreso.</p>
+    </div>
+
+    <div class="paso">
+      <h2>2. Explora el catálogo</h2>
+      <p>Usa el buscador para encontrar tus series favoritas. ¡También puedes descubrir nuevas aleatoriamente!</p>
+    </div>
+
+    <div class="paso">
+      <h2>3. Guarda tus series</h2>
+      <p>Añade series a tu lista personal y continúa viéndolas cuando quieras. Tu progreso se guarda automáticamente.</p>
+    </div>
+
+    <div class="paso">
+      <h2>4. Personaliza tu perfil</h2>
+      <p>Edita tu nombre, tu email y gestiona tus datos desde la sección "Mi cuenta". ¡Control total para ti!</p>
+    </div>
+  </div>
+
+  <div class="botones">
+    <button onclick="irHome()">Home</button>
+    <button onclick="irCuenta()">Mi Cuenta</button>
+  </div>
+
+  <footer>
+    © 2025 KYB. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    function irHome() {
+      window.location.href = 'catalogo.html';
+    }
+    function irCuenta() {
+      window.location.href = 'cuenta.html';
+    }
+  </script>
+
+</body>
+</html>
