@@ -1,268 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Cuenta - KYB</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #111;
-            color: white;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuenta | KYB</title>
+  <style>
+    /* Fondo degradado animado */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(-45deg, #006400, #00FF7F, #006400, #00FF7F);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .perfil-container {
-            text-align: center;
-            padding: 40px;
-            background-color: #111;
-            max-width: 600px;
-            margin: 50px auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
 
-        h2 {
-            font-size: 30px;
-            color: white;
-            margin-bottom: 20px;
-        }
+    h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
 
-        .user-info p {
-            font-size: 18px;
-            margin: 10px 0;
-        }
+    .perfil {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+      color: white;
+      width: 90%;
+      max-width: 400px;
+    }
 
-        .foto-perfil {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            border: 4px solid #e50914;
-        }
+    .perfil p {
+      margin: 10px 0;
+      font-size: 1.2rem;
+    }
 
-        .foto-perfil-placeholder {
-            font-size: 40px;
-            color: #e50914;
-            background-color: #333;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            cursor: pointer;
-            margin-top: -15px;
-            margin-bottom: 20px;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+    .perfil button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #00a86b;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
+    .perfil button:hover {
+      background-color: #00995c;
+    }
 
-        .popup-content {
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-        }
+    footer {
+      margin-top: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
 
-        .popup img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 10px;
-            cursor: pointer;
-        }
-
-        .popup img:hover {
-            opacity: 0.8;
-        }
-
-        .close-popup {
-            background-color: #e50914;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-            border-radius: 5px;
-        }
-
-        .home-btn {
-            background-color: #e50914;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: block;
-            margin: 20px auto;
-        }
-
-        .home-btn:hover {
-            background-color: #f40612;
-        }
-
-        .link-with-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 15px 0;
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-        }
-
-        .link-with-icon i {
-            margin-right: 10px;
-            font-size: 20px;
-        }
-
-        .change-photo-btn {
-            font-size: 18px;
-            background-color: #e50914;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .change-photo-btn:hover {
-            background-color: #f40612;
-        }
-
-        @media (max-width: 768px) {
-            .perfil-container {
-                padding: 20px;
-            }
-
-            h2 {
-                font-size: 24px;
-            }
-
-            .foto-perfil {
-                width: 120px;
-                height: 120px;
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </style>
 </head>
 <body>
 
-    <div class="perfil-container">
-        <h2>Perfil de Usuario</h2>
-        <div class="user-info">
-            <p><strong>Nombre de usuario:</strong> <span id="nombreUsuario">elihuf07</span></p>
-            <p><strong>Correo electrónico:</strong> <span id="emailUsuario">elihuf07@gmail.com</span></p>
-        </div>
+  <h1>Mi Cuenta KYB</h1>
 
-        <div>
-            <div id="perfilSeleccionado" class="foto-perfil">
-                <!-- Foto seleccionada aparecerá aquí -->
-            </div>
+  <div class="perfil">
+    <p><strong>Usuario:</strong> kyb_user</p>
+    <p><strong>Email:</strong> usuario@kyb.com</p>
+    <p><strong>Suscripción:</strong> Gratuita</p>
 
-            <div class="foto-perfil-placeholder" id="botonFoto" onclick="mostrarPopup()">
-                <span>+</span>
-            </div>
+    <button>Editar Perfil</button>
+    <button>Cerrar Sesión</button>
+  </div>
 
-            <!-- Botón para cambiar foto debajo de la foto -->
-            <button class="change-photo-btn" id="cambiarFotoBtn" onclick="mostrarPopup()">Cambiar Foto</button>
-        </div>
-
-        <a href="politica-privacidad.html" class="link-with-icon">
-            <i class="fas fa-shield-alt"></i> Política de Privacidad
-        </a>
-        <a href="ayuda.html" class="link-with-icon">
-            <i class="fas fa-question-circle"></i> Ayuda
-        </a>
-        <a href="eliminar-cuenta.html" class="link-with-icon">
-            <i class="fas fa-trash-alt"></i> Eliminar Cuenta
-        </a>
-
-        <a href="catalogo.html">
-            <button class="home-btn">Ir al Catálogo</button>
-        </a>
-    </div>
-
-    <div class="popup" id="popup">
-        <div class="popup-content">
-            <h3>Elige tu Foto de Perfil</h3>
-            <div class="perfiles">
-                <img src="perfil1.jpg" alt="Perfil 1" onclick="cambiarFoto('Kong_Kongpob_Jirojmontri.jpg')">
-                <img src="perfil2.jpg" alt="Perfil 2" onclick="cambiarFoto('Patji_Jirachart_Buspavanich.jpg')">
-                <img src="perfil3.jpg" alt="Perfil 3" onclick="cambiarFoto('Por_Suppakarn_Jirachotikul.jpg')">
-                <img src="perfil4.jpg" alt="Perfil 4" onclick="cambiarFoto('perfil4.jpg')">
-                <img src="perfil5.jpg" alt="Perfil 5" onclick="cambiarFoto('perfil5.jpg')">
-            </div>
-            <button class="close-popup" onclick="cerrarPopup()">Cerrar</button>
-        </div>
-    </div>
-
-    <script>
-        function mostrarPopup() {
-            document.getElementById("popup").style.display = "flex";
-        }
-
-        function cerrarPopup() {
-            document.getElementById("popup").style.display = "none";
-        }
-
-        function cambiarFoto(foto) {
-            let perfilSeleccionado = document.getElementById("perfilSeleccionado");
-            perfilSeleccionado.innerHTML = `<img src="${foto}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
-
-            localStorage.setItem("fotoPerfil", foto);
-
-            document.getElementById("botonFoto").style.display = "none"; // Ocultar el "+" una vez que se ha elegido una foto
-            document.getElementById("cambiarFotoBtn").style.display = "block"; // Mostrar el botón de cambiar foto
-
-            cerrarPopup();
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            let emailUsuario = localStorage.getItem("currentUser");
-
-            if (emailUsuario) {
-                document.getElementById("nombreUsuario").innerText = emailUsuario.split("@")[0];
-                document.getElementById("emailUsuario").innerText = emailUsuario;
-            } else {
-                document.getElementById("nombreUsuario").innerText = "Invitado";
-                document.getElementById("emailUsuario").innerText = "No disponible";
-            }
-
-            let fotoPerfil = localStorage.getItem("fotoPerfil");
-            if (fotoPerfil) {
-                let perfilSeleccionado = document.getElementById("perfilSeleccionado");
-                perfilSeleccionado.innerHTML = `<img src="${fotoPerfil}" alt="Foto de perfil seleccionada" class="foto-perfil">`;
-
-                document.getElementById("botonFoto").style.display = "none"; // Ocultar el "+" si ya se eligió una foto
-                document.getElementById("cambiarFotoBtn").style.display = "block"; // Mostrar el botón de cambiar foto
-            }
-        });
-    </script>
+  <footer>
+    © 2025 KYB. Todos los derechos reservados.
+  </footer>
 
 </body>
 </html>
