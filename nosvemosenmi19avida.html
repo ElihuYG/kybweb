@@ -3,6 +3,192 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos Vemos en Mi 19a Vida - KYB</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #0f0f0f;
+      color: white;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .header {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .header img {
+      width: 250px;
+      border-radius: 15px;
+    }
+    .info {
+      flex: 1;
+    }
+    .info h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
+    }
+    .info p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+    .tags {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag {
+      background-color: #1c1c1c;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #00cc66;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background-color: #00994d;
+    }
+    .episodes {
+      margin-top: 40px;
+    }
+    .episodes h2 {
+      margin-bottom: 20px;
+    }
+    .episode-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .episode {
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .episode:hover {
+      transform: scale(1.03);
+    }
+    .episode img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .episode h3 {
+      margin: 5px 0;
+      font-size: 1.2rem;
+    }
+    .episode p {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: center;
+      }
+      .header img {
+        width: 90%;
+      }
+      .info {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <img src="https://m.media-amazon.com/images/M/MV5BNTRmZjc5ODItMDMyZi00ZTk0LWIyYTItY2RjYWY5MzIyNDU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Nos Vemos en Mi 19a Vida">
+    <div class="info">
+      <h1>Nos Vemos en Mi 19a Vida</h1>
+      <div class="tags">
+        <div class="tag">Romance</div>
+        <div class="tag">Fantasía</div>
+        <div class="tag">Corea del Sur</div>
+        <div class="tag">2023</div>
+        <div class="tag">12 episodios</div>
+      </div>
+      <div class="buttons">
+        <button class="btn" onclick="addToMyList()">Añadir a Mi Lista</button>
+      </div>
+      <p>
+        Ban Ji Eum ha tenido la habilidad especial de recordar sus vidas pasadas durante casi mil años. 
+        Después de que su vida número 18 se corta trágicamente, decide encontrar a las personas de su vida anterior 
+        en su vida número 19 y se reencuentra con un hombre que fue importante para ella.
+      </p>
+    </div>
+  </div>
+
+  <div class="episodes">
+    <h2>Episodios</h2>
+    <div class="episode-list">
+      <div class="episode">
+        <img src="cap1_nosvemos.png" alt="Episodio 1">
+        <h3>Episodio 1</h3>
+        <p>Ban Ji Eum empieza a reconectar con su pasado...</p>
+      </div>
+      <div class="episode">
+        <img src="cap2_nosvemos.png" alt="Episodio 2">
+        <h3>Episodio 2</h3>
+        <p>Los recuerdos traen viejas emociones a la superficie...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function addToMyList() {
+    const serie = {
+      id: 2,
+      title: "Nos Vemos en Mi 19a Vida",
+      image: "https://m.media-amazon.com/images/M/MV5BNTRmZjc5ODItMDMyZi00ZTk0LWIyYTItY2RjYWY5MzIyNDU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+    };
+
+    let myList = JSON.parse(localStorage.getItem('myList')) || [];
+
+    if (!myList.some(item => item.id === serie.id)) {
+      myList.push(serie);
+      localStorage.setItem('myList', JSON.stringify(myList));
+      alert("¡Añadido a tu lista!");
+    } else {
+      alert("Esta serie ya está en tu lista.");
+    }
+  }
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nos Vemos en mi 19a Vida</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
@@ -32,102 +218,134 @@
   </style>
 </head>
 <body class="bg-gray-900 text-white">
-  <div class="overlay" id="overlay" onclick="cerrarPopup()"></div>
-  <div class="popup" id="popup">
-    <h2 class="text-xl font-bold mb-4">¿Cómo calificarías esta serie?</h2>
-    <div class="flex flex-col gap-4">
-      <button onclick="calificar('No me gusta')" class="bg-red-500 hover:bg-red-600 transition-all px-4 py-2 rounded-lg">❌ No me gusta</button>
-      <button onclick="calificar('Me gusta')" class="bg-yellow-500 hover:bg-yellow-600 transition-all px-4 py-2 rounded-lg">👍 Me gusta</button>
-      <button onclick="calificar('Me encanta')" class="bg-pink-500 hover:bg-pink-600 transition-all px-4 py-2 rounded-lg">❤️ Me encanta</button>
+
+<div class="overlay" id="overlay" onclick="cerrarPopup()"></div>
+<div class="popup" id="popup">
+  <h2 class="text-xl font-bold mb-4">¿Cómo calificarías esta serie?</h2>
+  <div class="flex flex-col gap-4">
+    <button onclick="calificar('No me gusta')" class="bg-red-500 hover:bg-red-600 transition-all px-4 py-2 rounded-lg">❌ No me gusta</button>
+    <button onclick="calificar('Me gusta')" class="bg-yellow-500 hover:bg-yellow-600 transition-all px-4 py-2 rounded-lg">👍 Me gusta</button>
+    <button onclick="calificar('Me encanta')" class="bg-pink-500 hover:bg-pink-600 transition-all px-4 py-2 rounded-lg">❤️ Me encanta</button>
+  </div>
+</div>
+
+<div class="max-w-6xl mx-auto p-4">
+  <img src="https://m.media-amazon.com/images/M/MV5BNTRmZjc5ODItMDMyZi00ZTk0LWIyYTItY2RjYWY5MzIyNDU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Nos Vemos en mi 19a Vida" class="w-full md:h-[450px] h-[300px] object-cover rounded-lg mb-6">
+
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+    <h1 class="text-3xl md:text-4xl font-bold">Nos Vemos en mi 19a Vida</h1>
+    <div class="flex gap-4">
+      <button id="btnMiLista" onclick="agregarMiLista()" class="bg-green-500 hover:bg-green-600 transition-all px-4 py-2 rounded-lg font-semibold flex items-center gap-2">
+        ➕ Añadir a Mi Lista
+      </button>
+      <button onclick="abrirPopup()" class="bg-blue-500 hover:bg-blue-600 transition-all px-4 py-2 rounded-lg font-semibold flex items-center gap-2">
+        ⭐ Calificar
+      </button>
     </div>
   </div>
 
-  <div class="max-w-6xl mx-auto p-4">
-    <img src="https://m.media-amazon.com/images/M/MV5BNTRmZjc5ODItMDMyZi00ZTk0LWIyYTItY2RjYWY5MzIyNDU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Nos Vemos en mi 19a Vida" class="w-full md:h-[450px] h-[300px] object-cover rounded-lg mb-6">
-
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-      <h1 class="text-3xl md:text-4xl font-bold">Nos Vemos en mi 19a Vida</h1>
-      <div class="flex gap-4">
-        <button id="btnMiLista" onclick="agregarMiLista()" class="bg-green-500 hover:bg-green-600 transition-all px-4 py-2 rounded-lg font-semibold flex items-center gap-2">
-          ➕ Añadir a Mi Lista
-        </button>
-        <button onclick="abrirPopup()" class="bg-blue-500 hover:bg-blue-600 transition-all px-4 py-2 rounded-lg font-semibold flex items-center gap-2">
-          ⭐ Calificar
-        </button>
-      </div>
-    </div>
-
-    <div class="mb-4">
-      <p><span class="font-bold">Género:</span> Romance, Drama, Fantasía</p>
-      <p><span class="font-bold">País:</span> Corea del Sur</p>
-      <p><span class="font-bold">Episodios:</span> 12</p>
-      <p><span class="font-bold">Emitido:</span> Jun 17, 2023 - Jul 23, 2023</p>
-      <p><span class="font-bold">Duración:</span> 1 hr. 5 min. por ep.</p>
-      <p><span class="font-bold">Clasificación:</span> 15+</p>
-      <p><span class="font-bold">Reparto:</span> Shin Hye Sun, Ahn Bo Hyun, Ha Yoon Kyung, Ahn Dong Goo</p>
-    </div>
-
-    <div>
-      <h2 class="text-2xl font-bold mb-4">Lista de Episodios</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-gray-800 p-4 rounded-lg">
-          <img src="https://via.placeholder.com/400x225" alt="Episodio 1" class="rounded mb-2">
-          <h3 class="text-xl font-semibold">Episodio 1</h3>
-          <p>Ban Ji Eum recuerda sus vidas pasadas e intenta reconectarse con alguien importante de su vida anterior.</p>
-        </div>
-        <!-- Aquí puedes agregar más episodios -->
-      </div>
-    </div>
+  <div class="mb-4">
+    <p><span class="font-bold">Género:</span> Romance, Drama, Fantasía</p>
+    <p><span class="font-bold">País:</span> Corea del Sur</p>
+    <p><span class="font-bold">Año:</span> 2023</p>
+    <p><span class="font-bold">Episodios:</span> 12</p>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const lista = JSON.parse(localStorage.getItem('miLista')) || [];
-      const serieTitulo = "Nos Vemos en mi 19a Vida";
-      const btnMiLista = document.getElementById('btnMiLista');
+  <div class="mb-6">
+    <p>Ban Ji Eum ha tenido la habilidad especial de recordar sus vidas pasadas durante casi mil años. 
+    Después de que su vida número 18 se corta trágicamente, decide encontrar a las personas de su vida anterior 
+    en su vida número 19 y se reencuentra con un hombre que fue importante para ella.</p>
+  </div>
+</div>
 
-      if (lista.some(item => item.titulo === serieTitulo)) {
-        btnMiLista.innerHTML = '✅ Añadido';
-        btnMiLista.classList.remove('bg-green-500');
-        btnMiLista.classList.add('bg-gray-500');
-      }
-    });
+<script>
+function agregarMiLista() {
+  const serie = {
+    id: 2,
+    title: "Nos Vemos en mi 19a Vida",
+    image: "https://m.media-amazon.com/images/M/MV5BNTRmZjc5ODItMDMyZi00ZTk0LWIyYTItY2RjYWY5MzIyNDU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+  };
 
-    function agregarMiLista() {
-      const lista = JSON.parse(localStorage.getItem('miLista')) || [];
-      const serie = {
-        titulo: "Nos Vemos en mi 19a Vida",
-        imagen: "https://m.media-amazon.com/images/M/MV5BNTRmZjc5ODItMDMyZi00ZTk0LWIyYTItY2RjYWY5MzIyNDU0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-      };
-      const btn = document.getElementById('btnMiLista');
+  let myList = JSON.parse(localStorage.getItem('myList')) || [];
 
-      if (!lista.some(item => item.titulo === serie.titulo)) {
-        lista.push(serie);
-        localStorage.setItem('miLista', JSON.stringify(lista));
-        btn.innerHTML = '✅ Añadido';
-        btn.classList.remove('bg-green-500');
-        btn.classList.add('bg-gray-500', 'animate-bounce');
-        setTimeout(() => {
-          btn.classList.remove('animate-bounce');
-        }, 1000);
-      }
+  if (!myList.some(item => item.id === serie.id)) {
+    myList.push(serie);
+    localStorage.setItem('myList', JSON.stringify(myList));
+    alert("¡Añadido a tu lista!");
+  } else {
+    alert("Esta serie ya está en tu lista.");
+  }
+}
+
+function abrirPopup() {
+  document.getElementById('overlay').style.display = 'block';
+  document.getElementById('popup').style.display = 'block';
+}
+
+function cerrarPopup() {
+  document.getElementById('overlay').style.display = 'none';
+  document.getElementById('popup').style.display = 'none';
+}
+
+function calificar(valor) {
+  alert('Has calificado: ' + valor);
+  cerrarPopup();
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos Vemos en Mi 19a Vida - KYB</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Tu CSS de computadora aquí */
+    /* Vamos a ocultar por defecto el diseño móvil */
+    .mobile-version {
+      display: none;
     }
-
-    function abrirPopup() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('popup').style.display = 'block';
+    /* Opción extra: que no haya scroll raro */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
     }
+  </style>
+</head>
+<body>
 
-    function cerrarPopup() {
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('popup').style.display = 'none';
-    }
+<!-- Versión de computadora -->
+<div class="desktop-version">
+  <!-- Aquí va TODO tu primer HTML (el bonito para compu) -->
+  <!-- el que me mandaste primero -->
+</div>
 
-    function calificar(valor) {
-      localStorage.setItem('calificacion_NosVemosEnMi19aVida', valor);
-      alert('¡Gracias por tu calificación: ' + valor + '!');
-      cerrarPopup();
+<!-- Versión de móvil -->
+<div class="mobile-version">
+  <!-- Aquí va TODO tu segundo HTML (el de Tailwind con popup) -->
+</div>
+
+<script>
+  // Código para detectar el tamaño de pantalla
+  function ajustarVista() {
+    if (window.innerWidth <= 768) {
+      document.querySelector('.desktop-version').style.display = 'none';
+      document.querySelector('.mobile-version').style.display = 'block';
+    } else {
+      document.querySelector('.desktop-version').style.display = 'block';
+      document.querySelector('.mobile-version').style.display = 'none';
     }
-  </script>
+  }
+
+  // Llamarlo al cargar
+  ajustarVista();
+
+  // Llamarlo también si el usuario cambia el tamaño de la ventana
+  window.addEventListener('resize', ajustarVista);
+</script>
+
 </body>
 </html>
