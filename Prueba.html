@@ -247,91 +247,180 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="info">
-      <h1>Thame & PO: Latidos del corazón</h1>
-      <p>TOP 4 - N.º 2 en TV hoy</p>
-      <button class="play-btn">Reproducir</button>
-      <button class="list-btn" onclick="agregarLista('hasta')">+ Mi lista</button>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Solo en KYB</h2>
-    <div class="card-row">
-      <div class="card">
-        <img src="Posters KYB marry my husband.png" alt="Serie 1"/>
-        <div class="info-card">
-          <h3>Marry My Husband</h3>
-          <p>Una historia de venganza y redención donde el destino da una segunda oportunidad.</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="Posters KYB time the series.png" alt="Serie 2"/>
-        <div class="info-card">
-          <h3>Time The Series</h3>
-          <p>El tiempo lo cambia todo, pero el amor verdadero lo resiste todo.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Top 4 de KYB</h2>
-    <div class="top10-row">
-      <div class="top10-item">
-        <span>1</span>
-        <img src="Posters KYB doctor slump.png" alt="Top 1" />
-      </div>
-      <div class="top10-item">
-        <span>2</span>
-        <img src="Posters KYB love for love shake.png" alt="Top 2" />
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Recién agregados</h2>
-    <div class="extra-row">
-      <div class="card">
-        <img src="Posters KYB yours to claim.png" alt="Extra 1"/>
-      </div>
-      <div class="card">
-        <img src="Posters KYB different princess.png" alt="Extra 2"/>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Dramas recomendados</h2>
-    <div class="extra-row">
-      <div class="card">
-        <img src="Posters KYB thamepo.png" alt="Extra 3"/>
-      </div>
-      <div class="card">
-        <img src="Posters KYB cautious.jpg" alt="Extra 4"/>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © 2025 KYB. Todos los derechos reservados.
-  </footer>
-
-  <script>
-    function agregarLista(id) {
-      const btn = event.target;
-      btn.classList.toggle("added");
-      btn.textContent = btn.classList.contains("added") ? "✓ Añadido" : "+ Mi lista";
-
-      let lista = JSON.parse(localStorage.getItem("miLista")) || [];
-      if (btn.classList.contains("added")) {
-        if (!lista.includes(id)) lista.push(id);
-      } else {
-        lista = lista.filter(item => item !== id);
-      }
-      localStorage.setItem("miLista", JSON.stringify(lista));
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KYB</title>
+  <style>
+    /* Estilos generales */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #ffffff;
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Menú para computadora */
+    .nav-desktop {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-desktop a img {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Menú hamburguesa para celular */
+    .menu-mobile {
+      display: none;
+      position: relative;
+    }
+
+    #menu-btn {
+      font-size: 30px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #333;
+    }
+
+    #menu-content {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #menu-content a img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .menu-hidden {
+      display: none;
+    }
+
+    /* Estilos para las secciones */
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-desktop {
+        display: none;
+      }
+      .menu-mobile {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">KYB</div>
+
+    <!-- Menú normal para computadora -->
+    <nav class="nav-desktop">
+      <a href="cuenta.html"><img src="cuenta.png" alt="Cuenta"></a>
+      <a href="lupa.html"><img src="lupa.png" alt="Buscar"></a>
+      <a href="descargas.html"><img src="descargas.png" alt="Descargas"></a>
+    </nav>
+
+    <!-- Menú hamburguesa para celular -->
+    <div class="menu-mobile">
+      <button id="menu-btn">☰</button>
+      <div id="menu-content" class="menu-hidden">
+        <a href="cuenta.html"><img src="cuenta.png" alt="Cuenta"></a>
+        <a href="lupa.html"><img src="lupa.png" alt="Buscar"></a>
+        <a href="descargas.html"><img src="descargas.png" alt="Descargas"></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <!-- Sección 1 -->
+    <section id="inicio">
+      <h2>Inicio</h2>
+      <p>Bienvenido a KYB. Aquí encontrarás todo sobre tus series y películas favoritas.</p>
+    </section>
+
+    <!-- Sección 2 -->
+    <section id="populares">
+      <h2>Populares</h2>
+      <p>Estas son las series y películas más vistas esta semana.</p>
+    </section>
+
+    <!-- Sección 3 -->
+    <section id="novedades">
+      <h2>Novedades</h2>
+      <p>Descubre los últimos estrenos que tenemos para ti.</p>
+    </section>
+
+    <!-- Sección 4 -->
+    <section id="recomendados">
+      <h2>Recomendados para ti</h2>
+      <p>Basado en tus gustos, te recomendamos estas series.</p>
+    </section>
+  </main>
+
+  <!-- SCRIPT PARA MENU -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menuContent = document.getElementById('menu-content');
+
+    menuBtn.addEventListener('click', () => {
+      menuContent.classList.toggle('menu-hidden');
+    });
   </script>
 
 </body>
