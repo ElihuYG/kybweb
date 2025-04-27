@@ -20,6 +20,7 @@
     body {
       background-color: #141414;
       color: white;
+      padding-bottom: 80px; /* Espacio para el footer */
     }
 
     header {
@@ -39,6 +40,28 @@
       background: linear-gradient(90deg, var(--verde-kyb), #00ffcc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-container input {
+      padding: 5px 10px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      background-color: #2c2c2c;
+      color: white;
+    }
+
+    .search-container img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
     .nav-icons button {
@@ -188,14 +211,27 @@
     .extra-row::-webkit-scrollbar {
       display: none;
     }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #1a1a1a;
+      text-align: center;
+      padding: 1rem 0;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <header>
+
+ <header>
     <div class="logo">KYB</div>
     <div class="nav-icons">
       <button title="Descargas"><i class="fas fa-download"></i></button>
       <button title="Buscar"><i class="fas fa-search"></i></button>
+       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8oyXqxbNVc-aVRcZ7WTT3bKX4Hqfh3V55Q&s" alt="Perfil">
     </div>
   </header>
 
@@ -266,6 +302,10 @@
     </div>
   </section>
 
+  <footer>
+    © 2025 KYB. Todos los derechos reservados.
+  </footer>
+
   <script>
     function agregarLista(id) {
       const btn = event.target;
@@ -281,5 +321,6 @@
       localStorage.setItem("miLista", JSON.stringify(lista));
     }
   </script>
+
 </body>
 </html>
