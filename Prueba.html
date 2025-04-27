@@ -3,322 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KYB</title>
+  <title>KYB - Tu App de Series</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Estilos generales */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .header {
+    header {
+      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      background-color: #ffffff;
-      position: relative;
-      z-index: 10;
-      border-bottom: 1px solid #ccc;
+      background-color: #111;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00FF00, #00BFFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Menú para computadora */
-    .nav-desktop {
+    .header-icons {
       display: flex;
-      gap: 20px;
+      gap: 15px;
     }
 
-    .nav-desktop a img {
-      width: 30px;
-      height: 30px;
-    }
-
-    /* Menú hamburguesa para celular */
-    .menu-mobile {
-      display: none;
-      position: relative;
-    }
-
-    #menu-btn {
-      font-size: 30px;
+    .icon-btn {
       background: none;
       border: none;
       cursor: pointer;
-      color: #333;
-    }
-
-    #menu-content {
-      position: absolute;
-      top: 50px;
-      right: 0;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
       padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
     }
 
-    #menu-content a img {
-      width: 30px;
-      height: 30px;
-    }
-
-    .menu-hidden {
-      display: none;
-    }
-
-    /* Estilos para las secciones */
-    main {
-      padding: 20px;
+    .icon-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
     }
 
     .hero {
-      background: url('banner.jpg') no-repeat center center/cover;
-      padding: 100px 20px;
-      color: white;
-      text-align: center;
-      margin-bottom: 40px;
-      border-radius: 12px;
+      background: url('Sliders_Arriba_TP.png') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      padding-left: 50px;
+      position: relative;
     }
 
-    .hero .info {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 12px;
-      display: inline-block;
-    }
-
-    .hero h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 20px;
+    .info h1 {
+      font-size: 3rem;
+      background: linear-gradient(90deg, #00FF00, #00BFFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .play-btn, .list-btn {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .play-btn {
-      background-color: #00c853;
-      color: white;
-    }
-
-    .list-btn {
       background-color: #fff;
-      color: #00c853;
-      border: 1px solid #00c853;
+      color: #000;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    .list-btn.added {
-      background-color: #00c853;
+    .play-btn:hover, .list-btn:hover {
+      background-color: #00bfff;
       color: white;
-    }
-
-    .section {
-      margin-bottom: 40px;
-    }
-
-    .section h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #333;
     }
 
     .card-row, .top10-row, .extra-row {
       display: flex;
       gap: 20px;
+      padding: 20px;
       overflow-x: auto;
-      padding-bottom: 10px;
     }
 
     .card, .top10-item {
-      background: white;
-      border-radius: 8px;
+      background-color: #111;
+      border-radius: 10px;
       overflow: hidden;
-      flex: 0 0 auto;
-      width: 150px;
-      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .card img, .top10-item img {
-      width: 100%;
-      display: block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
     .info-card {
       padding: 10px;
     }
 
-    .top10-item span {
-      position: absolute;
-      font-size: 24px;
-      font-weight: bold;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 0 0 8px 0;
-    }
-
     footer {
       text-align: center;
       padding: 20px;
-      background-color: #eee;
-      color: #555;
-      font-size: 14px;
-      margin-top: 40px;
+      font-size: 0.8rem;
+      background-color: #111;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .nav-desktop {
-        display: none;
-      }
-      .menu-mobile {
-        display: block;
-      }
+    /* Sección de categorías */
+    .section h2 {
+      padding-left: 20px;
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 10px;
     }
+
+    .card img, .top10-item img, .extra-row img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
   </style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo">KYB</div>
+  <header>
+    <div class="header-content">
+      <h1 class="logo">KYB</h1>
 
-    <!-- Menú normal para computadora -->
-    <nav class="nav-desktop">
-      <a href="cuenta.html"><img src="cuenta.png" alt="Cuenta"></a>
-      <a href="lupa.html"><img src="lupa.png" alt="Buscar"></a>
-      <a href="descargas.html"><img src="descargas.png" alt="Descargas"></a>
-    </nav>
+      <div class="header-icons">
+        <button class="icon-btn" onclick="buscar()">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 20l-5.8-5.8A7 7 0 1 0 7 14a7 7 0 0 0 8.2-1.2L21 20zM10 16a6 6 0 1 1 6-6 6 6 0 0 1-6 6z"/>
+          </svg>
+        </button>
 
-    <!-- Menú hamburguesa para celular -->
-    <div class="menu-mobile">
-      <button id="menu-btn">☰</button>
-      <div id="menu-content" class="menu-hidden">
-        <a href="cuenta.html"><img src="cuenta.png" alt="Cuenta"></a>
-        <a href="lupa.html"><img src="lupa.png" alt="Buscar"></a>
-        <a href="descargas.html"><img src="descargas.png" alt="Descargas"></a>
+        <button class="icon-btn" onclick="descargar()">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 16l4-4h-3V4h-2v8H8l4 4zm8 2H4v2h16v-2z"/>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main>
+  <section class="hero">
+    <div class="info">
+      <h1>Thame & PO: Latidos del corazón</h1>
+      <p>TOP 4 - N.º 2 en TV hoy</p>
+      <button class="play-btn">Reproducir</button>
+      <button class="list-btn" onclick="agregarLista('hasta')">+ Mi lista</button>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="info">
-        <h1>Thame & PO: Latidos del corazón</h1>
-        <p>TOP 4 - N.º 2 en TV hoy</p>
-        <button class="play-btn">Reproducir</button>
-        <button class="list-btn" onclick="agregarLista('hasta')">+ Mi lista</button>
-      </div>
-    </section>
-
-    <!-- Solo en KYB -->
-    <section class="section">
-      <h2>Solo en KYB</h2>
-      <div class="card-row">
-        <div class="card">
-          <img src="Posters KYB marry my husband.png" alt="Serie 1"/>
-          <div class="info-card">
-            <h3>Marry My Husband</h3>
-            <p>Una historia de venganza y redención donde el destino da una segunda oportunidad.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="Posters KYB time the series.png" alt="Serie 2"/>
-          <div class="info-card">
-            <h3>Time The Series</h3>
-            <p>El tiempo lo cambia todo, pero el amor verdadero lo resiste todo.</p>
-          </div>
+  <section class="section">
+    <h2>Solo en KYB</h2>
+    <div class="card-row">
+      <div class="card">
+        <img src="Posters KYB marry my husband.png" alt="Serie 1"/>
+        <div class="info-card">
+          <h3>Marry My Husband</h3>
+          <p>Una historia de venganza y redención donde el destino da una segunda oportunidad.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Top 4 de KYB -->
-    <section class="section">
-      <h2>Top 4 de KYB</h2>
-      <div class="top10-row">
-        <div class="top10-item">
-          <span>1</span>
-          <img src="Posters KYB doctor slump.png" alt="Top 1" />
-        </div>
-        <div class="top10-item">
-          <span>2</span>
-          <img src="Posters KYB love for love shake.png" alt="Top 2" />
+      <div class="card">
+        <img src="Posters KYB time the series.png" alt="Serie 2"/>
+        <div class="info-card">
+          <h3>Time The Series</h3>
+          <p>El tiempo lo cambia todo, pero el amor verdadero lo resiste todo.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Recién agregados -->
-    <section class="section">
-      <h2>Recién agregados</h2>
-      <div class="extra-row">
-        <div class="card">
-          <img src="Posters KYB yours to claim.png" alt="Extra 1"/>
-        </div>
-        <div class="card">
-          <img src="Posters KYB different princess.png" alt="Extra 2"/>
-        </div>
+  <section class="section">
+    <h2>Top 4 de KYB</h2>
+    <div class="top10-row">
+      <div class="top10-item">
+        <span>1</span>
+        <img src="Posters KYB doctor slump.png" alt="Top 1" />
       </div>
-    </section>
-
-    <!-- Dramas recomendados -->
-    <section class="section">
-      <h2>Dramas recomendados</h2>
-      <div class="extra-row">
-        <div class="card">
-          <img src="Posters KYB thamepo.png" alt="Extra 3"/>
-        </div>
-        <div class="card">
-          <img src="Posters KYB cautious.jpg" alt="Extra 4"/>
-        </div>
+      <div class="top10-item">
+        <span>2</span>
+        <img src="Posters KYB love for love shake.png" alt="Top 2" />
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <section class="section">
+    <h2>Recién agregados</h2>
+    <div class="extra-row">
+      <div class="card">
+        <img src="Posters KYB yours to claim.png" alt="Extra 1"/>
+      </div>
+      <div class="card">
+        <img src="Posters KYB different princess.png" alt="Extra 2"/>
+      </div>
+    </div>
+  </section>
 
-  <!-- FOOTER -->
+  <section class="section">
+    <h2>Dramas recomendados</h2>
+    <div class="extra-row">
+      <div class="card">
+        <img src="Posters KYB thamepo.png" alt="Extra 3"/>
+      </div>
+      <div class="card">
+        <img src="Posters KYB cautious.jpg" alt="Extra 4"/>
+      </div>
+    </div>
+  </section>
+
   <footer>
     © 2025 KYB. Todos los derechos reservados.
   </footer>
 
-  <!-- SCRIPTS -->
   <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const menuContent = document.getElementById('menu-content');
-
-    menuBtn.addEventListener('click', () => {
-      menuContent.classList.toggle('menu-hidden');
-    });
-
     function agregarLista(id) {
       const btn = event.target;
       btn.classList.toggle("added");
@@ -331,6 +229,14 @@
         lista = lista.filter(item => item !== id);
       }
       localStorage.setItem("miLista", JSON.stringify(lista));
+    }
+
+    function buscar() {
+      alert('Función de búsqueda en desarrollo...');
+    }
+
+    function descargar() {
+      alert('Función de descargas en desarrollo...');
     }
   </script>
 
