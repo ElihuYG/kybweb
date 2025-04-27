@@ -17,16 +17,45 @@
       background-color: #f9f9f9;
     }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      background-color: #ffffff;
-      position: relative;
-      z-index: 10;
-      border-bottom: 1px solid #ccc;
-    }
+    /* Estilo del header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+
+.logo-container .logo {
+  font-size: 2rem; /* Tamaño del texto */
+  font-weight: bold; /* Peso de la fuente */
+  background: linear-gradient(90deg, #50c878, #007f4f); /* Degradado verde esmeralda */
+  -webkit-background-clip: text; /* Esto hace que el degradado se aplique solo al texto */
+  color: transparent; /* Hace el texto transparente para que solo se vea el degradado */
+}
+
+.header-icons {
+  display: flex;
+  gap: 20px; /* Espacio entre los iconos */
+}
+
+.header-icon svg {
+  width: 25px; /* Tamaño de los iconos SVG */
+  height: 25px;
+  transition: transform 0.3s ease;
+}
+
+.header-icon svg:hover {
+  transform: scale(1.2); /* Efecto de aumento al pasar el ratón */
+}
+
+.profile-img {
+  border-radius: 50%; /* Esto hace que la imagen sea redonda */
+  width: 40px; /* Tamaño de la imagen redonda */
+  height: 40px;
+  object-fit: cover; /* Asegura que la imagen se recorte adecuadamente */
+}
+
 
     .logo {
       font-size: 24px;
@@ -209,15 +238,31 @@
 <body>
 
   <!-- HEADER -->
-  <header class="header">
-    <div class="logo">KYB</div>
+<header>
+  <div class="logo-container">
+    <!-- Logo de KYB con texto y degradado -->
+    <h1 class="logo">KYB</h1>
+  </div>
+  <div class="header-icons">
+    <a href="descargas.html" class="header-icon">
+      <!-- Icono de Descarga (SVG) -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M12 3v12.59l3.707-3.707 1.414 1.414L12 18.414l-5.121-5.121 1.414-1.414L12 15.59V3h1zM19 19H5v-2h14v2z"/>
+      </svg>
+    </a>
+    <a href="buscar.html" class="header-icon">
+      <!-- Icono de Lupa (SVG) -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path d="M10 2a8 8 0 1 1-8 8 8 8 0 0 1 8-8zm0 14a6 6 0 1 0-6-6 6 6 0 0 0 6 6zm10 2l-5.7-5.7a7.96 7.96 0 0 0 1.7-4.3C20 5.58 16.42 2 12 2 7.58 2 4 5.58 4 10s3.58 8 8 8c3.12 0 5.9-1.74 7.26-4.33l5.7 5.7-1.26 1.26z"/>
+      </svg>
+    </a>
+    <a href="cuenta.html" class="header-icon">
+      <!-- Imagen de cuenta redonda -->
+      <img src="perfil-imagen.png" alt="Imagen de Cuenta" class="profile-img">
+    </a>
+  </div>
+</header>
 
-    <!-- Menú normal para computadora -->
-    <nav class="nav-desktop">
-      <a href="cuenta.html"><img src="cuenta.png" alt="Cuenta"></a>
-      <a href="lupa.html"><img src="lupa.png" alt="Buscar"></a>
-      <a href="descargas.html"><img src="descargas.png" alt="Descargas"></a>
-    </nav>
 
     <!-- Menú hamburguesa para celular -->
     <div class="menu-mobile">
