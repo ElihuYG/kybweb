@@ -4,12 +4,6 @@
 <meta content="initial-scale=1.0, width=device-width, minimal-ui" name="viewport">
 <title>iQONE — Video Blogger Template</title>
 <style id="page-skin-1" type="text/css"><!--
-/*!************************************************
-* Blogger Template Style
-* Name      : iQONE
-* Version   : 2.0.0
-* Creator   : Rian seo - https://www.temabanua.com
-**************************************************/
 :root {
 --keycolor:#1cc749;
 --background:#111319;
