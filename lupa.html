@@ -1,223 +1,239 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Buscar Series - KYB</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tu Historia con Música</title>
   <style>
-    /* Fondo degradado animado */
+    /* Reset básico */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #00a86b, #007f5f, #00a86b, #007f5f);
-      background-size: 400% 400%;
-      animation: moverFondo 15s ease infinite;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      background: #f9f9f9;
+      color: #222;
+      padding: 20px;
+      transition: background 0.4s, color 0.4s;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    body.night {
+      background: #121212;
+      color: #eee;
     }
 
-    @keyframes moverFondo {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Contenedor principal */
-    .container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-    }
-
-    h1 {
-      margin-bottom: 20px;
+    header {
       text-align: center;
-    }
-
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
       margin-bottom: 30px;
     }
-
-    input[type="text"] {
-      padding: 10px;
-      border: none;
-      border-radius: 20px;
-      width: 250px;
-      font-size: 16px;
+    header img {
+      max-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #888;
+      margin-bottom: 15px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 5px;
+    }
+    header p {
+      font-style: italic;
+      color: #666;
+    }
+    body.night header p {
+      color: #bbb;
     }
 
+    main {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ccc;
+      margin-bottom: 40px;
+      transition: background 0.4s, color 0.4s;
+    }
+    body.night main {
+      background: #222;
+      color: #eee;
+      box-shadow: 0 0 15px #333;
+    }
+
+    /* Reproductor de música estilo caja */
+    .music-player {
+      margin: 20px auto;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #aaa;
+    }
+
+    /* Botones */
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
     button {
-      background-color: #00a86b;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 20px;
       cursor: pointer;
+      background: #2ecc71;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
       color: white;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      font-size: 1rem;
+      box-shadow: 0 5px #27ae60;
       transition: background 0.3s;
+      user-select: none;
     }
-
     button:hover {
-      background-color: #00935e;
+      background: #27ae60;
+    }
+    button:active {
+      box-shadow: none;
+      transform: translateY(3px);
     }
 
-    .wand {
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(white, transparent);
-      border-radius: 50%;
-      animation: girarVarita 1s linear infinite;
+    /* Botón modo noche */
+    .toggle-night {
+      background: #34495e;
+      box-shadow: 0 5px #2c3e50;
+    }
+    .toggle-night:hover {
+      background: #2c3e50;
+    }
+    .toggle-night:active {
+      box-shadow: none;
+      transform: translateY(3px);
     }
 
-    @keyframes girarVarita {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Resultados */
-    .results {
-      display: none;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      width: 100%;
-      max-width: 1000px;
-    }
-
-    .serie {
-      text-align: center;
-    }
-
-    .serie img {
-      width: 100%;
-      height: 280px; /* Más alto para que sean verticales */
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .random-popup {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #007f5f;
-      padding: 20px 30px;
-      border-radius: 20px;
-      text-align: center;
-      font-size: 22px;
-      animation: aparecerDesaparecer 3s forwards;
-    }
-
-    @keyframes aparecerDesaparecer {
-      0% { opacity: 0; transform: translate(-50%, -60%); }
-      10% { opacity: 1; transform: translate(-50%, -50%); }
-      90% { opacity: 1; }
-      100% { opacity: 0; transform: translate(-50%, -40%); }
-    }
-
-    /* Footer */
     footer {
-      background-color: #003d2e;
       text-align: center;
-      padding: 15px 0;
-      font-size: 14px;
-      color: white;
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+    body.night footer {
+      color: #555;
     }
   </style>
 </head>
 <body>
+  <header>
+    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Portada de la historia" />
+    <h1>El Misterio de las Sombras</h1>
+    <p>Una historia con música para sentir cada momento</p>
+  </header>
 
-<div class="container">
-  <h1>Buscar Series en KYB</h1>
+  <main>
+    <div class="buttons">
+      <button id="prevChapter" disabled>← Capítulo Anterior</button>
+      <button id="toggleNight" class="toggle-night">Modo Noche</button>
+      <button id="nextChapter">Siguiente Capítulo →</button>
+    </div>
 
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar serie...">
-    <button id="randomButton">
-      <div class="wand"></div> Aleatorio
-    </button>
-  </div>
+    <article id="chapterContent">
+      <h2>Capítulo 1: La llegada</h2>
+      <p>
+        La noche caía lentamente sobre el pueblo cuando Clara llegó con su maleta. 
+        Un viento frío la recibió y una sensación extraña recorrió su espalda. 
+        ¿Qué secretos guardaba aquel lugar que parecía dormido y a la vez vigilante?
+      </p>
+      <p>
+        Mientras caminaba por la calle empedrada, la música de un violín lejano se mezclaba con el susurro de las hojas, 
+        y algo en su interior le decía que esa noche sería diferente.
+      </p>
+    </article>
 
-  <div class="results" id="resultsContainer">
-    <!-- Series aparecerán aquí -->
-  </div>
-</div>
+    <div class="music-player">
+      <!-- Cambia el src del iframe con el link del video de YouTube que quieras poner -->
+      <iframe id="music" src="https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g" 
+              title="Música de fondo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </main>
 
-<footer>
-  © 2025 KYB. Todos los derechos reservados.
-</footer>
+  <footer>
+    &copy; 2025 Tu Nombre - Historia creada por ti.
+  </footer>
 
-<script>
-  const series = [
-    { nombre: "Cautivar a un Rey", imagen: "Posters KYB cautivar un rey.png" },
-    { nombre: "Different Princess", imagen: "Posters KYB different princess.png" },
-    { nombre: "Doctor Slump", imagen: "Posters KYB doctor slump.png" },
-    { nombre: "Love for Love Shake", imagen: "Posters KYB love for love shake.png" },
-    { nombre: "Marry My Husband", imagen: "Posters KYB marry my husband.png" },
-    { nombre: "Time the Series", imagen: "Posters KYB time the series.png" },
-    { nombre: "Begins Youth", imagen: "poster_begins_youth.png" },
-    { nombre: "Yoursky", imagen: "Posters KYB yoursky.png" },
-    { nombre: "The Heart Killer", imagen: "Posters KYB the heart killer.png" },
-    { nombre: "Sweet Home", imagen: "Posters KYB sweet home.png" },
-    { nombre: "My Only 12%", imagen: "Posters KYB my only 12%.png" }
-  ];
+  <script>
+    // Modo noche / día
+    const btnNight = document.getElementById('toggleNight');
+    btnNight.addEventListener('click', () => {
+      document.body.classList.toggle('night');
+      btnNight.textContent = document.body.classList.contains('night') ? 'Modo Día' : 'Modo Noche';
+    });
 
-  const searchInput = document.getElementById("searchInput");
-  const resultsContainer = document.getElementById("resultsContainer");
-  const randomButton = document.getElementById("randomButton");
+    // Simulación para cambiar capítulos
+    const chapterContent = document.getElementById('chapterContent');
+    const music = document.getElementById('music');
+    const btnNext = document.getElementById('nextChapter');
+    const btnPrev = document.getElementById('prevChapter');
 
-  function mostrarResultados(filtro = "") {
-    resultsContainer.innerHTML = "";
-    const resultados = series.filter(serie =>
-      serie.nombre.toLowerCase().includes(filtro.toLowerCase())
-    );
+    const chapters = [
+      {
+        title: "Capítulo 1: La llegada",
+        text: `
+          <p>
+            La noche caía lentamente sobre el pueblo cuando Clara llegó con su maleta. 
+            Un viento frío la recibió y una sensación extraña recorrió su espalda. 
+            ¿Qué secretos guardaba aquel lugar que parecía dormido y a la vez vigilante?
+          </p>
+          <p>
+            Mientras caminaba por la calle empedrada, la música de un violín lejano se mezclaba con el susurro de las hojas, 
+            y algo en su interior le decía que esa noche sería diferente.
+          </p>
+        `,
+        musicUrl: "https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g"
+      },
+      {
+        title: "Capítulo 2: La sombra misteriosa",
+        text: `
+          <p>
+            Clara se adentró en el bosque, guiada solo por la débil luz de la luna. 
+            Algo se movía entre los árboles, una sombra que parecía seguirla sin ser vista.
+          </p>
+          <p>
+            La música cambió a un ritmo más intenso, envolviendo cada paso con un aura de misterio.
+          </p>
+        `,
+        musicUrl: "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&loop=1&playlist=5qap5aO4i9A"
+      }
+    ];
 
-    if (resultados.length > 0) {
-      resultsContainer.style.display = "grid";
-      resultados.forEach(serie => {
-        const div = document.createElement("div");
-        div.classList.add("serie");
-        div.innerHTML = `<img src="${serie.imagen}" alt="${serie.nombre}"><p>${serie.nombre}</p>`;
-        resultsContainer.appendChild(div);
-      });
-    } else {
-      resultsContainer.style.display = "none";
+    let currentChapter = 0;
+
+    function loadChapter(index) {
+      if (index < 0 || index >= chapters.length) return;
+      currentChapter = index;
+      chapterContent.innerHTML = `<h2>${chapters[index].title}</h2>${chapters[index].text}`;
+      music.src = chapters[index].musicUrl;
+
+      btnPrev.disabled = currentChapter === 0;
+      btnNext.disabled = currentChapter === chapters.length - 1;
     }
-  }
 
-  searchInput.addEventListener("input", () => {
-    const searchTerm = searchInput.value.trim();
-    if (searchTerm === "") {
-      resultsContainer.style.display = "none";
-    } else {
-      mostrarResultados(searchTerm);
-    }
-  });
+    btnNext.addEventListener('click', () => {
+      if (currentChapter < chapters.length -1) {
+        loadChapter(currentChapter +1);
+      }
+    });
 
-  randomButton.addEventListener("click", () => {
-    const randomSerie = series[Math.floor(Math.random() * series.length)];
-    
-    const popup = document.createElement("div");
-    popup.className = "random-popup";
-    popup.innerText = randomSerie.nombre;
-    
-    document.body.appendChild(popup);
+    btnPrev.addEventListener('click', () => {
+      if (currentChapter > 0) {
+        loadChapter(currentChapter -1);
+      }
+    });
 
-    setTimeout(() => {
-      popup.remove();
-    }, 3000);
-  });
-
-  // No mostramos series al inicio
-</script>
-
+    // Carga inicial
+    loadChapter(0);
+  </script>
 </body>
-</html>
+        </html>
