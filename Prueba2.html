@@ -3,73 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KYB - Reproductor con Subtítulos</title>
-
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-
+  <title>KYB – Ver en Inkaplay</title>
   <style>
-    body {
-      margin: 0;
-      background-color: #000;
-      font-family: sans-serif;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-
-    #player {
-      width: 100%;
-      max-width: 720px;
-      background: black;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .controls-extra {
-      margin-top: 15px;
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .controls-extra button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 12px;
-      background: #00cc99;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .controls-extra button:hover {
-      background: #00997a;
-    }
+    body { background: #111; color: #eee; font-family: sans-serif; text-align: center; padding: 30px; }
+    h1 { margin-bottom: 20px; }
+    .server-btn { display: block; margin: 10px auto; padding: 12px 20px; background: #00cc99; color: white; border: none; border-radius: 8px; cursor: pointer; width: 200px; font-size: 16px; }
+    .server-btn:hover { background: #00997a; }
+    .note { color: #888; font-size: 14px; margin-top: 20px; }
   </style>
 </head>
-
 <body>
+  <h1>Selecciona Servidor</h1>
+  <div id="servers"></div>
+  <div class="note">Al elegir un servidor, se abrirá Inkaplay si está instalada.</div>
 
-  <video id="player" playsinline controls poster="https://tuweb.com/poster.jpg">
-    <source src="https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i" type="video/mp4" />
-    <track kind="subtitles" src="https://raw.githubusercontent.com/elihuchat/subtitles/main/test-theboynextworld.vtt" srclang="es" label="Español" default>
-    Tu navegador no soporta video.
-  </video>
-
-  <div class="controls-extra">
-    <button onclick="player.currentTime += 85">⏩ Saltar Intro</button>
-    <button onclick="window.location.href='/episodio2.html'">➡️ Siguiente Episodio</button>
-  </div>
-
-  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <script>
-    const player = new Plyr('#player');
-  </script>
+    const servers = {
+      "Fembed": "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i",
+      "Dropbox": "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i"
+    };
 
+    const cont = document.getElementById('servers');
+    for (let [name, url] of Object.entries(servers)) {
+      let btn = document.createElement('button');
+      btn.innerText = `Ver con ${name}`;
+      btn.className = 'server-btn';
+      btn.onclick = () => {
+        const intentUri =
+          `intent://play?url=${encodeURIComponent(url)}#Intent;scheme=inkaplay;package=com.inkamedia.inkaplay;end`;
+        window.location = intentUri;
+        setTimeout(() => window.location = url, 500);
+      };
+      cont.appendChild(btn);
+    }
+  </script>
 </body>
 </html>
