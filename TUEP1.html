@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>KYB - Intro + The Untamed Cap 1</title>
+  <title>KYB - The Untamed EP 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -31,16 +31,14 @@
   <script>
     const video = document.getElementById('videoPlayer');
 
-    const capituloSrc = "https://dl.dropboxusercontent.com/scl/fi/ix4dsynti06x0zgq1ij1m/The-Untamed-EP1-SUB-ESP.mp4?rlkey=8f5bzhvdw0rzbaynt1o19sbw6&st=ln2d0t1l";
+    const capituloSrc = "https://dl.dropboxusercontent.com/scl/fi/ix4dsynti06x0zgq1ij1m/The-Untamed-EP1-SUB-ESP.mp4?rlkey=8f5bzhvdw0rzbaynt1o19sbw6&st=xxwg4hbu";
 
     video.addEventListener('ended', () => {
-      // Cambia el video al capítulo nuevo
       video.src = capituloSrc;
       video.load();
       video.play();
     });
 
-    // Evita clic derecho para bajar video
     video.addEventListener('contextmenu', e => e.preventDefault());
   </script>
 
