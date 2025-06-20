@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KYB - Reproductor</title>
+
+  <!-- Estilos de Plyr (reproductor) -->
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #player {
+      width: 100%;
+      max-width: 720px;
+      background: black;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .controls-extra {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .controls-extra button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      background: #00cc99;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .controls-extra button:hover {
+      background: #00997a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Reproductor de video -->
+  <video id="player" playsinline controls poster="https://tuweb.com/imagen-del-poster.jpg">
+    <source src="https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i" type="video/mp4" />
+    Tu navegador no soporta el video.
+  </video>
+
+  <!-- Botones extra -->
+  <div class="controls-extra">
+    <button onclick="player.currentTime += 85">⏩ Saltar Intro</button>
+    <button onclick="window.location.href='/episodio2.html'">➡️ Siguiente Episodio</button>
+  </div>
+
+  <!-- Script del reproductor -->
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+  <script>
+    const player = new Plyr('#player', {
+      controls: [
+        'play', 'progress', 'current-time',
+        'mute', 'volume', 'settings', 'fullscreen'
+      ],
+      speed: { selected: 1, options: [0.75, 1, 1.25, 1.5] },
+      ratio: '16:9',
+    });
+  </script>
+
+</body>
+  </html>
