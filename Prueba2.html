@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>KYB - Episodios</title>
+  <title>KYB - Episodio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
@@ -24,24 +24,21 @@
 </head>
 <body>
 
-  <video id="videoPlayer" playsinline autoplay></video>
+  <video id="videoPlayer" controls autoplay playsinline></video>
 
   <script>
     const video = document.getElementById('videoPlayer');
 
-    // URL de la intro y el capítulo
+    // Intro de KYB y luego el capítulo
     const intro = "https://dl.dropboxusercontent.com/scl/fi/p6zfg3pyhsc76bx502ofi/intro-de-KYB.mp4?rlkey=f4ies3jfbz4l6lpm9f29d5eyd&st=t66hux8e";
     const capitulo = "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i";
 
-    // Primero cargamos la intro sin controles
+    // Inicia con la intro (con controles activos)
     video.src = intro;
-    video.controls = false;
 
-    // Cuando termine la intro
+    // Cuando termina la intro, cambia al capítulo
     video.addEventListener('ended', () => {
       video.src = capitulo;
-      video.controls = true;
-      video.autoplay = true;
       video.load();
       video.play();
     });
