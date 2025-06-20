@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>KYB - TBNW Episodio 1</title>
+  <title>KYB - Episodio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
@@ -33,39 +33,42 @@
 
     const videoElement = document.querySelector('#player');
 
-    // 🔒 Reproductor con controles limitados durante la intro
-    let player = new Plyr('#player', {
-      controls: ['progress', 'fullscreen'], // solo barra de tiempo + fullscreen
+    // Iniciar con la intro
+    videoElement.src = intro;
+
+    // Crear Plyr con controles limitados para la intro
+    let player = new Plyr(videoElement, {
+      controls: ['progress', 'fullscreen'],
       disableContextMenu: true,
       seekTime: 0
     });
 
-    // Cargar intro primero
-    videoElement.src = intro;
-
-    // Cuando termina la intro, cargar el capítulo completo
+    // Cuando termina la intro
     videoElement.addEventListener('ended', () => {
-      player.destroy(); // Destruir reproductor anterior
+      // Cambiar la fuente del video
       videoElement.src = capitulo;
 
-      // Nuevo reproductor con todos los controles
-      player = new Plyr('#player', {
-        controls: [
-          'play',
-          'progress',
-          'current-time',
-          'mute',
-          'volume',
-          'settings',
-          'fullscreen'
-        ],
-        disableContextMenu: true
-      });
-
-      // Esperar a que cargue el nuevo video antes de hacer play
+      // Esperar a que el nuevo video cargue
       videoElement.addEventListener('loadeddata', () => {
+        // Destruir el reproductor viejo
+        player.destroy();
+
+        // Crear un nuevo reproductor con todos los controles
+        player = new Plyr(videoElement, {
+          controls: [
+            'play',
+            'progress',
+            'current-time',
+            'mute',
+            'volume',
+            'settings',
+            'fullscreen'
+          ],
+          disableContextMenu: true
+        });
+
         player.play();
-      }, { once: true });
+      }, { once: true }); // solo una vez
     });
   </script>
 
