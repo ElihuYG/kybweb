@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KYB - Reproductor</title>
+  <title>KYB - Reproductor Cine</title>
 
-  <!-- Estilos de Plyr (reproductor) -->
+  <!-- Plyr (estilos) -->
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
   <style>
@@ -18,12 +18,34 @@
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      position: relative;
+    }
+
+    /* Fondo oscurecido */
+    .cinema-mode {
+      background-color: #000;
+    }
+
+    .dark-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1;
+      display: none;
+    }
+
+    .video-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 720px;
     }
 
     #player {
       width: 100%;
-      max-width: 720px;
-      background: black;
       border-radius: 12px;
       overflow: hidden;
     }
@@ -34,9 +56,11 @@
       gap: 15px;
       flex-wrap: wrap;
       justify-content: center;
+      z-index: 2;
     }
 
-    .controls-extra button {
+    .controls-extra button,
+    #toggleLights {
       padding: 10px 20px;
       font-size: 16px;
       border: none;
@@ -46,23 +70,39 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s;
+      z-index: 2;
     }
 
-    .controls-extra button:hover {
+    .controls-extra button:hover,
+    #toggleLights:hover {
       background: #00997a;
+    }
+
+    #toggleLights {
+      position: fixed;
+      top: 15px;
+      right: 15px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Reproductor de video -->
-  <video id="player" playsinline controls poster="https://tuweb.com/imagen-del-poster.jpg">
-    <source src="https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i" type="video/mp4" />
-    Tu navegador no soporta el video.
-  </video>
+  <!-- Fondo oscuro (oculto al inicio) -->
+  <div class="dark-overlay" id="overlay"></div>
 
-  <!-- Botones extra -->
+  <!-- Botón foco -->
+  <button id="toggleLights">💡 Apagar luces</button>
+
+  <!-- Contenedor del reproductor -->
+  <div class="video-container">
+    <video id="player" playsinline controls poster="https://tuweb.com/imagen-del-poster.jpg">
+      <source src="https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i" type="video/mp4" />
+      Tu navegador no soporta el video.
+    </video>
+  </div>
+
+  <!-- Botones adicionales -->
   <div class="controls-extra">
     <button onclick="player.currentTime += 85">⏩ Saltar Intro</button>
     <button onclick="window.location.href='/episodio2.html'">➡️ Siguiente Episodio</button>
@@ -71,15 +111,18 @@
   <!-- Script del reproductor -->
   <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <script>
-    const player = new Plyr('#player', {
-      controls: [
-        'play', 'progress', 'current-time',
-        'mute', 'volume', 'settings', 'fullscreen'
-      ],
-      speed: { selected: 1, options: [0.75, 1, 1.25, 1.5] },
-      ratio: '16:9',
+    const player = new Plyr('#player');
+
+    const btnToggle = document.getElementById('toggleLights');
+    const overlay = document.getElementById('overlay');
+    let dark = false;
+
+    btnToggle.addEventListener('click', () => {
+      dark = !dark;
+      overlay.style.display = dark ? 'block' : 'none';
+      btnToggle.innerText = dark ? '💡 Encender luces' : '💡 Apagar luces';
     });
   </script>
 
 </body>
-  </html>
+</html>
