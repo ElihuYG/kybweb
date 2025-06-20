@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>KYB - Episodio</title>
+  <title>KYB - TBNW Episodio 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
@@ -33,28 +33,39 @@
 
     const videoElement = document.querySelector('#player');
 
-    // 🔒 Controles restringidos durante la intro (solo timeline)
+    // 🔒 Reproductor con controles limitados durante la intro
     let player = new Plyr('#player', {
-      controls: ['progress'], // solo barra de tiempo
+      controls: ['progress', 'fullscreen'], // solo barra de tiempo + fullscreen
       disableContextMenu: true,
-      seekTime: 0 // prevenir skip con teclado
+      seekTime: 0
     });
 
     // Cargar intro primero
     videoElement.src = intro;
 
-    // Cuando termina la intro, cargar capítulo con todos los controles
+    // Cuando termina la intro, cargar el capítulo completo
     videoElement.addEventListener('ended', () => {
-      player.destroy(); // destruimos el primero
+      player.destroy(); // Destruir reproductor anterior
       videoElement.src = capitulo;
 
-      // Creamos nuevo reproductor con controles completos
+      // Nuevo reproductor con todos los controles
       player = new Plyr('#player', {
-        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'],
-        disableContextMenu: true,
+        controls: [
+          'play',
+          'progress',
+          'current-time',
+          'mute',
+          'volume',
+          'settings',
+          'fullscreen'
+        ],
+        disableContextMenu: true
       });
 
-      player.play();
+      // Esperar a que cargue el nuevo video antes de hacer play
+      videoElement.addEventListener('loadeddata', () => {
+        player.play();
+      }, { once: true });
     });
   </script>
 
