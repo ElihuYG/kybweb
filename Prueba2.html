@@ -24,29 +24,36 @@
 </head>
 <body>
 
-  <video id="player" controls playsinline></video>
+  <video id="player" playsinline controls></video>
 
   <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <script>
-    const player = new Plyr('#player');
-
     const intro = "https://dl.dropboxusercontent.com/scl/fi/p6zfg3pyhsc76bx502ofi/intro-de-KYB.mp4?rlkey=f4ies3jfbz4l6lpm9f29d5eyd&st=t66hux8e";
     const capitulo = "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i";
 
     const videoElement = document.querySelector('#player');
 
+    // 🔒 Controles restringidos durante la intro (solo timeline)
+    let player = new Plyr('#player', {
+      controls: ['progress'], // solo barra de tiempo
+      disableContextMenu: true,
+      seekTime: 0 // prevenir skip con teclado
+    });
+
     // Cargar intro primero
     videoElement.src = intro;
 
-    // Cuando termine la intro, cargar el capítulo
+    // Cuando termina la intro, cargar capítulo con todos los controles
     videoElement.addEventListener('ended', () => {
-      player.source = {
-        type: 'video',
-        sources: [{
-          src: capitulo,
-          type: 'video/mp4',
-        }]
-      };
+      player.destroy(); // destruimos el primero
+      videoElement.src = capitulo;
+
+      // Creamos nuevo reproductor con controles completos
+      player = new Plyr('#player', {
+        controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'],
+        disableContextMenu: true,
+      });
+
       player.play();
     });
   </script>
