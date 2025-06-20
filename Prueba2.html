@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KYB – Ver en Inkaplay</title>
+  <meta charset="UTF-8" />
+  <title>KYB - Episodio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
-    body { background: #111; color: #eee; font-family: sans-serif; text-align: center; padding: 30px; }
-    h1 { margin-bottom: 20px; }
-    .server-btn { display: block; margin: 10px auto; padding: 12px 20px; background: #00cc99; color: white; border: none; border-radius: 8px; cursor: pointer; width: 200px; font-size: 16px; }
-    .server-btn:hover { background: #00997a; }
-    .note { color: #888; font-size: 14px; margin-top: 20px; }
+    body {
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    video {
+      width: 90%;
+      max-width: 720px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00cc99;
+    }
   </style>
 </head>
 <body>
-  <h1>Selecciona Servidor</h1>
-  <div id="servers"></div>
-  <div class="note">Al elegir un servidor, se abrirá Inkaplay si está instalada.</div>
 
+  <video id="player" controls playsinline></video>
+
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <script>
-    const servers = {
-      "Fembed": "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i",
-      "Dropbox": "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i"
-    };
+    const player = new Plyr('#player');
 
-    const cont = document.getElementById('servers');
-    for (let [name, url] of Object.entries(servers)) {
-      let btn = document.createElement('button');
-      btn.innerText = `Ver con ${name}`;
-      btn.className = 'server-btn';
-      btn.onclick = () => {
-        const intentUri =
-          `intent://play?url=${encodeURIComponent(url)}#Intent;scheme=inkaplay;package=com.inkamedia.inkaplay;end`;
-        window.location = intentUri;
-        setTimeout(() => window.location = url, 500);
+    const intro = "https://dl.dropboxusercontent.com/scl/fi/p6zfg3pyhsc76bx502ofi/intro-de-KYB.mp4?rlkey=f4ies3jfbz4l6lpm9f29d5eyd&st=t66hux8e";
+    const capitulo = "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i";
+
+    const videoElement = document.querySelector('#player');
+
+    // Cargar intro primero
+    videoElement.src = intro;
+
+    // Cuando termine la intro, cargar el capítulo
+    videoElement.addEventListener('ended', () => {
+      player.source = {
+        type: 'video',
+        sources: [{
+          src: capitulo,
+          type: 'video/mp4',
+        }]
       };
-      cont.appendChild(btn);
-    }
+      player.play();
+    });
   </script>
+
 </body>
 </html>
