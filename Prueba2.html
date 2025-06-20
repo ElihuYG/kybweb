@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>KYB - Intro + Capítulo con Subtítulos</title>
+  <title>KYB - Intro + Capítulo con Subtítulos y Plyr.js</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
     body {
       margin: 0;
@@ -13,7 +14,7 @@
       align-items: center;
       height: 100vh;
     }
-    video {
+    #player {
       width: 90%;
       max-width: 720px;
       border-radius: 12px;
@@ -24,43 +25,52 @@
 </head>
 <body>
 
-  <video id="videoPlayer" controls autoplay playsinline>
-    <source src="https://dl.dropboxusercontent.com/scl/fi/p6zfg3pyhsc76bx502ofi/intro-de-KYB.mp4?rlkey=f4ies3jfbz4l6lpm9f29d5eyd&st=t66hux8e" type="video/mp4" />
-  </video>
+  <video id="player" playsinline></video>
 
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   <script>
-    const video = document.getElementById('videoPlayer');
-
+    const introSrc = "https://dl.dropboxusercontent.com/scl/fi/p6zfg3pyhsc76bx502ofi/intro-de-KYB.mp4?rlkey=f4ies3jfbz4l6lpm9f29d5eyd&st=t66hux8e";
     const capituloSrc = "https://dl.dropboxusercontent.com/scl/fi/pt9auseod1g6n5153a9m8/Theboynextworldextendido.mp4?rlkey=gmoj897qrwkcqe21wwygrtgaj&st=b3dgab8i";
     const subtituloSrc = "https://dl.dropboxusercontent.com/scl/fi/d931ktraub5r6rb4mborr/theboynextworldextendido.vtt?rlkey=pto6wtm3nqaosgsh9oqmldtgm&st=a9l3u0c4";
 
-    video.addEventListener('ended', () => {
-      // Limpiar video
-      while (video.firstChild) {
-        video.removeChild(video.firstChild);
-      }
+    const video = document.getElementById('player');
 
-      // Crear source para capítulo
-      const source = document.createElement('source');
-      source.src = capituloSrc;
-      source.type = 'video/mp4';
-      video.appendChild(source);
-
-      // Crear track para subtítulos
-      const track = document.createElement('track');
-      track.kind = "subtitles";
-      track.label = "Español";
-      track.srclang = "es";
-      track.src = subtituloSrc;
-      track.default = true;
-      video.appendChild(track);
-
-      video.load();
-      video.play();
+    // Inicializamos Plyr con opciones, sin botón descargar
+    let player = new Plyr(video, {
+      controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen', 'captions'],
+      captions: { active: true, language: 'es' },
+      disableContextMenu: true,  // evita clic derecho
+      hideControls: false
     });
 
-    // Evitar menú clic derecho para descargar
-    video.addEventListener('contextmenu', e => e.preventDefault());
+    // Cargar intro primero sin subtítulos
+    player.source = {
+      type: 'video',
+      sources: [
+        { src: introSrc, type: 'video/mp4' }
+      ],
+      tracks: []
+    };
+
+    // Cuando termina intro, carga capítulo con subtítulos
+    player.on('ended', () => {
+      player.source = {
+        type: 'video',
+        sources: [
+          { src: capituloSrc, type: 'video/mp4' }
+        ],
+        tracks: [
+          {
+            kind: 'subtitles',
+            label: 'Español',
+            srclang: 'es',
+            src: subtituloSrc,
+            default: true
+          }
+        ]
+      };
+      player.play();
+    });
   </script>
 
 </body>
