@@ -2,91 +2,126 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Untamed - KYB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Untamed</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .episode:hover { background-color: #1e293b; }
+    .popup {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .star {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .star:hover {
+      transform: scale(1.2);
+    }
+    .bounce {
+      animation: bounce 0.3s;
+    }
+    @keyframes bounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
-<body class="bg-slate-900 text-white">
-  <!-- Encabezado -->
-  <nav class="flex justify-between items-center px-6 py-4 bg-slate-800">
-    <h1 class="text-2xl font-bold text-emerald-400">The Untamed</h1>
-    <div class="space-x-4">
-      <button id="addToList" class="bg-emerald-600 px-4 py-2 rounded hover:bg-emerald-700">+ Mi Lista</button>
-      <button id="rate" class="bg-gray-700 px-4 py-2 rounded hover:bg-gray-600">⭐ Valorar</button>
-    </div>
-  </nav>
+<body class="bg-slate-900 text-white font-sans">
 
-  <!-- Contenido principal -->
-  <main class="p-6 space-y-6">
-    <!-- Trailer y descripción -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="p-6 max-w-4xl mx-auto space-y-6">
+
+    <div class="flex justify-between items-start">
       <div>
-        <iframe class="w-full aspect-video rounded-lg" src="https://www.youtube.com/embed/8B2r3IIPmbA" frameborder="0" allowfullscreen></iframe>
+        <h1 class="text-3xl font-bold text-emerald-500">The Untamed</h1>
+        <p class="text-sm text-gray-400 mt-1">China • 2019 • 50 episodios • BL, Fantasía, Misterio • Subtitulado</p>
+        <p class="text-sm text-gray-400">Duración promedio: 45 min • Clasificación: +13</p>
       </div>
-      <div class="space-y-3">
-        <p><span class="font-semibold text-emerald-400">Género:</span> Fantasía, Romance, Acción</p>
-        <p><span class="font-semibold text-emerald-400">Etiquetas:</span> Hermandad, Cultivo Espiritual, BL, Reencarnación</p>
-        <p><span class="font-semibold text-emerald-400">País:</span> China</p>
-        <p><span class="font-semibold text-emerald-400">Idioma:</span> Mandarín (Subtitulado)</p>
-        <p><span class="font-semibold text-emerald-400">Duración:</span> 45 min por episodio</p>
-        <p><span class="font-semibold text-emerald-400">Clasificación:</span> +16</p>
-        <p class="text-sm text-gray-300">
-          <span class="font-semibold text-emerald-400">Sinopsis:</span> Wei Wuxian y Lan Wangji, dos cultivadores de diferentes clanes, se unen para resolver misterios del pasado mientras luchan contra fuerzas oscuras. Una historia llena de amor, sacrificio y redención.
-        </p>
+      <div class="flex space-x-4">
+        <button id="miListaBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Mi lista" class="h-6 w-6 mr-1">
+          <span>Mi Lista</span>
+        </button>
+        <button id="valorarBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="Valorar" class="h-6 w-6 mr-1">
+          <span>Valorar</span>
+        </button>
       </div>
     </div>
 
-    <!-- Reparto -->
-    <div>
-      <h2 class="text-xl font-bold mb-2 text-emerald-400">Reparto</h2>
-      <ul class="list-disc list-inside text-gray-300">
-        <li>Xiao Zhan como Wei Wuxian</li>
-        <li>Wang Yibo como Lan Wangji</li>
-        <li>Lu Xuan como Jiang Yanli</li>
-        <li>Wang Zhuocheng como Jiang Cheng</li>
-      </ul>
+    <div class="aspect-w-16 aspect-h-9">
+      <iframe class="w-full rounded-lg" height="315" src="https://youtu.be/rAsP69G5rWQ?si=mgGEsfeTI-Mqss0k" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <!-- Lista de episodios -->
-    <div>
-      <h2 class="text-xl font-bold mb-2 text-emerald-400">Episodios</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <!-- Genera episodios -->
-        <script>
-          const episodes = 50;
-          for (let i = 1; i <= episodes; i++) {
-            document.write(`<a href="#" class="episode block p-4 rounded bg-slate-800 text-center transition">The Untamed 1x${i}</a>`);
-          }
-        </script>
+    <p class="text-gray-300">En un mundo lleno de clanes y cultivadores, dos jóvenes de ideales opuestos, Wei Wuxian y Lan Wangji, se enfrentan a un misterio ancestral que podría cambiar el destino de todos. "The Untamed" es una historia de amor, lealtad, traición y redención que ha capturado el corazón de millones.</p>
+
+    <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+  </div>
+
+  <!-- Popup estrellas -->
+  <div id="popup" class="fixed inset-0 popup hidden flex items-center justify-center z-50">
+    <div class="bg-slate-800 p-6 rounded-xl text-center">
+      <h2 class="text-lg font-bold mb-4">Califica esta serie</h2>
+      <div id="estrellas" class="flex justify-center space-x-2 mb-4">
+        <!-- Se llenan por JS -->
       </div>
+      <button onclick="cerrarPopup()" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded">Cerrar</button>
     </div>
-  </main>
+  </div>
 
   <script>
-    const listBtn = document.getElementById('addToList');
-    listBtn.addEventListener('click', () => {
-      const series = JSON.parse(localStorage.getItem('miLista')) || [];
-      if (!series.includes('The Untamed')) {
-        series.push('The Untamed');
-        localStorage.setItem('miLista', JSON.stringify(series));
-        alert('Agregado a Mi Lista ✅');
-      } else {
-        alert('Ya está en tu lista');
-      }
+    const listaBtn = document.getElementById('miListaBtn');
+    const valorarBtn = document.getElementById('valorarBtn');
+    const popup = document.getElementById('popup');
+    const estrellasDiv = document.getElementById('estrellas');
+
+    // Cargar estado de Mi Lista
+    if (localStorage.getItem('untamed_lista') === 'true') {
+      listaBtn.classList.add('text-white');
+    }
+
+    // Agregar a mi lista con animación
+    listaBtn.addEventListener('click', () => {
+      listaBtn.classList.add('bounce');
+      localStorage.setItem('untamed_lista', 'true');
+      setTimeout(() => listaBtn.classList.remove('bounce'), 300);
+      listaBtn.classList.add('text-white');
     });
 
-    const rateBtn = document.getElementById('rate');
-    rateBtn.addEventListener('click', () => {
-      const rating = prompt('¿Qué puntuación le das del 1 al 5?');
-      if (rating >= 1 && rating <= 5) {
-        alert(`Gracias por tu valoración de ${rating} ⭐`);
-      } else {
-        alert('Puntuación inválida');
-      }
+    // Mostrar popup de valoración
+    valorarBtn.addEventListener('click', () => {
+      popup.classList.remove('hidden');
+      cargarEstrellas();
     });
+
+    // Cerrar popup
+    function cerrarPopup() {
+      popup.classList.add('hidden');
+    }
+
+    // Estrellas
+    function cargarEstrellas() {
+      estrellasDiv.innerHTML = '';
+      const calif = parseInt(localStorage.getItem('untamed_valoracion')) || 0;
+      for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.className = `star text-3xl ${i <= calif ? 'text-yellow-400' : 'text-gray-500'}`;
+        star.textContent = '★';
+        star.addEventListener('click', () => {
+          localStorage.setItem('untamed_valoracion', i);
+          cargarEstrellas();
+        });
+        estrellasDiv.appendChild(star);
+      }
+    }
+
+    // Cargar episodios
+    const episodios = document.getElementById('episodios');
+    for (let i = 1; i <= 50; i++) {
+      const ep = document.createElement('div');
+      ep.className = 'bg-slate-800 hover:bg-slate-700 text-white p-2 rounded text-center cursor-pointer';
+      ep.textContent = `The Untamed 1x${i}`;
+      episodios.appendChild(ep);
+    }
   </script>
 </body>
 </html>
