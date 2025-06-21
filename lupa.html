@@ -1,239 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tu Historia con Música</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar - KYB Doramas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Reset básico */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background: #f9f9f9;
-      color: #222;
-      padding: 20px;
-      transition: background 0.4s, color 0.4s;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    body.night {
-      background: #121212;
-      color: #eee;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    header img {
-      max-width: 200px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #888;
-      margin-bottom: 15px;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 5px;
-    }
-    header p {
-      font-style: italic;
-      color: #666;
-    }
-    body.night header p {
-      color: #bbb;
-    }
-
-    main {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #ccc;
-      margin-bottom: 40px;
-      transition: background 0.4s, color 0.4s;
-    }
-    body.night main {
-      background: #222;
-      color: #eee;
-      box-shadow: 0 0 15px #333;
-    }
-
-    /* Reproductor de música estilo caja */
-    .music-player {
-      margin: 20px auto;
-      text-align: center;
-    }
-    iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #aaa;
-    }
-
-    /* Botones */
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    button {
-      cursor: pointer;
-      background: #2ecc71;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      color: white;
-      font-weight: bold;
-      font-size: 1rem;
-      box-shadow: 0 5px #27ae60;
-      transition: background 0.3s;
-      user-select: none;
-    }
-    button:hover {
-      background: #27ae60;
-    }
-    button:active {
-      box-shadow: none;
-      transform: translateY(3px);
-    }
-
-    /* Botón modo noche */
-    .toggle-night {
-      background: #34495e;
-      box-shadow: 0 5px #2c3e50;
-    }
-    .toggle-night:hover {
-      background: #2c3e50;
-    }
-    .toggle-night:active {
-      box-shadow: none;
-      transform: translateY(3px);
-    }
-
-    footer {
-      text-align: center;
-      color: #888;
-      font-size: 0.9rem;
-      margin-top: 40px;
-    }
-    body.night footer {
-      color: #555;
+    body { background-color: #0f172a; color: white; }
+    .pill {
+      @apply bg-slate-800 text-gray-300 px-4 py-1 rounded-full text-sm hover:bg-emerald-600 hover:text-white transition;
     }
   </style>
 </head>
-<body>
-  <header>
-    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Portada de la historia" />
-    <h1>El Misterio de las Sombras</h1>
-    <p>Una historia con música para sentir cada momento</p>
-  </header>
+<body class="font-sans">
+  <!-- Header con barra de búsqueda -->
+  <div class="px-4 py-6">
+    <input type="text" placeholder="Buscar doramas y películas..."
+           class="w-full bg-slate-800 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+  </div>
 
-  <main>
-    <div class="buttons">
-      <button id="prevChapter" disabled>← Capítulo Anterior</button>
-      <button id="toggleNight" class="toggle-night">Modo Noche</button>
-      <button id="nextChapter">Siguiente Capítulo →</button>
+  <!-- Botones de categoría -->
+  <div class="px-4 flex space-x-2 mb-6">
+    <button class="pill">Doramas</button>
+    <button class="pill">Películas</button>
+    <button class="pill">Variedades</button>
+  </div>
+
+  <!-- Géneros -->
+  <div class="px-4 mb-6">
+    <h2 class="text-lg font-semibold mb-2">Géneros</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="pill">Dramas</span>
+      <span class="pill">Romance</span>
+      <span class="pill">Comedia</span>
+      <span class="pill">Misterio</span>
+      <span class="pill">Fantasía</span>
+      <span class="pill">Ciencia Ficción</span>
     </div>
+  </div>
 
-    <article id="chapterContent">
-      <h2>Capítulo 1: La llegada</h2>
-      <p>
-        La noche caía lentamente sobre el pueblo cuando Clara llegó con su maleta. 
-        Un viento frío la recibió y una sensación extraña recorrió su espalda. 
-        ¿Qué secretos guardaba aquel lugar que parecía dormido y a la vez vigilante?
-      </p>
-      <p>
-        Mientras caminaba por la calle empedrada, la música de un violín lejano se mezclaba con el susurro de las hojas, 
-        y algo en su interior le decía que esa noche sería diferente.
-      </p>
-    </article>
-
-    <div class="music-player">
-      <!-- Cambia el src del iframe con el link del video de YouTube que quieras poner -->
-      <iframe id="music" src="https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g" 
-              title="Música de fondo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <!-- Etiquetas -->
+  <div class="px-4 mb-6">
+    <h2 class="text-lg font-semibold mb-2">Etiquetas</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="pill">Comedia Romántica</span>
+      <span class="pill">Juvenil</span>
+      <span class="pill">Amistad</span>
+      <span class="pill">Vida</span>
+      <span class="pill">Suspenso</span>
+      <span class="pill">Escolar</span>
     </div>
-  </main>
+  </div>
 
-  <footer>
-    &copy; 2025 Tu Nombre - Historia creada por ti.
-  </footer>
+  <!-- Productoras -->
+  <div class="px-4 mb-6">
+    <h2 class="text-lg font-semibold mb-2">Productoras</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="pill">Tencent Video</span>
+      <span class="pill">Netflix</span>
+      <span class="pill">TVN</span>
+      <span class="pill">iQIYI</span>
+      <span class="pill">Youku</span>
+      <span class="pill">KBS2</span>
+    </div>
+  </div>
 
-  <script>
-    // Modo noche / día
-    const btnNight = document.getElementById('toggleNight');
-    btnNight.addEventListener('click', () => {
-      document.body.classList.toggle('night');
-      btnNight.textContent = document.body.classList.contains('night') ? 'Modo Día' : 'Modo Noche';
-    });
+  <!-- Países -->
+  <div class="px-4 mb-6">
+    <h2 class="text-lg font-semibold mb-2">Países</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="pill">Corea del Sur</span>
+      <span class="pill">China</span>
+      <span class="pill">Japón</span>
+      <span class="pill">Tailandia</span>
+      <span class="pill">Indonesia</span>
+      <span class="pill">Filipinas</span>
+    </div>
+  </div>
 
-    // Simulación para cambiar capítulos
-    const chapterContent = document.getElementById('chapterContent');
-    const music = document.getElementById('music');
-    const btnNext = document.getElementById('nextChapter');
-    const btnPrev = document.getElementById('prevChapter');
+  <!-- Idiomas -->
+  <div class="px-4 mb-6">
+    <h2 class="text-lg font-semibold mb-2">Idiomas</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="pill">Latino</span>
+      <span class="pill">CoreanoLatino</span>
+      <span class="pill">JaponésLatino</span>
+      <span class="pill">MandarínLatino</span>
+      <span class="pill">TailandésLatino</span>
+      <span class="pill">FilipinoLatino</span>
+    </div>
+  </div>
 
-    const chapters = [
-      {
-        title: "Capítulo 1: La llegada",
-        text: `
-          <p>
-            La noche caía lentamente sobre el pueblo cuando Clara llegó con su maleta. 
-            Un viento frío la recibió y una sensación extraña recorrió su espalda. 
-            ¿Qué secretos guardaba aquel lugar que parecía dormido y a la vez vigilante?
-          </p>
-          <p>
-            Mientras caminaba por la calle empedrada, la música de un violín lejano se mezclaba con el susurro de las hojas, 
-            y algo en su interior le decía que esa noche sería diferente.
-          </p>
-        `,
-        musicUrl: "https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g"
-      },
-      {
-        title: "Capítulo 2: La sombra misteriosa",
-        text: `
-          <p>
-            Clara se adentró en el bosque, guiada solo por la débil luz de la luna. 
-            Algo se movía entre los árboles, una sombra que parecía seguirla sin ser vista.
-          </p>
-          <p>
-            La música cambió a un ritmo más intenso, envolviendo cada paso con un aura de misterio.
-          </p>
-        `,
-        musicUrl: "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&loop=1&playlist=5qap5aO4i9A"
-      }
-    ];
-
-    let currentChapter = 0;
-
-    function loadChapter(index) {
-      if (index < 0 || index >= chapters.length) return;
-      currentChapter = index;
-      chapterContent.innerHTML = `<h2>${chapters[index].title}</h2>${chapters[index].text}`;
-      music.src = chapters[index].musicUrl;
-
-      btnPrev.disabled = currentChapter === 0;
-      btnNext.disabled = currentChapter === chapters.length - 1;
-    }
-
-    btnNext.addEventListener('click', () => {
-      if (currentChapter < chapters.length -1) {
-        loadChapter(currentChapter +1);
-      }
-    });
-
-    btnPrev.addEventListener('click', () => {
-      if (currentChapter > 0) {
-        loadChapter(currentChapter -1);
-      }
-    });
-
-    // Carga inicial
-    loadChapter(0);
-  </script>
+  <!-- Años -->
+  <div class="px-4 mb-10">
+    <h2 class="text-lg font-semibold mb-2">Años</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="pill">2025</span>
+      <span class="pill">2024</span>
+      <span class="pill">2023</span>
+      <span class="pill">2022</span>
+      <span class="pill">2021</span>
+      <span class="pill">2020</span>
+    </div>
+  </div>
 </body>
-        </html>
+</html>
