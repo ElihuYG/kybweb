@@ -101,7 +101,7 @@
     <div class="progress-container mx-auto mt-8">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
-    <div class="subtext">Cargando lo mejor del drama... 🔥</div>
+    <div class="subtext">Cargando lo mejor del drama... </div>
   </div>
 
   <script>
@@ -110,7 +110,7 @@
     const splash = document.getElementById('splash');
 
     const interval = setInterval(() => {
-      progress += Math.floor(Math.random() * 10) + 5; // Aumenta de forma aleatoria
+      progress += Math.floor(Math.random() * 10) + 10; // Aumenta de forma aleatoria
 
       if (progress >= 100) {
         progress = 100;
