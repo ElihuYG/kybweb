@@ -6,28 +6,29 @@
     <title>KYB - Doramas</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-slate-900 text-white font-sans">
-
+  <body class="bg-black text-white font-sans">
     <!-- ENCABEZADO -->
-    <nav class="flex justify-end items-center space-x-6 px-6 py-4 text-sm text-gray-300">
-      <a href="#" class="hover:text-white">Inicio</a>
-      <a href="#" class="hover:text-white">Doramas</a>
-      <a href="#" class="hover:text-white">BL</a>
-      <a href="#" class="hover:text-white">Próximos Estrenos</a>
-      <a href="#" class="hover:text-white">Mi Lista</a>
-      <!-- LUPA -->
-      <button class="hover:text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-        </svg>
-      </button>
+    <nav class="flex justify-between items-center px-6 py-4 text-sm text-white">
+      <div class="text-emerald-500 text-xl font-bold">KYB</div>
+      <div class="flex items-center space-x-6">
+        <a href="#" class="hover:text-emerald-500">Inicio</a>
+        <a href="#" class="hover:text-emerald-500">Doramas</a>
+        <a href="#" class="hover:text-emerald-500">BL</a>
+        <a href="#" class="hover:text-emerald-500">Próximos Estrenos</a>
+        <a href="#" class="hover:text-emerald-500">Mi Lista</a>
+        <button class="hover:text-emerald-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+          </svg>
+        </button>
+      </div>
     </nav>
 
-    <!-- MINI BANNER PRINCIPAL -->
+    <!-- HERO BANNER -->
     <section class="relative w-full h-64 bg-cover bg-center" style="background-image: url('https://i.ibb.co/x2Gyzh6/banner-dorama.jpg');">
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/70 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
       <div class="absolute bottom-4 left-4">
-        <h1 class="text-xl font-bold">Love Like The Falling Petals</h1>
+        <h1 class="text-2xl font-bold">Love Like The Falling Petals</h1>
         <p class="text-sm text-gray-300">Drama • Japón • 2022</p>
       </div>
     </section>
@@ -48,35 +49,70 @@
       </button>
     </div>
 
-    <!-- CATEGORÍAS -->
-    <div class="mt-10 px-6">
-      <h2 class="text-lg font-semibold mb-4">Doramas populares</h2>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="bg-slate-800 rounded-lg overflow-hidden shadow-lg">
-          <img src="https://i.ibb.co/QfFyW26/dorama1.jpg" alt="Dorama 1" class="w-full h-40 object-cover" />
-          <div class="p-2">
-            <h3 class="text-sm font-medium">Dorama Uno</h3>
-          </div>
+    <!-- SECCIONES: Populares, Recomendados, BL, Próximos Estrenos -->
+    <div class="mt-10 px-6 space-y-10">
+      <div>
+        <h2 class="text-lg font-semibold mb-4">Doramas Populares</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <!-- Reemplaza estas imágenes por las tuyas -->
+          <img src="https://i.ibb.co/QfFyW26/dorama1.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/yNLGCF9/dorama2.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/bFB9Zhr/dorama3.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/tXjpwcs/dorama4.jpg" class="rounded-lg" />
         </div>
-        <div class="bg-slate-800 rounded-lg overflow-hidden shadow-lg">
-          <img src="https://i.ibb.co/yNLGCF9/dorama2.jpg" alt="Dorama 2" class="w-full h-40 object-cover" />
-          <div class="p-2">
-            <h3 class="text-sm font-medium">Dorama Dos</h3>
-          </div>
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-4">Recomendados</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <img src="https://i.ibb.co/bFB9Zhr/dorama3.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/tXjpwcs/dorama4.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/QfFyW26/dorama1.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/yNLGCF9/dorama2.jpg" class="rounded-lg" />
         </div>
-        <div class="bg-slate-800 rounded-lg overflow-hidden shadow-lg">
-          <img src="https://i.ibb.co/bFB9Zhr/dorama3.jpg" alt="Dorama 3" class="w-full h-40 object-cover" />
-          <div class="p-2">
-            <h3 class="text-sm font-medium">Dorama Tres</h3>
-          </div>
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold mb-4">BL</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <img src="https://i.ibb.co/yNLGCF9/dorama2.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/QfFyW26/dorama1.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/bFB9Zhr/dorama3.jpg" class="rounded-lg" />
+          <img src="https://i.ibb.co/tXjpwcs/dorama4.jpg" class="rounded-lg" />
         </div>
       </div>
     </div>
 
-    <!-- JS (si quieres cerrar algo como un modal en el futuro) -->
-    <script>
-      // Aquí puedes poner funciones JS si luego agregas cosas como modal de reproducción
-    </script>
+    <!-- CALENDARIO -->
+    <section class="mt-12 px-6">
+      <h2 class="text-lg font-semibold mb-4">Calendario de Estrenos</h2>
+      <div class="overflow-x-auto bg-slate-800 rounded-lg p-4">
+        <table class="min-w-full text-left text-sm">
+          <thead class="text-gray-400">
+            <tr>
+              <th class="py-2 pr-4">Fecha</th>
+              <th class="py-2 pr-4">Título</th>
+              <th class="py-2">Género</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-gray-700">
+              <td class="py-2 pr-4">22 Jun</td>
+              <td class="py-2 pr-4">Between Us</td>
+              <td class="py-2">BL</td>
+            </tr>
+            <tr class="border-t border-gray-700">
+              <td class="py-2 pr-4">25 Jun</td>
+              <td class="py-2 pr-4">A Time Called You</td>
+              <td class="py-2">Romance</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-12 bg-black text-center py-6 border-t border-gray-800 text-gray-500 text-sm">
+      © 2025 KYB Doramas. Todos los derechos reservados.
+    </footer>
 
   </body>
 </html>
