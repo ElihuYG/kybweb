@@ -34,7 +34,7 @@
       <h2 class="text-2xl font-bold text-center mb-2">Crear una cuenta</h2>
 
       <div id="errorMsg" class="hidden text-sm text-red-500 text-center"></div>
-      <div id="successMsg" class="hidden text-sm text-emerald-400 text-center">Registro exitoso. Ahora puedes iniciar sesión.</div>
+      <div id="successMsg" class="hidden text-sm text-emerald-400 text-center">Registro exitoso. Bienvenido.</div>
 
       <div class="space-y-4">
         <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
@@ -100,6 +100,9 @@
       localStorage.setItem('kyb_correo', correo);
       localStorage.setItem('kyb_contraseña', contraseña);
 
+      // Poner flag para que quede logueado al instante
+      localStorage.setItem('kyb_logged_in', 'true');
+
       successMsg.classList.remove('hidden');
 
       // Limpiar inputs
@@ -107,6 +110,11 @@
       document.getElementById('correo').value = '';
       document.getElementById('contraseña').value = '';
       document.getElementById('confirmarContraseña').value = '';
+
+      // Esperar un segundo y mandar a cuenta.html directo
+      setTimeout(() => {
+        window.location.href = 'cuenta.html';
+      }, 1000);
     }
   </script>
 </body>
