@@ -8,7 +8,7 @@
 </head>
 <body class="bg-slate-900 text-white font-sans min-h-screen pb-20">
 
-  <!-- Botón Home (casita PNG) -->
+  <!-- Botón Home -->
   <a href="home.html" class="fixed top-4 left-4 z-50">
     <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Inicio" class="w-8 h-8">
   </a>
@@ -19,51 +19,65 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
       </svg>
-      <input type="text" placeholder="Busca doramas o películas..." class="bg-transparent outline-none text-white ml-3 w-full placeholder-gray-400"/>
+      <input id="searchInput" type="text" placeholder="Busca doramas o películas..." class="bg-transparent outline-none text-white ml-3 w-full placeholder-gray-400"/>
     </div>
   </div>
 
   <!-- Botones principales -->
   <div class="flex justify-around py-6">
-    <button class="flex flex-col items-center text-white hover:text-emerald-500">
+    <button onclick="filterByCategory('Doramas')" class="flex flex-col items-center text-white hover:text-emerald-500">
       <img src="https://cdn-icons-png.flaticon.com/512/3468/3468378.png" class="w-12 h-12 mb-1" alt="Doramas"/>
       <span class="text-sm">Doramas</span>
     </button>
-    <button class="flex flex-col items-center text-white hover:text-emerald-500">
+    <button onclick="filterByCategory('Películas')" class="flex flex-col items-center text-white hover:text-emerald-500">
       <img src="https://cdn-icons-png.flaticon.com/512/3097/3097192.png" class="w-12 h-12 mb-1" alt="Películas"/>
       <span class="text-sm">Películas</span>
     </button>
-    <button class="flex flex-col items-center text-white hover:text-emerald-500">
+    <button onclick="filterByCategory('Variedades')" class="flex flex-col items-center text-white hover:text-emerald-500">
       <img src="https://cdn-icons-png.flaticon.com/512/9610/9610341.png" class="w-12 h-12 mb-1" alt="Variedades"/>
       <span class="text-sm">Variedades</span>
     </button>
   </div>
 
   <!-- Sección generadora de chips -->
-  <div class="px-4 space-y-6">
+  <div id="filters" class="px-4 space-y-6"></div>
 
-    <!-- Función para cada sección -->
-    <script>
-      const renderButtons = (title, items) => {
-        document.write(`
-          <div>
-            <h2 class="text-xl font-semibold mb-2">${title}</h2>
-            <div class="flex flex-wrap gap-2">
-              ${items.map(item => `<button class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition">${item}</button>`).join('')}
-            </div>
-          </div>
-        `);
-      };
+  <script>
+    // Función para renderizar filtros
+    const renderButtons = (title, items) => {
+      const section = document.createElement('div');
+      section.innerHTML = `
+        <h2 class="text-xl font-semibold mb-2">${title}</h2>
+        <div class="flex flex-wrap gap-2">
+          ${items.map(item => `<button onclick="applyFilter('${item}')" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition">${item}</button>`).join('')}
+        </div>
+      `;
+      document.getElementById("filters").appendChild(section);
+    };
 
-      renderButtons("Géneros", ["Drama", "Romance", "Comedia", "Misterio", "Fantasía", "Ciencia Ficción"]);
-      renderButtons("Etiquetas", ["Comedia Romántica", "Juvenil", "Amistad", "Vida", "Suspenso", "Escolar"]);
-      renderButtons("Productoras", ["Tencent Video", "Netflix", "tvN", "iQIYI", "Youku", "KBS2"]);
-      renderButtons("Países", ["Corea del Sur", "China", "Japón", "Tailandia", "Indonesia", "Filipinas"]);
-      renderButtons("Idiomas", ["Latino", "CoreanoLatino", "JaponésLatino", "MandarínLatino", "TailandésLatino", "FilipinoLatino"]);
-      renderButtons("Años", ["2025", "2024", "2023", "2022", "2021", "2020"]);
-    </script>
+    renderButtons("Géneros", ["Drama", "Romance", "Comedia", "Misterio", "Fantasía", "Ciencia Ficción"]);
+    renderButtons("Etiquetas", ["Comedia Romántica", "Juvenil", "Amistad", "Vida", "Suspenso", "Escolar"]);
+    renderButtons("Productoras", ["Tencent Video", "Netflix", "tvN", "iQIYI", "Youku", "KBS2"]);
+    renderButtons("Países", ["Corea del Sur", "China", "Japón", "Tailandia", "Indonesia", "Filipinas"]);
+    renderButtons("Idiomas", ["Latino", "CoreanoLatino", "JaponésLatino", "MandarínLatino", "TailandésLatino", "FilipinoLatino"]);
+    renderButtons("Años", ["2025", "2024", "2023", "2022", "2021", "2020"]);
 
-  </div>
+    // Función de búsqueda
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      const query = e.target.value.trim().toLowerCase();
+      console.log("Buscando:", query); // Aquí puedes agregar tu lógica real de búsqueda
+    });
+
+    // Función para botones de categoría
+    function filterByCategory(category) {
+      console.log("Filtrando por categoría:", category); // Puedes agregar lógica real aquí
+    }
+
+    // Función para chips de filtros
+    function applyFilter(filtro) {
+      console.log("Filtro aplicado:", filtro); // Aquí también
+    }
+  </script>
 
 </body>
 </html>
