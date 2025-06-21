@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Lista - KYB Doramas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen font-sans">
+
+  <!-- Encabezado -->
+  <div class="flex justify-between items-center px-4 py-4 border-b border-slate-700">
+    <h1 class="text-xl font-semibold text-emerald-400">Mi Lista</h1>
+    <a href="home.html">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" class="w-7 h-7 hover:scale-110 transition-transform" alt="Home">
+    </a>
+  </div>
+
+  <!-- Contenedor de series -->
+  <div id="listaContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+    <!-- Las series guardadas se insertan aquí por JS -->
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById('listaContainer');
+      const lista = JSON.parse(localStorage.getItem('mi_lista')) || [];
+
+      if (lista.length === 0) {
+        container.innerHTML = `<p class="text-center col-span-full text-gray-400 mt-10">Aún no has añadido ninguna serie.</p>`;
+        return;
+      }
+
+      lista.forEach(serie => {
+        const card = document.createElement("div");
+        card.className = "bg-slate-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow";
+
+        card.innerHTML = `
+          <img src="${serie.portada}" alt="${serie.titulo}" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h2 class="text-lg font-bold text-white">${serie.titulo}</h2>
+            <p class="text-sm text-gray-400">Género: ${serie.genero.join(", ")}</p>
+            <p class="text-sm text-gray-400">Año: ${serie.año}</p>
+            <p class="text-sm text-gray-400">País: ${serie.pais}</p>
+            <p class="text-sm text-gray-400">Episodios: ${serie.episodios}</p>
+            <a href="serie-${serie.id}.html" class="mt-3 inline-block bg-emerald-600 hover:bg-emerald-700 text-white text-sm py-1 px-4 rounded transition-colors">Ver</a>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>
