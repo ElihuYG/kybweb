@@ -2,141 +2,230 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Untamed</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .etiqueta {
-      @apply text-xs border border-gray-500 rounded-full px-2 py-0.5 text-gray-300;
+    body {
+      margin: 0;
+      background-color: #0f172a;
+      font-family: Arial, sans-serif;
+      color: white;
     }
-    .popup {
-      background-color: rgba(0, 0, 0, 0.7);
+
+    header {
+      padding: 1rem;
     }
-    .star {
+
+    .home-icon {
+      width: 30px;
+    }
+
+    .container {
+      padding: 1rem 2rem;
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .poster {
+      width: 250px;
+      height: 300px;
+      background-image: url("https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABSrZyEjwDHB8w9YYTtmaVx7ljGqMDJBabhar-V9eFrwEXEa87nao1WdYd3ZC0Fdpd7piinbG9aGqvdbBiUVoZccSr9YryirlveBA.jpg?r=959");
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+    }
+
+    .details h1 {
+      margin: 0;
+      color: #10b981;
+    }
+
+    .tags {
+      margin: 0.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background-color: #1e293b;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .desc {
+      margin: 1rem 0;
+      max-width: 600px;
+    }
+
+    .cast-section {
+      margin: 1rem 0;
+    }
+
+    .cast-section h3 {
+      color: #22d3ee;
+    }
+
+    .cast-list {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cast {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #999;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #ccc;
+    }
+
+    .arrow {
+      font-size: 2rem;
+      margin-left: 1rem;
+      color: white;
       cursor: pointer;
-      transition: transform 0.2s;
     }
-    .star:hover {
-      transform: scale(1.2);
+
+    .episodes {
+      margin-top: 2rem;
     }
-    .bounce {
-      animation: bounce 0.3s;
+
+    .episodes h3 {
+      color: #22c55e;
     }
-    @keyframes bounce {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-      100% { transform: scale(1); }
+
+    .episode-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .episode a {
+      display: block;
+      background-color: #1e293b;
+      padding: 0.5rem;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .episode a:hover {
+      background-color: #10b981;
+      transform: scale(1.03);
+    }
+
+    footer {
+      background-color: #1e293b;
+      color: #ccc;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
-<body class="bg-slate-900 text-white font-sans">
+<body>
+  <header>
+  <a href="home.html">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" class="home-icon" alt="home">
+  </a>
+</header>
 
-  <div class="p-6 max-w-5xl mx-auto space-y-6">
 
-    <!-- Header principal -->
-    <div class="flex justify-between items-start">
-      <div>
-        <h1 class="text-3xl font-bold text-emerald-500">The Untamed</h1>
-        <div class="flex flex-wrap gap-2 mt-2">
-          <span class="etiqueta">+13</span>
-          <span class="etiqueta">BL</span>
-          <span class="etiqueta">Fantasía</span>
-          <span class="etiqueta">Misterio</span>
-          <span class="etiqueta">Subtitulado</span>
-          <span class="etiqueta">China</span>
-          <span class="etiqueta">2019</span>
-          <span class="etiqueta">50 episodios</span>
+  <div class="container">
+    <div class="content">
+      <div class="poster"></div>
+
+      <div class="details">
+        <h1>The Untamed (陈情令)</h1>
+        <div class="tags">
+          <div class="tag">+13</div>
+          <div class="tag">BL</div>
+          <div class="tag">Fantasía</div>
+          <div class="tag">Misterio</div>
+          <div class="tag">China • 2019</div>
+          <div class="tag">50 episodios</div>
+          <div class="tag">Subtitulado</div>
         </div>
-      </div>
-      <div class="flex space-x-4">
-        <!-- Mi Lista -->
-        <button id="miListaBtn" class="flex items-center hover:scale-105 transition-transform">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" alt="Mi lista" class="h-10 w-10 rounded-full bg-red-600 p-1 shadow-lg">
-        </button>
-        <!-- Valorar -->
-        <button id="valorarBtn" class="flex items-center hover:scale-105 transition-transform">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="Valorar" class="h-10 w-10 rounded-full bg-yellow-500 p-1 shadow-lg">
-        </button>
+        <p class="desc">
+          Wei Wuxian, un cultivador expulsado tras dominar artes oscuras, resucita dieciséis años después y se reencuentra con Lan Wangji para resolver una serie de asesinatos que los llevan a deshacer una conspiración ancestral.
+        </p>
+
+<div class="cast-section">
+  <h3>Reparto principal</h3>
+  <div class="cast-list">
+    <a href="actor1.html">
+      <div class="cast" style="background-image: url('https://i.mydramalist.com/YYqZWQ_5c.jpg');"></div>
+    </a>
+    <a href="actor2.html">
+      <div class="cast" style="background-image: url('https://i.mydramalist.com/5v7q04_5c.jpg');"></div>
+    </a>
+    <a href="actor3.html">
+      <div class="cast" style="background-image: url('https://i.mydramalist.com/EO42b_5s.jpg');"></div>
+    </a>
+    <a href="actor4.html">
+      <div class="cast" style="background-image: url('https://i.mydramalist.com/d0wW0W_5s.jpg');"></div>
+    </a>
+    <a href="actor5.html">
+      <div class="cast" style="background-image: url('https://i.mydramalist.com/R66yV_5s.jpg');"></div>
+    </a>
+    <a href="actor6.html">
+      <div class="cast" style="background-image: url('https://i.mydramalist.com/0gd67_5s.jpg');"></div>
+    </a>
+    <a href="actor7.html">
+      <div class="cast" style="background-image: url('https://i.mydramalist.com/VXdmrv_5s.jpg');"></div>
+    </a>
+    <div class="arrow">▶</div>
+  </div>
+</div>
       </div>
     </div>
 
-    <!-- Trailer -->
-    <div class="aspect-w-16 aspect-h-9">
-      <iframe class="w-full rounded-lg" height="315" src="https://www.youtube.com/embed/dFAj0X0rKGA" frameborder="0" allowfullscreen></iframe>
+    <div class="episodes">
+      <h3>Episodios</h3>
+      <div class="episode-list">
+        <!-- Puedes duplicar esto hasta el episodio 50 -->
+        <div class="episode"><a href="#">The Untamed E01</a></div>
+        <div class="episode"><a href="#">The Untamed E02</a></div>
+        <div class="episode"><a href="#">The Untamed E03</a></div>
+        <div class="episode"><a href="#">The Untamed E04</a></div>
+        <div class="episode"><a href="#">The Untamed E05</a></div>
+        <div class="episode"><a href="#">The Untamed E06</a></div>
+        <div class="episode"><a href="#">The Untamed E07</a></div>
+        <div class="episode"><a href="#">The Untamed E08</a></div>
+        <div class="episode"><a href="#">The Untamed E09</a></div>
+        <div class="episode"><a href="#">The Untamed E10</a></div>
+        <div class="episode"><a href="#">The Untamed E11</a></div>
+        <div class="episode"><a href="#">The Untamed E12</a></div>
+        <div class="episode"><a href="#">The Untamed E13</a></div>
+        <div class="episode"><a href="#">The Untamed E14</a></div>
+        <div class="episode"><a href="#">The Untamed E15</a></div>
+        <div class="episode"><a href="#">The Untamed E16</a></div>
+        <div class="episode"><a href="#">The Untamed E17</a></div>
+        <div class="episode"><a href="#">The Untamed E18</a></div>
+        <div class="episode"><a href="#">The Untamed E19</a></div>
+        <div class="episode"><a href="#">The Untamed E20</a></div>
+        <!-- ... hasta T50 -->
+      </div>
     </div>
-
-    <!-- Sinopsis -->
-    <p class="text-gray-300">
-      En un mundo lleno de clanes y cultivadores, dos jóvenes de ideales opuestos, Wei Wuxian y Lan Wangji, se enfrentan a un misterio ancestral que podría cambiar el destino de todos. "The Untamed" es una historia de amor, lealtad, traición y redención que ha capturado el corazón de millones.
-    </p>
-
-    <!-- Episodios -->
-    <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-4"></div>
   </div>
 
-  <!-- Popup valoración -->
-  <div id="popup" class="fixed inset-0 popup hidden flex items-center justify-center z-50">
-    <div class="bg-slate-800 p-6 rounded-xl text-center">
-      <h2 class="text-lg font-bold mb-4">Califica esta serie</h2>
-      <div id="estrellas" class="flex justify-center space-x-2 mb-4"></div>
-      <button onclick="cerrarPopup()" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded">Cerrar</button>
-    </div>
-  </div>
-
-  <script>
-    const listaBtn = document.getElementById('miListaBtn');
-    const valorarBtn = document.getElementById('valorarBtn');
-    const popup = document.getElementById('popup');
-    const estrellasDiv = document.getElementById('estrellas');
-
-    // Cargar estado de Mi Lista
-    if (localStorage.getItem('untamed_lista') === 'true') {
-      listaBtn.classList.add('animate-pulse');
-    }
-
-    // Agregar a mi lista con animación
-    listaBtn.addEventListener('click', () => {
-      listaBtn.classList.add('bounce');
-      localStorage.setItem('untamed_lista', 'true');
-      setTimeout(() => listaBtn.classList.remove('bounce'), 300);
-      listaBtn.classList.add('animate-pulse');
-    });
-
-    // Mostrar popup de valoración
-    valorarBtn.addEventListener('click', () => {
-      popup.classList.remove('hidden');
-      cargarEstrellas();
-    });
-
-    function cerrarPopup() {
-      popup.classList.add('hidden');
-    }
-
-    // Cargar estrellas
-    function cargarEstrellas() {
-      estrellasDiv.innerHTML = '';
-      const calif = parseInt(localStorage.getItem('untamed_valoracion')) || 0;
-      for (let i = 1; i <= 5; i++) {
-        const star = document.createElement('span');
-        star.className = `star text-3xl ${i <= calif ? 'text-yellow-400' : 'text-gray-500'}`;
-        star.textContent = '★';
-        star.addEventListener('click', () => {
-          localStorage.setItem('untamed_valoracion', i);
-          cargarEstrellas();
-        });
-        estrellasDiv.appendChild(star);
-      }
-    }
-
-    // Generar episodios
-    const episodios = document.getElementById('episodios');
-    for (let i = 1; i <= 50; i++) {
-      const ep = document.createElement('div');
-      ep.className = 'bg-slate-800 hover:bg-slate-700 text-white p-2 rounded text-center cursor-pointer';
-      ep.textContent = `The Untamed 1x${i}`;
-      episodios.appendChild(ep);
-    }
-  </script>
-
+  <footer>
+    © 2025 KYB | Todos los derechos reservados
+  </footer>
 </body>
 </html>
