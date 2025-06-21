@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ayuda - KYB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding-top: 60px; /* para que no tape el header fijo */
+    }
+    header {
+      background-color: #064e3b; /* verde esmeralda oscuro */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      z-index: 100;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #10b981; /* verde esmeralda claro */
+      user-select: none;
+    }
+    .titulo {
+      flex: 1;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: white;
+      border-bottom: 3px solid #10b981; /* subrayado esmeralda */
+      padding-bottom: 4px;
+    }
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    h2 {
+      color: #10b981;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    details {
+      background-color: #064e3b;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(16,185,129,0.3);
+    }
+    summary {
+      font-weight: 600;
+      font-size: 1.1rem;
+      outline: none;
+    }
+    summary::-webkit-details-marker {
+      color: #10b981;
+    }
+    footer {
+      background-color: #111827; /* gris oscuro */
+      padding: 1.5rem 1rem;
+      color: #94a3b8;
+      text-align: center;
+      font-size: 0.875rem;
+      margin-top: 3rem;
+    }
+    footer a {
+      color: #10b981;
+      margin: 0 0.5rem;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">KYB</div>
+    <div class="titulo">Ayuda</div>
+  </header>
+
+  <main>
+    <h1 class="text-3xl font-bold mb-6 text-emerald-400">¿En qué podemos ayudarte?</h1>
+
+    <p>En KYB queremos que tengas la mejor experiencia posible. Aquí respondemos las preguntas más frecuentes y te damos consejos para que disfrutes al máximo nuestra plataforma.</p>
+
+    <details>
+      <summary>¿Cómo me registro en KYB?</summary>
+      <p>Para registrarte, ve a la página de registro y completa los campos con tu nombre, correo y contraseña. Después podrás iniciar sesión para acceder a todo el contenido.</p>
+    </details>
+
+    <details>
+      <summary>Olvidé mi contraseña, ¿qué hago?</summary>
+      <p>Por ahora no contamos con recuperación automática, pero estamos trabajando para implementarla. Puedes cambiar tu contraseña desde tu perfil si estás logueado.</p>
+    </details>
+
+    <details>
+      <summary>¿Puedo cambiar mi nombre o correo después de registrarme?</summary>
+      <p>Actualmente no es posible editar esos datos desde la plataforma, pero pronto añadiremos esa función para que puedas actualizar tu perfil fácilmente.</p>
+    </details>
+
+    <details>
+      <summary>¿Cómo sé si estoy logueado correctamente?</summary>
+      <p>Si al iniciar sesión eres redirigido a tu cuenta y ves tu nombre y correo, entonces ya estás dentro. Si no, revisa que tu correo y contraseña sean correctos.</p>
+    </details>
+
+    <details>
+      <summary>¿Qué hago si la página no carga o tengo problemas técnicos?</summary>
+      <p>Prueba limpiar la caché del navegador, actualizar la página o intentar en otro navegador. Si sigue el problema, escríbenos a soporte.</p>
+    </details>
+
+    <details>
+      <summary>¿Dónde puedo reportar errores o sugerencias?</summary>
+      <p>Queremos escucharte. Envía tus sugerencias o reportes a nuestro correo de soporte o usa el formulario que pondremos pronto en la web.</p>
+    </details>
+
+    <h2>¿Aún tienes dudas?</h2>
+    <p>No dudes en contactarnos directamente, queremos ayudarte en todo lo que necesites para que tu experiencia con KYB sea la mejor.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 KYB. Todos los derechos reservados.</p>
+    <a href="#">Términos</a> | <a href="#">Privacidad</a> | <a href="#">Soporte</a>
+  </footer>
+
+</body>
+</html>
