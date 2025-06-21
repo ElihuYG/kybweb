@@ -79,5 +79,63 @@
     }
   </script>
 
+  <!-- RESULTADOS -->
+<div id="resultados" class="px-4 mt-6 space-y-4"></div>
+
+<script>
+  // Tus doramas aquí
+  const doramas = [
+    {
+      titulo: "The Untamed",
+      año: "2019",
+      pais: "China",
+      generos: ["BL", "Fantasía", "Misterio"],
+      imagen: "https://i.mydramalist.com/YYqZWQ_5c.jpg"
+    },
+    // Agrega más aquí después si quieres
+  ];
+
+  // Mostrar resultados en la web
+  function mostrarResultados(lista) {
+    const contenedor = document.getElementById("resultados");
+    contenedor.innerHTML = "";
+
+    if (lista.length === 0) {
+      contenedor.innerHTML = "<p class='text-gray-400'>No se encontraron resultados.</p>";
+      return;
+    }
+
+    lista.forEach(dorama => {
+      const card = document.createElement("div");
+      card.className = "bg-gray-800 rounded-lg p-4 shadow-md flex items-center gap-4";
+      card.innerHTML = `
+        <img src="${dorama.imagen}" alt="${dorama.titulo}" class="w-16 h-24 object-cover rounded">
+        <div>
+          <h3 class="text-lg font-bold">${dorama.titulo}</h3>
+          <p class="text-sm text-gray-400">${dorama.año} • ${dorama.pais}</p>
+          <p class="text-sm text-emerald-400">${dorama.generos.join(", ")}</p>
+        </div>
+      `;
+      contenedor.appendChild(card);
+    });
+  }
+
+  // Escuchar lo que escribes
+  document.getElementById("searchInput").addEventListener("input", (e) => {
+    const query = e.target.value.trim().toLowerCase();
+
+    const resultadosFiltrados = doramas.filter(dorama =>
+      dorama.titulo.toLowerCase().includes(query) ||
+      dorama.generos.some(g => g.toLowerCase().includes(query)) ||
+      dorama.pais.toLowerCase().includes(query)
+    );
+
+    mostrarResultados(resultadosFiltrados);
+  });
+
+  // Mostrar todo al principio si quieres
+  mostrarResultados(doramas);
+</script>
+
 </body>
 </html>
