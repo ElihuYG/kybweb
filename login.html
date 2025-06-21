@@ -23,29 +23,41 @@
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
+<body class="flex flex-col min-h-screen">
 
   <!-- Logo en la esquina -->
   <div class="absolute top-4 left-4 text-2xl font-bold text-emerald-400 select-none">KYB</div>
 
   <!-- Contenedor login -->
-  <div class="w-full max-w-md bg-zinc-900 p-8 rounded-2xl shadow-xl space-y-6">
-    <h2 class="text-2xl font-bold text-center mb-2">Iniciar sesión</h2>
+  <main class="flex-1 flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-zinc-900 p-8 rounded-2xl shadow-xl space-y-6">
+      <h2 class="text-2xl font-bold text-center mb-2">Iniciar sesión</h2>
 
-    <div id="errorMsg" class="hidden text-sm text-red-500 text-center">Correo o contraseña incorrectos.</div>
+      <div id="errorMsg" class="hidden text-sm text-red-500 text-center">Correo o contraseña incorrectos.</div>
 
-    <div class="space-y-4">
-      <input type="email" id="correo" placeholder="Correo electrónico" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
-      <input type="password" id="contraseña" placeholder="Contraseña" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
+      <div class="space-y-4">
+        <input type="email" id="correo" placeholder="Correo electrónico" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
+        <input type="password" id="contraseña" placeholder="Contraseña" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
+      </div>
+
+      <button onclick="iniciarSesion()" class="w-full bg-emerald-600 hover:bg-emerald-500 transition rounded-lg py-2 text-white font-semibold">Entrar</button>
+
+      <p class="text-center text-sm text-zinc-400">
+        ¿No tienes cuenta?
+        <a href="registrarse.html" class="text-emerald-400 hover:underline">Regístrate</a>
+      </p>
     </div>
+  </main>
 
-    <button onclick="iniciarSesion()" class="w-full bg-emerald-600 hover:bg-emerald-500 transition rounded-lg py-2 text-white font-semibold">Entrar</button>
-
-    <p class="text-center text-sm text-zinc-400">
-      ¿No tienes cuenta?
-      <a href="registrarse.html" class="text-emerald-400 hover:underline">Regístrate</a>
-    </p>
-  </div>
+  <!-- Footer -->
+  <footer class="bg-zinc-950 p-6 text-sm text-zinc-400 text-center">
+    <p>&copy; 2025 KYB. Todos los derechos reservados.</p>
+    <div class="flex justify-center mt-4 space-x-4">
+      <a href="terminos.html" class="hover:text-white">Términos</a>
+      <a href="privacidad.html" class="hover:text-white">Privacidad</a>
+      <a href="soporte.html" class="hover:text-white">Soporte</a>
+    </div>
+  </footer>
 
   <!-- Script login -->
   <script>
@@ -58,7 +70,6 @@
 
       const correoGuardado = localStorage.getItem('kyb_correo');
       const contraseñaGuardada = localStorage.getItem('kyb_contraseña');
-      const nombreGuardado = localStorage.getItem('kyb_nombre');
 
       if (!correoGuardado || !contraseñaGuardada) {
         errorMsg.textContent = 'No existe ninguna cuenta registrada.';
@@ -67,7 +78,6 @@
       }
 
       if (correo === correoGuardado && contraseña === contraseñaGuardada) {
-        // Acceso correcto
         errorMsg.classList.add('hidden');
         window.location.href = 'cuenta.html';
       } else {
@@ -83,16 +93,5 @@
       }
     }
   </script>
-
 </body>
-  
-    <!-- Footer -->
-<footer class="bg-zinc-950 p-6 mt-10 text-sm text-zinc-400 text-center">
-  <p>&copy; 2025 KYB. Todos los derechos reservados.</p>
-  <div class="flex justify-center mt-4 space-x-4">
-    <a href="#" class="hover:text-white">Términos</a>
-    <a href="#" class="hover:text-white">Privacidad</a>
-    <a href="#" class="hover:text-white">Soporte</a>
-  </div>
-</footer>
 </html>
