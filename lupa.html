@@ -41,14 +41,37 @@
       </button>
     </div>
 
-    <!-- Chips dinámicos -->
-    <div id="filters" class="px-4 space-y-6"></div>
+    <!-- Chips dinámicos con links a páginas -->
+    <div id="filters" class="px-4 space-y-6">
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Géneros</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href="genero-bl.html" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition inline-block">BL</a>
+          <a href="genero-drama.html" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition inline-block">Drama</a>
+          <a href="genero-romance.html" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition inline-block">Romance</a>
+          <a href="genero-comedia.html" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition inline-block">Comedia</a>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Países</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href="pais-china.html" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition inline-block">China</a>
+          <a href="pais-tailandia.html" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition inline-block">Tailandia</a>
+          <a href="pais-corea.html" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition inline-block">Corea del Sur</a>
+        </div>
+      </div>
+
+      <!-- Puedes agregar más secciones así -->
+
+    </div>
   </div>
 
   <!-- Resultados de búsqueda -->
   <div id="resultados" class="px-4 mt-6 space-y-4"></div>
 
-  <!-- Lógica -->
+  <!-- Lógica JS para búsqueda -->
   <script>
     const doramas = [
       {
@@ -85,17 +108,6 @@
       }
     ];
 
-    // Estado de filtros activos
-    const filtrosActivos = {
-      generos: new Set(),
-      etiquetas: new Set(),
-      productoras: new Set(),
-      paises: new Set(),
-      idiomas: new Set(),
-      años: new Set()
-    };
-
-    // Función para mostrar resultados
     function mostrarResultados(lista) {
       const contenedor = document.getElementById("resultados");
       contenedor.innerHTML = "";
@@ -123,93 +135,24 @@
       });
     }
 
-    // Función para filtrar y mostrar según texto y filtros activos
-    function filtrarYMostrar(){
-      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      const query = e.target.value.trim().toLowerCase();
       const contenidoEstatico = document.getElementById("contenido-estatico");
       const resultadosDiv = document.getElementById("resultados");
 
-      let filtrados = doramas.filter(dorama => {
-        // Filtrado texto
-        const textoMatch = dorama.titulo.toLowerCase().includes(query) ||
-                          dorama.generos.some(g => g.toLowerCase().includes(query)) ||
-                          dorama.pais.toLowerCase().includes(query);
-
-        if(!textoMatch) return false;
-
-        // Filtros por género
-        if(filtrosActivos.generos.size > 0 && !dorama.generos.some(g => filtrosActivos.generos.has(g.toLowerCase())))
-          return false;
-
-        // Filtros por país
-        if(filtrosActivos.paises.size > 0 && !filtrosActivos.paises.has(dorama.pais.toLowerCase()))
-          return false;
-
-        // Filtros por año
-        if(filtrosActivos.años.size > 0 && !filtrosActivos.años.has(dorama.año.toLowerCase()))
-          return false;
-
-        // Aquí puedes añadir filtros para etiquetas, productoras, idiomas si tienes esos datos
-
-        return true;
-      });
-
-      if(query.length > 0 || Object.values(filtrosActivos).some(set => set.size > 0)){
+      if (query.length > 0) {
         contenidoEstatico.style.display = "none";
+        const filtrados = doramas.filter(dorama =>
+          dorama.titulo.toLowerCase().includes(query) ||
+          dorama.generos.some(g => g.toLowerCase().includes(query)) ||
+          dorama.pais.toLowerCase().includes(query)
+        );
         mostrarResultados(filtrados);
       } else {
         contenidoEstatico.style.display = "block";
         resultadosDiv.innerHTML = "";
       }
-    }
-
-    // Evento input para buscar
-    document.getElementById("searchInput").addEventListener("input", filtrarYMostrar);
-
-    // Función para crear los botones de filtros
-    const renderButtons = (title, items) => {
-      const section = document.createElement('div');
-      // clave para filtrosActivos (sin tildes ni espacios)
-      const key = title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g, "");
-      
-      section.innerHTML = `
-        <h2 class="text-xl font-semibold mb-2">${title}</h2>
-        <div class="flex flex-wrap gap-2">
-          ${items.map(item => `<button type="button" class="filter-btn bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition" data-category="${key}" data-value="${item.toLowerCase()}">${item}</button>`).join('')}
-        </div>
-      `;
-      document.getElementById("filters").appendChild(section);
-    };
-
-    // Agregar listeners para togglear filtros
-    document.addEventListener("click", (e) => {
-      if(e.target.classList.contains("filter-btn")){
-        const btn = e.target;
-        const category = btn.dataset.category; 
-        const value = btn.dataset.value;
-
-        if (filtrosActivos[category].has(value)) {
-          filtrosActivos[category].delete(value);
-          btn.classList.remove("bg-emerald-600");
-          btn.classList.add("bg-gray-700");
-        } else {
-          filtrosActivos[category].add(value);
-          btn.classList.remove("bg-gray-700");
-          btn.classList.add("bg-emerald-600");
-        }
-
-        filtrarYMostrar();
-      }
     });
-
-    // Renderizar los botones de filtro
-    renderButtons("Géneros", ["Drama", "Romance", "Comedia", "Misterio", "Fantasía", "Ciencia Ficción"]);
-    renderButtons("Etiquetas", ["Comedia Romántica", "Juvenil", "Amistad", "Vida", "Suspenso", "Escolar"]);
-    renderButtons("Productoras", ["Tencent Video", "Netflix", "tvN", "iQIYI", "Youku", "KBS2"]);
-    renderButtons("Países", ["Corea del Sur", "China", "Japón", "Tailandia", "Indonesia", "Filipinas"]);
-    renderButtons("Idiomas", ["Latino", "CoreanoLatino", "JaponésLatino", "MandarínLatino", "TailandésLatino", "FilipinoLatino"]);
-    renderButtons("Años", ["2025", "2024", "2023", "2022", "2021", "2020"]);
-
   </script>
 
 </body>
