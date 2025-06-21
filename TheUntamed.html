@@ -6,6 +6,9 @@
   <title>The Untamed</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    .etiqueta {
+      @apply text-xs border border-gray-500 rounded-full px-2 py-0.5 text-gray-300;
+    }
     .popup {
       background-color: rgba(0, 0, 0, 0.7);
     }
@@ -28,42 +31,54 @@
 </head>
 <body class="bg-slate-900 text-white font-sans">
 
-  <div class="p-6 max-w-4xl mx-auto space-y-6">
+  <div class="p-6 max-w-5xl mx-auto space-y-6">
 
+    <!-- Header principal -->
     <div class="flex justify-between items-start">
       <div>
         <h1 class="text-3xl font-bold text-emerald-500">The Untamed</h1>
-        <p class="text-sm text-gray-400 mt-1">China • 2019 • 50 episodios • BL, Fantasía, Misterio • Subtitulado</p>
-        <p class="text-sm text-gray-400">Duración promedio: 45 min • Clasificación: +13</p>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="etiqueta">+13</span>
+          <span class="etiqueta">BL</span>
+          <span class="etiqueta">Fantasía</span>
+          <span class="etiqueta">Misterio</span>
+          <span class="etiqueta">Subtitulado</span>
+          <span class="etiqueta">China</span>
+          <span class="etiqueta">2019</span>
+          <span class="etiqueta">50 episodios</span>
+        </div>
       </div>
       <div class="flex space-x-4">
-        <button id="miListaBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Mi lista" class="h-6 w-6 mr-1">
-          <span>Mi Lista</span>
+        <!-- Mi Lista -->
+        <button id="miListaBtn" class="flex items-center hover:scale-105 transition-transform">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" alt="Mi lista" class="h-10 w-10 rounded-full bg-red-600 p-1 shadow-lg">
         </button>
-        <button id="valorarBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="Valorar" class="h-6 w-6 mr-1">
-          <span>Valorar</span>
+        <!-- Valorar -->
+        <button id="valorarBtn" class="flex items-center hover:scale-105 transition-transform">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="Valorar" class="h-10 w-10 rounded-full bg-yellow-500 p-1 shadow-lg">
         </button>
       </div>
     </div>
 
+    <!-- Trailer -->
     <div class="aspect-w-16 aspect-h-9">
-      <iframe class="w-full rounded-lg" height="315" src="https://youtu.be/rAsP69G5rWQ?si=mgGEsfeTI-Mqss0k" frameborder="0" allowfullscreen></iframe>
+      <iframe class="w-full rounded-lg" height="315" src="https://www.youtube.com/embed/dFAj0X0rKGA" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <p class="text-gray-300">En un mundo lleno de clanes y cultivadores, dos jóvenes de ideales opuestos, Wei Wuxian y Lan Wangji, se enfrentan a un misterio ancestral que podría cambiar el destino de todos. "The Untamed" es una historia de amor, lealtad, traición y redención que ha capturado el corazón de millones.</p>
+    <!-- Sinopsis -->
+    <p class="text-gray-300">
+      En un mundo lleno de clanes y cultivadores, dos jóvenes de ideales opuestos, Wei Wuxian y Lan Wangji, se enfrentan a un misterio ancestral que podría cambiar el destino de todos. "The Untamed" es una historia de amor, lealtad, traición y redención que ha capturado el corazón de millones.
+    </p>
 
-    <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+    <!-- Episodios -->
+    <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-4"></div>
   </div>
 
-  <!-- Popup estrellas -->
+  <!-- Popup valoración -->
   <div id="popup" class="fixed inset-0 popup hidden flex items-center justify-center z-50">
     <div class="bg-slate-800 p-6 rounded-xl text-center">
       <h2 class="text-lg font-bold mb-4">Califica esta serie</h2>
-      <div id="estrellas" class="flex justify-center space-x-2 mb-4">
-        <!-- Se llenan por JS -->
-      </div>
+      <div id="estrellas" class="flex justify-center space-x-2 mb-4"></div>
       <button onclick="cerrarPopup()" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded">Cerrar</button>
     </div>
   </div>
@@ -76,7 +91,7 @@
 
     // Cargar estado de Mi Lista
     if (localStorage.getItem('untamed_lista') === 'true') {
-      listaBtn.classList.add('text-white');
+      listaBtn.classList.add('animate-pulse');
     }
 
     // Agregar a mi lista con animación
@@ -84,7 +99,7 @@
       listaBtn.classList.add('bounce');
       localStorage.setItem('untamed_lista', 'true');
       setTimeout(() => listaBtn.classList.remove('bounce'), 300);
-      listaBtn.classList.add('text-white');
+      listaBtn.classList.add('animate-pulse');
     });
 
     // Mostrar popup de valoración
@@ -93,12 +108,11 @@
       cargarEstrellas();
     });
 
-    // Cerrar popup
     function cerrarPopup() {
       popup.classList.add('hidden');
     }
 
-    // Estrellas
+    // Cargar estrellas
     function cargarEstrellas() {
       estrellasDiv.innerHTML = '';
       const calif = parseInt(localStorage.getItem('untamed_valoracion')) || 0;
@@ -114,7 +128,7 @@
       }
     }
 
-    // Cargar episodios
+    // Generar episodios
     const episodios = document.getElementById('episodios');
     for (let i = 1; i <= 50; i++) {
       const ep = document.createElement('div');
@@ -123,5 +137,6 @@
       episodios.appendChild(ep);
     }
   </script>
+
 </body>
 </html>
