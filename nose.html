@@ -1,118 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KYB - Doramas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-black text-white font-sans">
-    <!-- ENCABEZADO -->
-    <nav class="flex justify-between items-center px-6 py-4 text-sm text-white">
-      <div class="text-emerald-500 text-xl font-bold">KYB</div>
-      <div class="flex items-center space-x-6">
-        <a href="#" class="hover:text-emerald-500">Inicio</a>
-        <a href="#" class="hover:text-emerald-500">Doramas</a>
-        <a href="#" class="hover:text-emerald-500">BL</a>
-        <a href="#" class="hover:text-emerald-500">Próximos Estrenos</a>
-        <a href="#" class="hover:text-emerald-500">Mi Lista</a>
-        <button class="hover:text-emerald-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-          </svg>
-        </button>
-      </div>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KYB Doramas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-white">
 
-    <!-- HERO BANNER -->
-    <section class="relative w-full h-64 bg-cover bg-center" style="background-image: url('https://i.ibb.co/x2Gyzh6/banner-dorama.jpg');">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
-      <div class="absolute bottom-4 left-4">
-        <h1 class="text-2xl font-bold">Love Like The Falling Petals</h1>
-        <p class="text-sm text-gray-300">Drama • Japón • 2022</p>
-      </div>
-    </section>
-
-    <!-- BOTONES -->
-    <div class="flex justify-center space-x-4 mt-6 px-6">
-      <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
-        </svg>
-        Reproducir
-      </button>
-      <button class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg flex items-center transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
-        </svg>
-        Mi Lista
-      </button>
+  <!-- NAVBAR -->
+  <nav class="flex justify-between items-center px-6 py-4">
+    <div class="text-2xl font-bold text-emerald-500">KYB</div>
+    <div class="flex space-x-6 text-sm text-gray-300">
+      <a href="#" class="hover:text-white">Inicio</a>
+      <a href="#" class="hover:text-white">Doramas</a>
+      <a href="#" class="hover:text-white">BL</a>
+      <a href="#" class="hover:text-white">Próximos Estrenos</a>
+      <a href="#" class="hover:text-white">Mi Lista</a>
     </div>
+    <!-- Lupa -->
+    <button class="text-gray-300 hover:text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+      </svg>
+    </button>
+  </nav>
 
-    <!-- SECCIONES: Populares, Recomendados, BL, Próximos Estrenos -->
-    <div class="mt-10 px-6 space-y-10">
-      <div>
-        <h2 class="text-lg font-semibold mb-4">Doramas Populares</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          <!-- Reemplaza estas imágenes por las tuyas -->
-          <img src="https://i.ibb.co/QfFyW26/dorama1.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/yNLGCF9/dorama2.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/bFB9Zhr/dorama3.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/tXjpwcs/dorama4.jpg" class="rounded-lg" />
-        </div>
-      </div>
-      <div>
-        <h2 class="text-lg font-semibold mb-4">Recomendados</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          <img src="https://i.ibb.co/bFB9Zhr/dorama3.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/tXjpwcs/dorama4.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/QfFyW26/dorama1.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/yNLGCF9/dorama2.jpg" class="rounded-lg" />
-        </div>
-      </div>
-      <div>
-        <h2 class="text-lg font-semibold mb-4">BL</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          <img src="https://i.ibb.co/yNLGCF9/dorama2.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/QfFyW26/dorama1.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/bFB9Zhr/dorama3.jpg" class="rounded-lg" />
-          <img src="https://i.ibb.co/tXjpwcs/dorama4.jpg" class="rounded-lg" />
+  <!-- HERO -->
+  <section class="relative w-full h-[60vh] bg-cover bg-center" style="background-image: url('https://i.imgur.com/Gy9t9vI.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end">
+      <div class="p-6">
+        <h1 class="text-3xl font-bold text-white">Love Like the Falling Petals</h1>
+        <p class="text-gray-300 mt-1">Drama · Japón · 2022</p>
+        <div class="mt-4 flex space-x-4">
+          <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
+            </svg>
+            Reproducir
+          </button>
+          <button class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+            </svg>
+            Mi Lista
+          </button>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- CALENDARIO -->
-    <section class="mt-12 px-6">
-      <h2 class="text-lg font-semibold mb-4">Calendario de Estrenos</h2>
-      <div class="overflow-x-auto bg-slate-800 rounded-lg p-4">
-        <table class="min-w-full text-left text-sm">
-          <thead class="text-gray-400">
-            <tr>
-              <th class="py-2 pr-4">Fecha</th>
-              <th class="py-2 pr-4">Título</th>
-              <th class="py-2">Género</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-t border-gray-700">
-              <td class="py-2 pr-4">22 Jun</td>
-              <td class="py-2 pr-4">Between Us</td>
-              <td class="py-2">BL</td>
-            </tr>
-            <tr class="border-t border-gray-700">
-              <td class="py-2 pr-4">25 Jun</td>
-              <td class="py-2 pr-4">A Time Called You</td>
-              <td class="py-2">Romance</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- SECCIÓN: Populares -->
+  <section class="p-6">
+    <h2 class="text-xl font-semibold mb-4">Populares</h2>
+    <div class="flex space-x-4 overflow-x-auto scrollbar-hide">
+      <img src="https://i.imgur.com/z5L1a9R.jpg" alt="dorama1" class="h-40 rounded-lg" />
+      <img src="https://i.imgur.com/UYiroysl.jpg" alt="dorama2" class="h-40 rounded-lg" />
+      <img src="https://i.imgur.com/Edw9eKZ.jpg" alt="dorama3" class="h-40 rounded-lg" />
+      <img src="https://i.imgur.com/3zhvVgL.jpg" alt="dorama4" class="h-40 rounded-lg" />
+    </div>
+  </section>
+
+  <!-- SECCIÓN: Recomendados -->
+  <section class="p-6">
+    <h2 class="text-xl font-semibold mb-4">Recomendados</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <img src="https://i.imgur.com/BtM7tZe.jpg" class="rounded-lg" />
+      <img src="https://i.imgur.com/fnLOMyc.jpg" class="rounded-lg" />
+      <img src="https://i.imgur.com/jqYnbFh.jpg" class="rounded-lg" />
+      <img src="https://i.imgur.com/NczKNlZ.jpg" class="rounded-lg" />
+    </div>
+  </section>
+
+  <!-- SECCIÓN: BL -->
+  <section class="p-6">
+    <h2 class="text-xl font-semibold mb-4">Boys Love (BL)</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <img src="https://i.imgur.com/W0XbAXY.jpg" class="rounded-lg" />
+      <img src="https://i.imgur.com/qn6BV6h.jpg" class="rounded-lg" />
+      <img src="https://i.imgur.com/qfAaAkN.jpg" class="rounded-lg" />
+      <img src="https://i.imgur.com/hz2n9JD.jpg" class="rounded-lg" />
+    </div>
+  </section>
+
+  <!-- CALENDARIO DE ESTRENOS -->
+  <section class="p-6">
+    <h2 class="text-xl font-semibold mb-4">Calendario de Estrenos</h2>
+    <ul class="space-y-2">
+      <li class="flex justify-between border-b border-gray-700 py-2">
+        <span>18 Junio - The Midnight Studio</span><span class="text-gray-400">Corea</span>
+      </li>
+      <li class="flex justify-between border-b border-gray-700 py-2">
+        <span>23 Junio - Tokyo in April is...</span><span class="text-gray-400">Japón</span>
+      </li>
+      <li class="flex justify-between border-b border-gray-700 py-2">
+        <span>30 Junio - Be My Favorite</span><span class="text-gray-400">Tailandia</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-800 text-gray-400 text-sm py-6 px-6 mt-12">
+    <div class="flex flex-col md:flex-row justify-between">
+      <div>
+        <p>© 2025 KYB Doramas. Todos los derechos reservados.</p>
+        <p>Diseño inspirado en Netflix y Viki.</p>
       </div>
-    </section>
+      <div class="mt-4 md:mt-0 space-x-4">
+        <a href="#" class="hover:text-white">Términos</a>
+        <a href="#" class="hover:text-white">Privacidad</a>
+        <a href="#" class="hover:text-white">Contacto</a>
+      </div>
+    </div>
+  </footer>
 
-    <!-- FOOTER -->
-    <footer class="mt-12 bg-black text-center py-6 border-t border-gray-800 text-gray-500 text-sm">
-      © 2025 KYB Doramas. Todos los derechos reservados.
-    </footer>
-
-  </body>
+</body>
 </html>
