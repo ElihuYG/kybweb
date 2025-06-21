@@ -2,110 +2,126 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Untamed - KYB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Untamed</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    // Calificación (localStorage)
-    function rate(n) {
-      localStorage.setItem("theuntamed_rating", n);
-      renderStars();
+  <style>
+    .popup {
+      background-color: rgba(0, 0, 0, 0.7);
     }
-    function renderStars() {
-      const val = localStorage.getItem("theuntamed_rating") || 0;
-      document.querySelectorAll(".star").forEach((el, i) => {
-        el.classList.toggle("text-yellow-400", i < val);
-      });
+    .star {
+      cursor: pointer;
+      transition: transform 0.2s;
     }
-
-    // Mi Lista (localStorage)
-    function toggleList() {
-      const exists = localStorage.getItem("in_list_theuntamed") === "true";
-      localStorage.setItem("in_list_theuntamed", !exists);
-      document.getElementById("listIcon").classList.toggle("animate-bounce", !exists);
+    .star:hover {
+      transform: scale(1.2);
     }
-    function isInList() {
-      return localStorage.getItem("in_list_theuntamed") === "true";
+    .bounce {
+      animation: bounce 0.3s;
     }
-    function setupPage() {
-      renderStars();
-      if (isInList()) document.getElementById("listIcon").classList.add("animate-bounce");
+    @keyframes bounce {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
     }
-    window.onload = setupPage;
-  </script>
+  </style>
 </head>
 <body class="bg-slate-900 text-white font-sans">
-  <!-- Header -->
-  <nav class="flex justify-between items-center p-4">
-    <a href="home.html">
-      <img src="/icons/home.png" class="h-6 w-6" alt="Home" />
-    </a>
-    <h1 class="text-xl font-bold">The Untamed</h1>
-  </nav>
 
-  <!-- Portada -->
-  <div class="relative w-full max-w-5xl mx-auto">
-    <img src="/img/theuntamed-cover.jpg" alt="The Untamed" class="rounded-xl w-full object-cover max-h-[500px]" />
-  </div>
+  <div class="p-6 max-w-4xl mx-auto space-y-6">
 
-  <!-- Info -->
-  <section class="max-w-5xl mx-auto p-4 space-y-4">
-    <div class="flex items-center justify-between">
-      <button onclick="toggleList()" class="bg-white rounded-full p-2">
-        <img id="listIcon" src="/icons/netflix-mylist.png" class="h-6 w-6" alt="Mi Lista" />
-      </button>
-      <button onclick="document.getElementById('ratingModal').classList.remove('hidden')" class="bg-white rounded-full p-2">
-        <img src="/icons/star.png" class="h-6 w-6" alt="Valorar" />
-      </button>
-    </div>
-
-    <p class="text-gray-300">
-      <strong>Género:</strong> Fantasía, Acción, Romance &bull;
-      <strong>País:</strong> China &bull;
-      <strong>Idioma:</strong> Subtitulado &bull;
-      <strong>Duración:</strong> 50min &bull;
-      <strong>+13</strong>
-    </p>
-
-    <div class="border border-gray-500 p-3 rounded">
-      <p class="text-sm text-gray-200">
-        La historia sigue a Wei Wuxian y Lan Wangji mientras descubren una conspiración que se remonta a generaciones, todo envuelto en acción sobrenatural, bromance, y drama político.
-      </p>
-    </div>
-
-    <!-- Trailer -->
-    <div class="aspect-w-16 aspect-h-9">
-      <iframe class="w-full rounded-lg" src="https://www.youtube.com/embed/r5O5ZzfnQzk" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-    <!-- Episodios -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mt-4">
-      <!-- Lista de episodios -->
-      <script>
-        for (let i = 1; i <= 50; i++) {
-          document.write(`
-            <div class='bg-slate-800 hover:bg-emerald-600 transition-all rounded p-2 text-center cursor-pointer'>
-              The Untamed 1x${i}
-            </div>
-          `);
-        }
-      </script>
-    </div>
-  </section>
-
-  <!-- Modal Estrellas -->
-  <div id="ratingModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
-    <div class="bg-white p-6 rounded-lg">
-      <h2 class="text-black text-lg mb-2">¿Cuántas estrellas le das?</h2>
-      <div class="flex gap-2 mb-4">
-        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(1)">&#9733;</span>
-        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(2)">&#9733;</span>
-        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(3)">&#9733;</span>
-        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(4)">&#9733;</span>
-        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(5)">&#9733;</span>
+    <div class="flex justify-between items-start">
+      <div>
+        <h1 class="text-3xl font-bold text-emerald-500">The Untamed</h1>
+        <p class="text-sm text-gray-400 mt-1">China • 2019 • 50 episodios • BL, Fantasía, Misterio • Subtitulado</p>
+        <p class="text-sm text-gray-400">Duración promedio: 45 min • Clasificación: +13</p>
       </div>
-      <button onclick="document.getElementById('ratingModal').classList.add('hidden')" class="bg-emerald-600 text-white px-4 py-2 rounded">Listo</button>
+      <div class="flex space-x-4">
+        <button id="miListaBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Mi lista" class="h-6 w-6 mr-1">
+          <span>Mi Lista</span>
+        </button>
+        <button id="valorarBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="Valorar" class="h-6 w-6 mr-1">
+          <span>Valorar</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="aspect-w-16 aspect-h-9">
+      <iframe class="w-full rounded-lg" height="315" src="https://www.youtube.com/embed/dFAj0X0rKGA" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <p class="text-gray-300">En un mundo lleno de clanes y cultivadores, dos jóvenes de ideales opuestos, Wei Wuxian y Lan Wangji, se enfrentan a un misterio ancestral que podría cambiar el destino de todos. "The Untamed" es una historia de amor, lealtad, traición y redención que ha capturado el corazón de millones.</p>
+
+    <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+  </div>
+
+  <!-- Popup estrellas -->
+  <div id="popup" class="fixed inset-0 popup hidden flex items-center justify-center z-50">
+    <div class="bg-slate-800 p-6 rounded-xl text-center">
+      <h2 class="text-lg font-bold mb-4">Califica esta serie</h2>
+      <div id="estrellas" class="flex justify-center space-x-2 mb-4">
+        <!-- Se llenan por JS -->
+      </div>
+      <button onclick="cerrarPopup()" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded">Cerrar</button>
     </div>
   </div>
+
+  <script>
+    const listaBtn = document.getElementById('miListaBtn');
+    const valorarBtn = document.getElementById('valorarBtn');
+    const popup = document.getElementById('popup');
+    const estrellasDiv = document.getElementById('estrellas');
+
+    // Cargar estado de Mi Lista
+    if (localStorage.getItem('untamed_lista') === 'true') {
+      listaBtn.classList.add('text-white');
+    }
+
+    // Agregar a mi lista con animación
+    listaBtn.addEventListener('click', () => {
+      listaBtn.classList.add('bounce');
+      localStorage.setItem('untamed_lista', 'true');
+      setTimeout(() => listaBtn.classList.remove('bounce'), 300);
+      listaBtn.classList.add('text-white');
+    });
+
+    // Mostrar popup de valoración
+    valorarBtn.addEventListener('click', () => {
+      popup.classList.remove('hidden');
+      cargarEstrellas();
+    });
+
+    // Cerrar popup
+    function cerrarPopup() {
+      popup.classList.add('hidden');
+    }
+
+    // Estrellas
+    function cargarEstrellas() {
+      estrellasDiv.innerHTML = '';
+      const calif = parseInt(localStorage.getItem('untamed_valoracion')) || 0;
+      for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.className = `star text-3xl ${i <= calif ? 'text-yellow-400' : 'text-gray-500'}`;
+        star.textContent = '★';
+        star.addEventListener('click', () => {
+          localStorage.setItem('untamed_valoracion', i);
+          cargarEstrellas();
+        });
+        estrellasDiv.appendChild(star);
+      }
+    }
+
+    // Cargar episodios
+    const episodios = document.getElementById('episodios');
+    for (let i = 1; i <= 50; i++) {
+      const ep = document.createElement('div');
+      ep.className = 'bg-slate-800 hover:bg-slate-700 text-white p-2 rounded text-center cursor-pointer';
+      ep.textContent = `The Untamed 1x${i}`;
+      episodios.appendChild(ep);
+    }
+  </script>
 </body>
 </html>
