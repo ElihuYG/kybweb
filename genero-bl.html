@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Género BL - KYB Doramas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white font-sans min-h-screen pb-20">
+
+  <a href="index.html" class="fixed top-4 left-4 z-50">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Inicio" class="w-8 h-8">
+  </a>
+
+  <div class="p-4 pt-10">
+    <h1 class="text-3xl font-bold mb-6">Doramas - Género BL</h1>
+    
+    <div id="lista-doramas" class="space-y-4"></div>
+  </div>
+
+  <script>
+    const doramas = [
+      {
+        titulo: "The Untamed",
+        año: "2019",
+        pais: "China",
+        generos: ["BL", "Fantasía", "Misterio"],
+        imagen: "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABSrZyEjwDHB8w9YYTtmaVx7ljGqMDJBabhar-V9eFrwEXEa87nao1WdYd3ZC0Fdpd7piinbG9aGqvdbBiUVoZccSr9YryirlveBA.jpg?r=959",
+        url: "theuntamed.html"
+      },
+      {
+        titulo: "SOTUS: The Series",
+        año: "2016",
+        pais: "Tailandia",
+        generos: ["BL", "Romance", "Escolar"],
+        imagen: "https://pm1.aminoapps.com/7671/b6e9f622b6d2f79a8f50daafc2b81844f844c591r1-720-405v2_uhq.jpg",
+        url: "sotus.html"
+      },
+      {
+        titulo: "Love By Chance",
+        año: "2018",
+        pais: "Tailandia",
+        generos: ["BL", "Romance", "Drama"],
+        imagen: "https://image.tmdb.org/t/p/original/cdqu80wEdIj7k6aaUw5ZX2wLOYB.jpg",
+        url: "lovebychance.html"
+      },
+      {
+        titulo: "TharnType: The Series",
+        año: "2019",
+        pais: "Tailandia",
+        generos: ["BL", "Romance", "Comedia"],
+        imagen: "https://i1.sndcdn.com/artworks-qffilK359uJJ-0-t500x500.jpg",
+        url: "tharntype.html"
+      }
+    ];
+
+    // Filtra solo BL
+    const blDoramas = doramas.filter(d => d.generos.map(g => g.toLowerCase()).includes("bl"));
+
+    const contenedor = document.getElementById("lista-doramas");
+
+    if(blDoramas.length === 0){
+      contenedor.innerHTML = "<p class='text-gray-400'>No hay doramas en este género.</p>";
+    } else {
+      blDoramas.forEach(dorama => {
+        const card = document.createElement("div");
+        card.className = "bg-gray-800 rounded-lg p-4 shadow-md";
+
+        card.innerHTML = `
+          <a href="${dorama.url}" class="flex items-center gap-4 hover:opacity-80 transition">
+            <img src="${dorama.imagen}" alt="${dorama.titulo}" class="w-16 h-24 object-cover rounded">
+            <div>
+              <h3 class="text-lg font-bold">${dorama.titulo}</h3>
+              <p class="text-sm text-gray-400">${dorama.año} • ${dorama.pais}</p>
+              <p class="text-sm text-emerald-400">${dorama.generos.join(", ")}</p>
+            </div>
+          </a>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+  </script>
+
+</body>
+</html>
