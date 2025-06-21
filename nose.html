@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KYB Doramas</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: sans-serif;
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+    body { background: #0f172a; color: white; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    .hover-scale { transition: transform 0.3s ease; }
+    .hover-scale:hover { transform: scale(1.05); }
   </style>
 </head>
-<body class="bg-slate-900 text-white">
+<body class="font-sans">
 
   <!-- NAVBAR -->
   <nav class="flex justify-between items-center px-6 py-4">
     <div class="text-2xl font-bold text-emerald-500">KYB</div>
-    <div class="flex space-x-6 text-sm text-gray-300">
+    <div class="flex space-x-6 text-sm text-gray-400">
       <a href="#" class="hover:text-white">Inicio</a>
       <a href="#" class="hover:text-white">Doramas</a>
       <a href="#" class="hover:text-white">BL</a>
       <a href="#" class="hover:text-white">Próximos Estrenos</a>
       <a href="#" class="hover:text-white">Mi Lista</a>
     </div>
-    <!-- Lupa -->
-    <button class="text-gray-300 hover:text-white">
+    <button class="text-gray-400 hover:text-white">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
       </svg>
@@ -39,92 +33,98 @@
   </nav>
 
   <!-- HERO -->
-  <section class="relative w-full h-[60vh] bg-cover bg-center" style="background-image: url('https://i.imgur.com/Gy9t9vI.jpg');">
-    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-end">
-      <div class="p-6">
-        <h1 class="text-3xl font-bold text-white">Love Like the Falling Petals</h1>
-        <p class="text-gray-300 mt-1">Drama · Japón · 2022</p>
-        <div class="mt-4 flex space-x-4">
-          <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" />
-            </svg>
-            Reproducir
-          </button>
-          <button class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
-            </svg>
-            Mi Lista
-          </button>
-        </div>
+  <section class="relative w-full h-60 md:h-80 lg:h-[600px] bg-cover bg-center" style="background-image: url('TU_IMAGEN_1920x600.png');">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent pt-32"></div>
+    <div class="absolute bottom-10 left-10 z-10">
+      <h1 class="text-4xl md:text-6xl font-bold">Love Like the Falling Petals</h1>
+      <p class="text-gray-300 mt-2 max-w-lg">Una historia de amor entre un fotógrafo aspirante y una estilista con una enfermedad que la hace envejecer rápidamente.</p>
+      <div class="mt-4 flex space-x-4">
+        <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-3 rounded-lg flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/>
+          </svg>Reproducir
+        </button>
+        <button class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-3 rounded-lg flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
+          </svg>Mi Lista
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN: Populares -->
+  <!-- Populares (carousel vertical hover) -->
   <section class="p-6">
     <h2 class="text-xl font-semibold mb-4">Populares</h2>
-    <div class="flex space-x-4 overflow-x-auto scrollbar-hide">
-      <img src="https://i.imgur.com/z5L1a9R.jpg" alt="dorama1" class="h-40 rounded-lg" />
-      <img src="https://i.imgur.com/UYiroysl.jpg" alt="dorama2" class="h-40 rounded-lg" />
-      <img src="https://i.imgur.com/Edw9eKZ.jpg" alt="dorama3" class="h-40 rounded-lg" />
-      <img src="https://i.imgur.com/3zhvVgL.jpg" alt="dorama4" class="h-40 rounded-lg" />
+    <div class="flex space-x-4 overflow-x-auto scrollbar-hide py-2">
+      <div class="hover-scale flex-none w-40">
+        <img src="PORTADA1_VERTICAL.png" class="w-full rounded-lg shadow-lg" alt="">
+      </div>
+      <div class="hover-scale flex-none w-40">
+        <img src="PORTADA2_VERTICAL.png" class="w-full rounded-lg shadow-lg" alt="">
+      </div>
+      <div class="hover-scale flex-none w-40">
+        <img src="PORTADA3_VERTICAL.png" class="w-full rounded-lg shadow-lg" alt="">
+      </div>
+      <div class="hover-scale flex-none w-40">
+        <img src="PORTADA4_VERTICAL.png" class="w-full rounded-lg shadow-lg" alt="">
+      </div>
     </div>
   </section>
 
-  <!-- SECCIÓN: Recomendados -->
+  <!-- Recomendados -->
   <section class="p-6">
     <h2 class="text-xl font-semibold mb-4">Recomendados</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <img src="https://i.imgur.com/BtM7tZe.jpg" class="rounded-lg" />
-      <img src="https://i.imgur.com/fnLOMyc.jpg" class="rounded-lg" />
-      <img src="https://i.imgur.com/jqYnbFh.jpg" class="rounded-lg" />
-      <img src="https://i.imgur.com/NczKNlZ.jpg" class="rounded-lg" />
+    <div class="flex space-x-4 overflow-x-auto scrollbar-hide py-2">
+      <div class="hover-scale flex-none w-40"><img src="REC1_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
+      <div class="hover-scale flex-none w-40"><img src="REC2_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
+      <div class="hover-scale flex-none w-40"><img src="REC3_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
+      <div class="hover-scale flex-none w-40"><img src="REC4_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
     </div>
   </section>
 
-  <!-- SECCIÓN: BL -->
+  <!-- BL -->
   <section class="p-6">
-    <h2 class="text-xl font-semibold mb-4">Boys Love (BL)</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <img src="https://i.imgur.com/W0XbAXY.jpg" class="rounded-lg" />
-      <img src="https://i.imgur.com/qn6BV6h.jpg" class="rounded-lg" />
-      <img src="https://i.imgur.com/qfAaAkN.jpg" class="rounded-lg" />
-      <img src="https://i.imgur.com/hz2n9JD.jpg" class="rounded-lg" />
+    <h2 class="text-xl font-semibold mb-4">BL</h2>
+    <div class="flex space-x-4 overflow-x-auto scrollbar-hide py-2">
+      <div class="hover-scale flex-none w-40"><img src="BL1_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
+      <div class="hover-scale flex-none w-40"><img src="BL2_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
+      <div class="hover-scale flex-none w-40"><img src="BL3_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
+      <div class="hover-scale flex-none w-40"><img src="BL4_VERTICAL.png" class="w-full rounded-lg shadow-lg"></div>
     </div>
   </section>
 
-  <!-- CALENDARIO DE ESTRENOS -->
+  <!-- Calendario con días y lanzamientos -->
   <section class="p-6">
-    <h2 class="text-xl font-semibold mb-4">Calendario de Estrenos</h2>
-    <ul class="space-y-2">
-      <li class="flex justify-between border-b border-gray-700 py-2">
-        <span>18 Junio - The Midnight Studio</span><span class="text-gray-400">Corea</span>
-      </li>
-      <li class="flex justify-between border-b border-gray-700 py-2">
-        <span>23 Junio - Tokyo in April is...</span><span class="text-gray-400">Japón</span>
-      </li>
-      <li class="flex justify-between border-b border-gray-700 py-2">
-        <span>30 Junio - Be My Favorite</span><span class="text-gray-400">Tailandia</span>
-      </li>
+    <h2 class="text-xl font-semibold mb-4">Próximos Estrenos</h2>
+    <div class="grid grid-cols-7 gap-1 text-center text-gray-400 text-sm">
+      <div>D</div><div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div>
+      <!-- days 1-14 tacitly omitted -->
+      <div class="col-start-7 text-gray-400">1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
+      <!-- ... -->
+      <div class="bg-emerald-500 text-white rounded">15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div>
+      <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+      <div>29</div><div>30</div>
+    </div>
+    <ul class="mt-4 space-y-2">
+      <li class="flex justify-between"><span>15 Junio</span><span class="bg-emerald-600 text-xs px-2 rounded">KinnPorsche S2</span></li>
+      <li class="flex justify-between"><span>18 Junio</span><span class="bg-emerald-600 text-xs px-2 rounded">My Precious</span></li>
+      <li class="flex justify-between"><span>22 Junio</span><span class="bg-emerald-600 text-xs px-2 rounded">Love in the Air</span></li>
     </ul>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-800 text-gray-400 text-sm py-6 px-6 mt-12">
+  <footer class="mt-10 p-6 bg-[#1e293b] text-sm text-gray-400">
     <div class="flex flex-col md:flex-row justify-between">
-      <div>
-        <p>© 2025 KYB Doramas. Todos los derechos reservados.</p>
-        <p>Diseño inspirado en Netflix y Viki.</p>
-      </div>
-      <div class="mt-4 md:mt-0 space-x-4">
+      <span>© 2025 KYB Doramas. Todos los derechos reservados.</span>
+      <span class="mt-2 md:mt-0 space-x-4">
         <a href="#" class="hover:text-white">Términos</a>
         <a href="#" class="hover:text-white">Privacidad</a>
         <a href="#" class="hover:text-white">Contacto</a>
-      </div>
+      </span>
     </div>
   </footer>
 
 </body>
 </html>
+
