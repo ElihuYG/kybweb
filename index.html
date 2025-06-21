@@ -6,52 +6,126 @@
   <title>KYB - Cargando...</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
+    /* Fondo animado tipo neón */
+    body {
+      background: radial-gradient(circle at center, #0f172a, #000);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
     }
 
-    @keyframes fadeOut {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(1.05); }
+    .glow-text {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      color: #10b981;
+      text-shadow: 0 0 10px #10b98188, 0 0 20px #10b98166, 0 0 30px #10b98144;
+      animation: pulseGlow 3s ease-in-out infinite;
     }
 
-    .fade-in {
-      animation: fadeIn 1s ease-out forwards;
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow: 0 0 10px #10b98188, 0 0 20px #10b98166, 0 0 30px #10b98144;
+      }
+      50% {
+        text-shadow: 0 0 15px #10b981aa, 0 0 30px #10b98188, 0 0 45px #10b98166;
+      }
+    }
+
+    .progress-container {
+      width: 90%;
+      max-width: 500px;
+      height: 18px;
+      background: #1f2937;
+      border-radius: 9999px;
+      overflow: hidden;
+      margin-top: 2rem;
+      box-shadow: 0 0 10px #10b98155;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #10b981, #059669);
+      transition: width 0.2s ease;
+      border-radius: 9999px;
+      box-shadow: 0 0 10px #10b981aa;
+    }
+
+    .subtext {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #9ca3af;
+      text-align: center;
+      letter-spacing: 1px;
+      animation: fadeIn 2s ease-in-out;
     }
 
     .fade-out {
-      animation: fadeOut 0.8s ease-in forwards;
+      animation: fadeOut 1s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .vibrate {
+      animation: vibrate 4s infinite ease-in-out;
+    }
+
+    @keyframes vibrate {
+      0%, 100% { transform: translateY(0px); }
+      25% { transform: translateY(-2px); }
+      50% { transform: translateY(2px); }
+      75% { transform: translateY(-1px); }
     }
   </style>
 </head>
-<body class="bg-black text-white font-sans overflow-hidden">
+<body class="flex items-center justify-center h-screen">
 
-  <!-- Pantalla de carga -->
-  <div id="splash" class="flex items-center justify-center h-screen bg-black">
-    <div class="text-center fade-in">
-      <!-- Logo o nombre de KYB -->
-      <img src="logo_kyb.png" alt="KYB Logo" class="mx-auto w-28 h-28 mb-4 animate-pulse" />
-      <h1 class="text-3xl font-bold tracking-widest mb-2">KYB</h1>
-      <p class="text-sm text-gray-400">Cargando contenido...</p>
+  <div class="text-center" id="splash">
+    <div class="glow-text vibrate">KYB</div>
+    <div class="progress-container mx-auto mt-8">
+      <div class="progress-bar" id="progress-bar"></div>
     </div>
-  </div>
-
-  <!-- Contenido principal oculto al inicio -->
-  <div id="main-content" class="hidden">
-    <!-- Aquí puedes redirigir o cargar tu página principal con JS -->
+    <div class="subtext">Cargando lo mejor del drama... 🔥</div>
   </div>
 
   <script>
-    // Espera 2.5 segundos y luego hace fade out y muestra el contenido o redirige
-    setTimeout(() => {
-      const splash = document.getElementById('splash');
-      splash.classList.add('fade-out');
+    let progress = 0;
+    const bar = document.getElementById('progress-bar');
+    const splash = document.getElementById('splash');
 
-      setTimeout(() => {
-        window.location.href = "home.html"; // Cambia esto al nombre real de tu página principal
-      }, 800); // Tiempo del fadeOut
-    }, 2500); // Tiempo en pantalla de carga
+    const interval = setInterval(() => {
+      progress += Math.floor(Math.random() * 10) + 5; // Aumenta de forma aleatoria
+
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+
+        // Fade out y redirige
+        splash.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = "home.html"; // cámbialo por tu página real
+        }, 1000);
+      }
+
+      bar.style.width = progress + '%';
+    }, 300);
   </script>
+
 </body>
 </html>
