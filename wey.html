@@ -2,91 +2,201 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Untamed</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .popup { background-color: rgba(0,0,0,0.7); }
-    .star { cursor: pointer; transition: transform 0.2s; }
-    .star:hover { transform: scale(1.2); }
-    .bounce { animation: bounce 0.3s; }
-    @keyframes bounce { 0%,100% {transform:scale(1);} 50% {transform:scale(1.3);} }
-    .etiqueta {
-      border: 1px solid #4B5563;
-      border-radius: 9999px;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
-      color: #D1D5DB;
+    body {
+      margin: 0;
+      background-color: #0f172a;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    header {
+      padding: 1rem;
+    }
+
+    .home-icon {
+      width: 30px;
+    }
+
+    .container {
+      padding: 1rem 2rem;
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .poster {
+      width: 250px;
+      height: 300px;
+      background-image: url("https://i.imgur.com/6oH7qg9.jpg");
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+    }
+
+    .details h1 {
+      margin: 0;
+      color: #10b981;
+    }
+
+    .tags {
+      margin: 0.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background-color: #1e293b;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .desc {
+      margin: 1rem 0;
+      max-width: 600px;
+    }
+
+    .cast-section {
+      margin: 1rem 0;
+    }
+
+    .cast-section h3 {
+      color: #22d3ee;
+    }
+
+    .cast-list {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cast {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #999;
+      background-size: cover;
+      background-position: center;
+      border: 2px solid #ccc;
+    }
+
+    .arrow {
+      font-size: 2rem;
+      margin-left: 1rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .episodes {
+      margin-top: 2rem;
+    }
+
+    .episodes h3 {
+      color: #22c55e;
+    }
+
+    .episode-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .episode a {
+      display: block;
+      background-color: #1e293b;
+      padding: 0.5rem;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .episode a:hover {
+      background-color: #10b981;
+      transform: scale(1.03);
+    }
+
+    footer {
+      background-color: #1e293b;
+      color: #ccc;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
-<body class="bg-slate-900 text-white font-sans">
-  <div class="p-6 max-w-4xl mx-auto space-y-6">
-    <!-- Encabezado -->
-    <div class="flex justify-between items-start">
-      <div>
-        <h1 class="text-3xl font-bold text-emerald-500 flex items-center">The Untamed (陈情令)</h1>
-        <div class="flex flex-wrap gap-2 mt-2">
-          <span class="etiqueta">±13</span>
-          <span class="etiqueta">BL</span>
-          <span class="etiqueta">Fantasía</span>
-          <span class="etiqueta">Misterio</span>
-          <span class="etiqueta">China • 2019</span>
-          <span class="etiqueta">50 episodios</span>
-          <span class="etiqueta">Subtitulado</span>
+<body>
+  <header>
+    <img src="https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABSrZyEjwDHB8w9YYTtmaVx7ljGqMDJBabhar-V9eFrwEXEa87nao1WdYd3ZC0Fdpd7piinbG9aGqvdbBiUVoZccSr9YryirlveBA.jpg?r=959" class="home-icon" alt="home">
+  </header>
+
+  <div class="container">
+    <div class="content">
+      <div class="poster"></div>
+
+      <div class="details">
+        <h1>The Untamed (陈情令)</h1>
+        <div class="tags">
+          <div class="tag">+13</div>
+          <div class="tag">BL</div>
+          <div class="tag">Fantasía</div>
+          <div class="tag">Misterio</div>
+          <div class="tag">China • 2019</div>
+          <div class="tag">50 episodios</div>
+          <div class="tag">Subtitulado</div>
         </div>
-        <p class="text-sm text-gray-400 mt-1 flex items-center gap-2">
-          <a href="https://en.wikipedia.org/wiki/Xiao_Zhan" target="_blank" class="hover:text-emerald-400 underline flex items-center">
-            Xiao Zhan
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Xiao_Zhan_May_2021.jpg/100px-Xiao_Zhan_May_2021.jpg" alt="Xiao Zhan" class="h-6 w-6 rounded-full ml-1">
-          </a>
-          , Wang Yibo, Xuan Lu, Wang Zhuocheng...
+        <p class="desc">
+          Wei Wuxian, un cultivador expulsado tras dominar artes oscuras, resucita dieciséis años después y se reencuentra con Lan Wangji para resolver una serie de asesinatos que los llevan a deshacer una conspiración ancestral.
         </p>
+
+        <div class="cast-section">
+          <h3>Reparto principal</h3>
+          <div class="cast-list">
+            <div class="cast" style="background-image: url('https://i.mydramalist.com/YYqZWQ_5c.jpg');"></div>
+            <div class="cast" style="background-image: url('https://i.mydramalist.com/5v7q04_5c.jpg');"></div>
+            <div class="cast" style="background-image: url('https://i.imgur.com/CuFi0ML.jpg');"></div>
+            <div class="cast" style="background-image: url('https://i.imgur.com/8bGTSP1.jpg');"></div>
+            <div class="cast" style="background-image: url('https://i.imgur.com/hy2V3qB.jpg');"></div>
+            <div class="arrow">▶</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Tráiler -->
-    <div class="aspect-w-16 aspect-h-9">
-      <iframe class="w-full rounded-lg" src="https://www.youtube.com/embed/rAsP69G5rWQ" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-    <!-- Sinopsis -->
-    <p class="text-gray-300">
-      Wei Wuxian, un cultivador repudiado tras dominar artes oscuras, resucita dieciséis años después y se reúne con Lan Wangji para resolver una serie de asesinatos que los llevan a destapar una conspiración ancestral.
-    </p>
-
-    <!-- Reparto -->
-    <div>
-      <h2 class="text-xl font-bold text-emerald-500 mb-2">Reparto principal</h2>
-      <ul class="list-disc list-inside text-gray-300 space-y-1">
-        <li>
-          <a href="https://en.wikipedia.org/wiki/Xiao_Zhan" target="_blank" class="hover:text-emerald-400 underline flex items-center">
-            Xiao Zhan
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Xiao_Zhan_May_2021.jpg/100px-Xiao_Zhan_May_2021.jpg" alt="Xiao Zhan" class="h-6 w-6 rounded-full ml-1">
-          </a> como Wei Wuxian (魏无羡)
-        </li>
-        <li>Wang Yibo como Lan Wangji (蓝忘机)</li>
-        <li>Xuan Lu como Jiang Yanli</li>
-        <li>Wang Zhuocheng como Jiang Cheng</li>
-      </ul>
-    </div>
-
-    <!-- Episodios -->
-    <div>
-      <h2 class="text-xl font-bold text-emerald-500 mb-2">Episodios</h2>
-      <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+    <div class="episodes">
+      <h3>Episodios</h3>
+      <div class="episode-list">
+        <!-- Puedes duplicar esto hasta el episodio 50 -->
+        <div class="episode"><a href="#">The Untamed T01</a></div>
+        <div class="episode"><a href="#">The Untamed T02</a></div>
+        <div class="episode"><a href="#">The Untamed T03</a></div>
+        <div class="episode"><a href="#">The Untamed T04</a></div>
+        <div class="episode"><a href="#">The Untamed T05</a></div>
+        <div class="episode"><a href="#">The Untamed T06</a></div>
+        <div class="episode"><a href="#">The Untamed T07</a></div>
+        <div class="episode"><a href="#">The Untamed T08</a></div>
+        <div class="episode"><a href="#">The Untamed T09</a></div>
+        <div class="episode"><a href="#">The Untamed T10</a></div>
+        <!-- ... hasta T50 -->
+      </div>
     </div>
   </div>
 
-  <script>
-    const cont = document.getElementById('episodios');
-    for (let i = 1; i <= 50; i++) {
-      const ep = document.createElement('a');
-      ep.className = 'bg-slate-800 hover:bg-slate-700 text-white p-2 rounded text-center cursor-pointer block';
-      ep.textContent = `The Untamed 1x${i}`;
-      ep.href = `theuntamed-1x${i}.html`;
-      cont.appendChild(ep);
-    }
-  </script>
+  <footer>
+    © 2025 KYB | Todos los derechos reservados
+  </footer>
 </body>
 </html>
