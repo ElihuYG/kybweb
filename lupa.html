@@ -8,10 +8,36 @@
 </head>
 <body class="bg-slate-900 text-white font-sans min-h-screen pb-20">
 
-  <!-- Botón Home -->
-  <a href="home.html" class="fixed top-4 left-4 z-50">
-    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Inicio" class="w-8 h-8">
-  </a>
+   <!-- Header -->
+  <header class="bg-slate-900 text-white shadow-md fixed w-full top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo (KYB) -->
+        <a href="index.html" class="text-2xl font-bold text-emerald-500 hover:text-emerald-400 transition-colors">KYB</a>
+
+        <!-- Nav Links (center) -->
+        <nav class="hidden md:flex space-x-6">
+          <a href="peliculas.html" class="hover:text-emerald-400 transition-colors">Películas</a>
+          <a href="dramas.html" class="hover:text-emerald-400 transition-colors">Dramas</a>
+          <a href="calendario.html" class="hover:text-emerald-400 transition-colors">Calendario</a>
+          <a href="ayuda.html" class="hover:text-emerald-400 transition-colors">Ayuda</a>
+        </nav>
+
+        <!-- Icono de cuenta -->
+        <div class="flex space-x-4 items-center">
+          <a href="cuenta.html" class="hover:text-emerald-400 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5.121 17.804A11.954 11.954 0 0112 15c2.21 0 4.263.636 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Espacio para compensar el header fijo -->
+  <div class="h-16"></div>
 
   <!-- Buscador -->
   <div class="p-4 pt-10">
