@@ -1,214 +1,272 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Untamed</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #0f172a;
-      font-family: Arial, sans-serif;
-      color: white;
-    }
-
-    header {
-      padding: 1rem;
-    }
-
-    .home-icon {
-      width: 30px;
-    }
-
-    .container {
-      padding: 1rem 2rem;
-    }
-
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .poster {
-      width: 250px;
-      height: 300px;
-      background-image: url("https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/Z-WHgqd_TeJxSuha8aZ5WpyLcX8/AAAABSrZyEjwDHB8w9YYTtmaVx7ljGqMDJBabhar-V9eFrwEXEa87nao1WdYd3ZC0Fdpd7piinbG9aGqvdbBiUVoZccSr9YryirlveBA.jpg?r=959");
-      background-size: cover;
-      background-position: center;
-      border-radius: 10px;
-    }
-
-    .details h1 {
-      margin: 0;
-      color: #10b981;
-    }
-
-    .tags {
-      margin: 0.5rem 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      background-color: #1e293b;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-    }
-
-    .desc {
-      margin: 1rem 0;
-      max-width: 600px;
-    }
-
-    .cast-section {
-      margin: 1rem 0;
-    }
-
-    .cast-section h3 {
-      color: #22d3ee;
-    }
-
-    .cast-list {
-      display: flex;
-      gap: 1rem;
-      margin-top: 0.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .cast {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background-color: #999;
-      background-size: cover;
-      background-position: center;
-      border: 2px solid #ccc;
-    }
-
-    .arrow {
-      font-size: 2rem;
-      margin-left: 1rem;
-      color: white;
-      cursor: pointer;
-    }
-
-    .episodes {
-      margin-top: 2rem;
-    }
-
-    .episodes h3 {
-      color: #22c55e;
-    }
-
-    .episode-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .episode a {
-      display: block;
-      background-color: #1e293b;
-      padding: 0.5rem;
-      text-align: center;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      color: #fff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .episode a:hover {
-      background-color: #10b981;
-      transform: scale(1.03);
-    }
-
-    footer {
-      background-color: #1e293b;
-      color: #ccc;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KYB Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>
-    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" class="home-icon" alt="home">
-  </header>
+<body class="bg-slate-900 text-white">
 
-  <div class="container">
-    <div class="content">
-      <div class="poster"></div>
-
-      <div class="details">
-        <h1>The Untamed (陈情令)</h1>
-        <div class="tags">
-          <div class="tag">+13</div>
-          <div class="tag">BL</div>
-          <div class="tag">Fantasía</div>
-          <div class="tag">Misterio</div>
-          <div class="tag">China • 2019</div>
-          <div class="tag">50 episodios</div>
-          <div class="tag">Subtitulado</div>
+    <!-- Header -->
+    <header class="flex justify-between items-center bg-slate-800 p-4 sticky top-0 z-50">
+        <div class="flex items-center space-x-4">
+            <button id="menuToggle" class="md:hidden text-emerald-500 focus:outline-none">
+                <!-- Icono hamburguesa -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </button>
+            <span class="font-bold text-2xl bg-gradient-to-r from-emerald-500 to-emerald-700 bg-clip-text text-transparent select-none">KYB</span>
         </div>
-        <p class="desc">
-          Wei Wuxian, un cultivador expulsado tras dominar artes oscuras, resucita dieciséis años después y se reencuentra con Lan Wangji para resolver una serie de asesinatos que los llevan a deshacer una conspiración ancestral.
-        </p>
 
-        <div class="cast-section">
-          <h3>Reparto principal</h3>
-          <div class="cast-list">
-            <div class="cast" style="background-image: url('https://i.mydramalist.com/YYqZWQ_5c.jpg');"></div>
-            <div class="cast" style="background-image: url('https://i.mydramalist.com/5v7q04_5c.jpg');"></div>
-            <div class="cast" style="background-image: url('https://i.mydramalist.com/EO42b_5s.jpg');"></div>
-            <div class="cast" style="background-image: url('https://i.mydramalist.com/d0wW0W_5s.jpg');"></div>
-            <div class="cast" style="background-image: url('https://i.mydramalist.com/R66yV_5s.jpg');"></div>
-            <div class="cast" style="background-image: url('https://i.mydramalist.com/0gd67_5s.jpg');"></div>
-            <div class="cast" style="background-image: url('https://i.mydramalist.com/VXdmrv_5s.jpg');"></div>
-            <div class="arrow">▶</div>
-          </div>
+        <div class="flex items-center space-x-4">
+            <button id="searchToggle" class="text-gray-400 hover:text-emerald-500 focus:outline-none">
+                <!-- Lupa -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+            </button>
+
+            <button class="relative focus:outline-none">
+                <!-- Icono perfil -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 hover:text-emerald-500 transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <path d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.193M12 11a4 4 0 100-8 4 4 0 000 8z"/>
+                </svg>
+            </button>
         </div>
-      </div>
+    </header>
+
+    <!-- Search bar (hidden by default) -->
+    <div id="searchBar" class="hidden bg-slate-800 p-4">
+        <input type="text" placeholder="Buscar..." class="w-full p-2 rounded bg-slate-700 text-white focus:outline-none" />
     </div>
 
-    <div class="episodes">
-      <h3>Episodios</h3>
-      <div class="episode-list">
-        <!-- Puedes duplicar esto hasta el episodio 50 -->
-        <div class="episode"><a href="#">The Untamed T01</a></div>
-        <div class="episode"><a href="#">The Untamed T02</a></div>
-        <div class="episode"><a href="#">The Untamed T03</a></div>
-        <div class="episode"><a href="#">The Untamed T04</a></div>
-        <div class="episode"><a href="#">The Untamed T05</a></div>
-        <div class="episode"><a href="#">The Untamed T06</a></div>
-        <div class="episode"><a href="#">The Untamed T07</a></div>
-        <div class="episode"><a href="#">The Untamed T08</a></div>
-        <div class="episode"><a href="#">The Untamed T09</a></div>
-        <div class="episode"><a href="#">The Untamed T10</a></div>
-        <div class="episode"><a href="#">The Untamed T11</a></div>
-        <div class="episode"><a href="#">The Untamed T12</a></div>
-        <div class="episode"><a href="#">The Untamed T13</a></div>
-        <div class="episode"><a href="#">The Untamed T14</a></div>
-        <div class="episode"><a href="#">The Untamed T15</a></div>
-        <div class="episode"><a href="#">The Untamed T16</a></div>
-        <div class="episode"><a href="#">The Untamed T17</a></div>
-        <div class="episode"><a href="#">The Untamed T18</a></div>
-        <div class="episode"><a href="#">The Untamed T19</a></div>
-        <div class="episode"><a href="#">The Untamed T20</a></div>
-        <!-- ... hasta T50 -->
-      </div>
-    </div>
-  </div>
+    <!-- Main content -->
+    <main class="container mx-auto px-6 mt-6">
 
-  <footer>
-    © 2025 KYB | Todos los derechos reservados
-  </footer>
+        <!-- Popular on KYB -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">Popular en KYB</h2>
+            <div class="overflow-x-auto custom-scrollbar">
+                <div class="flex space-x-4 pb-4 min-w-max">
+
+                    <!-- Popular Card 1 -->
+                    <div class="w-64 bg-slate-800 rounded-lg overflow-hidden shadow-lg card-hover transition-all duration-300">
+                        <div class="relative pb-[140%]">
+                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 to-emerald-700 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white opacity-80" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded">TOP 1</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-white font-medium">To My Star</h3>
+                            <p class="text-gray-400 text-sm mt-1">BL • Corea</p>
+                            <div class="flex items-center mt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="text-gray-400 text-sm ml-1">4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Popular Card 2 -->
+                    <div class="w-64 bg-slate-800 rounded-lg overflow-hidden shadow-lg card-hover transition-all duration-300">
+                        <div class="relative pb-[140%]">
+                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 to-teal-500 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white opacity-80" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded">TOP 2</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-white font-medium">Semantic Error</h3>
+                            <p class="text-gray-400 text-sm mt-1">BL • Corea</p>
+                            <div class="flex items-center mt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="text-gray-400 text-sm ml-1">4.7</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Popular Card 3 -->
+                    <div class="w-64 bg-slate-800 rounded-lg overflow-hidden shadow-lg card-hover transition-all duration-300">
+                        <div class="relative pb-[140%]">
+                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-white opacity-80" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="absolute top-2 left-2 bg-emerald-600 text-white text-xs font-bold px-2 py-1 rounded">TOP 3</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-white font-medium">Itaewon Class</h3>
+                            <p class="text-gray-400 text-sm mt-1">Drama • Corea</p>
+                            <div class="flex items-center mt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                </svg>
+                                <span class="text-gray-400 text-sm ml-1">4.9</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 p-6 text-gray-400 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center">
+            <div class="mb-4 md:mb-0">
+                <p>© 2025 KYB Streaming. Todos los derechos reservados.</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-emerald-500">Política de Privacidad</a>
+                <a href="#" class="hover:text-emerald-500">Términos de Uso</a>
+                <a href="#" class="hover:text-emerald-500">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation Menu (Hidden by default) -->
+    <div id="mobileMenu" class="fixed bottom-0 left-0 right-0 bg-slate-900 shadow-lg z-50 md:hidden hidden">
+        <div class="flex justify-around py-3">
+            <a href="#" class="flex flex-col items-center text-emerald-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span class="text-xs mt-1">Inicio</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-emerald-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
+                </svg>
+                <span class="text-xs mt-1">Doramas</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-emerald-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-xs mt-1">BL</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-400 hover:text-emerald-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                </svg>
+                <span class="text-xs mt-1">Mi Lista</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Video Player Modal (Hidden by default) -->
+    <div id="videoPlayerModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center">
+        <div class="relative w-full max-w-4xl mx-4">
+            <div class="bg-slate-900 rounded-lg overflow-hidden">
+                <div class="relative pb-[56.25%] bg-black">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto text-emerald-500 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-white mt-4">Reproduciendo contenido...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h3 class="text-white text-xl font-medium">Love Like The Falling Petals</h3>
+                            <p class="text-gray-400 text-sm">Drama • Japón • 2022</p>
+                        </div>
+                        <button id="closeVideoPlayer" class="text-gray-400 hover:text-white transition-colors focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                            </svg>
+                            Reproducir
+                        </button>
+                        <button class="bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg flex items-center transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path>
+                            </svg>
+                            Mi Lista
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Toggle search bar
+        const searchToggle = document.getElementById('searchToggle');
+        const searchBar = document.getElementById('searchBar');
+        searchToggle.addEventListener('click', () => {
+            searchBar.classList.toggle('hidden');
+        });
+
+        // Close video modal
+        const closeVideoBtn = document.getElementById('closeVideoPlayer');
+        const videoModal = document.getElementById('videoPlayerModal');
+        closeVideoBtn.addEventListener('click', () => {
+            videoModal.classList.add('hidden');
+        });
+
+        // Just as example: open modal on clicking the first popular card (you can change)
+        document.querySelector('.card-hover').addEventListener('click', () => {
+            videoModal.classList.remove('hidden');
+        });
+    </script>
+
+    <style>
+        /* Scrollbar custom para el carrusel horizontal */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b; /* slate-800 */
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #10b981; /* emerald-500 */
+            border-radius: 9999px;
+        }
+        /* Hover efectos para tarjetas */
+        .card-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.5);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+    </style>
+
 </body>
 </html>
