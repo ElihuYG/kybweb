@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Untamed - KYB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .episode:hover { background-color: #1e293b; }
+  </style>
+</head>
+<body class="bg-slate-900 text-white">
+  <!-- Encabezado -->
+  <nav class="flex justify-between items-center px-6 py-4 bg-slate-800">
+    <h1 class="text-2xl font-bold text-emerald-400">The Untamed</h1>
+    <div class="space-x-4">
+      <button id="addToList" class="bg-emerald-600 px-4 py-2 rounded hover:bg-emerald-700">+ Mi Lista</button>
+      <button id="rate" class="bg-gray-700 px-4 py-2 rounded hover:bg-gray-600">⭐ Valorar</button>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main class="p-6 space-y-6">
+    <!-- Trailer y descripción -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <iframe class="w-full aspect-video rounded-lg" src="https://www.youtube.com/embed/8B2r3IIPmbA" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="space-y-3">
+        <p><span class="font-semibold text-emerald-400">Género:</span> Fantasía, Romance, Acción</p>
+        <p><span class="font-semibold text-emerald-400">Etiquetas:</span> Hermandad, Cultivo Espiritual, BL, Reencarnación</p>
+        <p><span class="font-semibold text-emerald-400">País:</span> China</p>
+        <p><span class="font-semibold text-emerald-400">Idioma:</span> Mandarín (Subtitulado)</p>
+        <p><span class="font-semibold text-emerald-400">Duración:</span> 45 min por episodio</p>
+        <p><span class="font-semibold text-emerald-400">Clasificación:</span> +16</p>
+        <p class="text-sm text-gray-300">
+          <span class="font-semibold text-emerald-400">Sinopsis:</span> Wei Wuxian y Lan Wangji, dos cultivadores de diferentes clanes, se unen para resolver misterios del pasado mientras luchan contra fuerzas oscuras. Una historia llena de amor, sacrificio y redención.
+        </p>
+      </div>
+    </div>
+
+    <!-- Reparto -->
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-emerald-400">Reparto</h2>
+      <ul class="list-disc list-inside text-gray-300">
+        <li>Xiao Zhan como Wei Wuxian</li>
+        <li>Wang Yibo como Lan Wangji</li>
+        <li>Lu Xuan como Jiang Yanli</li>
+        <li>Wang Zhuocheng como Jiang Cheng</li>
+      </ul>
+    </div>
+
+    <!-- Lista de episodios -->
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-emerald-400">Episodios</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Genera episodios -->
+        <script>
+          const episodes = 50;
+          for (let i = 1; i <= episodes; i++) {
+            document.write(`<a href="#" class="episode block p-4 rounded bg-slate-800 text-center transition">The Untamed 1x${i}</a>`);
+          }
+        </script>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const listBtn = document.getElementById('addToList');
+    listBtn.addEventListener('click', () => {
+      const series = JSON.parse(localStorage.getItem('miLista')) || [];
+      if (!series.includes('The Untamed')) {
+        series.push('The Untamed');
+        localStorage.setItem('miLista', JSON.stringify(series));
+        alert('Agregado a Mi Lista ✅');
+      } else {
+        alert('Ya está en tu lista');
+      }
+    });
+
+    const rateBtn = document.getElementById('rate');
+    rateBtn.addEventListener('click', () => {
+      const rating = prompt('¿Qué puntuación le das del 1 al 5?');
+      if (rating >= 1 && rating <= 5) {
+        alert(`Gracias por tu valoración de ${rating} ⭐`);
+      } else {
+        alert('Puntuación inválida');
+      }
+    });
+  </script>
+</body>
+</html>
