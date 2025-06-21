@@ -1,144 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Iniciar sesión - KYB</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar Sesión - KYB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      margin: 0;
+      background-color: #0f0f0f;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f0f0;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    /* Fondo con texto KYB gigante y opaco */
-    body::before {
-      content: "KYB";
-      position: absolute;
-      font-size: 250px;
-      font-weight: bold;
-      color: #4CAF50;
-      opacity: 0.06;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      background-color: #fff;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    h2 {
-      margin-bottom: 25px;
-      color: #333;
-    }
-
-    .error-message {
-      display: none;
-      background-color: #f8d7da;
-      color: #721c24;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      font-weight: bold;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: 2px solid #ccc;
-      font-size: 16px;
-      transition: all 0.3s ease;
-    }
-
-    input:focus:valid {
-      border-color: #4CAF50;
-      box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
-    }
-
-    input:focus:invalid {
-      border-color: #e74c3c;
-      box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
-    }
-
-    button {
-      width: 100%;
-      background-color: #4CAF50;
       color: white;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.3s ease;
     }
-
-    button:hover {
-      background-color: #43a047;
+    .error {
+      animation: shake 0.3s ease-in-out;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
     }
-
   </style>
 </head>
-<body>
+<body class="flex items-center justify-center min-h-screen p-4">
 
-  <div class="container">
-    <h2>Iniciar sesión - KYB</h2>
-    <div id="error-message" class="error-message">⚠️ Error en el correo o la contraseña</div>
-    <form id="loginForm">
-      <input type="email" id="correo" placeholder="Correo electrónico" required>
-      <input type="password" id="clave" placeholder="Contraseña" required minlength="4">
-      <button type="submit">Iniciar sesión</button>
-    </form>
+  <!-- Logo en la esquina -->
+  <div class="absolute top-4 left-4 text-2xl font-bold text-emerald-400 select-none">KYB</div>
+
+  <!-- Contenedor login -->
+  <div class="w-full max-w-md bg-zinc-900 p-8 rounded-2xl shadow-xl space-y-6">
+    <h2 class="text-2xl font-bold text-center mb-2">Iniciar sesión</h2>
+
+    <div id="errorMsg" class="hidden text-sm text-red-500 text-center">Correo o contraseña incorrectos.</div>
+
+    <div class="space-y-4">
+      <input type="email" id="correo" placeholder="Correo electrónico" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
+      <input type="password" id="contraseña" placeholder="Contraseña" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"/>
+    </div>
+
+    <button onclick="iniciarSesion()" class="w-full bg-emerald-600 hover:bg-emerald-500 transition rounded-lg py-2 text-white font-semibold">Entrar</button>
+
+    <p class="text-center text-sm text-zinc-400">
+      ¿No tienes cuenta?
+      <a href="registrarse.html" class="text-emerald-400 hover:underline">Regístrate</a>
+    </p>
   </div>
 
+  <!-- Script login -->
   <script>
-    const form = document.getElementById('loginForm');
-    const errorMessage = document.getElementById('error-message');
+    function iniciarSesion() {
+      const correoInput = document.getElementById('correo');
+      const contraseñaInput = document.getElementById('contraseña');
+      const correo = correoInput.value.trim();
+      const contraseña = contraseñaInput.value.trim();
+      const errorMsg = document.getElementById('errorMsg');
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+      const correoGuardado = localStorage.getItem('kyb_correo');
+      const contraseñaGuardada = localStorage.getItem('kyb_contraseña');
+      const nombreGuardado = localStorage.getItem('kyb_nombre');
 
-      const correo = document.getElementById('correo').value.trim();
-      const clave = document.getElementById('clave').value.trim();
-
-      // Obtener datos guardados
-      const savedCorreo = localStorage.getItem('kyb_correo');
-      const savedClave = localStorage.getItem('kyb_clave');
-
-      if (correo === savedCorreo && clave === savedClave) {
-        // Si los datos son correctos, redirigir al catálogo
-        window.location.href = 'catalogo.html'; // Redirige a catalogo.html
-      } else {
-        // Si el correo o la contraseña son incorrectos, mostrar mensaje de error
-        errorMessage.style.display = 'block';
+      if (!correoGuardado || !contraseñaGuardada) {
+        errorMsg.textContent = 'No existe ninguna cuenta registrada.';
+        errorMsg.classList.remove('hidden');
+        return;
       }
-    });
+
+      if (correo === correoGuardado && contraseña === contraseñaGuardada) {
+        // Acceso correcto
+        errorMsg.classList.add('hidden');
+        window.location.href = 'cuenta.html';
+      } else {
+        errorMsg.textContent = 'Correo o contraseña incorrectos.';
+        errorMsg.classList.remove('hidden');
+        correoInput.classList.add('error');
+        contraseñaInput.classList.add('error');
+
+        setTimeout(() => {
+          correoInput.classList.remove('error');
+          contraseñaInput.classList.remove('error');
+        }, 500);
+      }
+    }
   </script>
+
+  <!-- Footer -->
+<footer class="bg-zinc-950 p-6 mt-10 text-sm text-zinc-400 text-center">
+  <p>&copy; 2025 KYB. Todos los derechos reservados.</p>
+  <div class="flex justify-center mt-4 space-x-4">
+    <a href="#" class="hover:text-white">Términos</a>
+    <a href="#" class="hover:text-white">Privacidad</a>
+    <a href="#" class="hover:text-white">Soporte</a>
+  </div>
+</footer>
 
 </body>
 </html>
