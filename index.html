@@ -6,7 +6,6 @@
   <title>KYB - Cargando...</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Fondo animado tipo neón */
     body {
       background: radial-gradient(circle at center, #0f172a, #000);
       overflow: hidden;
@@ -14,7 +13,7 @@
     }
 
     .glow-text {
-      font-size: 3rem;
+      font-size: clamp(2rem, 6vw, 3rem);
       font-weight: bold;
       text-align: center;
       color: #10b981;
@@ -34,11 +33,11 @@
     .progress-container {
       width: 90%;
       max-width: 500px;
-      height: 18px;
+      height: 16px;
       background: #1f2937;
       border-radius: 9999px;
       overflow: hidden;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       box-shadow: 0 0 10px #10b98155;
     }
 
@@ -52,12 +51,13 @@
     }
 
     .subtext {
-      margin-top: 1rem;
-      font-size: 1rem;
+      margin-top: 1.2rem;
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
       color: #9ca3af;
       text-align: center;
       letter-spacing: 1px;
       animation: fadeIn 2s ease-in-out;
+      padding: 0 1rem;
     }
 
     .fade-out {
@@ -94,14 +94,14 @@
     }
   </style>
 </head>
-<body class="flex items-center justify-center h-screen">
+<body class="flex items-center justify-center h-screen px-4">
 
   <div class="text-center" id="splash">
-    <div class="glow-text vibrate">KYB</div>
-    <div class="progress-container mx-auto mt-8">
+    <div class="glow-text vibrate mt-[-10vh]">KYB</div>
+    <div class="progress-container mx-auto mt-6 sm:mt-8">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
-    <div class="subtext">Cargando lo mejor del drama... </div>
+    <div class="subtext">Cargando lo mejor del drama...</div>
   </div>
 
   <script>
@@ -110,13 +110,12 @@
     const splash = document.getElementById('splash');
 
     const interval = setInterval(() => {
-      progress += Math.floor(Math.random() * 10) + 10; // Aumenta de forma aleatoria
+      progress += Math.floor(Math.random() * 5) + 5;
 
       if (progress >= 100) {
         progress = 100;
         clearInterval(interval);
 
-        // Fade out y redirige
         splash.classList.add('fade-out');
         setTimeout(() => {
           window.location.href = "home.html"; // cámbialo por tu página real
@@ -124,7 +123,7 @@
       }
 
       bar.style.width = progress + '%';
-    }, 300);
+    }, 400); // Más tiempo
   </script>
 
 </body>
