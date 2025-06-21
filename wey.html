@@ -91,7 +91,21 @@
         }
       </script>
     </div>
+  </section>
 
-
+  <!-- Modal Estrellas -->
+  <div id="ratingModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg">
+      <h2 class="text-black text-lg mb-2">¿Cuántas estrellas le das?</h2>
+      <div class="flex gap-2 mb-4">
+        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(1)">&#9733;</span>
+        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(2)">&#9733;</span>
+        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(3)">&#9733;</span>
+        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(4)">&#9733;</span>
+        <span class="star text-gray-400 cursor-pointer text-2xl" onclick="rate(5)">&#9733;</span>
+      </div>
+      <button onclick="document.getElementById('ratingModal').classList.add('hidden')" class="bg-emerald-600 text-white px-4 py-2 rounded">Listo</button>
+    </div>
+  </div>
 </body>
 </html>
