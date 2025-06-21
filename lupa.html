@@ -1,107 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Buscar - KYB Doramas</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { background-color: #0f172a; color: white; }
-    .pill {
-      @apply bg-slate-800 text-gray-300 px-4 py-1 rounded-full text-sm hover:bg-emerald-600 hover:text-white transition;
-    }
-  </style>
 </head>
-<body class="font-sans">
-  <!-- Header con barra de búsqueda -->
-  <div class="px-4 py-6">
-    <input type="text" placeholder="Buscar doramas y películas..."
-           class="w-full bg-slate-800 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500" />
-  </div>
+<body class="bg-slate-900 text-white font-sans min-h-screen pb-20">
 
-  <!-- Botones de categoría -->
-  <div class="px-4 flex space-x-2 mb-6">
-    <button class="pill">Doramas</button>
-    <button class="pill">Películas</button>
-    <button class="pill">Variedades</button>
-  </div>
+  <!-- Botón Home (casita PNG) -->
+  <a href="home.html" class="fixed top-4 left-4 z-50">
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Inicio" class="w-8 h-8">
+  </a>
 
-  <!-- Géneros -->
-  <div class="px-4 mb-6">
-    <h2 class="text-lg font-semibold mb-2">Géneros</h2>
-    <div class="flex flex-wrap gap-2">
-      <span class="pill">Dramas</span>
-      <span class="pill">Romance</span>
-      <span class="pill">Comedia</span>
-      <span class="pill">Misterio</span>
-      <span class="pill">Fantasía</span>
-      <span class="pill">Ciencia Ficción</span>
+  <!-- Buscador -->
+  <div class="p-4 pt-10">
+    <div class="flex items-center bg-gray-800 rounded-full px-4 py-2 shadow-md">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+      </svg>
+      <input type="text" placeholder="Busca doramas o películas..." class="bg-transparent outline-none text-white ml-3 w-full placeholder-gray-400"/>
     </div>
   </div>
 
-  <!-- Etiquetas -->
-  <div class="px-4 mb-6">
-    <h2 class="text-lg font-semibold mb-2">Etiquetas</h2>
-    <div class="flex flex-wrap gap-2">
-      <span class="pill">Comedia Romántica</span>
-      <span class="pill">Juvenil</span>
-      <span class="pill">Amistad</span>
-      <span class="pill">Vida</span>
-      <span class="pill">Suspenso</span>
-      <span class="pill">Escolar</span>
-    </div>
+  <!-- Botones principales -->
+  <div class="flex justify-around py-6">
+    <button class="flex flex-col items-center text-white hover:text-emerald-500">
+      <img src="https://cdn-icons-png.flaticon.com/512/3468/3468378.png" class="w-12 h-12 mb-1" alt="Doramas"/>
+      <span class="text-sm">Doramas</span>
+    </button>
+    <button class="flex flex-col items-center text-white hover:text-emerald-500">
+      <img src="https://cdn-icons-png.flaticon.com/512/3097/3097192.png" class="w-12 h-12 mb-1" alt="Películas"/>
+      <span class="text-sm">Películas</span>
+    </button>
+    <button class="flex flex-col items-center text-white hover:text-emerald-500">
+      <img src="https://cdn-icons-png.flaticon.com/512/9610/9610341.png" class="w-12 h-12 mb-1" alt="Variedades"/>
+      <span class="text-sm">Variedades</span>
+    </button>
   </div>
 
-  <!-- Productoras -->
-  <div class="px-4 mb-6">
-    <h2 class="text-lg font-semibold mb-2">Productoras</h2>
-    <div class="flex flex-wrap gap-2">
-      <span class="pill">Tencent Video</span>
-      <span class="pill">Netflix</span>
-      <span class="pill">TVN</span>
-      <span class="pill">iQIYI</span>
-      <span class="pill">Youku</span>
-      <span class="pill">KBS2</span>
-    </div>
+  <!-- Sección generadora de chips -->
+  <div class="px-4 space-y-6">
+
+    <!-- Función para cada sección -->
+    <script>
+      const renderButtons = (title, items) => {
+        document.write(`
+          <div>
+            <h2 class="text-xl font-semibold mb-2">${title}</h2>
+            <div class="flex flex-wrap gap-2">
+              ${items.map(item => `<button class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition">${item}</button>`).join('')}
+            </div>
+          </div>
+        `);
+      };
+
+      renderButtons("Géneros", ["Drama", "Romance", "Comedia", "Misterio", "Fantasía", "Ciencia Ficción"]);
+      renderButtons("Etiquetas", ["Comedia Romántica", "Juvenil", "Amistad", "Vida", "Suspenso", "Escolar"]);
+      renderButtons("Productoras", ["Tencent Video", "Netflix", "tvN", "iQIYI", "Youku", "KBS2"]);
+      renderButtons("Países", ["Corea del Sur", "China", "Japón", "Tailandia", "Indonesia", "Filipinas"]);
+      renderButtons("Idiomas", ["Latino", "CoreanoLatino", "JaponésLatino", "MandarínLatino", "TailandésLatino", "FilipinoLatino"]);
+      renderButtons("Años", ["2025", "2024", "2023", "2022", "2021", "2020"]);
+    </script>
+
   </div>
 
-  <!-- Países -->
-  <div class="px-4 mb-6">
-    <h2 class="text-lg font-semibold mb-2">Países</h2>
-    <div class="flex flex-wrap gap-2">
-      <span class="pill">Corea del Sur</span>
-      <span class="pill">China</span>
-      <span class="pill">Japón</span>
-      <span class="pill">Tailandia</span>
-      <span class="pill">Indonesia</span>
-      <span class="pill">Filipinas</span>
-    </div>
-  </div>
-
-  <!-- Idiomas -->
-  <div class="px-4 mb-6">
-    <h2 class="text-lg font-semibold mb-2">Idiomas</h2>
-    <div class="flex flex-wrap gap-2">
-      <span class="pill">Latino</span>
-      <span class="pill">CoreanoLatino</span>
-      <span class="pill">JaponésLatino</span>
-      <span class="pill">MandarínLatino</span>
-      <span class="pill">TailandésLatino</span>
-      <span class="pill">FilipinoLatino</span>
-    </div>
-  </div>
-
-  <!-- Años -->
-  <div class="px-4 mb-10">
-    <h2 class="text-lg font-semibold mb-2">Años</h2>
-    <div class="flex flex-wrap gap-2">
-      <span class="pill">2025</span>
-      <span class="pill">2024</span>
-      <span class="pill">2023</span>
-      <span class="pill">2022</span>
-      <span class="pill">2021</span>
-      <span class="pill">2020</span>
-    </div>
-  </div>
 </body>
 </html>
