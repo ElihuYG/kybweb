@@ -23,33 +23,94 @@
     </div>
   </div>
 
-  <!-- Botones principales -->
-  <div class="flex justify-around py-6">
-    <button onclick="filterByCategory('Doramas')" class="flex flex-col items-center text-white hover:text-emerald-500">
-      <img src="https://cdn-icons-png.flaticon.com/512/3468/3468378.png" class="w-12 h-12 mb-1" alt="Doramas"/>
-      <span class="text-sm">Doramas</span>
-    </button>
-    <button onclick="filterByCategory('Películas')" class="flex flex-col items-center text-white hover:text-emerald-500">
-      <img src="https://cdn-icons-png.flaticon.com/512/3097/3097192.png" class="w-12 h-12 mb-1" alt="Películas"/>
-      <span class="text-sm">Películas</span>
-    </button>
-    <button onclick="filterByCategory('Variedades')" class="flex flex-col items-center text-white hover:text-emerald-500">
-      <img src="https://cdn-icons-png.flaticon.com/512/9610/9610341.png" class="w-12 h-12 mb-1" alt="Variedades"/>
-      <span class="text-sm">Variedades</span>
-    </button>
+  <!-- Contenido estático (chips y botones) -->
+  <div id="contenido-estatico">
+    <!-- Botones principales -->
+    <div class="flex justify-around py-6">
+      <button class="flex flex-col items-center text-white hover:text-emerald-500">
+        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468378.png" class="w-12 h-12 mb-1" alt="Doramas"/>
+        <span class="text-sm">Doramas</span>
+      </button>
+      <button class="flex flex-col items-center text-white hover:text-emerald-500">
+        <img src="https://cdn-icons-png.flaticon.com/512/3097/3097192.png" class="w-12 h-12 mb-1" alt="Películas"/>
+        <span class="text-sm">Películas</span>
+      </button>
+      <button class="flex flex-col items-center text-white hover:text-emerald-500">
+        <img src="https://cdn-icons-png.flaticon.com/512/9610/9610341.png" class="w-12 h-12 mb-1" alt="Variedades"/>
+        <span class="text-sm">Variedades</span>
+      </button>
+    </div>
+
+    <!-- Chips dinámicos -->
+    <div id="filters" class="px-4 space-y-6"></div>
   </div>
 
-  <!-- Sección generadora de chips -->
-  <div id="filters" class="px-4 space-y-6"></div>
+  <!-- Resultados de búsqueda -->
+  <div id="resultados" class="px-4 mt-6 space-y-4"></div>
 
+  <!-- Lógica -->
   <script>
-    // Función para renderizar filtros
+    const doramas = [
+      {
+        titulo: "The Untamed",
+        año: "2019",
+        pais: "China",
+        generos: ["BL", "Fantasía", "Misterio"],
+        imagen: "https://i.mydramalist.com/YYqZWQ_5c.jpg"
+      }
+      // Puedes agregar más aquí después
+    ];
+
+    function mostrarResultados(lista) {
+      const contenedor = document.getElementById("resultados");
+      contenedor.innerHTML = "";
+
+      if (lista.length === 0) {
+        contenedor.innerHTML = "<p class='text-gray-400'>No se encontraron resultados.</p>";
+        return;
+      }
+
+      lista.forEach(dorama => {
+        const card = document.createElement("div");
+        card.className = "bg-gray-800 rounded-lg p-4 shadow-md flex items-center gap-4";
+        card.innerHTML = `
+          <img src="${dorama.imagen}" alt="${dorama.titulo}" class="w-16 h-24 object-cover rounded">
+          <div>
+            <h3 class="text-lg font-bold">${dorama.titulo}</h3>
+            <p class="text-sm text-gray-400">${dorama.año} • ${dorama.pais}</p>
+            <p class="text-sm text-emerald-400">${dorama.generos.join(", ")}</p>
+          </div>
+        `;
+        contenedor.appendChild(card);
+      });
+    }
+
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      const query = e.target.value.trim().toLowerCase();
+      const contenidoEstatico = document.getElementById("contenido-estatico");
+      const resultadosDiv = document.getElementById("resultados");
+
+      if (query.length > 0) {
+        contenidoEstatico.style.display = "none";
+        const filtrados = doramas.filter(dorama =>
+          dorama.titulo.toLowerCase().includes(query) ||
+          dorama.generos.some(g => g.toLowerCase().includes(query)) ||
+          dorama.pais.toLowerCase().includes(query)
+        );
+        mostrarResultados(filtrados);
+      } else {
+        contenidoEstatico.style.display = "block";
+        resultadosDiv.innerHTML = "";
+      }
+    });
+
+    // Chips dinámicos
     const renderButtons = (title, items) => {
       const section = document.createElement('div');
       section.innerHTML = `
         <h2 class="text-xl font-semibold mb-2">${title}</h2>
         <div class="flex flex-wrap gap-2">
-          ${items.map(item => `<button onclick="applyFilter('${item}')" class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition">${item}</button>`).join('')}
+          ${items.map(item => `<button class="bg-gray-700 hover:bg-emerald-600 text-white px-4 py-1 rounded-full text-sm transition">${item}</button>`).join('')}
         </div>
       `;
       document.getElementById("filters").appendChild(section);
@@ -61,81 +122,7 @@
     renderButtons("Países", ["Corea del Sur", "China", "Japón", "Tailandia", "Indonesia", "Filipinas"]);
     renderButtons("Idiomas", ["Latino", "CoreanoLatino", "JaponésLatino", "MandarínLatino", "TailandésLatino", "FilipinoLatino"]);
     renderButtons("Años", ["2025", "2024", "2023", "2022", "2021", "2020"]);
-
-    // Función de búsqueda
-    document.getElementById("searchInput").addEventListener("input", (e) => {
-      const query = e.target.value.trim().toLowerCase();
-      console.log("Buscando:", query); // Aquí puedes agregar tu lógica real de búsqueda
-    });
-
-    // Función para botones de categoría
-    function filterByCategory(category) {
-      console.log("Filtrando por categoría:", category); // Puedes agregar lógica real aquí
-    }
-
-    // Función para chips de filtros
-    function applyFilter(filtro) {
-      console.log("Filtro aplicado:", filtro); // Aquí también
-    }
   </script>
-
-  <!-- RESULTADOS -->
-<div id="resultados" class="px-4 mt-6 space-y-4"></div>
-
-<script>
-  // Tus doramas aquí
-  const doramas = [
-    {
-      titulo: "The Untamed",
-      año: "2019",
-      pais: "China",
-      generos: ["BL", "Fantasía", "Misterio"],
-      imagen: "https://i.mydramalist.com/YYqZWQ_5c.jpg"
-    },
-    // Agrega más aquí después si quieres
-  ];
-
-  // Mostrar resultados en la web
-  function mostrarResultados(lista) {
-    const contenedor = document.getElementById("resultados");
-    contenedor.innerHTML = "";
-
-    if (lista.length === 0) {
-      contenedor.innerHTML = "<p class='text-gray-400'>No se encontraron resultados.</p>";
-      return;
-    }
-
-    lista.forEach(dorama => {
-      const card = document.createElement("div");
-      card.className = "bg-gray-800 rounded-lg p-4 shadow-md flex items-center gap-4";
-      card.innerHTML = `
-        <img src="${dorama.imagen}" alt="${dorama.titulo}" class="w-16 h-24 object-cover rounded">
-        <div>
-          <h3 class="text-lg font-bold">${dorama.titulo}</h3>
-          <p class="text-sm text-gray-400">${dorama.año} • ${dorama.pais}</p>
-          <p class="text-sm text-emerald-400">${dorama.generos.join(", ")}</p>
-        </div>
-      `;
-      contenedor.appendChild(card);
-    });
-  }
-
-  // Escuchar lo que escribes
-  document.getElementById("searchInput").addEventListener("input", (e) => {
-    const query = e.target.value.trim().toLowerCase();
-
-    const resultadosFiltrados = doramas.filter(dorama =>
-      dorama.titulo.toLowerCase().includes(query) ||
-      dorama.generos.some(g => g.toLowerCase().includes(query)) ||
-      dorama.pais.toLowerCase().includes(query)
-    );
-
-    mostrarResultados(resultadosFiltrados);
-  });
-
-  // Mostrar todo al principio si quieres
-  mostrarResultados(doramas);
-</script>
 
 </body>
 </html>
