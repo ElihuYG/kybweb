@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registrarse - KYB</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+    }
+    .error {
+      animation: shake 0.3s ease-in-out;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- Logo KYB esquina -->
+  <div class="absolute top-4 left-4 text-2xl font-bold text-emerald-400 select-none">KYB</div>
+
+  <!-- Contenedor registro -->
+  <main class="flex-1 flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-zinc-900 p-8 rounded-2xl shadow-xl space-y-6">
+      <h2 class="text-2xl font-bold text-center mb-2">Crear una cuenta</h2>
+
+      <div id="errorMsg" class="hidden text-sm text-red-500 text-center"></div>
+      <div id="successMsg" class="hidden text-sm text-emerald-400 text-center">Registro exitoso. Ahora puedes iniciar sesión.</div>
+
+      <div class="space-y-4">
+        <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+        <input type="email" id="correo" placeholder="Correo electrónico" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+        <input type="password" id="contraseña" placeholder="Contraseña" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+        <input type="password" id="confirmarContraseña" placeholder="Confirmar contraseña" class="w-full p-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+      </div>
+
+      <button onclick="registrarUsuario()" class="w-full bg-emerald-600 hover:bg-emerald-500 transition rounded-lg py-2 text-white font-semibold">Registrarse</button>
+
+      <p class="text-center text-sm text-zinc-400">
+        ¿Ya tienes cuenta?
+        <a href="login.html" class="text-emerald-400 hover:underline">Iniciar sesión</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-zinc-950 p-6 text-sm text-zinc-400 text-center">
+    <p>&copy; 2025 KYB. Todos los derechos reservados.</p>
+    <div class="flex justify-center mt-4 space-x-4">
+      <a href="#" class="hover:text-white">Términos</a>
+      <a href="#" class="hover:text-white">Privacidad</a>
+      <a href="#" class="hover:text-white">Soporte</a>
+    </div>
+  </footer>
+
+  <!-- Script registro -->
+  <script>
+    function registrarUsuario() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const contraseña = document.getElementById('contraseña').value.trim();
+      const confirmarContraseña = document.getElementById('confirmarContraseña').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const successMsg = document.getElementById('successMsg');
+
+      errorMsg.classList.add('hidden');
+      successMsg.classList.add('hidden');
+
+      if (!nombre || !correo || !contraseña || !confirmarContraseña) {
+        errorMsg.textContent = 'Por favor, completa todos los campos.';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      // Validar formato email básico
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(correo)) {
+        errorMsg.textContent = 'Ingresa un correo válido.';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      if (contraseña !== confirmarContraseña) {
+        errorMsg.textContent = 'Las contraseñas no coinciden.';
+        errorMsg.classList.remove('hidden');
+        return;
+      }
+
+      // Guardar en localStorage
+      localStorage.setItem('kyb_nombre', nombre);
+      localStorage.setItem('kyb_correo', correo);
+      localStorage.setItem('kyb_contraseña', contraseña);
+
+      successMsg.classList.remove('hidden');
+
+      // Limpiar inputs
+      document.getElementById('nombre').value = '';
+      document.getElementById('correo').value = '';
+      document.getElementById('contraseña').value = '';
+      document.getElementById('confirmarContraseña').value = '';
+    }
+  </script>
+</body>
+</html>
