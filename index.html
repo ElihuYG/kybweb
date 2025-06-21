@@ -1,83 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KYB - Cargando</title>
-    <link rel="stylesheet" href="styles.css">
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(() => {
-                if (localStorage.getItem("usuarioLogeado")) {
-                    window.location.href = "catalogo.html";
-                } else {
-                    window.location.href = "login.html";
-                }
-            }, 3000);
-        });
-    </script>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #000;
-            color: white;
-            font-family: Arial, sans-serif;
-            flex-direction: column;
-        }
-        .logo {
-            font-size: 50px;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-        .loader {
-            width: 100px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 20px;
-            position: relative;
-        }
-        .loader::before {
-            content: "";
-            display: block;
-            width: 30%;
-            height: 100%;
-            background: #e50914;
-            position: absolute;
-            animation: loading 3s infinite;
-        }
-        @keyframes loading {
-            0% { left: -30%; }
-            50% { left: 100%; }
-            100% { left: -30%; }
-        }
-    </style>
-    <script>
-        setTimeout(() => {
-            window.location.href = "login.html";
-        }, 3000);
-    </script>
-</head>
-<body>
-    <div class="logo">KYB</div>
-    <div class="loader"></div>
-</body>
-<div class="carousel-container">
-    <div class="carousel-slide active" data-video="https://www.youtube.com/embed/lmAgSSClm3c?autoplay=1&controls=0&modestbranding=1&showinfo=0&rel=0&loop=1&mute=1">
-        <img src="imagenes/PostersLargosbegins-youth.png" alt="Slider 1">
-        <iframe class="video-frame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </div>
-    <div class="carousel-slide" data-video="">
-        <img src="imagenes/slider2.png" alt="Slider 2">
-    </div>
-    <div class="carousel-slide" data-video="">
-        <img src="imagenes/slider3.png" alt="Slider 3">
-    </div>
-</div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KYB - Cargando...</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
 
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.05); }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    .fade-out {
+      animation: fadeOut 0.8s ease-in forwards;
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-sans overflow-hidden">
+
+  <!-- Pantalla de carga -->
+  <div id="splash" class="flex items-center justify-center h-screen bg-black">
+    <div class="text-center fade-in">
+      <!-- Logo o nombre de KYB -->
+      <img src="logo_kyb.png" alt="KYB Logo" class="mx-auto w-28 h-28 mb-4 animate-pulse" />
+      <h1 class="text-3xl font-bold tracking-widest mb-2">KYB</h1>
+      <p class="text-sm text-gray-400">Cargando contenido...</p>
+    </div>
+  </div>
+
+  <!-- Contenido principal oculto al inicio -->
+  <div id="main-content" class="hidden">
+    <!-- Aquí puedes redirigir o cargar tu página principal con JS -->
+  </div>
+
+  <script>
+    // Espera 2.5 segundos y luego hace fade out y muestra el contenido o redirige
+    setTimeout(() => {
+      const splash = document.getElementById('splash');
+      splash.classList.add('fade-out');
+
+      setTimeout(() => {
+        window.location.href = "home.html"; // Cambia esto al nombre real de tu página principal
+      }, 800); // Tiempo del fadeOut
+    }, 2500); // Tiempo en pantalla de carga
+  </script>
+</body>
 </html>
