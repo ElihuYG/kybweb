@@ -6,65 +6,77 @@
   <title>The Untamed</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .popup {
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-    .star {
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .star:hover {
-      transform: scale(1.2);
-    }
-    .bounce {
-      animation: bounce 0.3s;
-    }
-    @keyframes bounce {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-      100% { transform: scale(1); }
-    }
+    .popup { background-color: rgba(0,0,0,0.7); }
+    .star { cursor: pointer; transition: transform 0.2s; }
+    .star:hover { transform: scale(1.2); }
+    .bounce { animation: bounce 0.3s; }
+    @keyframes bounce { 0%,100% {transform:scale(1);} 50% {transform:scale(1.3);} }
+    .etiqueta { @apply text-xs border border-gray-500 rounded-full px-2 py-0.5 text-gray-300; }
   </style>
 </head>
 <body class="bg-slate-900 text-white font-sans">
-
   <div class="p-6 max-w-4xl mx-auto space-y-6">
-
+    <!-- Encabezado -->
     <div class="flex justify-between items-start">
       <div>
-        <h1 class="text-3xl font-bold text-emerald-500">The Untamed</h1>
-        <p class="text-sm text-gray-400 mt-1">China • 2019 • 50 episodios • BL, Fantasía, Misterio • Subtitulado</p>
-        <p class="text-sm text-gray-400">Duración promedio: 45 min • Clasificación: +13</p>
+        <h1 class="text-3xl font-bold text-emerald-500">The Untamed (陈情令)</h1>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="etiqueta">±13</span>
+          <span class="etiqueta">BL</span>
+          <span class="etiqueta">Fantasía</span>
+          <span class="etiqueta">Misterio</span>
+          <span class="etiqueta">China • 2019</span>
+          <span class="etiqueta">50 episodios</span>
+          <span class="etiqueta">Subtitulado</span>
+        </div>
+        <p class="text-sm text-gray-400 mt-1">Xiao Zhan, Wang Yibo, Xuan Lu, Wang Zhuocheng...</p>
       </div>
       <div class="flex space-x-4">
         <button id="miListaBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Mi lista" class="h-6 w-6 mr-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" class="h-6 w-6 mr-1" alt="Mi Lista">
           <span>Mi Lista</span>
         </button>
         <button id="valorarBtn" class="flex items-center text-emerald-400 hover:text-white transition-colors">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" alt="Valorar" class="h-6 w-6 mr-1">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828961.png" class="h-6 w-6 mr-1" alt="Valorar">
           <span>Valorar</span>
         </button>
       </div>
     </div>
 
+    <!-- Tráiler -->
     <div class="aspect-w-16 aspect-h-9">
-      <iframe class="w-full rounded-lg" height="315" src="https://www.youtube.com/embed/dFAj0X0rKGA" frameborder="0" allowfullscreen></iframe>
+      <iframe class="w-full rounded-lg" src="https://www.youtube.com/embed/r5O5ZzfnQzk" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <p class="text-gray-300">En un mundo lleno de clanes y cultivadores, dos jóvenes de ideales opuestos, Wei Wuxian y Lan Wangji, se enfrentan a un misterio ancestral que podría cambiar el destino de todos. "The Untamed" es una historia de amor, lealtad, traición y redención que ha capturado el corazón de millones.</p>
+    <!-- Sinopsis -->
+    <p class="text-gray-300">
+      Wei Wuxian, un cultivador repudiado tras dominar artes oscuras, resucita dieciséis años después y se reúne con Lan Wangji para resolver una serie de asesinatos que los llevan a destapar una conspiración ancestral :contentReference[oaicite:1]{index=1}.
+    </p>
 
-    <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+    <!-- Reparto -->
+    <div>
+      <h2 class="text-xl font-bold text-emerald-500 mb-2">Reparto principal</h2>
+      <ul class="list-disc list-inside text-gray-300 space-y-1">
+        <li>Xiao Zhan como Wei Wuxian (魏无羡) :contentReference[oaicite:2]{index=2}</li>
+        <li>Wang Yibo como Lan Wangji (蓝忘机) :contentReference[oaicite:3]{index=3}</li>
+        <li>Xuan Lu como Jiang Yanli :contentReference[oaicite:4]{index=4}</li>
+        <li>Wang Zhuocheng como Jiang Cheng :contentReference[oaicite:5]{index=5}</li>
+      </ul>
+    </div>
+
+    <!-- Episodios -->
+    <div>
+      <h2 class="text-xl font-bold text-emerald-500 mb-2">Episodios</h2>
+      <div id="episodios" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"></div>
+    </div>
   </div>
 
-  <!-- Popup estrellas -->
+  <!-- Popup valoración -->
   <div id="popup" class="fixed inset-0 popup hidden flex items-center justify-center z-50">
     <div class="bg-slate-800 p-6 rounded-xl text-center">
       <h2 class="text-lg font-bold mb-4">Califica esta serie</h2>
-      <div id="estrellas" class="flex justify-center space-x-2 mb-4">
-        <!-- Se llenan por JS -->
-      </div>
-      <button onclick="cerrarPopup()" class="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded">Cerrar</button>
+      <div id="estrellas" class="flex justify-center space-x-2 mb-4"></div>
+      <button onclick="cerrarPopup()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded">Cerrar</button>
     </div>
   </div>
 
@@ -74,12 +86,7 @@
     const popup = document.getElementById('popup');
     const estrellasDiv = document.getElementById('estrellas');
 
-    // Cargar estado de Mi Lista
-    if (localStorage.getItem('untamed_lista') === 'true') {
-      listaBtn.classList.add('text-white');
-    }
-
-    // Agregar a mi lista con animación
+    if (localStorage.getItem('untamed_lista') === 'true') listaBtn.classList.add('text-white');
     listaBtn.addEventListener('click', () => {
       listaBtn.classList.add('bounce');
       localStorage.setItem('untamed_lista', 'true');
@@ -87,40 +94,34 @@
       listaBtn.classList.add('text-white');
     });
 
-    // Mostrar popup de valoración
     valorarBtn.addEventListener('click', () => {
       popup.classList.remove('hidden');
       cargarEstrellas();
     });
+    function cerrarPopup() { popup.classList.add('hidden'); }
 
-    // Cerrar popup
-    function cerrarPopup() {
-      popup.classList.add('hidden');
-    }
-
-    // Estrellas
     function cargarEstrellas() {
       estrellasDiv.innerHTML = '';
-      const calif = parseInt(localStorage.getItem('untamed_valoracion')) || 0;
-      for (let i = 1; i <= 5; i++) {
+      const calif = +localStorage.getItem('untamed_valoracion') || 0;
+      for (let i=1;i<=5;i++){
         const star = document.createElement('span');
-        star.className = `star text-3xl ${i <= calif ? 'text-yellow-400' : 'text-gray-500'}`;
+        star.className = `star text-3xl ${i<=calif ? 'text-yellow-400':'text-gray-500'}`;
         star.textContent = '★';
-        star.addEventListener('click', () => {
+        star.addEventListener('click', ()=>{
           localStorage.setItem('untamed_valoracion', i);
           cargarEstrellas();
+          cerrarPopup();
         });
         estrellasDiv.appendChild(star);
       }
     }
 
-    // Cargar episodios
-    const episodios = document.getElementById('episodios');
-    for (let i = 1; i <= 50; i++) {
+    const cont = document.getElementById('episodios');
+    for (let i=1;i<=50;i++){
       const ep = document.createElement('div');
       ep.className = 'bg-slate-800 hover:bg-slate-700 text-white p-2 rounded text-center cursor-pointer';
       ep.textContent = `The Untamed 1x${i}`;
-      episodios.appendChild(ep);
+      cont.appendChild(ep);
     }
   </script>
 </body>
